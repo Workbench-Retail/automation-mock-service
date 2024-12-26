@@ -2,9 +2,10 @@ import axios from "axios";
 import logger from "./logger";
 
 export const sendResponse = async (data: any, type: string, queryParam?: Record<string, string>) => {
+  const baseUrl = `${process.env.API_SERVICE_LAYER}/api-service/mock/${type}`;
   try {
     // Retrieve the base URL from the environment variable
-    const baseUrl = `${process.env.API_SERVICE_LAYER}/api-service/mock/${type}`;
+    
 
     // Append query parameters if provided
     const url = queryParam
@@ -18,6 +19,6 @@ export const sendResponse = async (data: any, type: string, queryParam?: Record<
     logger.info("response>", response.data);
   } catch (error:any) {
     // Handle errors
-    logger.error("Error sending response at url:"+` ${process.env.API_SERVICE_LAYER}/mock/${type}`, error);
+    logger.error("Error sending response at url:"+` ${baseUrl}`, error);
   }
 };
