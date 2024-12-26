@@ -26,13 +26,5 @@ app.use("/trigger",router)
 const PORT = process.env.PORT || 6000;
 
 app.listen(PORT, () => {
-  const data = {
-    context: {
-      location: {
-        citu: "adsa",
-      },
-    },
-  };
-
   logger.info(`Server running at ${PORT}`);
 });
