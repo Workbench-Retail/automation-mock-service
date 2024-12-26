@@ -4,7 +4,7 @@ import on_status from "../templates/on_status.json";
 import { sendResponse } from "../utils/api";
 import { RedisService } from "ondc-automation-cache-lib";
 import { generateRandomUUID } from "../utils/generate_uuids";
-import { getFromCache } from "../utils/redis";
+import { getFromCache, setToCache } from "../utils/redis";
 import { CACHE_DB_2 } from "../constants/constants";
 
 const handleStatusRequest = async (payload: any) => {
@@ -15,6 +15,11 @@ const handleStatusRequest = async (payload: any) => {
   extracted_data["updated_at"] = time_stamp
   const combined_data = {...json_cache_data,...extracted_data}
   const responsePayload = resolveTemplate(on_status, combined_data);
+  await setToCache(
+    payload?.context?.transaction_id,
+    combined_data,
+    CACHE_DB_2
+  );
   sendResponse(responsePayload, "on_status");
   };
 
