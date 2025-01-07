@@ -15,7 +15,6 @@ export async function saveDataMiddleware(
 ) {
 	const action = req.params.action;
 	const body = req.body;
-	const mockResponseMetaData = await getMockResponseMetaData(action, body);
 
 	next();
 }
