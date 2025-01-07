@@ -4,6 +4,8 @@ import { Request } from "express";
 import { generateMockResponseMiddleware } from "../controllers/generationController";
 import axios from "axios";
 import logger from "../utils/logger";
+import { sendToApiService } from "../utils/request-utils";
+import { setAckResponse } from "../utils/ackUtils";
 
 const triggerRouter = Router();
 
@@ -22,22 +24,15 @@ triggerRouter.post(
 	"/api-service/:action",
 	generateMockResponseMiddleware,
 	saveDataMiddleware,
-	(req: CustomRequest, res) => {
+	async (req: CustomRequest, res) => {
 		try {
 			if (!req.mockResponse) {
 				throw new Error("Mock response not found");
 			}
 			const action = req.params.action;
 			logger.info(`Forwarding request to API service for action: ${action}`);
-			axios.post(
-				`${process.env.API_SERVICE_URL}/mock/${action}`,
-				req.mockResponse,
-				{
-					params: {
-						...req.queryData,
-					},
-				}
-			);
+			await sendToApiService(action, req.body, req.queryData);
+			res.status(200).send(setAckResponse(true));
 		} catch (err) {
 			logger.error("Error in forwarding request to API service", err);
 			res.status(500).send("Error in forwarding request to API service");
