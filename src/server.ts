@@ -1,30 +1,43 @@
-import express from "express";
+import express, { Application, Request, Response, NextFunction } from "express";
 import cors from "cors";
-import bodyParser from "body-parser";
-
-import jsonPath from "jsonpath";
-import { RedisService } from "ondc-automation-cache-lib";
-import apiRouter from "./routes";
-import router from "./routes/trigger";
 import logger from "./utils/logger";
+import { config } from "./config/serverConfig";
+import defaultRouter from "./routes/defaultRoute";
+import manualRouter from "./routes/manual";
+import triggerRouter from "./routes/trigger";
+import { setAckResponse, setBadRequestNack } from "./utils/ackUtils";
 
+const createServer = (): Application => {
+	const app = express();
 
-const app = express();
+	// Middleware
+	app.use(express.json({ limit: "50mb" }));
+	app.use(cors());
 
-RedisService.useDb(1);
+	// Log all requests in development
+	if (config.port !== "production") {
+		app.use((req: Request, res: Response, next: NextFunction) => {
+			logger.debug(`${req.method} ${req.url}`);
+			next();
+		});
+	}
 
-// Middleware
-app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+	// app.use("/manual", manualRouter);
+	app.use("/mock", defaultRouter);
+	app.use("/trigger", triggerRouter);
 
+	// Health Check
+	app.get("/health", (req: Request, res: Response) => {
+		res.status(200).send(setAckResponse(true));
+	});
 
-// Routes
-app.use("/api", apiRouter);
-app.use("/trigger",router)
+	// Error Handling Middleware
+	app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+		logger.error(err.message, { stack: err.stack });
+		res.status(200).send(setBadRequestNack(err.message));
+	});
 
-const PORT = process.env.PORT || 6000;
+	return app;
+};
 
-app.listen(PORT, () => {
-  logger.info(`Server running at ${PORT}`);
-});
+export default createServer;

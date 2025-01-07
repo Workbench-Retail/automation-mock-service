@@ -1,4 +1,0 @@
-{
-    "selected_item_id": "$.message.order.items[*].id",
-    "selected_item_quantity": "$.message.order.items[*].quantity.selected.count"
-}
