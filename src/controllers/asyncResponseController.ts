@@ -39,5 +39,5 @@ async function sendResponse(action: string, body: any) {
 
 function isManual(payload: any) {
 	const txn = payload.txn;
-	return true;
+	return false;
 }

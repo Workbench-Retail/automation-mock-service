@@ -1,8 +1,8 @@
-import e, { Router } from "express";
+import { Router } from "express";
 import { saveDataMiddleware } from "../controllers/dataControllers";
 import { Request } from "express";
 import { generateMockResponseMiddleware } from "../controllers/generationController";
-import axios from "axios";
+
 import logger from "../utils/logger";
 import { sendToApiService } from "../utils/request-utils";
 import { setAckResponse } from "../utils/ackUtils";
@@ -30,7 +30,6 @@ triggerRouter.post(
 				throw new Error("Mock response not found");
 			}
 			const action = req.params.action;
-			logger.info(`Forwarding request to API service for action: ${action}`);
 			await sendToApiService(action, req.body, req.queryData);
 			res.status(200).send(setAckResponse(true));
 		} catch (err) {
