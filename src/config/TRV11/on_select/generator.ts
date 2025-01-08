@@ -114,11 +114,17 @@ const filterItemsBySelectedIds = (items: any[], selectedIds: string | string[]):
 export async function onSelectGenerator(existingPayload: any,sessionData: any){
     let items = filterItemsBySelectedIds(sessionData.items,sessionData.selected_ids)
     let fulfillments = getUniqueFulfillmentIdsAndFilterFulfillments(sessionData.items,sessionData.fulfillments)
+    const ids_with_quantities = {
+        items: existingPayload.message.order.items.reduce((acc: any, item: any) => {
+          acc[item.id] = item.quantity.selected.count;
+          return acc;
+        }, {})
+      };
     const updatedItems = sessionData.items.map((item: any) => ({
         ...item,
         quantity: {
           selected: {
-            count: sessionData["ids_with_quantities"]["items"][item.id] || 0, // Default to 0 if not in the mapping
+            count: ids_with_quantities["items"][item.id] || 0, // Default to 0 if not in the mapping
           },
         },
       }
