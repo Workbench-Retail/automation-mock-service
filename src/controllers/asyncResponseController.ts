@@ -13,8 +13,10 @@ export async function initAsyncMiddleware(
 		if (isManual(req.body)) {
 			next();
 		}
+		const body = req.body;
+
 		setTimeout(async () => {
-			await sendResponse(req.params.action, req.body);
+			await sendResponse(body);
 		}, 2000);
 		next();
 	} catch (err) {
@@ -22,15 +24,20 @@ export async function initAsyncMiddleware(
 	}
 }
 
-async function sendResponse(action: string, body: any) {
+async function sendResponse(body: any) {
 	try {
 		// ! check l2 error here
-		const mockResponseMetaData = await getMockResponseMetaData(action, body);
-		const mockReponse = createMockReponse(
+		const mockResponseMetaData = await getMockResponseMetaData(
+			body.context.action,
+			body
+		);
+		logger.info("response data", mockResponseMetaData);
+		const mockReponse = await createMockReponse(
 			mockResponseMetaData.actionID,
 			mockResponseMetaData.sessionData
 		);
-		await sendToApiService(action, mockReponse);
+		console.log("mockReponse", mockReponse);
+		await sendToApiService(mockResponseMetaData.action, mockReponse);
 	} catch (err) {
 		logger.error("Error in sending repsonse to api service", err);
 		throw err;

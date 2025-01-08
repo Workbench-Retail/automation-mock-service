@@ -9,12 +9,14 @@ import {
 export default function init(input: validationInput): validationOutput {
     const scope = payloadUtils.getJsonPath(input.payload, "$");
     let subResults: validationOutput = [];
+    let valid = true;
     for (const testObj of scope) {
         testObj._EXTERNAL = input.externalData;
 
         function on_init(input: validationInput): validationOutput {
             const scope = payloadUtils.getJsonPath(input.payload, "$");
             let subResults: validationOutput = [];
+            let valid = true;
             for (const testObj of scope) {
                 testObj._EXTERNAL = input.externalData;
                 const txn_id = payloadUtils.getJsonPath(
@@ -36,7 +38,7 @@ export default function init(input: validationInput): validationOutput {
 
                 delete testObj._EXTERNAL;
             }
-            return [{ valid: true, code: 107 }, ...subResults];
+            return [{ valid: valid, code: 107 }, ...subResults];
         }
 
         const testFunctions: testFunctionArray = [on_init];
@@ -53,9 +55,10 @@ export default function init(input: validationInput): validationOutput {
         if (invalidResults.length > 0) {
             // return invalidResults;
             subResults = invalidResults;
+            valid = subResults.every((r) => r.valid);
         }
 
         delete testObj._EXTERNAL;
     }
-    return [{ valid: true, code: 200 }, ...subResults];
+    return [{ valid: valid, code: 200 }, ...subResults];
 }

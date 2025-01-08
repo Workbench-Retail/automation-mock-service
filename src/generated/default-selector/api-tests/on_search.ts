@@ -9,12 +9,14 @@ import {
 export default function on_search(input: validationInput): validationOutput {
     const scope = payloadUtils.getJsonPath(input.payload, "$");
     let subResults: validationOutput = [];
+    let valid = true;
     for (const testObj of scope) {
         testObj._EXTERNAL = input.externalData;
 
         function second_search(input: validationInput): validationOutput {
             const scope = payloadUtils.getJsonPath(input.payload, "$");
             let subResults: validationOutput = [];
+            let valid = true;
             for (const testObj of scope) {
                 testObj._EXTERNAL = input.externalData;
                 const items = payloadUtils.getJsonPath(
@@ -36,11 +38,12 @@ export default function on_search(input: validationInput): validationOutput {
 
                 delete testObj._EXTERNAL;
             }
-            return [{ valid: true, code: 101 }, ...subResults];
+            return [{ valid: valid, code: 101 }, ...subResults];
         }
         function select(input: validationInput): validationOutput {
             const scope = payloadUtils.getJsonPath(input.payload, "$");
             let subResults: validationOutput = [];
+            let valid = true;
             for (const testObj of scope) {
                 testObj._EXTERNAL = input.externalData;
                 const items = payloadUtils.getJsonPath(
@@ -62,7 +65,7 @@ export default function on_search(input: validationInput): validationOutput {
 
                 delete testObj._EXTERNAL;
             }
-            return [{ valid: true, code: 104 }, ...subResults];
+            return [{ valid: valid, code: 104 }, ...subResults];
         }
 
         const testFunctions: testFunctionArray = [second_search, select];
@@ -79,9 +82,10 @@ export default function on_search(input: validationInput): validationOutput {
         if (invalidResults.length > 0) {
             // return invalidResults;
             subResults = invalidResults;
+            valid = subResults.every((r) => r.valid);
         }
 
         delete testObj._EXTERNAL;
     }
-    return [{ valid: true, code: 200 }, ...subResults];
+    return [{ valid: valid, code: 200 }, ...subResults];
 }

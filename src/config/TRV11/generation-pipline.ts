@@ -2,7 +2,7 @@ import { createContext } from "./create-context";
 import fs from "fs";
 import yaml from "js-yaml";
 import { Generator } from "./api-factory";
-
+import path from "path";
 function yamlToJson(filePath: string): object {
 	try {
 		// Read the YAML file contents
@@ -47,11 +47,13 @@ function getDetailsByActionId(
 	throw new Error("Invalid action id found!");
 }
 
-export function createMockReponse(actionID: string, sessionData: any) {
+export async function createMockReponse(actionID: string, sessionData: any) {
 	// 1. create context
 	// 2. load default
 	// 3. run faker
-	const factoryData = loadFactoryYaml("TRV11/factory.yaml");
+	const factoryData = loadFactoryYaml(
+		path.resolve(__dirname, "../TRV11/factory.yaml")
+	);
 	const api_details = getDetailsByActionId(actionID, factoryData);
 	const context_object = {
 		action: api_details?.action,
@@ -72,10 +74,12 @@ export function createMockReponse(actionID: string, sessionData: any) {
 	};
 
 	const context = createContext(context_object);
-	const default_message = yamlToJson(api_details.default);
+	const default_message = yamlToJson(
+		path.resolve(__dirname, api_details.default)
+	);
 	const payload = {
 		context: { ...context },
-		message: { ...default_message },
+		...default_message,
 	};
-	Generator(actionID, payload, sessionData);
+	return await Generator(actionID, payload, sessionData);
 }
