@@ -112,9 +112,8 @@ const filterItemsBySelectedIds = (items: any[], selectedIds: string | string[]):
 
 
 export async function onSelectGenerator(existingPayload: any,sessionData: any){
-    sessionData.selected_ids = Array.isArray(sessionData.selected_ids) ? sessionData.selected_ids : [sessionData.selected_ids];
-    sessionData.items = filterItemsBySelectedIds(sessionData.items,sessionData.selected_ids)
-    sessionData.fulfillments = getUniqueFulfillmentIdsAndFilterFulfillments(sessionData.items,sessionData.fulfillments)
+    let items = filterItemsBySelectedIds(sessionData.items,sessionData.selected_ids)
+    let fulfillments = getUniqueFulfillmentIdsAndFilterFulfillments(sessionData.items,sessionData.fulfillments)
     const updatedItems = sessionData.items.map((item: any) => ({
         ...item,
         quantity: {
@@ -124,12 +123,11 @@ export async function onSelectGenerator(existingPayload: any,sessionData: any){
         },
       }
       ));
-    sessionData.items = updatedItems
-    createAndAppendFulfillments(updatedItems,sessionData.fulfillments)
+    items = updatedItems
+    createAndAppendFulfillments(updatedItems,fulfillments)
     const quote = createQuoteFromItems(updatedItems)
-    sessionData["quote"] = quote
-    existingPayload.message.order.items = sessionData.items
-    existingPayload.message.order.fulfillments = sessionData.fulfillments
-    existingPayload.message.order.quote = sessionData.quote
+    existingPayload.message.order.items = items
+    existingPayload.message.order.fulfillments = fulfillments
+    existingPayload.message.order.quote = quote
     return existingPayload;
 }

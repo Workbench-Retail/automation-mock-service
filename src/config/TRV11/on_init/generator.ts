@@ -8,10 +8,16 @@ export async function onInitGenerator(existingPayload: any,sessionData: any){
     "bank_code": "XXXXXXXX",
     "bank_account_number": "xxxxxxxxxxxxxx"
   }
-  if (!Array.isArray(sessionData.payments)) {
-    sessionData.payments = [sessionData.payments];
-    }
-    existingPayload.message.order.payments = sessionData.payments
+  const payments = [
+    {
+      ids: randomId, // Generates a random ID
+      params: {
+        bank_code: "XXXXXXXX",
+        bank_account_number: "xxxxxxxxxxxxxx",
+      },
+    },
+  ];
+    existingPayload.message.order.payments = payments
     existingPayload.message.order.items = sessionData.items
     existingPayload.message.order.fulfillments = sessionData.fulfillments
     existingPayload.message.order.quote = sessionData.quote

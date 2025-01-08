@@ -58,8 +58,8 @@ function updateFulfillmentsWithParentInfo(fulfillments: any[]): void {
 
 export async function onConfirmGenerator(existingPayload: any,sessionData: any){
     const randomId = Math.random().toString(36).substring(2, 15);
-    sessionData["order_id"] = randomId
-    sessionData["updated_payments"]["params"] = {
+    const order_id = randomId
+    const updated_payments = {
         ...sessionData["updated_payments"]["params"],
         "bank_code": "XXXXXXXX",
         "bank_account_number": "xxxxxxxxxxxxxx"
@@ -68,10 +68,10 @@ export async function onConfirmGenerator(existingPayload: any,sessionData: any){
         sessionData.updated_payments = [sessionData.updated_payments];
     }
     updateFulfillmentsWithParentInfo(sessionData.fulfillments)
-    existingPayload.message.order.payments = sessionData.payments
+    existingPayload.message.order.payments = updated_payments
     existingPayload.message.order.items = sessionData.items
     existingPayload.message.order.fulfillments = sessionData.fulfillments
     existingPayload.message.order.quote = sessionData.quote
-    existingPayload.message.order.id = sessionData.order_id
+    existingPayload.message.order.id = order_id
     return existingPayload;
 }
