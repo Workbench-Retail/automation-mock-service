@@ -1,3 +1,5 @@
+import { SessionData } from "../session-types";
+
 const createQuoteFromItems = (items: any): any => {
     let totalPrice = 0; // Initialize total price
   
@@ -111,8 +113,8 @@ const filterItemsBySelectedIds = (items: any[], selectedIds: string | string[]):
 };
 
 
-export async function onSelectGenerator(existingPayload: any,sessionData: any){
-    let items = filterItemsBySelectedIds(sessionData.items,sessionData.selected_ids)
+export async function onSelectGenerator(existingPayload: any,sessionData: SessionData){
+    let items = filterItemsBySelectedIds(sessionData.items,sessionData.selected_item_ids)
     let fulfillments = getUniqueFulfillmentIdsAndFilterFulfillments(sessionData.items,sessionData.fulfillments)
     const ids_with_quantities = {
         items: existingPayload.message.order.items.reduce((acc: any, item: any) => {
