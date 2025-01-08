@@ -3,6 +3,7 @@ import fs from "fs";
 import yaml from "js-yaml";
 import { Generator } from "./api-factory";
 import path from "path";
+import { SessionData } from "./session-types";
 function yamlToJson(filePath: string): object {
 	try {
 		// Read the YAML file contents
@@ -51,6 +52,7 @@ export async function createMockReponse(actionID: string, sessionData: any) {
 	// 1. create context
 	// 2. load default
 	// 3. run faker
+
 	const factoryData = loadFactoryYaml(
 		path.resolve(__dirname, "../TRV11/factory.yaml")
 	);
@@ -64,7 +66,7 @@ export async function createMockReponse(actionID: string, sessionData: any) {
 		bpp_uri: sessionData?.bpp_uri,
 		location: {
 			city: {
-				code: sessionData.city_code || "std:011",
+				code: sessionData.city_code ?? "std:011",
 			},
 			country: {
 				code: "IND",

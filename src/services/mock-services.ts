@@ -15,10 +15,11 @@ export async function getMockResponseMetaData(action: string, body: any) {
 		throw new Error("No valid test found");
 	}
 	const actionData = getActionData(code);
+	const sessionData = await getSessionData(body.context.transaction_id);
 	return {
 		actionID: actionData.action_id,
 		action: actionData.action,
-		sessionData: await getSessionData(body.context.transaction_id),
+		sessionData: sessionData,
 	};
 }
 

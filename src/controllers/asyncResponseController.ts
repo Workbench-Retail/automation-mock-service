@@ -3,6 +3,8 @@ import logger from "../utils/logger";
 import { getMockResponseMetaData } from "../services/mock-services";
 import { createMockReponse } from "../config/TRV11/generation-pipline";
 import { sendToApiService } from "../utils/request-utils";
+import { createContext } from "../config/TRV11/create-context";
+import { BecknContext } from "../config/TRV11/session-types";
 
 export async function initAsyncMiddleware(
 	req: Request,
@@ -31,7 +33,7 @@ async function sendResponse(body: any) {
 			body.context.action,
 			body
 		);
-		logger.info("response data", mockResponseMetaData);
+		logger.info(`response data ${JSON.stringify(mockResponseMetaData)}`);
 		const mockReponse = await createMockReponse(
 			mockResponseMetaData.actionID,
 			mockResponseMetaData.sessionData
@@ -40,7 +42,6 @@ async function sendResponse(body: any) {
 		await sendToApiService(mockResponseMetaData.action, mockReponse);
 	} catch (err) {
 		logger.error("Error in sending repsonse to api service", err);
-		throw err;
 	}
 }
 
@@ -48,3 +49,5 @@ function isManual(payload: any) {
 	const txn = payload.txn;
 	return false;
 }
+
+function sendErrorReponse(context: BecknContext) {}

@@ -23,7 +23,6 @@ interface CustomRequest extends Request {
 triggerRouter.post(
 	"/api-service/:action",
 	generateMockResponseMiddleware,
-	saveDataMiddleware,
 	async (req: CustomRequest, res) => {
 		try {
 			if (!req.mockResponse) {

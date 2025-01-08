@@ -47,7 +47,7 @@ codes:
   - code: 109
     action_id: "on_confirm"
     action: "on_confirm"
-    default: "on_confirm/default.yaml"
+    default: "on_confirm/on_confirm/default.yaml"
     message_id: false
   - code: 110
     action_id: "status"

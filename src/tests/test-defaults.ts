@@ -95,5 +95,3 @@ const result = search({
 	externalData: {},
 	config: { runAllValidations: true },
 });
-
-// console.log(result);

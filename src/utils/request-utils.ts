@@ -1,5 +1,6 @@
 import axios from "axios";
 import logger from "./logger";
+import { saveData } from "../services/data-services";
 
 export async function sendToApiService(
 	action: string,
@@ -8,8 +9,8 @@ export async function sendToApiService(
 ) {
 	try {
 		const url = `${process.env.API_SERVICE_URL}/api-service/mock/${action}`;
-		logger.info(`Forwarding request to API service for action: ${action} at
-			url: ${url}`);
+		await saveData(action, body);
+		logger.debug(`Sending response to api service ${url} ${action}`); //${JSON.stringify(body)}
 		await axios.post(url, body, {
 			params: {
 				...queryData,

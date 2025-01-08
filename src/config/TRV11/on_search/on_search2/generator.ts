@@ -1,10 +1,12 @@
 import { SessionData } from "../../session-types";
+import { createFullfillment } from "../fullfillment-generator";
 
 const createCustomRoute = (
 	routeData: any[],
 	startStationCode: string,
 	endStationCode: string
 ): any[] => {
+	console.log(startStationCode, endStationCode, "ROUTE DATA");
 	return routeData.map((route) => {
 		const stops = route.stops;
 
@@ -64,8 +66,11 @@ export async function onSearch2Generator(
 	existingPayload: any,
 	sessionData: SessionData
 ) {
-	// const route = stations[city_code as keyof typeof stations]
-	const route: any[] = [];
+	console.log(JSON.stringify(sessionData), "ON SEARCH 2 GENERATOR");
+
+	const route = createFullfillment(
+		sessionData.city_code ?? "std:011"
+	).fulfillments;
 	const { start_code, end_code } = sessionData;
 	if (!start_code || !end_code) {
 		throw new Error("Start and End station codes are required");

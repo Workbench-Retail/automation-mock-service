@@ -18,10 +18,12 @@ export interface SessionData {
 	fullfillment_ids: string[]; // Assuming these are strings; adjust if needed
 	item_ids: string[]; // Assuming these are strings; adjust if needed
 	items: any[]; // Replace `any` with a specific type if known
+	selected_items: any[];
 	selected_item_ids: string[]; // Assuming these are strings; adjust if needed
 	billing: Record<string, any>; // Replace `any` with specific types if known
 	payments: any[]; // Replace `any` with a specific type if known
 	order_id: string | null;
+	quote: any;
 }
 
 export type BecknContext = {

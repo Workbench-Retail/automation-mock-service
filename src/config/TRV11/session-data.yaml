@@ -18,6 +18,7 @@ session_data:
   fullfillment_ids: []
   item_ids: []
   items: []
+  selected_items: []
   selected_item_ids: []
   billing: {}
   payments: []

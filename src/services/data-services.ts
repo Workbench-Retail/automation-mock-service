@@ -6,10 +6,11 @@ import jsonpath from "jsonpath";
 
 import { SessionData } from "../config/TRV11/session-types";
 import logger from "../utils/logger";
+import { isArrayKey } from "../types/type-utils";
 
 export function updateSessionData(
 	saveData: Record<string, string>,
-	payload: object,
+	payload: any,
 	sessionData: SessionData
 ) {
 	logger.info(`updating session`);
@@ -17,8 +18,15 @@ export function updateSessionData(
 		for (const key in saveData) {
 			const jsonPath = saveData[key as keyof typeof saveData];
 			const result = jsonpath.query(payload, jsonPath);
-			sessionData[key as keyof typeof sessionData] =
-				result.length === 1 ? result[0] : result;
+			console.log("saving key", key, "result", result, "jsonpath", jsonPath);
+
+			if (
+				isArrayKey<SessionData>(key as keyof typeof sessionData, sessionData)
+			) {
+				sessionData[key as keyof typeof sessionData] = result;
+			} else {
+				sessionData[key as keyof typeof sessionData] = result[0];
+			}
 		}
 	} catch (e) {
 		logger.error("Error in updating session data", e);
@@ -39,12 +47,12 @@ export async function saveData(action: string, payload: any) {
 		const keyExists = await RedisService.keyExists(
 			payload.context.transaction_id
 		);
-		let sessionData;
+		let sessionData: SessionData = {} as SessionData;
 		if (!keyExists) {
-			sessionData = yamlToJson(
+			const raw = yamlToJson(
 				path.resolve(__dirname, "../config/TRV11/session-data.yaml")
-			) as SessionData;
-			console.log("default session data is ", sessionData);
+			) as any;
+			sessionData = raw.session_data;
 			sessionData.bpp_id = sessionData.bap_id = "mock.com";
 			sessionData.bap_uri = sessionData.bpp_uri =
 				process.env.API_SERVICE_URL + "/api";
@@ -74,7 +82,7 @@ export async function saveData(action: string, payload: any) {
 export async function loadSessionData(transactionID: string) {
 	if (await RedisService.keyExists(transactionID)) {
 		const rawData = await RedisService.getKey(transactionID);
-		console.log("raw data is ", rawData);
+		console.log("raw data is ", rawData, typeof rawData, "for ", transactionID);
 		const sessionData = JSON.parse(rawData ?? "{}") as SessionData;
 		return sessionData;
 	} else {
