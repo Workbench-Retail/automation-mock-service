@@ -1,5 +1,9 @@
 import { randomBytes } from "crypto";
 
+function delay(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 function generateQrToken(): string {
     return randomBytes(32).toString("base64");
   }
@@ -56,22 +60,23 @@ function updateFulfillmentsWithParentInfo(fulfillments: any[]): void {
 }
 
 
-export async function onConfirmGenerator(existingPayload: any,sessionData: any){
-    const randomId = Math.random().toString(36).substring(2, 15);
-    sessionData["order_id"] = randomId
-    sessionData["updated_payments"]["params"] = {
-        ...sessionData["updated_payments"]["params"],
-        "bank_code": "XXXXXXXX",
-        "bank_account_number": "xxxxxxxxxxxxxx"
-    }
-    if (!Array.isArray(sessionData.updated_payments)) {
-        sessionData.updated_payments = [sessionData.updated_payments];
-    }
-    updateFulfillmentsWithParentInfo(sessionData.fulfillments)
-    existingPayload.message.order.payments = sessionData.payments
-    existingPayload.message.order.items = sessionData.items
-    existingPayload.message.order.fulfillments = sessionData.fulfillments
-    existingPayload.message.order.quote = sessionData.quote
-    existingPayload.message.order.id = sessionData.order_id
-    return existingPayload;
+export async function onConfirmDelayedGenerator(existingPayload: any,sessionData: any){
+  const randomId = Math.random().toString(36).substring(2, 15);
+  const order_id = randomId
+  const updated_payments = {
+      ...sessionData["updated_payments"]["params"],
+      "bank_code": "XXXXXXXX",
+      "bank_account_number": "xxxxxxxxxxxxxx"
+  }
+  if (!Array.isArray(sessionData.updated_payments)) {
+      sessionData.updated_payments = [sessionData.updated_payments];
+  }
+  updateFulfillmentsWithParentInfo(sessionData.fulfillments)
+  existingPayload.message.order.payments = updated_payments
+  existingPayload.message.order.items = sessionData.items
+  existingPayload.message.order.fulfillments = sessionData.fulfillments
+  existingPayload.message.order.quote = sessionData.quote
+  existingPayload.message.order.id = order_id
+  await delay(30000);
+  return existingPayload;
 }
