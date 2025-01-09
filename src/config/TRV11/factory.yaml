@@ -50,7 +50,7 @@ codes:
     default: "on_confirm/on_confirm/default.yaml"
     message_id: false
   - code: 110
-    action_id: "on_confirm"
+    action_id: "on_confirm_delayed"
     action: "on_confirm"
     default: "on_confirm/on_confirm_delayed/default.yaml"
     message_id: false
@@ -68,4 +68,24 @@ codes:
     action_id: "unsolicited_on_status"
     action: "on_status"
     default: "on_status/default.yaml"
+    message_id: true
+  - code: 114
+    action_id: "cancel"
+    action: "cancel"
+    default: "cancel/default.yaml"
+    message_id: true
+  - code: 115
+    action_id: "on_cancel"
+    action: "on_cancel"
+    default: "on_cancel/default.yaml"
+    message_id: false
+  - code: 116
+    action_id: "on_update_accepted"
+    action: "on_update"
+    default: "on_update/default.yaml"
+    message_id: true
+  - code: 117
+    action_id: "on_update_rejected"
+    action: "on_update"
+    default: "on_update/default.yaml"
     message_id: true
