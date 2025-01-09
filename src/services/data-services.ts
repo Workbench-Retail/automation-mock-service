@@ -18,8 +18,7 @@ export function updateSessionData(
 		for (const key in saveData) {
 			const jsonPath = saveData[key as keyof typeof saveData];
 			const result = jsonpath.query(payload, jsonPath);
-			console.log("saving key", key, "result", result, "jsonpath", jsonPath);
-
+			logger.debug(`updating ${key} for path $${jsonPath}`);
 			if (
 				isArrayKey<SessionData>(key as keyof typeof sessionData, sessionData)
 			) {
@@ -82,7 +81,8 @@ export async function saveData(action: string, payload: any) {
 export async function loadSessionData(transactionID: string) {
 	if (await RedisService.keyExists(transactionID)) {
 		const rawData = await RedisService.getKey(transactionID);
-		console.log("raw data is ", rawData, typeof rawData, "for ", transactionID);
+		logger.info(`loading session data for ${transactionID}`);
+		// console.log("raw data is ", rawData, typeof rawData, "for ", transactionID);
 		const sessionData = JSON.parse(rawData ?? "{}") as SessionData;
 		return sessionData;
 	} else {

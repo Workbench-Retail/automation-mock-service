@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { saveDataMiddleware } from "../controllers/dataControllers";
 import { Request } from "express";
 import { generateMockResponseMiddleware } from "../controllers/generationController";
 
@@ -15,7 +14,7 @@ interface QuerySettings {
 	subscriberUrl?: string;
 	[key: string]: undefined | string | string[] | any;
 }
-interface CustomRequest extends Request {
+export interface CustomRequest extends Request {
 	mockResponse?: any;
 	queryData?: QuerySettings;
 }

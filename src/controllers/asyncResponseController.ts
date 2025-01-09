@@ -38,7 +38,6 @@ async function sendResponse(body: any) {
 			mockResponseMetaData.actionID,
 			mockResponseMetaData.sessionData
 		);
-		console.log("mockReponse", mockReponse);
 		await sendToApiService(mockResponseMetaData.action, mockReponse);
 	} catch (err) {
 		logger.error("Error in sending repsonse to api service", err);

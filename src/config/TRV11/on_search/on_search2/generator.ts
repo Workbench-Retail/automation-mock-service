@@ -6,7 +6,6 @@ const createCustomRoute = (
 	startStationCode: string,
 	endStationCode: string
 ): any[] => {
-	console.log(startStationCode, endStationCode, "ROUTE DATA");
 	return routeData.map((route) => {
 		const stops = route.stops;
 
@@ -66,8 +65,6 @@ export async function onSearch2Generator(
 	existingPayload: any,
 	sessionData: SessionData
 ) {
-	console.log(JSON.stringify(sessionData), "ON SEARCH 2 GENERATOR");
-
 	const route = createFullfillment(
 		sessionData.city_code ?? "std:011"
 	).fulfillments;

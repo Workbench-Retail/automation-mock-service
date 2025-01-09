@@ -567,6 +567,5 @@ export function createFullfillment(cityCode: string) {
 			index++;
 		});
 	}
-	console.log("fake", fake);
 	return { fulfillments: fake };
 }
