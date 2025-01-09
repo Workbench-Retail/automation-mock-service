@@ -48,7 +48,7 @@ function getDetailsByActionId(
 	throw new Error("Invalid action id found!");
 }
 
-export async function createMockReponse(actionID: string, sessionData: any) {
+export async function createMockReponse(actionID: string, sessionData: SessionData) {
 	// 1. create context
 	// 2. load default
 	// 3. run faker
@@ -72,7 +72,7 @@ export async function createMockReponse(actionID: string, sessionData: any) {
 				code: "IND",
 			},
 		},
-		message_id: api_details?.message_id ? undefined : sessionData?.message_id,
+		message_id: api_details.message_id ? undefined : sessionData.message_id,
 	};
 
 	const context = createContext(context_object);

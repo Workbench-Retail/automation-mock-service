@@ -33,7 +33,7 @@ async function sendResponse(body: any) {
 			body.context.action,
 			body
 		);
-		logger.info(`response data ${JSON.stringify(mockResponseMetaData)}`);
+		console.log(mockResponseMetaData.action,mockResponseMetaData.actionID);
 		const mockReponse = await createMockReponse(
 			mockResponseMetaData.actionID,
 			mockResponseMetaData.sessionData
