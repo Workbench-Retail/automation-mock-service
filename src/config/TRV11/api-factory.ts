@@ -3,6 +3,7 @@ import { confirmGenerator } from "./confirm/generator";
 import { initGenerator } from "./init/generator";
 import { onCancelGenerator } from "./on_cancel/generator";
 import { onConfirmGenerator } from "./on_confirm/on_confirm/generator";
+import { onConfirmDelayedGenerator } from "./on_confirm/on_confirm_delayed/generator";
 import { onInitGenerator } from "./on_init/generator";
 import { onSearch1Generator } from "./on_search/on_search1/generator";
 import { onSearch2Generator } from "./on_search/on_search2/generator";
@@ -39,6 +40,8 @@ export async function Generator(
 			return await onInitGenerator(existingPayload, sessionData);
 		case "on_confirm":
 			return await onConfirmGenerator(existingPayload, sessionData);
+		case "on_confirm_delayed":
+			return await onConfirmDelayedGenerator(existingPayload, sessionData);
 		case "on_cancel":
 			return await onCancelGenerator(existingPayload, sessionData);
 		default:

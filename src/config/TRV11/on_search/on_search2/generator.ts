@@ -66,7 +66,6 @@ export async function onSearch2Generator(
 	existingPayload: any,
 	sessionData: SessionData
 ) {
-	console.log(JSON.stringify(sessionData), "ON SEARCH 2 GENERATOR");
 
 	const route = createFullfillment(
 		sessionData.city_code ?? "std:011"

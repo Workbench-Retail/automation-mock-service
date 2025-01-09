@@ -50,16 +50,21 @@ codes:
     default: "on_confirm/on_confirm/default.yaml"
     message_id: false
   - code: 110
+    action_id: "on_confirm"
+    action: "on_confirm"
+    default: "on_confirm/on_confirm_delayed/default.yaml"
+    message_id: false
+  - code: 111
     action_id: "status"
     action: "status"
     default: "status/default.yaml"
     message_id: true
-  - code: 111
+  - code: 112
     action_id: "on_status"
     action: "on_status"
     default: "on_status/default.yaml"
     message_id: false
-  - code: 112
+  - code: 113
     action_id: "unsolicited_on_status"
     action: "on_status"
     default: "on_status/default.yaml"
