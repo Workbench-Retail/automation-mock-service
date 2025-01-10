@@ -74,6 +74,7 @@ export async function loadSessionData(transactionID: string) {
 		sessionData.bpp_id = sessionData.bap_id = "mock.com";
 		sessionData.bap_uri = sessionData.bpp_uri =
 			process.env.API_SERVICE_URL + "/api";
+		logger.info(`new session data is ${JSON.stringify(sessionData)}`);
 		return sessionData;
 	} else {
 		const rawData = await RedisService.getKey(transactionID);
