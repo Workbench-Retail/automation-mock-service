@@ -1,4 +1,5 @@
 export interface SessionData {
+	subscriber_url: string | undefined;
 	transaction_id: string | undefined;
 	message_id: string | undefined;
 	last_action: string | undefined;
@@ -25,7 +26,7 @@ export interface SessionData {
 	updated_payments: any[]; // Replace `any` with a specific type if known
 	order_id: string | undefined;
 	quote: any;
-	status: string
+	status: string;
 }
 
 export type BecknContext = {

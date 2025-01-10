@@ -62,7 +62,10 @@ export async function saveData(action: string, payload: any) {
 	}
 }
 
-export async function loadSessionData(transactionID: string) {
+export async function loadSessionData(
+	transactionID: string,
+	subscriber_url?: string
+) {
 	const keyExists = await RedisService.keyExists(transactionID);
 	let sessionData: SessionData = {} as SessionData;
 	if (!keyExists) {
@@ -74,6 +77,7 @@ export async function loadSessionData(transactionID: string) {
 		sessionData.bpp_id = sessionData.bap_id = "mock.com";
 		sessionData.bap_uri = sessionData.bpp_uri =
 			process.env.API_SERVICE_URL + "/api";
+		sessionData.subscriber_url = subscriber_url;
 		logger.info(`new session data is ${JSON.stringify(sessionData)}`);
 		return sessionData;
 	} else {
