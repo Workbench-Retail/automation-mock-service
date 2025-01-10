@@ -9,24 +9,24 @@ export async function generateMockResponseMiddleware(
 	res: Response,
 	next: NextFunction
 ) {
-	// ! if payload exists in body do not generate mock response
+	req.queryData = req.query as any;
 	if (req.body.payload) {
 		req.mockResponse = req.body.payload;
 	} else {
-		const txn = req.queryData?.transactionID;
+		const txn = req.queryData?.transaction_id;
 		if (!txn) {
 			logger.error("Transaction ID not found in query data");
 			res.status(400).send("Transaction ID not found in query data");
 			return;
 		}
-		if (!req.queryData?.actionID) {
+		if (!req.queryData?.action_id) {
 			logger.error("Action ID not found in query data");
 			res.status(400).send("Action ID not found in query data");
 			return;
 		}
 		const sessionData = await loadSessionData(txn);
 		const mockResponse = createMockReponse(
-			req.queryData?.actionID,
+			req.queryData?.action_id,
 			sessionData
 		);
 		req.mockResponse = mockResponse;

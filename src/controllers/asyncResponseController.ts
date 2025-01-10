@@ -3,7 +3,6 @@ import logger from "../utils/logger";
 import { getMockResponseMetaData } from "../services/mock-services";
 import { createMockReponse } from "../config/TRV11/generation-pipline";
 import { sendToApiService } from "../utils/request-utils";
-import { createContext } from "../config/TRV11/create-context";
 import { BecknContext } from "../config/TRV11/session-types";
 
 export async function initAsyncMiddleware(
@@ -48,5 +47,3 @@ function isManual(payload: any) {
 	const txn = payload.txn;
 	return false;
 }
-
-function sendErrorReponse(context: BecknContext) {}

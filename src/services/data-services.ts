@@ -43,23 +43,7 @@ function yamlToJson(filePath: string): object {
 
 export async function saveData(action: string, payload: any) {
 	try {
-		const keyExists = await RedisService.keyExists(
-			payload.context.transaction_id
-		);
-		let sessionData: SessionData = {} as SessionData;
-		if (!keyExists) {
-			const raw = yamlToJson(
-				path.resolve(__dirname, "../config/TRV11/session-data.yaml")
-			) as any;
-			sessionData = raw.session_data;
-			sessionData.bpp_id = sessionData.bap_id = "mock.com";
-			sessionData.bap_uri = sessionData.bpp_uri =
-				process.env.API_SERVICE_URL + "/api";
-		} else {
-			sessionData = (await loadSessionData(
-				payload?.context.transaction_id
-			)) as SessionData;
-		}
+		const sessionData = await loadSessionData(payload?.context.transaction_id);
 		const actionFolderPath = path.resolve(
 			__dirname,
 			`../config/TRV11/${action}`
@@ -79,13 +63,22 @@ export async function saveData(action: string, payload: any) {
 }
 
 export async function loadSessionData(transactionID: string) {
-	if (await RedisService.keyExists(transactionID)) {
-		const rawData = await RedisService.getKey(transactionID);
-		logger.info(`loading session data for ${transactionID}`);
-		// console.log("raw data is ", rawData, typeof rawData, "for ", transactionID);
-		const sessionData = JSON.parse(rawData ?? "{}") as SessionData;
+	const keyExists = await RedisService.keyExists(transactionID);
+	let sessionData: SessionData = {} as SessionData;
+	if (!keyExists) {
+		const raw = yamlToJson(
+			path.resolve(__dirname, "../config/TRV11/session-data.yaml")
+		) as any;
+		sessionData = raw.session_data;
+		sessionData.transaction_id = transactionID;
+		sessionData.bpp_id = sessionData.bap_id = "mock.com";
+		sessionData.bap_uri = sessionData.bpp_uri =
+			process.env.API_SERVICE_URL + "/api";
 		return sessionData;
 	} else {
-		throw Error("transaction ID  does not  exist");
+		const rawData = await RedisService.getKey(transactionID);
+		logger.info(`loading session data for ${transactionID}`);
+		const sessionData = JSON.parse(rawData ?? "{}") as SessionData;
+		return sessionData;
 	}
 }

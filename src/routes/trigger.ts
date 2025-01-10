@@ -9,9 +9,9 @@ import { setAckResponse } from "../utils/ackUtils";
 const triggerRouter = Router();
 
 interface QuerySettings {
-	transactionID: string;
-	actionID: string;
-	subscriberUrl?: string;
+	transaction_id: string;
+	action_id: string;
+	subscriber_url?: string;
 	[key: string]: undefined | string | string[] | any;
 }
 export interface CustomRequest extends Request {
