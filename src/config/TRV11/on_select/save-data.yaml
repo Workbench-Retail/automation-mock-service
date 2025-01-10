@@ -7,5 +7,5 @@ save-data:
   price: "$.message.order.quote.price.value"
   updated_payments: "$.message.order.payments[*]"
   items: "$.message.order.items[*]"
-  fulfillments: "$.message.order.fulfillments",
+  fulfillments: "$.message.order.provider[*].fulfillments[*]"
   quote: "$.message.order.quote"

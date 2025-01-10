@@ -122,6 +122,7 @@ export async function onSelectGenerator(
 	existingPayload: any,
 	sessionData: SessionData
 ) {
+	console.log("session data before the on_select call is ",sessionData)
 	let items = filterItemsBySelectedIds(
 		sessionData.items,
 		sessionData.selected_item_ids

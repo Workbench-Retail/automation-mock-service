@@ -31,3 +31,19 @@
 - **confirm** : All the following sub conditions must pass as per the api requirement
 
 	- **condition on_confirm**: $.context.transaction_id must be present in the payload
+
+- **on_confirm** : All the following sub conditions must pass as per the api requirement
+
+	- **condition status**: $.context.transaction_id must be present in the payload
+
+- **status** : All the following sub conditions must pass as per the api requirement
+
+	- **condition on_status**: $.context.transaction_id must be present in the payload
+
+- **cancel** : All the following sub conditions must pass as per the api requirement
+
+	- **condition on_cancel**: $.context.transaction_id must be present in the payload
+
+- **on_cancel** : All the following sub conditions must pass as per the api requirement
+
+	- **condition on_update_accepted**: $.context.transaction_id must be present in the payload

@@ -15,7 +15,7 @@ session_data:
   fulfillments: []
   category_ids: []
   provider_id: null
-  fullfillment_ids: []
+  fulfillment_ids: []
   item_ids: []
   items: []
   selected_items: []

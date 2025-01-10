@@ -4,6 +4,7 @@ export async function onInitGenerator(
 	existingPayload: any,
 	sessionData: SessionData
 ) {
+	// console.log(sessionData, "session_data of on_init")
 	// existingPayload.fulfillments = stations[city_code as keyof typeof stations]
 	const randomId = Math.random().toString(36).substring(2, 15);
 

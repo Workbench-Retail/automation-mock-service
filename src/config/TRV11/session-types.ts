@@ -1,20 +1,20 @@
 export interface SessionData {
-	transaction_id: string | null;
-	message_id: string | null;
-	last_action: string | null;
-	mock_type: string | null;
-	city_code: string | null;
-	bap_id: string | null;
-	bap_uri: string | null;
-	bpp_id: string | null;
-	bpp_uri: string | null;
-	start_code: string | null;
-	end_code: string | null;
-	buyer_app_fee: string | null;
-	vehicle_type: string | null;
+	transaction_id: string | undefined;
+	message_id: string | undefined;
+	last_action: string | undefined;
+	mock_type: string | undefined;
+	city_code: string | undefined;
+	bap_id: string | undefined;
+	bap_uri: string | undefined;
+	bpp_id: string | undefined;
+	bpp_uri: string | undefined;
+	start_code: string | undefined;
+	end_code: string | undefined;
+	buyer_app_fee: string | undefined;
+	vehicle_type: string | undefined;
 	fulfillments: any[]; // Replace `any` with a specific type if known
 	category_ids: string[]; // Assuming these are strings; adjust if needed
-	provider_id: string | null;
+	provider_id: string | undefined;
 	fullfillment_ids: string[]; // Assuming these are strings; adjust if needed
 	item_ids: string[]; // Assuming these are strings; adjust if needed
 	items: any[]; // Replace `any` with a specific type if known
@@ -23,8 +23,9 @@ export interface SessionData {
 	billing: Record<string, any>; // Replace `any` with specific types if known
 	payments: any[]; // Replace `any` with a specific type if known
 	updated_payments: any[]; // Replace `any` with a specific type if known
-	order_id: string | null;
+	order_id: string | undefined;
 	quote: any;
+	status: string
 }
 
 export type BecknContext = {

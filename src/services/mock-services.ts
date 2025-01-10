@@ -5,7 +5,6 @@ import { loadSessionData } from "./data-services";
 
 export async function getMockResponseMetaData(action: string, body: any) {
 	logger.info("getting meta data for action " + action);
-	console.log(JSON.stringify(body.message));
 	const actionTests = defaultSelectionCodeTests(action, body, true);
 	const successTest = actionTests.find(
 		(test) => test.valid && test.code != 200

@@ -6,5 +6,7 @@ export async function onSearch1Generator(
 ) {
 	existingPayload.message.catalog.providers[0].fulfillments =
 		createFullfillment(sessionData.city_code).fulfillments;
+
+	// console.log("session data for on_search1",sessionData)
 	return existingPayload;
 }
