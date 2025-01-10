@@ -12,6 +12,7 @@ export async function generateMockResponseMiddleware(
 	req.queryData = req.query as any;
 	if (req.body.payload) {
 		req.mockResponse = req.body.payload;
+		next();
 	} else {
 		const txn = req.queryData?.transaction_id;
 		if (!txn) {
@@ -32,5 +33,4 @@ export async function generateMockResponseMiddleware(
 		req.mockResponse = mockResponse;
 		next();
 	}
-	next();
 }
