@@ -28,7 +28,7 @@ triggerRouter.post(
 				throw new Error("Mock response not found");
 			}
 			const action = req.params.action;
-			await sendToApiService(action, req.body, req.queryData);
+			await sendToApiService(action, req.mockResponse, req.queryData);
 			res.status(200).send(setAckResponse(true));
 		} catch (err) {
 			logger.error("Error in forwarding request to API service", err);
