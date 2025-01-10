@@ -25,11 +25,13 @@ export async function generateMockResponseMiddleware(
 			res.status(400).send("Action ID not found in query data");
 			return;
 		}
-		const sessionData = await loadSessionData(txn);
-		const mockResponse = createMockReponse(
+		const sessionData = await loadSessionData(txn,req.queryData.subscriber_url);
+		console.log("I want to see session data",sessionData,req.queryData?.action_id)
+		const mockResponse = await createMockReponse(
 			req.queryData?.action_id,
 			sessionData
 		);
+		console.log('mock response is',JSON.stringify(mockResponse,null,2));
 		req.mockResponse = mockResponse;
 		next();
 	}

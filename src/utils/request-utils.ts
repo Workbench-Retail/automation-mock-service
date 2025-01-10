@@ -9,6 +9,7 @@ export async function sendToApiService(
 ) {
 	try {
 		const url = `${process.env.API_SERVICE_URL}/api-service/mock/${action}`;
+		console.log(action,body.context);
 		await saveData(action, body);
 		logger.debug(`Sending response to api service ${url} ${action}`); //${JSON.stringify(body)}
 		await axios.post(url, body, {

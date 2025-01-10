@@ -12,6 +12,7 @@ import { onStatusGenerator } from "./on_status/generator";
 import { search1Generator } from "./search/search1/generator";
 import { search2Generator } from "./search/search2/generator";
 import { selectGenerator } from "./select/generator";
+import { statusGenerator } from "./status/generator";
 
 export async function Generator(
 	action_id: string,
@@ -29,6 +30,8 @@ export async function Generator(
 			return await initGenerator(existingPayload, sessionData);
 		case "confirm":
 			return await confirmGenerator(existingPayload, sessionData);
+		case "status":
+			return await statusGenerator(existingPayload, sessionData);
 		case "cancel":
 			return await cancelGenerator(existingPayload, sessionData);
 		case "on_search1":

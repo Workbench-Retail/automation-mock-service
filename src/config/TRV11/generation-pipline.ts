@@ -72,10 +72,12 @@ export async function createMockReponse(actionID: string, sessionData: SessionDa
 				code: "IND",
 			},
 		},
-		message_id: api_details.message_id ? undefined : sessionData.message_id,
 	};
 
-	const context = createContext(context_object);
+	let context = createContext(context_object);
+	if(!api_details.message_id){
+		context.message_id =  sessionData.message_id as string;
+	}
 	const default_message = yamlToJson(
 		path.resolve(__dirname, api_details.default)
 	);

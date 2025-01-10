@@ -22,6 +22,6 @@ export async function getMockResponseMetaData(action: string, body: any) {
 	};
 }
 
-export async function getSessionData(transactionID: string) {
-	return await loadSessionData(transactionID);
+export async function getSessionData(transactionID: string,subscriber_url?: string) {
+	return await loadSessionData(transactionID,subscriber_url);
 }

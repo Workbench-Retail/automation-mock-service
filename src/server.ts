@@ -22,7 +22,7 @@ const createServer = (): Application => {
 		});
 	}
 
-	// app.use("/manual", manualRouter);
+	app.use("/manual", manualRouter);
 	app.use("/mock", defaultRouter);
 	app.use("/trigger", triggerRouter);
 
