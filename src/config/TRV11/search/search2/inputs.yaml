@@ -4,7 +4,6 @@ inputs:
     type: enum
     values:
       - METRO
-      - BUS
     payloadField: $.message.intent.fulfillment.vehicle.category
   - name: city_code
     label: Enter city code

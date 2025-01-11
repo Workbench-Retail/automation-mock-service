@@ -1,6 +1,9 @@
 import { Router } from "express";
 import { Request } from "express";
-import { generateMockResponseMiddleware } from "../controllers/generationController";
+import {
+	generateMockResponseMiddleware,
+	replaceJsonPaths,
+} from "../controllers/generationController";
 
 import logger from "../utils/logger";
 import { sendToApiService } from "../utils/request-utils";
@@ -19,9 +22,15 @@ export interface CustomRequest extends Request {
 	queryData?: QuerySettings;
 }
 
+export interface BodyTriggerType {
+	payload?: any;
+	json_path_changes?: Record<string, any>;
+}
+
 triggerRouter.post(
 	"/api-service/:action",
 	generateMockResponseMiddleware,
+	replaceJsonPaths,
 	async (req: CustomRequest, res) => {
 		try {
 			if (!req.mockResponse) {
