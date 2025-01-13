@@ -37,7 +37,7 @@ export default function cancel(input: validationInput): validationOutput {
                         {
                             valid: false,
                             code: 30000,
-                            description: `- **condition A**: $.message.order_id must be equal to $._EXTERNAL.order_id`,
+                            description: `- **condition order_id_needs_to_be_equal_that_sent_in_on_confirm**: $.message.order_id must be equal to $._EXTERNAL.order_id`,
                         },
                     ];
                 }

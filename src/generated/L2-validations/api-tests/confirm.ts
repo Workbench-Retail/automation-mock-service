@@ -40,7 +40,7 @@ export default function confirm(input: validationInput): validationOutput {
                         {
                             valid: false,
                             code: 30000,
-                            description: `- **condition A**: $.message.order.payments[*].tags[?(@.descriptor.code == 'BUYER_FINDER_FEES')].list[?(@.descriptor.code == 'BUYER_FINDER_FEES_PERCENTAGE')].value must be equal to $._EXTERNAL.buyer_app_fee`,
+                            description: `- **condition buyer_finder_fees_needs_to_be_equal**: $.message.order.payments[*].tags[?(@.descriptor.code == 'BUYER_FINDER_FEES')].list[?(@.descriptor.code == 'BUYER_FINDER_FEES_PERCENTAGE')].value must be equal to $._EXTERNAL.buyer_app_fee`,
                         },
                     ];
                 }
@@ -75,10 +75,10 @@ export default function confirm(input: validationInput): validationOutput {
                         {
                             valid: false,
                             code: 30000,
-                            description: `- **condition A**: all of the following sub conditions must be met:
+                            description: `- **condition all_item_ids_are_there_which_were_present_in_select**: all of the following sub conditions must be met:
 
-  - **condition A.1**: every element of $.message.order.items[*].id must be in $._EXTERNAL.selected_item_ids[*]
-  - **condition A.2**: every element of $._EXTERNAL.selected_item_ids[*] must be in $.message.order.items[*].id`,
+  - **condition all_item_ids_are_there_which_were_present_in_select.1**: every element of $.message.order.items[*].id must be in $._EXTERNAL.selected_item_ids[*]
+  - **condition all_item_ids_are_there_which_were_present_in_select.2**: every element of $._EXTERNAL.selected_item_ids[*] must be in $.message.order.items[*].id`,
                         },
                     ];
                 }

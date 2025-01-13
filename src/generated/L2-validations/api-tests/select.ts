@@ -37,7 +37,7 @@ export default function select(input: validationInput): validationOutput {
                         {
                             valid: false,
                             code: 30000,
-                            description: `- **condition A**: every element of $.message.order.items[*].id must be in $._EXTERNAL.item_ids[*]`,
+                            description: `- **condition all_item_ids_are_present_in_the_array**: every element of $.message.order.items[*].id must be in $._EXTERNAL.item_ids[*]`,
                         },
                     ];
                 }

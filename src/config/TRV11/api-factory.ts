@@ -1,4 +1,4 @@
-import { cancelGenerator } from "./cancel/generator";
+import { cancelSoftGenerator } from "./cancel/cancel_soft/generator";
 import { confirmGenerator } from "./confirm/generator";
 import { initGenerator } from "./init/generator";
 import { onCancelGenerator } from "./on_cancel/generator";
@@ -33,7 +33,7 @@ export async function Generator(
 		case "status":
 			return await statusGenerator(existingPayload, sessionData);
 		case "cancel":
-			return await cancelGenerator(existingPayload, sessionData);
+			return await cancelSoftGenerator(existingPayload, sessionData);
 		case "on_search1":
 			return await onSearch1Generator(existingPayload, sessionData);
 		case "on_search2":
