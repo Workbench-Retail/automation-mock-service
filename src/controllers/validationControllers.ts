@@ -1,8 +1,9 @@
 import { NextFunction, Request, Response } from "express";
 import logger from "../utils/logger";
+import { ApiRequest } from "../routes/manual";
 
 export async function l2Validation(
-	req: Request,
+	req: ApiRequest,
 	res: Response,
 	next: NextFunction
 ) {

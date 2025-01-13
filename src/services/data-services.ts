@@ -11,7 +11,11 @@ import { isArrayKey } from "../types/type-utils";
 export function updateSessionData(
 	saveData: Record<string, string>,
 	payload: any,
-	sessionData: SessionData
+	sessionData: SessionData,
+	errorData?: {
+		code: number;
+		message: string;
+	}
 ) {
 	logger.info(`updating session`);
 	try {
@@ -27,6 +31,13 @@ export function updateSessionData(
 				sessionData[key as keyof typeof sessionData] = result[0];
 			}
 		}
+		if (errorData) {
+			sessionData.error_code = errorData.code.toString();
+			sessionData.error_message = errorData.message;
+		} else {
+			sessionData.error_code = undefined;
+			sessionData.error_message = undefined;
+		}
 	} catch (e) {
 		logger.error("Error in updating session data", e);
 	}
@@ -41,7 +52,14 @@ function yamlToJson(filePath: string): object {
 	}
 }
 
-export async function saveData(action: string, payload: any) {
+export async function saveData(
+	action: string,
+	payload: any,
+	errorData?: {
+		code: number;
+		message: string;
+	}
+) {
 	try {
 		const sessionData = await loadSessionData(payload?.context.transaction_id);
 		const actionFolderPath = path.resolve(
@@ -51,7 +69,7 @@ export async function saveData(action: string, payload: any) {
 		const saveDataFilePath = path.join(actionFolderPath, "save-data.yaml");
 		const fileContent = fs.readFileSync(saveDataFilePath, "utf8");
 		const saveData = yaml.load(fileContent) as any;
-		updateSessionData(saveData["save-data"], payload, sessionData);
+		updateSessionData(saveData["save-data"], payload, sessionData, errorData);
 		await RedisService.setKey(
 			payload?.context.transaction_id,
 			JSON.stringify(sessionData)

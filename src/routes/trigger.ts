@@ -1,5 +1,5 @@
-import { Router } from "express";
-import { Request } from "express";
+import { Router, Request } from "express";
+
 import {
 	generateMockResponseMiddleware,
 	replaceJsonPaths,
@@ -17,7 +17,7 @@ interface QuerySettings {
 	subscriber_url?: string;
 	[key: string]: undefined | string | string[] | any;
 }
-export interface CustomRequest extends Request {
+export interface TriggerRequest extends Request {
 	mockResponse?: any;
 	queryData?: QuerySettings;
 }
@@ -31,7 +31,7 @@ triggerRouter.post(
 	"/api-service/:action",
 	generateMockResponseMiddleware,
 	replaceJsonPaths,
-	async (req: CustomRequest, res) => {
+	async (req: TriggerRequest, res) => {
 		try {
 			if (!req.mockResponse) {
 				throw new Error("Mock response not found");
@@ -49,7 +49,7 @@ triggerRouter.post(
 triggerRouter.get(
 	"/payload/:action",
 	generateMockResponseMiddleware,
-	(req: CustomRequest, res) => {
+	(req: TriggerRequest, res) => {
 		if (!req.mockResponse) {
 			logger.error("Mock response not found");
 			res.status(404).send("Mock response not found");

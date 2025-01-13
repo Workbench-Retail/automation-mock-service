@@ -25,3 +25,5 @@ session_data:
   updated_payments: []
   order_id: null
   status: null
+  error_code: null
+  error_message: null

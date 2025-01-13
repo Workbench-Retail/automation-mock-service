@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { CustomRequest } from "../routes/trigger";
+import { TriggerRequest } from "../routes/trigger";
 import { loadSessionData } from "../services/data-services";
 import logger from "../utils/logger";
 import { createMockReponse } from "../config/TRV11/generation-pipline";
@@ -7,7 +7,7 @@ import { updateAllJsonPaths } from "../utils/json-editor-utils/jsonPathEditor";
 import { delay } from "../utils/generic-utils";
 
 export async function generateMockResponseMiddleware(
-	req: CustomRequest,
+	req: TriggerRequest,
 	res: Response,
 	next: NextFunction
 ) {
@@ -42,7 +42,7 @@ export async function generateMockResponseMiddleware(
 }
 
 export async function replaceJsonPaths(
-	req: CustomRequest,
+	req: TriggerRequest,
 	res: Response,
 	next: NextFunction
 ) {
@@ -52,6 +52,10 @@ export async function replaceJsonPaths(
 	}
 	try {
 		const payload = req.mockResponse;
+		if (payload.messsage.error) {
+			logger.info("Error in response, skipping json path replacement");
+			next();
+		}
 		const changes = req.body.json_path_changes;
 		req.mockResponse = updateAllJsonPaths(payload, changes);
 		next();

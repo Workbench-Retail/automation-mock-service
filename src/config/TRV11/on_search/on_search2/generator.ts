@@ -65,21 +65,29 @@ export async function onSearch2Generator(
 	existingPayload: any,
 	sessionData: SessionData
 ) {
-	// console.log("session data for on_search2",sessionData)
-	const route = createFullfillment(
-		sessionData.city_code ?? "std:011"
-	).fulfillments;
-	const { start_code, end_code } = sessionData;
-	if (!start_code || !end_code) {
-		throw new Error("Start and End station codes are required");
+	try {
+		const route = createFullfillment(
+			sessionData.city_code ?? "std:011"
+		).fulfillments;
+		const { start_code, end_code } = sessionData;
+		if (!start_code || !end_code) {
+			throw new Error("Start and End station codes are required");
+		}
+		const fulfillments = createCustomRoute(route, start_code, end_code);
+
+		existingPayload.message.catalog.providers[0].fulfillments = fulfillments;
+
+		return existingPayload;
+	} catch (err) {
+		console.error(err);
+		const errorMessage = {
+			error: {
+				code: 91201,
+				message:
+					"To & from location not serviceable by Mock Seller application",
+			},
+		};
+		existingPayload.message = errorMessage;
+		return existingPayload;
 	}
-	const fulfillments = createCustomRoute(
-		route,
-		start_code,
-		end_code
-	);
-
-	existingPayload.message.catalog.providers[0].fulfillments = fulfillments;
-
-	return existingPayload;
 }

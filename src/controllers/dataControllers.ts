@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import logger from "../utils/logger";
 import { getMockResponseMetaData } from "../services/mock-services";
 import { saveData } from "../services/data-services";
+import { ApiRequest } from "../routes/manual";
 
 /*
 	save data middleware:
@@ -10,14 +11,14 @@ import { saveData } from "../services/data-services";
 
 */
 export async function saveDataMiddleware(
-	req: Request,
+	req: ApiRequest,
 	res: Response,
 	next: NextFunction
 ) {
 	try {
 		const action = req.params.action;
 		const body = req.body;
-		await saveData(action, body);
+		await saveData(action, body, req.l2Error);
 		next();
 	} catch (err) {
 		logger.error("Error in saveDataMiddleware", err);

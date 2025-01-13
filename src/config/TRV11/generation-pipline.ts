@@ -4,6 +4,7 @@ import yaml from "js-yaml";
 import { Generator } from "./api-factory";
 import path from "path";
 import { SessionData } from "./session-types";
+import { error } from "console";
 function yamlToJson(filePath: string): object {
 	try {
 		// Read the YAML file contents
@@ -48,7 +49,10 @@ function getDetailsByActionId(
 	throw new Error("Invalid action id found!");
 }
 
-export async function createMockReponse(actionID: string, sessionData: SessionData) {
+export async function createMockReponse(
+	actionID: string,
+	sessionData: SessionData
+) {
 	// 1. create context
 	// 2. load default
 	// 3. run faker
@@ -75,15 +79,25 @@ export async function createMockReponse(actionID: string, sessionData: SessionDa
 	};
 
 	let context = createContext(context_object);
-	if(!api_details.message_id){
-		context.message_id =  sessionData.message_id as string;
+	if (!api_details.message_id) {
+		context.message_id = sessionData.message_id as string;
 	}
 	const default_message = yamlToJson(
 		path.resolve(__dirname, api_details.default)
 	);
-	const payload = {
+	const payload: any = {
 		context: { ...context },
 		...default_message,
 	};
+	if (sessionData.error_code && sessionData.error_message) {
+		const error_message = {
+			error: {
+				code: sessionData.error_code,
+				message: sessionData.error_message,
+			},
+		};
+		payload.message = error_message;
+		return payload;
+	}
 	return await Generator(actionID, payload, sessionData);
 }
