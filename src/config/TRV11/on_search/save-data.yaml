@@ -10,4 +10,4 @@ save-data:
   item_ids: "$.message.catalog.providers[*].items[*].id"
   bpp_id: "$.context.bpp_id"
   bpp_uri: "$.context.bpp_uri"
-  cityCode: "$.context.location.city.code"
+  city_code: "$.context.location.city.code"

@@ -20,14 +20,9 @@ function getRandomStations(data: any) {
   }
 
 export async function search2Generator(existingPayload: any,sessionData: SessionData){
-  console.log("Payload of search2", existingPayload)
-  console.log("session data for search2", sessionData)
     existingPayload.context.bpp_uri = sessionData.subscriber_url
-    // const { start_station, end_station } = getRandomStations(sessionData?.fulfillments);
-    const start_station = "62"
-    const end_station = "88"
     const stops = existingPayload.message.intent.fulfillment.stops;
-    stops[0].location.descriptor.code = start_station
-    stops[1].location.descriptor.code = end_station
+    stops[0].location.descriptor.code = "start_station"
+    stops[1].location.descriptor.code = "end_station"
     return existingPayload;
 }
