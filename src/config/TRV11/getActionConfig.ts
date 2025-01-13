@@ -95,27 +95,41 @@ function getActionConfig() {
 			  },
 			  {
 				"code": 114,
-				"action_id": "cancel",
+				"action_id": "cancel_soft",
 				"action": "cancel",
 				"default": "cancel/default.yaml",
 				"message_id": true
 			  },
 			  {
 				"code": 115,
-				"action_id": "on_cancel",
+				"action_id": "cancel_hard",
+				"action": "cancel",
+				"default": "cancel/default.yaml",
+				"message_id": true
+			  },
+			  {
+				"code": 116,
+				"action_id": "on_cancel_soft",
 				"action": "on_cancel",
 				"default": "on_cancel/default.yaml",
 				"message_id": false
 			  },
 			  {
-				"code": 116,
+				"code": 117,
+				"action_id": "on_cancel_hard",
+				"action": "on_cancel",
+				"default": "on_cancel/default.yaml",
+				"message_id": false
+			  },
+			  {
+				"code": 118,
 				"action_id": "on_update_accepted",
 				"action": "on_update",
 				"default": "on_update/default.yaml",
 				"message_id": true
 			  },
 			  {
-				"code": 117,
+				"code": 119,
 				"action_id": "on_update_rejected",
 				"action": "on_update",
 				"default": "on_update/default.yaml",

@@ -1,7 +1,9 @@
+import { cancelHardGenerator } from "./cancel/cancel_hard/generator";
 import { cancelSoftGenerator } from "./cancel/cancel_soft/generator";
 import { confirmGenerator } from "./confirm/generator";
 import { initGenerator } from "./init/generator";
-import { onCancelGenerator } from "./on_cancel/generator";
+import { onCancelHardGenerator } from "./on_cancel/on_cancel_hard/generator";
+import { onCancelSoftGenerator } from "./on_cancel/on_cancel_soft/generator";
 import { onConfirmGenerator } from "./on_confirm/on_confirm/generator";
 import { onConfirmDelayedGenerator } from "./on_confirm/on_confirm_delayed/generator";
 import { onInitGenerator } from "./on_init/generator";
@@ -32,8 +34,10 @@ export async function Generator(
 			return await confirmGenerator(existingPayload, sessionData);
 		case "status":
 			return await statusGenerator(existingPayload, sessionData);
-		case "cancel":
+		case "cancel_soft":
 			return await cancelSoftGenerator(existingPayload, sessionData);
+		case "cancel_hard":
+			return await cancelHardGenerator(existingPayload, sessionData);
 		case "on_search1":
 			return await onSearch1Generator(existingPayload, sessionData);
 		case "on_search2":
@@ -48,8 +52,10 @@ export async function Generator(
 			return await onStatusGenerator(existingPayload, sessionData);
 		case "on_confirm_delayed":
 			return await onConfirmDelayedGenerator(existingPayload, sessionData);
-		case "on_cancel":
-			return await onCancelGenerator(existingPayload, sessionData);
+		case "on_cancel_soft":
+			return await onCancelSoftGenerator(existingPayload, sessionData);
+		case "on_cancel_hard":
+			return await onCancelHardGenerator(existingPayload, sessionData);
 		default:
 			throw new Error(`Invalid request type ${action_id}`);
 	}
