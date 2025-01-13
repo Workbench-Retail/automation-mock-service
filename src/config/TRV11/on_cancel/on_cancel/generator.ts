@@ -76,11 +76,13 @@ function applyCancellation(quote: Quote, cancellationCharges: number): Quote {
       breakup: [...quote.breakup, ...refundBreakups, cancellationBreakup],
     };
   }
-export async function onUpdateAcceptedGenerator(existingPayload: any,sessionData: any){
-    existingPayload.message.order.payments = sessionData.payments
-    existingPayload.message.order.items = sessionData.items
-    existingPayload.message.order.fulfillments = sessionData.fulfillments
-    existingPayload.message.order.quote = applyCancellation(sessionData.quote,15)
-    existingPayload.message.order.id = sessionData.order_id
+
+export async function onCancelGenerator(existingPayload: any,sessionData: any){
+    existingPayload.message.order.payments = sessionData.updated_payments;
+	existingPayload.message.order.items = sessionData.items;
+	existingPayload.message.order.fulfillments = sessionData.fulfillments;
+	existingPayload.message.order.quote = applyCancellation(sessionData.quote,15)
+	existingPayload.message.order.id = sessionData.order_id;
+    existingPayload.message.order.status = "CANCELLED"
     return existingPayload;
 }

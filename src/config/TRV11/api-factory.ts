@@ -2,7 +2,9 @@ import { cancelHardGenerator } from "./cancel/cancel_hard/generator";
 import { cancelSoftGenerator } from "./cancel/cancel_soft/generator";
 import { confirmGenerator } from "./confirm/generator";
 import { initGenerator } from "./init/generator";
+import { onCancelGenerator } from "./on_cancel/on_cancel/generator";
 import { onCancelHardGenerator } from "./on_cancel/on_cancel_hard/generator";
+import { onCancelInitGenerator } from "./on_cancel/on_cancel_init/generator";
 import { onCancelSoftGenerator } from "./on_cancel/on_cancel_soft/generator";
 import { onConfirmGenerator } from "./on_confirm/on_confirm/generator";
 import { onConfirmDelayedGenerator } from "./on_confirm/on_confirm_delayed/generator";
@@ -10,7 +12,7 @@ import { onInitGenerator } from "./on_init/generator";
 import { onSearch1Generator } from "./on_search/on_search1/generator";
 import { onSearch2Generator } from "./on_search/on_search2/generator";
 import { onSelectGenerator } from "./on_select/generator";
-import { onStatusGenerator } from "./on_status/generator";
+import { onStatusCompleteGenerator } from "./on_status/on_status_complete/generator";
 import { search1Generator } from "./search/search1/generator";
 import { search2Generator } from "./search/search2/generator";
 import { selectGenerator } from "./select/generator";
@@ -48,14 +50,18 @@ export async function Generator(
 			return await onInitGenerator(existingPayload, sessionData);
 		case "on_confirm":
 			return await onConfirmGenerator(existingPayload, sessionData);
-		case "on_status":
-			return await onStatusGenerator(existingPayload, sessionData);
+		case "on_status_complete":
+			return await onStatusCompleteGenerator(existingPayload, sessionData);
 		case "on_confirm_delayed":
 			return await onConfirmDelayedGenerator(existingPayload, sessionData);
 		case "on_cancel_soft":
 			return await onCancelSoftGenerator(existingPayload, sessionData);
 		case "on_cancel_hard":
 			return await onCancelHardGenerator(existingPayload, sessionData);
+		case "on_cancel":
+			return await onCancelGenerator(existingPayload, sessionData);
+		case "on_cancel_init":
+			return await onCancelInitGenerator(existingPayload, sessionData);
 		default:
 			throw new Error(`Invalid request type ${action_id}`);
 	}

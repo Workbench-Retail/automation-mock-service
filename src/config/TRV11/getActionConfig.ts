@@ -88,51 +88,72 @@ function getActionConfig() {
 			  },
 			  {
 				"code": 112,
-				"action_id": "on_status",
+				"action_id": "on_status_active",
 				"action": "on_status",
-				"default": "on_status/default.yaml",
+				"default": "on_status_active/default.yaml",
+				"message_id": false
+			  },
+			  {
+				"code": 113,
+				"action_id": "on_status_complete",
+				"action": "on_status",
+				"default": "on_status_complete/default.yaml",
 				"message_id": false
 			  },
 			  {
 				"code": 114,
-				"action_id": "cancel_soft",
-				"action": "cancel",
-				"default": "cancel/default.yaml",
+				"action_id": "on_status_complete",
+				"action": "on_status",
+				"default": "on_status_complete/default.yaml",
 				"message_id": true
 			  },
 			  {
 				"code": 115,
-				"action_id": "cancel_hard",
+				"action_id": "cancel_soft",
 				"action": "cancel",
-				"default": "cancel/default.yaml",
+				"default": "cancel/cancel_soft/default.yaml",
 				"message_id": true
 			  },
 			  {
 				"code": 116,
-				"action_id": "on_cancel_soft",
-				"action": "on_cancel",
-				"default": "on_cancel/default.yaml",
-				"message_id": false
+				"action_id": "cancel_hard",
+				"action": "cancel",
+				"default": "cancel/cancel_hard/default.yaml",
+				"message_id": true
 			  },
 			  {
 				"code": 117,
-				"action_id": "on_cancel_hard",
+				"action_id": "on_cancel",
 				"action": "on_cancel",
 				"default": "on_cancel/default.yaml",
 				"message_id": false
 			  },
 			  {
 				"code": 118,
-				"action_id": "on_update_accepted",
-				"action": "on_update",
-				"default": "on_update/default.yaml",
-				"message_id": true
+				"action_id": "on_cancel_soft",
+				"action": "on_cancel",
+				"default": "on_cancel/default.yaml",
+				"message_id": false
 			  },
 			  {
 				"code": 119,
-				"action_id": "on_update_rejected",
+				"action_id": "on_cancel_hard",
+				"action": "on_cancel",
+				"default": "on_cancel/default.yaml",
+				"message_id": false
+			  },
+			  {
+				"code": 120,
+				"action_id": "on_cancel_init",
+				"action": "on_cancel",
+				"default": "on_cancel/default.yaml",
+				"message_id": false
+			  },
+			  {
+				"code": 121,
+				"action_id": "on_update_accepted",
 				"action": "on_update",
-				"default": "on_update/default.yaml",
+				"default": "on_update/on_update_accepted/default.yaml",
 				"message_id": true
 			  }
 			]
