@@ -37,5 +37,14 @@ export async function getSafeActions(
 ) {
 	const sessionData = await getSessionData(transaction_id, subscriber_url);
 	sessionData.mock_type = mock_type;
-	const actionsTests = actionSelectionCodeTests("tests", {}, true, sessionData);
+	const actionsTests = actionSelectionCodeTests(
+		"search",
+		{},
+		true,
+		sessionData
+	);
+	const validCodes = actionsTests
+		.filter((test) => test.valid && test.code != 200)
+		.map((test) => test.code);
+	return validCodes.map((code) => getActionData(code));
 }
