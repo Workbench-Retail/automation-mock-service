@@ -4,8 +4,6 @@ export async function onInitGenerator(
 	existingPayload: any,
 	sessionData: SessionData
 ) {
-	// console.log(sessionData, "session_data of on_init")
-	// existingPayload.fulfillments = stations[city_code as keyof typeof stations]
 	const randomId = Math.random().toString(36).substring(2, 15);
 
 	const payments = [
@@ -18,8 +16,14 @@ export async function onInitGenerator(
 		},
 	];
 	existingPayload.message.order.payments = payments;
-	existingPayload.message.order.items = sessionData.items;
+	if (sessionData.items.length > 0) {
+		existingPayload.message.order.items = sessionData.items;
+	}
+	if (sessionData.fulfillments.length > 0) {
 	existingPayload.message.order.fulfillments = sessionData.fulfillments;
-	existingPayload.message.order.quote = sessionData.quote;
+	}
+	if(sessionData.quote != null){
+	existingPayload.message.order.quote = sessionData.quote
+	}
 	return existingPayload;
 }

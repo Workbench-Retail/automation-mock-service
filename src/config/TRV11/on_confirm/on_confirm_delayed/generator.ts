@@ -72,11 +72,21 @@ export async function onConfirmDelayedGenerator(existingPayload: any,sessionData
       sessionData.updated_payments = [sessionData.updated_payments];
   }
   updateFulfillmentsWithParentInfo(sessionData.fulfillments)
-  existingPayload.message.order.payments = updated_payments
-  existingPayload.message.order.items = sessionData.items
-  existingPayload.message.order.fulfillments = sessionData.fulfillments
-  existingPayload.message.order.quote = sessionData.quote
-  existingPayload.message.order.id = order_id
+  existingPayload.message.order.payments = updated_payments;
+	
+	  // Check if items is a non-empty array
+	if (sessionData.items.length > 0) {
+	existingPayload.message.order.items = sessionData.items;
+	}
+
+	// Check if fulfillments is a non-empty array
+	if (sessionData.fulfillments.length > 0) {
+	existingPayload.message.order.fulfillments = sessionData.fulfillments;
+	}
+	if(sessionData.quote != null){
+	existingPayload.message.order.quote = sessionData.quote
+	}
+	existingPayload.message.order.id = order_id;
   await delay(30000);
   return existingPayload;
 }

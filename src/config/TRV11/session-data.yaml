@@ -27,3 +27,4 @@ session_data:
   status: null
   error_code: null
   error_message: null
+  quote: null

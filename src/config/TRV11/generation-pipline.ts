@@ -82,6 +82,7 @@ export async function createMockReponse(
 	if (!api_details.message_id) {
 		context.message_id = sessionData.message_id as string;
 	}
+	console.log(api_details);
 	const default_message = yamlToJson(
 		path.resolve(__dirname, api_details.default)
 	);

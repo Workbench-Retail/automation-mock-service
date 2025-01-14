@@ -1,7 +1,11 @@
 
 export async function confirmGenerator(existingPayload: any,sessionData: any){
-    existingPayload.message.order.billing = sessionData.billing
-    // existingPayload.message.order.payments = sessionData.updated_payments
-    existingPayload.message.order.items = sessionData.items
+    if (sessionData.billing && Object.keys(sessionData.billing).length > 0) {
+        existingPayload.message.order.billing = sessionData.billing;
+      }
+      
+    if (sessionData.items && sessionData.items.length > 0) {
+    existingPayload.message.order.items = sessionData.items;
+    }
     return existingPayload;
 }

@@ -1,3 +1,4 @@
+import { cancelGenerator } from "./cancel/cancel/generator";
 import { cancelHardGenerator } from "./cancel/cancel_hard/generator";
 import { cancelSoftGenerator } from "./cancel/cancel_soft/generator";
 import { confirmGenerator } from "./confirm/generator";
@@ -36,6 +37,8 @@ export async function Generator(
 			return await confirmGenerator(existingPayload, sessionData);
 		case "status":
 			return await statusGenerator(existingPayload, sessionData);
+		case "cancel":
+			return await cancelGenerator(existingPayload, sessionData);
 		case "cancel_soft":
 			return await cancelSoftGenerator(existingPayload, sessionData);
 		case "cancel_hard":

@@ -78,11 +78,25 @@ function applyCancellation(quote: Quote, cancellationCharges: number): Quote {
   }
 
 export async function onCancelGenerator(existingPayload: any,sessionData: any){
+  if (sessionData.updated_payments.length > 0) {
     existingPayload.message.order.payments = sessionData.updated_payments;
-	existingPayload.message.order.items = sessionData.items;
-	existingPayload.message.order.fulfillments = sessionData.fulfillments;
-	existingPayload.message.order.quote = applyCancellation(sessionData.quote,15)
-	existingPayload.message.order.id = sessionData.order_id;
-    existingPayload.message.order.status = "CANCELLED"
-    return existingPayload;
+  }
+
+  // Check if items is a non-empty array
+  if (sessionData.items.length > 0) {
+    existingPayload.message.order.items = sessionData.items;
+  }
+
+  // Check if fulfillments is a non-empty array
+  if (sessionData.fulfillments.length > 0) {
+    existingPayload.message.order.fulfillments = sessionData.fulfillments;
+  }
+	if (sessionData.order_id) {
+    existingPayload.message.order_id = sessionData.order_id;
+  }
+  if(sessionData.quote != null){
+    existingPayload.message.order.quote = applyCancellation(sessionData.quote,15)
+  }
+  existingPayload.message.order.status = "CANCELLED"
+  return existingPayload;
 }
