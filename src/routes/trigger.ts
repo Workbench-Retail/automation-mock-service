@@ -46,6 +46,20 @@ triggerRouter.post(
 	}
 );
 
+triggerRouter.get("/safe-actions", async (req, res) => {
+	const transaction_id = req.query.transaction_id as string;
+	const mockType = req.query.mock_type as string;
+	if (!transaction_id) {
+		res.status(400).send("Transaction ID not found in query data");
+		return;
+	}
+
+	if (!mockType) {
+		res.status(400).send("Mock type not found in query data");
+		return;
+	}
+});
+
 triggerRouter.get(
 	"/payload/:action",
 	generateMockResponseMiddleware,

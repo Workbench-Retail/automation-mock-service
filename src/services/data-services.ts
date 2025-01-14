@@ -92,7 +92,7 @@ export async function loadSessionData(
 		) as any;
 		sessionData = raw.session_data;
 		sessionData.transaction_id = transactionID;
-		sessionData.bpp_id = sessionData.bap_id = "mock.com";
+		sessionData.bpp_id = sessionData.bap_id = "dev/automation.ondc.org";
 		sessionData.bap_uri = sessionData.bpp_uri =
 			process.env.API_SERVICE_LAYER + "/api";
 		sessionData.subscriber_url = subscriber_url;

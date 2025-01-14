@@ -1,4 +1,5 @@
 import { getActionData } from "../config/TRV11/getActionConfig";
+import { actionSelectionCodeTests } from "../generated/action-selector";
 import { defaultSelectionCodeTests } from "../generated/default-selector";
 import logger from "../utils/logger";
 import { loadSessionData } from "./data-services";
@@ -22,6 +23,19 @@ export async function getMockResponseMetaData(action: string, body: any) {
 	};
 }
 
-export async function getSessionData(transactionID: string,subscriber_url?: string) {
-	return await loadSessionData(transactionID,subscriber_url);
+export async function getSessionData(
+	transactionID: string,
+	subscriber_url?: string
+) {
+	return await loadSessionData(transactionID, subscriber_url);
+}
+
+export async function getSafeActions(
+	transaction_id: string,
+	subscriber_url?: string,
+	mock_type?: string
+) {
+	const sessionData = await getSessionData(transaction_id, subscriber_url);
+	sessionData.mock_type = mock_type;
+	const actionsTests = actionSelectionCodeTests("tests", {}, true, sessionData);
 }
