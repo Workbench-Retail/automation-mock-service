@@ -92,9 +92,9 @@ export async function loadSessionData(
 		) as any;
 		sessionData = raw.session_data;
 		sessionData.transaction_id = transactionID;
-		sessionData.bpp_id = sessionData.bap_id = "dev/automation.ondc.org";
-		sessionData.bap_uri = sessionData.bpp_uri =
-			process.env.API_SERVICE_LAYER + "/api";
+		sessionData.bpp_id = sessionData.bap_id = "dev-automation.ondc.org";
+		sessionData.bap_uri = "https://dev-automation.ondc.org/buyer";
+		sessionData.bpp_uri = "https://dev-automation.ondc.org/seller";
 		sessionData.subscriber_url = subscriber_url;
 		logger.info(`new session data is ${JSON.stringify(sessionData)}`);
 		return sessionData;
