@@ -1,9 +1,0 @@
-{
-  "cityCode": "$.context.location.city.code",
-  "bap_id": "$.context.bap_id",
-  "bap_uri": "$.context.bap_uri",
-  "transaction_id": "$.context.transaction_id",
-  "message_id": "$.context.message_id",
-  "vehicle_category": "$.message.intent.fulfillment.vehicle.category",
-  "buyer_app_finder_fees": "$.message.intent.payment.tags[?(@.descriptor.code=='BUYER_FINDER_FEES')].list[?(@.descriptor.code=='BUYER_FINDER_FEES_PERCENTAGE')].value"
-}

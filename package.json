@@ -4,9 +4,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
-    "start": "node dist/server.js",
-    "dev": "nodemon src/server.ts"
+    "build": "tsc && copyfiles -u 1 \"src/**/*.{yaml,html,css}\" dist/",
+    "start": "node dist/index.js",
+    "dev": "nodemon --exec ts-node src/index.ts"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +15,7 @@
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
+    "@types/js-yaml": "^4.0.9",
     "@types/jsonpath": "^0.2.4",
     "@types/node": "^22.10.0",
     "nodemon": "^3.1.7",
@@ -26,8 +27,10 @@
     "chalk": "^4.1.2",
     "cors": "^2.8.5",
     "express": "^4.21.1",
+    "js-yaml": "^4.1.0",
     "jsonpath": "^1.1.1",
-    "ondc-automation-cache-lib": "^1.0.3",
+    "jsonpath-plus": "^10.2.0",
+    "ondc-automation-cache-lib": "^1.0.4",
     "uuid": "^11.0.3",
     "winston": "^3.17.0"
   }
