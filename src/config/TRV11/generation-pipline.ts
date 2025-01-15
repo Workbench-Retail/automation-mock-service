@@ -93,7 +93,7 @@ export async function createMockReponse(
 	};
 	if (sessionData.error_code && sessionData.error_message) {
 		const error_message = {
-			code: sessionData.error_code,
+			code: `${sessionData.error_code}`,
 			message: sessionData.error_message,
 		};
 		delete payload.message;
