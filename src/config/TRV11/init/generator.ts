@@ -5,7 +5,7 @@ export async function initGenerator(existingPayload: any,sessionData: SessionDat
         existingPayload.message.order.billing = sessionData.billing;
       }
       
-    if (sessionData.selected_items && sessionData.items.length > 0) {
+    if (sessionData.selected_items && sessionData.selected_items.length > 0) {
     existingPayload.message.order.items = sessionData.selected_items;
     }
     if(sessionData.provider_id){
