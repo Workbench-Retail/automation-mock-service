@@ -146,7 +146,7 @@ export async function onSelectGenerator(
 		},
 	}));
 	items = updatedItems;
-	createAndAppendFulfillments(updatedItems, fulfillments);
+	// createAndAppendFulfillments(updatedItems, fulfillments); //testing for pramaan
 	const quote = createQuoteFromItems(updatedItems);
 	existingPayload.message.order.items = items;
 	existingPayload.message.order.fulfillments = fulfillments;
