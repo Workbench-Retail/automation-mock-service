@@ -97,7 +97,8 @@ export async function createMockReponse(
 				message: sessionData.error_message,
 			},
 		};
-		payload.message = error_message;
+		delete payload.message;
+		payload.error = error_message;
 		return payload;
 	}
 	return await Generator(actionID, payload, sessionData);
