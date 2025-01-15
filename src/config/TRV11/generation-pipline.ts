@@ -5,6 +5,7 @@ import { Generator } from "./api-factory";
 import path from "path";
 import { SessionData } from "./session-types";
 import { error } from "console";
+import logger from "../../utils/logger";
 function yamlToJson(filePath: string): object {
 	try {
 		// Read the YAML file contents
@@ -92,13 +93,12 @@ export async function createMockReponse(
 	};
 	if (sessionData.error_code && sessionData.error_message) {
 		const error_message = {
-			error: {
-				code: sessionData.error_code,
-				message: sessionData.error_message,
-			},
+			code: `${sessionData.error_code}`,
+			message: sessionData.error_message,
 		};
 		delete payload.message;
 		payload.error = error_message;
+		logger.debug(`Error payload is ${JSON.stringify(payload)}`);
 		return payload;
 	}
 	return await Generator(actionID, payload, sessionData);
