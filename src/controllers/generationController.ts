@@ -52,7 +52,7 @@ export async function replaceJsonPaths(
 	}
 	try {
 		const payload = req.mockResponse;
-		if (payload.messsage?.error) {
+		if (payload.error) {
 			logger.info("Error in response, skipping json path replacement");
 			next();
 		}
