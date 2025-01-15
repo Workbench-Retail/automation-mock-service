@@ -8,6 +8,7 @@ import {
 import logger from "../utils/logger";
 import { sendToApiService } from "../utils/request-utils";
 import { setAckResponse } from "../utils/ackUtils";
+import { getSafeActions } from "../services/mock-services";
 
 const triggerRouter = Router();
 
@@ -58,6 +59,10 @@ triggerRouter.get("/safe-actions", async (req, res) => {
 		res.status(400).send("Mock type not found in query data");
 		return;
 	}
+
+	const safeActions = await getSafeActions(transaction_id, undefined, mockType);
+	logger.info(`Returning safe actions ${JSON.stringify(safeActions)}`);
+	res.status(200).send(safeActions);
 });
 
 triggerRouter.get(
