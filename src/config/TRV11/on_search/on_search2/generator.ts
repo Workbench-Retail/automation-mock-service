@@ -82,7 +82,7 @@ export async function onSearch2Generator(
 		console.error(err);
 		delete existingPayload.message;
 		const errorMessage = {
-			code: 91201,
+			code: `91201`,
 			message: "To & from location not serviceable by Mock Seller application",
 		};
 		existingPayload.error = errorMessage;
