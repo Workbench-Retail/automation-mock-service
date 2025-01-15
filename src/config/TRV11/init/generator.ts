@@ -7,5 +7,8 @@ export async function initGenerator(existingPayload: any,sessionData: any){
     if (sessionData.items && sessionData.items.length > 0) {
     existingPayload.message.order.items = sessionData.items;
     }
+    if(sessionData.provider_id){
+      existingPayload.message.order.provider.id = sessionData.provider_id
+    }
     return existingPayload;
 }
