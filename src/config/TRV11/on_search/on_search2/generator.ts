@@ -80,14 +80,12 @@ export async function onSearch2Generator(
 		return existingPayload;
 	} catch (err) {
 		console.error(err);
+		delete existingPayload.message;
 		const errorMessage = {
-			error: {
-				code: 91201,
-				message:
-					"To & from location not serviceable by Mock Seller application",
-			},
+			code: 91201,
+			message: "To & from location not serviceable by Mock Seller application",
 		};
-		existingPayload.message = errorMessage;
+		existingPayload.error = errorMessage;
 		return existingPayload;
 	}
 }
