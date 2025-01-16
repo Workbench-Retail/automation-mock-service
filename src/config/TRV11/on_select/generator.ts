@@ -149,7 +149,7 @@ export async function onSelectGenerator(
 	// createAndAppendFulfillments(updatedItems, fulfillments);
 	const quote = createQuoteFromItems(updatedItems);
 	existingPayload.message.order.items = items;
-	// existingPayload.message.order.fulfillments = fulfillments; //testing for pramaan
+	existingPayload.message.order.fulfillments = sessionData.fulfillments; //testing for pramaan
 	existingPayload.message.order.quote = quote;
 	return existingPayload;
 }
