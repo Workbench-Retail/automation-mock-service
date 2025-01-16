@@ -244,24 +244,24 @@ message:
               - descriptor:
                   code: ROUTE_NAME
                 value: Yellow Line
-      # - id: F3
-      #   type: TICKET
-      #   tags:
-      #     - descriptor:
-      #         code: INFO
-      #       list:
-      #         - descriptor:
-      #             code: PARENT_ID
-      #           value: F1
-      # - id: F4
-      #   type: TICKET
-      #   tags:
-      #     - descriptor:
-      #         code: INFO
-      #       list:
-      #         - descriptor:
-      #             code: PARENT_ID
-      #           value: F1
+      - id: F3
+        type: TICKET
+        tags:
+          - descriptor:
+              code: INFO
+            list:
+              - descriptor:
+                  code: PARENT_ID
+                value: F1
+      - id: F4
+        type: TICKET
+        tags:
+          - descriptor:
+              code: INFO
+            list:
+              - descriptor:
+                  code: PARENT_ID
+                value: F1
     quote:
       price:
         value: "120"
