@@ -90,9 +90,8 @@
 				"_NAME_": "status_request",
 				"mockType": "$._EXTERNAL.mock_type",
 				"forType": ["BAP"],
-				"order_id": "$._EXTERNAL.order_id",
-				"_RETURN_": "(mockType equal to forType) && (order_id are present)",
-				"_SUCCESS_CODE_": 111 
+				"_RETURN_": "(mockType equal to forType)",
+				"_SUCCESS_CODE_": 111
 			},
 			{
 				"_NAME_": "onstatus_active_request",
@@ -115,7 +114,7 @@
 				"mockType": "$._EXTERNAL.mock_type",
 				"forType": ["BPP"],
 				"order_id": "$._EXTERNAL.order_id",
-				"_RETURN_": "(mockType equal to forType)  && (order_id are present)",
+				"_RETURN_": "(mockType equal to forType) && (order_id are present)",
 				"_SUCCESS_CODE_": 114
 			},
 			{
@@ -129,42 +128,42 @@
 				"_NAME_": "cancel_soft_request",
 				"mockType": "$._EXTERNAL.mock_type",
 				"forType": ["BAP"],
-				"_RETURN_": "(mockType equal to forType)",
+				"_RETURN_": "(mockType equal to forType) && (order_id are present)",
 				"_SUCCESS_CODE_": 116
 			},
 			{
 				"_NAME_": "cancel_hard_request",
 				"mockType": "$._EXTERNAL.mock_type",
 				"forType": ["BAP"],
-				"_RETURN_": "(mockType equal to forType)",
+				"_RETURN_": "(mockType equal to forType) && (order_id are present)",
 				"_SUCCESS_CODE_": 117
 			},
 			{
 				"_NAME_": "oncancel_request",
 				"mockType": "$._EXTERNAL.mock_type",
 				"forType": ["BPP"],
-				"_RETURN_": "(mockType equal to forType)",
+				"_RETURN_": "(mockType equal to forType) && (order_id are present)",
 				"_SUCCESS_CODE_": 118
 			},
 			{
 				"_NAME_": "oncancel_soft_request",
 				"mockType": "$._EXTERNAL.mock_type",
 				"forType": ["BPP"],
-				"_RETURN_": "(mockType equal to forType)",
+				"_RETURN_": "(mockType equal to forType) && (order_id are present)",
 				"_SUCCESS_CODE_": 119
 			},
 			{
 				"_NAME_": "oncancel_hard_request",
 				"mockType": "$._EXTERNAL.mock_type",
 				"forType": ["BPP"],
-				"_RETURN_": "(mockType equal to forType)",
+				"_RETURN_": "(mockType equal to forType) && (order_id are present)",
 				"_SUCCESS_CODE_": 120
 			},
 			{
 				"_NAME_": "oncancel_init_request",
 				"mockType": "$._EXTERNAL.mock_type",
 				"forType": ["BPP"],
-				"_RETURN_": "(mockType equal to forType)",
+				"_RETURN_": "(mockType equal to forType) && (order_id are present)",
 				"_SUCCESS_CODE_": 121
 			},
 			{
@@ -172,7 +171,7 @@
 				"mockType": "$._EXTERNAL.mock_type",
 				"forType": ["BPP"],
 				"order_id": "$._EXTERNAL.order_id",
-				"_RETURN_": "(mockType equal to forType) && (order_id are present",
+				"_RETURN_": "(mockType equal to forType) && (order_id are present)",
 				"_SUCCESS_CODE_": 122
 			}
 		]

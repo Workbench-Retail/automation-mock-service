@@ -408,24 +408,15 @@ export default function search(input: validationInput): validationOutput {
                     "$._EXTERNAL.mock_type",
                 );
                 const forType = ["BAP"];
-                const order_id = payloadUtils.getJsonPath(
-                    testObj,
-                    "$._EXTERNAL.order_id",
-                );
 
-                const validate =
-                    validations.equalTo(mockType, forType) &&
-                    validations.arePresent(order_id);
+                const validate = validations.equalTo(mockType, forType);
 
                 if (!validate) {
                     return [
                         {
                             valid: false,
                             code: 30000,
-                            description: `- **condition status_request**: all of the following sub conditions must be met:
-
-  - **condition status_request.1**: $._EXTERNAL.mock_type must be equal to ["BAP"]
-  - **condition status_request.2**: $._EXTERNAL.order_id must be present in the payload`,
+                            description: `- **condition status_request**: $._EXTERNAL.mock_type must be equal to ["BAP"]`,
                         },
                     ];
                 }
@@ -646,15 +637,24 @@ export default function search(input: validationInput): validationOutput {
                     "$._EXTERNAL.mock_type",
                 );
                 const forType = ["BPP"];
+                const order_id = payloadUtils.getJsonPath(
+                    testObj,
+                    "$._EXTERNAL.order_id",
+                );
 
-                const validate = validations.equalTo(mockType, forType);
+                const validate =
+                    validations.equalTo(mockType, forType) &&
+                    validations.arePresent(order_id);
 
                 if (!validate) {
                     return [
                         {
                             valid: false,
                             code: 30000,
-                            description: `- **condition oncancel_request**: $._EXTERNAL.mock_type must be equal to ["BPP"]`,
+                            description: `- **condition oncancel_request**: all of the following sub conditions must be met:
+
+  - **condition oncancel_request.1**: $._EXTERNAL.mock_type must be equal to ["BPP"]
+  - **condition oncancel_request.2**: $._EXTERNAL.order_id must be present in the payload`,
                         },
                     ];
                 }
@@ -676,15 +676,24 @@ export default function search(input: validationInput): validationOutput {
                     "$._EXTERNAL.mock_type",
                 );
                 const forType = ["BPP"];
+                const order_id = payloadUtils.getJsonPath(
+                    testObj,
+                    "$._EXTERNAL.order_id",
+                );
 
-                const validate = validations.equalTo(mockType, forType);
+                const validate =
+                    validations.equalTo(mockType, forType) &&
+                    validations.arePresent(order_id);
 
                 if (!validate) {
                     return [
                         {
                             valid: false,
                             code: 30000,
-                            description: `- **condition oncancel_soft_request**: $._EXTERNAL.mock_type must be equal to ["BPP"]`,
+                            description: `- **condition oncancel_soft_request**: all of the following sub conditions must be met:
+
+  - **condition oncancel_soft_request.1**: $._EXTERNAL.mock_type must be equal to ["BPP"]
+  - **condition oncancel_soft_request.2**: $._EXTERNAL.order_id must be present in the payload`,
                         },
                     ];
                 }
@@ -706,15 +715,24 @@ export default function search(input: validationInput): validationOutput {
                     "$._EXTERNAL.mock_type",
                 );
                 const forType = ["BPP"];
+                const order_id = payloadUtils.getJsonPath(
+                    testObj,
+                    "$._EXTERNAL.order_id",
+                );
 
-                const validate = validations.equalTo(mockType, forType);
+                const validate =
+                    validations.equalTo(mockType, forType) &&
+                    validations.arePresent(order_id);
 
                 if (!validate) {
                     return [
                         {
                             valid: false,
                             code: 30000,
-                            description: `- **condition oncancel_hard_request**: $._EXTERNAL.mock_type must be equal to ["BPP"]`,
+                            description: `- **condition oncancel_hard_request**: all of the following sub conditions must be met:
+
+  - **condition oncancel_hard_request.1**: $._EXTERNAL.mock_type must be equal to ["BPP"]
+  - **condition oncancel_hard_request.2**: $._EXTERNAL.order_id must be present in the payload`,
                         },
                     ];
                 }
@@ -736,15 +754,24 @@ export default function search(input: validationInput): validationOutput {
                     "$._EXTERNAL.mock_type",
                 );
                 const forType = ["BPP"];
+                const order_id = payloadUtils.getJsonPath(
+                    testObj,
+                    "$._EXTERNAL.order_id",
+                );
 
-                const validate = validations.equalTo(mockType, forType);
+                const validate =
+                    validations.equalTo(mockType, forType) &&
+                    validations.arePresent(order_id);
 
                 if (!validate) {
                     return [
                         {
                             valid: false,
                             code: 30000,
-                            description: `- **condition oncancel_init_request**: $._EXTERNAL.mock_type must be equal to ["BPP"]`,
+                            description: `- **condition oncancel_init_request**: all of the following sub conditions must be met:
+
+  - **condition oncancel_init_request.1**: $._EXTERNAL.mock_type must be equal to ["BPP"]
+  - **condition oncancel_init_request.2**: $._EXTERNAL.order_id must be present in the payload`,
                         },
                     ];
                 }
