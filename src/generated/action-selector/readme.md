@@ -45,10 +45,7 @@
 	  - **condition onconfirm_delayed_request.1**: $._EXTERNAL.mock_type must be equal to ["BPP"]
 	  - **condition onconfirm_delayed_request.2**: $._EXTERNAL.updated_payments[*].id must be present in the payload
 	
-	- **condition status_request**: all of the following sub conditions must be met:
-	
-	  - **condition status_request.1**: $._EXTERNAL.mock_type must be equal to ["BAP"]
-	  - **condition status_request.2**: $._EXTERNAL.order_id must be present in the payload
+	- **condition status_request**: $._EXTERNAL.mock_type must be equal to ["BAP"]
 	
 	- **condition onstatus_active_request**: all of the following sub conditions must be met:
 	
@@ -71,13 +68,25 @@
 	
 	- **condition cancel_hard_request**: $._EXTERNAL.mock_type must be equal to ["BAP"]
 	
-	- **condition oncancel_request**: $._EXTERNAL.mock_type must be equal to ["BPP"]
+	- **condition oncancel_request**: all of the following sub conditions must be met:
 	
-	- **condition oncancel_soft_request**: $._EXTERNAL.mock_type must be equal to ["BPP"]
+	  - **condition oncancel_request.1**: $._EXTERNAL.mock_type must be equal to ["BPP"]
+	  - **condition oncancel_request.2**: $._EXTERNAL.order_id must be present in the payload
 	
-	- **condition oncancel_hard_request**: $._EXTERNAL.mock_type must be equal to ["BPP"]
+	- **condition oncancel_soft_request**: all of the following sub conditions must be met:
 	
-	- **condition oncancel_init_request**: $._EXTERNAL.mock_type must be equal to ["BPP"]
+	  - **condition oncancel_soft_request.1**: $._EXTERNAL.mock_type must be equal to ["BPP"]
+	  - **condition oncancel_soft_request.2**: $._EXTERNAL.order_id must be present in the payload
+	
+	- **condition oncancel_hard_request**: all of the following sub conditions must be met:
+	
+	  - **condition oncancel_hard_request.1**: $._EXTERNAL.mock_type must be equal to ["BPP"]
+	  - **condition oncancel_hard_request.2**: $._EXTERNAL.order_id must be present in the payload
+	
+	- **condition oncancel_init_request**: all of the following sub conditions must be met:
+	
+	  - **condition oncancel_init_request.1**: $._EXTERNAL.mock_type must be equal to ["BPP"]
+	  - **condition oncancel_init_request.2**: $._EXTERNAL.order_id must be present in the payload
 	
 	- **condition onupdate_request**: all of the following sub conditions must be met:
 	
