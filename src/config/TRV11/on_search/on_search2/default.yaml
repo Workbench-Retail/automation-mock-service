@@ -70,7 +70,7 @@ message:
               - "2"
             descriptor:
               name: Journey Pass
-              code: Pass
+              code: PASS
             price:
               currency: INR
               value: "500"
