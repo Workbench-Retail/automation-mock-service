@@ -49,7 +49,9 @@ export async function selectGenerator(existingPayload: any, sessionData: any) {
 		? sessionData.selected_ids
 		: [sessionData.selected_ids];
 	const items_chosen = chosen_items;
-	existingPayload.message.order.items = items_chosen;
+	if(items_chosen){
+		existingPayload.message.order.items = items_chosen;
+	}
 	if(sessionData.provider_id){
 		existingPayload.message.order.provider.id = sessionData.provider_id
 	  }
