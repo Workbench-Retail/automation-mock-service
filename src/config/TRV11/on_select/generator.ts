@@ -146,10 +146,10 @@ export async function onSelectGenerator(
 		},
 	}));
 	items = updatedItems;
-	// createAndAppendFulfillments(updatedItems, fulfillments);
+	createAndAppendFulfillments(updatedItems, fulfillments);
 	const quote = createQuoteFromItems(updatedItems);
 	existingPayload.message.order.items = items;
-	existingPayload.message.order.fulfillments = sessionData.fulfillments; //testing for pramaan
+	existingPayload.message.order.fulfillments = fulfillments; 
 	existingPayload.message.order.fulfillments.forEach((fulfillment: any) => {
 		if (fulfillment.type === "ROUTE") {
 			fulfillment.type = "TRIP";

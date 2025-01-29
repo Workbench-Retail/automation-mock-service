@@ -10,11 +10,11 @@ function updateFulfillmentsWithParentInfo(fulfillments: any[]): void {
 
 	fulfillments.forEach((fulfillment) => {
 		// Check if the fulfillment has a parent tag
-		// const parentTag = fulfillment.tags?.find( //testing for pramaan
-		// 	(tag: any) =>
-		// 		tag.descriptor?.code === "INFO" &&
-		// 		tag.list?.some((item: any) => item.descriptor?.code === "PARENT_ID")
-		// );
+		const parentTag = fulfillment.tags?.find(
+			(tag: any) =>
+				tag.descriptor?.code === "INFO" &&
+				tag.list?.some((item: any) => item.descriptor?.code === "PARENT_ID")
+		);
 
 			// Generate a random QR token
 			const qrToken = generateQrToken();
