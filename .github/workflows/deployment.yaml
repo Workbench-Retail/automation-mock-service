@@ -2,7 +2,7 @@ name: ONDC Automation Mock Service Deployment
 
 on:
   push:
-    branches: ["main"]
+    branches: ["staging"]
 
 jobs:
   ssh-ec2:
@@ -23,8 +23,8 @@ jobs:
           REPO_DIR=~/ONDC-automation-framework/automation-mock-service
           echo "Removing existing repository directory if exists"
           rm -rf \$REPO_DIR
-          echo "Cloning repository from main branch"
-          git clone --single-branch --branch main https://github.com/ONDC-Official/automation-mock-service.git \$REPO_DIR
+          echo "Cloning repository from staging branch"
+          git clone --single-branch --branch staging https://github.com/ONDC-Official/automation-mock-service.git \$REPO_DIR
           EOF
 
       - name: Install Docker Compose (if not installed)
@@ -53,6 +53,7 @@ jobs:
           echo "REDIS_PORT=${{ secrets.REDIS_PORT }}" >> \$REPO_DIR/.env
           echo "PORT=${{ secrets.PORT }}" >> \$REPO_DIR/.env
           echo "API_SERVICE_LAYER=${{ secrets.API_SERVICE_LAYER }}" >> \$REPO_DIR/.env
+          echo "CONTAINER_NAME=staging-automation-mock-service" >> \$REPO_DIR/.env
           EOF
 
       - name: Verify .env and docker-compose.yml files
@@ -91,5 +92,5 @@ jobs:
 
           # Start the containers using Docker Compose
           echo "Running docker-compose up -d --build"
-          sudo docker compose up -d --build
+          sudo docker compose -p automation-staging up -d --build
           EOF
