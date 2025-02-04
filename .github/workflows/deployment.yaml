@@ -77,7 +77,7 @@ jobs:
           ssh -i ./key.pem ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} <<EOF
           REPO_DIR=~/ONDC-automation-framework/automation-mock-service
           cd \$REPO_DIR
-
+ 
           # Ensure the .env and docker-compose.yml files exist
           if [ ! -f .env ]; then
             echo ".env file not found!"
