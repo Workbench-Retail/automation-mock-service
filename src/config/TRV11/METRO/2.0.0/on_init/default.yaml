@@ -1,7 +1,5 @@
 message:
   order:
-    id: 077b248f
-    status: ACTIVE
     items:
       - id: I1
         category_ids:
@@ -41,12 +39,6 @@ message:
                 name: Shaheed Sthal(New Bus Adda)
                 code: SHAHEED_STHAL
               gps: '28.686576, 77.441632'
-            authorization:
-              type: QR
-              token: >-
-                iVBORw0KGgoAAAANSUhEUgAAAH0AAAB9AQAAAACn+1GIAAAApklEQVR4Xu2UMQ4EMQgD/QP+/0vK6zjsvayUMmavWxQpMAUBkwS12wcveAAkgNSCD3rR5Lkgoai3GUCMgWqbAEYR3HxAkZlzU/0MyBisYRsgI1ERFfcpBpA+ze6k56Cj7KTdXNigFWZvSOpsgqLfd18i2aAukXh9TXBNmdWt5gzA/oqzWkkN8HtA7G8CNOwYAiZt3wZixUfkA32OHNQq7Bxs9oI/gC/9fV8AVCkPjQAAAABJRU5ErkJggg==
-              valid_to: '2021-03-23T23:59:59.999Z'
-              status: UNCLAIMED
             id: '1'
           - type: INTERMEDIATE_STOP
             instructions:
@@ -240,14 +232,6 @@ message:
             parent_stop_id: '21'
         vehicle:
           category: METRO
-        tags:
-          - descriptor:
-              code: TICKET_INFO
-            display: false
-            list:
-              - descriptor:
-                  code: NUMBER
-                value: 8ed21b6f
       - id: F2
         type: TRIP
         stops:
@@ -257,12 +241,6 @@ message:
                 name: Shaheed Sthal(New Bus Adda)
                 code: SHAHEED_STHAL
               gps: '28.686576, 77.441632'
-            authorization:
-              type: QR
-              token: >-
-                xNMPRw0KGgoAAAANSUhEUgAAAH0AAAB9AQAAAACn+1GIAAAApklEQVR4Xu2UMQ4EMQgD/QP+/0vK6zjsvayUMmavWxQpMAUBkwS12wcveAAkgNSCD3rR5Lkgoai3GUCMgWqbAEYR3HxAkZlzU/0MyBisYRsgI1ERFfcpBpA+ze6k56Cj7KTdXNigFWZvSOpsgqLfd18i2aAukXh9TXBNmdWt5gzA/oqzWkkN8HtA7G8CNOwYAiZt3wZixUfkA32OHNQq7Bxs9oI/gC/9fV8AVCkPjQAAAABJRU5ErkJggg==
-              valid_to: '2021-03-23T23:59:59.999Z'
-              status: UNCLAIMED
             id: '1'
           - type: INTERMEDIATE_STOP
             instructions:
@@ -456,14 +434,6 @@ message:
             parent_stop_id: '21'
         vehicle:
           category: METRO
-        tags:
-          - descriptor:
-              code: TICKET_INFO
-            display: false
-            list:
-              - descriptor:
-                  code: NUMBER
-                value: 7f3a8e9d
     billing:
       name: John Doe
       email: john.doe@example.com
@@ -488,12 +458,9 @@ message:
     payments:
       - id: PA1
         collected_by: BAP
-        status: PAID
+        status: NOT-PAID
         type: PRE-ORDER
         params:
-          transaction_id: 34cc9b0b-6887-4c63-8397-2f4fcf03e50d
-          currency: INR
-          amount: '120'
           bank_code: XXXXXXXX
           bank_account_number: xxxxxxxxxxxxxx
         tags:
@@ -544,5 +511,3 @@ message:
           - descriptor:
               code: GTFS
             value: 'https://metro-transit/gtfs-realtime'
-    created_at: '2021-03-23T10:00:40.065Z'
-    updated_at: '2021-03-23T10:00:40.065Z'
