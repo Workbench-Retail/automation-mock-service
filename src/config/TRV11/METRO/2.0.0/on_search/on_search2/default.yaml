@@ -42,7 +42,7 @@ message:
               - F1
             time:
               label: Validity
-              duration: PT2D
+              duration: P2D
           - id: I2
             category_ids:
               - C1
@@ -61,7 +61,7 @@ message:
               - F1
             time:
               label: Validity
-              duration: PT2D
+              duration: P2D
           - id: I3
             category_ids:
               - '1'
@@ -81,7 +81,7 @@ message:
               - F2
             time:
               label: Validity
-              duration: PT2D
+              duration: P2D
         fulfillments:
           - id: F1
             type: TRIP
