@@ -1,4 +1,4 @@
-import { SessionData } from "../../session-types"
+import { SessionData } from "../../../../session-types";
 
 
 export async function onStatusActiveGenerator(existingPayload: any,sessionData: SessionData){
