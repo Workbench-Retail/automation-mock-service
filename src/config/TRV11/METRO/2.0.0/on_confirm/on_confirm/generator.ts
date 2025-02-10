@@ -4,6 +4,14 @@ import { SessionData } from "../../../../session-types";
 function generateQrToken(): string {
 	return randomBytes(32).toString("base64");
 }
+function updateOrderTimestamps(payload: any) {
+	const now = new Date().toISOString();
+	if (payload.message.order) {
+	  payload.message.order.created_at = now;
+	  payload.message.order.updated_at = now;
+	}
+	return payload;
+  }
 
 function updateFulfillmentsWithParentInfo(fulfillments: any[]): void {
 	const validTo = "2024-07-23T23:59:59.999Z";
@@ -88,5 +96,6 @@ export async function onConfirmGenerator(
 	existingPayload.message.order.quote = sessionData.quote
 	}
 	existingPayload.message.order.id = order_id;
+	existingPayload = updateOrderTimestamps(existingPayload)
 	return existingPayload;
 }
