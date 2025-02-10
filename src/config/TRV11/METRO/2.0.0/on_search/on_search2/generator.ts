@@ -1,6 +1,19 @@
 
 import { SessionData } from "../../../../session-types";
 import { createFullfillment } from "../fullfillment-generator";
+function updateProviderTime(payload: any) {
+	const now = new Date();
+	const twoDaysLater = new Date(now.getTime() + 2 * 24 * 60 * 60 * 1000);
+  
+	payload.message.catalog.providers.forEach((provider: any) => {
+	  if (provider.time && provider.time.range) {
+		provider.time.range.start = now.toISOString();
+		provider.time.range.end = twoDaysLater.toISOString();
+	  }
+	});
+  
+	return payload;
+  }
 
 const createCustomRoute = (
 	routeData: any[],
@@ -77,8 +90,9 @@ export async function onSearch2Generator(
 		const fulfillments = createCustomRoute(route, start_code, end_code);
 
 		existingPayload.message.catalog.providers[0].fulfillments = fulfillments;
-
+		existingPayload = updateProviderTime(existingPayload)
 		return existingPayload;
+
 	} catch (err) {
 		console.error(err);
 		delete existingPayload.message;
