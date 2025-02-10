@@ -26,7 +26,7 @@ message:
     provider:
       id: P1
       descriptor:
-        name: Delhi Metro Rail Limited
+        name: ONDC Metro Rail Limited
         images:
           - url: https://delhimetrorail.com/logos/logo.ico
       time:

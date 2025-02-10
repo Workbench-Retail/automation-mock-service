@@ -20,7 +20,7 @@ message:
             start: 2023-09-14T05:30:00.000Z
             end: 2023-09-14T23:30:00.000Z
         descriptor:
-          name: Delhi Metro Rail Limited
+          name: ONDC Metro Rail Limited
           images:
             - url: https://delhimetrorail.com/logos/logo.ico
         fulfillments:
