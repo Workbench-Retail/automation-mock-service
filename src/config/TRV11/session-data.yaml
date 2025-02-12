@@ -28,3 +28,4 @@ session_data:
   error_code: null
   error_message: null
   quote: null
+  ref_id: null

@@ -57,7 +57,7 @@ codes:
   - code: 111
     action_id: status
     action: status
-    default: status/default.yaml
+    default: status/status_active/default.yaml
     message_id: true
   - code: 112
     action_id: on_status_active
@@ -114,3 +114,7 @@ codes:
     action: on_update
     default: on_update/on_update_accepted/default.yaml
     message_id: true
+  - code: 123
+    action_id: status_tech_cancel
+    action: status
+    default: status/status_tech_cancel/default.yaml
