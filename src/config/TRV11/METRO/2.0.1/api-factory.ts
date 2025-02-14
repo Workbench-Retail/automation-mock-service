@@ -8,7 +8,7 @@ import { onConfirmGenerator } from "./on_confirm/on_confirm/generator";
 import { onConfirmDelayedGenerator } from "./on_confirm/on_confirm_delayed/generator";
 import { onSelectGenerator } from "./on_select/generator";
 import { selectGenerator } from "./select/generator";
-import { statusGenerator } from "./status/generator";
+import { statusActiveGenerator } from "./status/status_active/generator";
 import { onInitGenerator } from "./on_init/generator";
 import { initGenerator } from "./init/generator";
 import { search1Generator } from "./search/search1/generator";
@@ -18,6 +18,7 @@ import { cancelHardGenerator } from "./cancel/cancel_hard/generator";
 import { onSearch1Generator } from "./on_search/on_search1/generator";
 import { onSearch2Generator } from "./on_search/on_search2/generator";
 import { onStatusCompleteGenerator } from "./on_status/on_status_complete/generator";
+import { statusTechCancelGenerator } from "./status/status_tech_cancel/generator";
 
 export async function Generator(
 	action_id: string,
@@ -36,7 +37,9 @@ export async function Generator(
 		case "confirm":
 			return await confirmGenerator(existingPayload, sessionData);
 		case "status":
-			return await statusGenerator(existingPayload, sessionData);
+			return await statusActiveGenerator(existingPayload, sessionData);
+		case "status_tech_cancel":
+			return await statusTechCancelGenerator(existingPayload, sessionData);
 		case "cancel":
 			return await cancelGenerator(existingPayload, sessionData);
 		case "cancel_soft":

@@ -40,7 +40,6 @@ const createQuoteFromItems = (items: any): any => {
 
 function createAndAppendFulfillments(items: any[], fulfillments: any[]): void {
 	items.forEach((item) => {
-		// item.fulfillment_ids =
 		item.fulfillment_ids.forEach((parentFulfillmentId: string) => {
 			// Get the parent fulfillment object from the fulfillments array
 			const parentFulfillment = fulfillments.find(
@@ -52,25 +51,10 @@ function createAndAppendFulfillments(items: any[], fulfillments: any[]): void {
 				const quantity = item.quantity.selected.count;
 
 				for (let i = 0; i < quantity; i++) {
-					// Create new fulfillment object
+					// Create a deep copy of the parent fulfillment
 					const newFulfillment = {
+						...structuredClone(parentFulfillment), // Deep copy to avoid mutations
 						id: `F${Math.random().toString(36).substring(2, 9)}`, // Unique ID for new fulfillment
-						type: "TICKET",
-						tags: [
-							{
-								descriptor: {
-									code: "INFO",
-								},
-								list: [
-									{
-										descriptor: {
-											code: "PARENT_ID",
-										},
-										value: parentFulfillment.id, // Set parent ID
-									},
-								],
-							},
-						],
 					};
 
 					// Append the new fulfillment to the fulfillments array
@@ -83,6 +67,7 @@ function createAndAppendFulfillments(items: any[], fulfillments: any[]): void {
 		});
 	});
 }
+
 
 function getUniqueFulfillmentIdsAndFilterFulfillments(
 	items: any[],
@@ -122,7 +107,6 @@ export async function onSelectGenerator(
 	existingPayload: any,
 	sessionData: SessionData
 ) {
-	console.log("session data before the on_select call is ",sessionData)
 	let items = filterItemsBySelectedIds(
 		sessionData.items,
 		sessionData.selected_item_ids
