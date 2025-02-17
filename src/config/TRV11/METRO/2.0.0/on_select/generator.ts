@@ -88,7 +88,7 @@ function getUniqueFulfillmentIdsAndFilterFulfillments(
 	const filteredFulfillments = fulfillments.filter(
 		(fulfillment) => fulfillmentIds.includes(fulfillment.id) // Check if fulfillment.id is in the unique fulfillmentIds list
 	);
-
+	console.log("filtered fulfillments,", filteredFulfillments)
 	return filteredFulfillments;
 }
 
@@ -107,6 +107,7 @@ export async function onSelectGenerator(
 	existingPayload: any,
 	sessionData: SessionData
 ) {
+	console.log("The fulfillments in session data is", sessionData.fulfillments)
 	let items = filterItemsBySelectedIds(
 		sessionData.items,
 		sessionData.selected_item_ids
