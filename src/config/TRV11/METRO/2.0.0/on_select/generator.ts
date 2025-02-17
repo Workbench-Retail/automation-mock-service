@@ -130,6 +130,7 @@ export async function onSelectGenerator(
 		},
 	}));
 	items = updatedItems;
+	console.log("The fulfillment array before updation is", fulfillments)
 	createAndAppendFulfillments(updatedItems, fulfillments);
 	console.log("The fulfillment array after updation is", fulfillments)
 	const quote = createQuoteFromItems(updatedItems);
