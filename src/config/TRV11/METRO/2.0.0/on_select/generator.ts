@@ -74,6 +74,7 @@ function getUniqueFulfillmentIdsAndFilterFulfillments(
 	fulfillments: any[]
 ): any[] {
 	fulfillments = [fulfillments];
+	console.log("the fulfillmnets in the start are",JSON.stringify(fulfillments))
 	// Ensure fulfillments is an array, fallback to an empty array if it's not
 	if (!Array.isArray(fulfillments)) {
 		throw new Error("Expected 'fulfillments' to be an array.");
