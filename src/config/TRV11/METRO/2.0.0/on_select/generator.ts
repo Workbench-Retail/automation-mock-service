@@ -83,7 +83,7 @@ function getUniqueFulfillmentIdsAndFilterFulfillments(
 	const fulfillmentIds = items
 		.flatMap((item) => item.fulfillment_ids) // Flatten the fulfillment_ids arrays
 		.filter((value, index, self) => self.indexOf(value) === index); // Remove duplicates
-
+	console.log("fulfillment_ids", fulfillmentIds)
 	// Step 2: Filter the fulfillments based on the unique fulfillment IDs
 	const filteredFulfillments = fulfillments.filter(
 		(fulfillment) => fulfillmentIds.includes(fulfillment.id) // Check if fulfillment.id is in the unique fulfillmentIds list
