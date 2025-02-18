@@ -110,6 +110,6 @@ export async function onConfirmDelayedGenerator(existingPayload: any,sessionData
   existingPayload = updateOrderTimestamps(existingPayload)
   const delay_duration = isoDurationToSeconds(sessionData.ttl) + 2
   console.log("the delay duration is", delay_duration)
-  await delay(delay_duration);
+  await delay(delay_duration*1000);
   return existingPayload;
 }
