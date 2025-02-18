@@ -65,7 +65,9 @@ function createAndAppendFulfillments(items: any[], fulfillments: any[]): void {
 				}
 			}
 		});
+		item.fulfillment_ids.shift()
 	});
+	fulfillments.shift()
 }
 
 
@@ -80,12 +82,10 @@ function getUniqueFulfillmentIdsAndFilterFulfillments(
 	const fulfillmentIds = items
 		.flatMap((item) => item.fulfillment_ids) // Flatten the fulfillment_ids arrays
 		.filter((value, index, self) => self.indexOf(value) === index); // Remove duplicates
-	console.log("fulfillment_ids", fulfillmentIds)
 	// Step 2: Filter the fulfillments based on the unique fulfillment IDs
 	const filteredFulfillments = fulfillments.filter(
 		(fulfillment) => fulfillmentIds.includes(fulfillment.id) // Check if fulfillment.id is in the unique fulfillmentIds list
 	);
-	console.log("filtered fulfillments,", filteredFulfillments)
 	return filteredFulfillments;
 }
 
@@ -104,7 +104,6 @@ export async function onSelectGenerator(
 	existingPayload: any,
 	sessionData: SessionData
 ) {
-	console.log("The fulfillments in session data is", sessionData.fulfillments)
 	let items = filterItemsBySelectedIds(
 		sessionData.items,
 		sessionData.selected_item_ids
@@ -128,9 +127,7 @@ export async function onSelectGenerator(
 		},
 	}));
 	items = updatedItems;
-	console.log("The fulfillment array before updation is", fulfillments)
 	createAndAppendFulfillments(updatedItems, fulfillments);
-	console.log("The fulfillment array after updation is", fulfillments)
 	const quote = createQuoteFromItems(updatedItems);
 	existingPayload.message.order.items = items;
 	existingPayload.message.order.fulfillments = fulfillments; 
