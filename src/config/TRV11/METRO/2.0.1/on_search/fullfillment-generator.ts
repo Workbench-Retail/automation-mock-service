@@ -74,7 +74,7 @@ const exampleFullfillment = {
 					parent_stop_id: "4",
 				},
 				{
-					type: "TRANSIT_STOP",
+					type: "INTERMEDIATE_STOP",
 					instructions: {
 						name: "Stop 6",
 						short_desc: "Change for Pink Line",
@@ -159,7 +159,7 @@ const exampleFullfillment = {
 					parent_stop_id: "10",
 				},
 				{
-					type: "TRANSIT_STOP",
+					type: "INTERMEDIATE_STOP",
 					instructions: {
 						name: "Stop 12",
 						short_desc: "Change for Red and Violet Line",
@@ -202,7 +202,7 @@ const exampleFullfillment = {
 					parent_stop_id: "13",
 				},
 				{
-					type: "TRANSIT_STOP",
+					type: "INTERMEDIATE_STOP",
 					instructions: {
 						name: "Stop 15",
 						short_desc: "Change for Airport Express",
@@ -217,7 +217,7 @@ const exampleFullfillment = {
 					parent_stop_id: "14",
 				},
 				{
-					type: "TRANSIT_STOP",
+					type: "INTERMEDIATE_STOP",
 					instructions: {
 						name: "Stop 16",
 						short_desc: "Change for Blue Line",
@@ -246,7 +246,7 @@ const exampleFullfillment = {
 					parent_stop_id: "16",
 				},
 				{
-					type: "TRANSIT_STOP",
+					type: "INTERMEDIATE_STOP",
 					instructions: {
 						name: "Stop 18",
 						short_desc: "Change for Violet Line",
@@ -303,7 +303,7 @@ const exampleFullfillment = {
 					parent_stop_id: "20",
 				},
 				{
-					type: "TRANSIT_STOP",
+					type: "INTERMEDIATE_STOP",
 					instructions: {
 						name: "Stop 22",
 						short_desc: "Change for Pink Line",
@@ -346,7 +346,7 @@ const exampleFullfillment = {
 					parent_stop_id: "23",
 				},
 				{
-					type: "TRANSIT_STOP",
+					type: "INTERMEDIATE_STOP",
 					instructions: {
 						name: "Stop 25",
 						short_desc: "Change for Magenta Line",
@@ -473,7 +473,7 @@ const exampleFullfillment = {
 					parent_stop_id: "32",
 				},
 				{
-					type: "TRANSIT_STOP",
+					type: "INTERMEDIATE_STOP",
 					instructions: {
 						name: "Stop 34",
 						short_desc: "Change for Rapid Metro",

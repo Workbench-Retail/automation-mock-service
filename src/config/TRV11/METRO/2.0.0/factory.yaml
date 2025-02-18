@@ -62,17 +62,17 @@ codes:
   - code: 112
     action_id: on_status_active
     action: on_status
-    default: on_status_active/default.yaml
+    default: on_status/on_status_active/default.yaml
     message_id: false
   - code: 113
     action_id: on_status_complete
     action: on_status
-    default: on_status_complete/default.yaml
+    default:  on_status/on_status_complete/default.yaml
     message_id: false
   - code: 114
     action_id: on_status_unsolicited
     action: on_status
-    default: on_status_complete/default.yaml
+    default: on_status/on_status_complete/default.yaml
     message_id: true
   - code: 115
     action_id: cancel
@@ -97,17 +97,17 @@ codes:
   - code: 119
     action_id: on_cancel_soft
     action: on_cancel
-    default: on_cancel/default.yaml
+    default: on_cancel/on_cancel_soft/default.yaml
     message_id: false
   - code: 120
     action_id: on_cancel_hard
     action: on_cancel
-    default: on_cancel/default.yaml
+    default: on_cancel/on_cancel_hard/default.yaml
     message_id: false
   - code: 121
     action_id: on_cancel_init
     action: on_cancel
-    default: on_cancel/default.yaml
+    default: on_cancel/on_cancel_init/default.yaml
     message_id: false
   - code: 122
     action_id: on_update_accepted
