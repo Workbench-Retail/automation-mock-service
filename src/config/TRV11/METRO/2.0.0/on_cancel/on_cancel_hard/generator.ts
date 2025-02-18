@@ -11,7 +11,7 @@ export async function onCancelHardGenerator(existingPayload: any,sessionData: an
 	existingPayload.message.order.fulfillments = sessionData.fulfillments;
 	}
 	if (sessionData.order_id) {
-	existingPayload.message.order_id = sessionData.order_id;
+	existingPayload.message.order.id = sessionData.order_id;
 	}
 	if(sessionData.quote != null){
 	existingPayload.message.order.quote = sessionData.quote
