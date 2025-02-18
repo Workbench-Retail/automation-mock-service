@@ -118,3 +118,8 @@ codes:
     action_id: status_tech_cancel
     action: status
     default: status/status_tech_cancel/default.yaml
+  - code: 124
+    action_id: on_cancel_hard
+    action: on_cancel
+    default: on_cancel/on_cancel_hard/default.yaml
+    message_id: true
