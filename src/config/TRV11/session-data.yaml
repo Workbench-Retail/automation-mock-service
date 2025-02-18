@@ -29,3 +29,4 @@ session_data:
   error_message: null
   quote: null
   ref_id: null
+  ttl: null
