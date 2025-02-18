@@ -76,12 +76,6 @@ function getUniqueFulfillmentIdsAndFilterFulfillments(
 	if (!Array.isArray(fulfillments)) {
 		fulfillments = fulfillments ? [fulfillments] : [];
 	}
-	console.log("the fulfillmnets in the start are",JSON.stringify(fulfillments))
-	// Ensure fulfillments is an array, fallback to an empty array if it's not
-	if (!Array.isArray(fulfillments)) {
-		throw new Error("Expected 'fulfillments' to be an array.");
-	}
-
 	// Step 1: Get all unique fulfillment IDs from the items
 	const fulfillmentIds = items
 		.flatMap((item) => item.fulfillment_ids) // Flatten the fulfillment_ids arrays
