@@ -16,6 +16,7 @@ import { onSearch1Generator } from "./on_search/on_search1/generator";
 import { onSearch2Generator } from "./on_search/on_search2/generator";
 import { onStatusCompleteGenerator } from "./on_status/on_status_complete/generator";
 import { statusTechCancelGenerator } from "./status/status_tech_cancel/generator";
+import { onStatusActiveGenerator } from "./on_status/on_status_active/generator";
 
 export async function Generator(
 	action_id: string,
@@ -51,6 +52,8 @@ export async function Generator(
 			return await onInitGenerator(existingPayload, sessionData);
 		case "on_confirm":
 			return await onConfirmGenerator(existingPayload, sessionData);
+		case "on_status":
+			return await onStatusActiveGenerator(existingPayload, sessionData);
 		case "on_status_complete":
 			return await onStatusCompleteGenerator(existingPayload, sessionData);
 		case "on_confirm_delayed":
