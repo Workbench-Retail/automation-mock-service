@@ -1,41 +1,41 @@
 import { SessionData } from "../../../session-types";
 
 const createQuoteFromItems = (items: any): any => {
-	let totalPrice = 0; // Initialize total price
+    let totalPrice = 0; // Initialize total price
 
-	const breakup = items.map((item: any) => {
-		const itemTotalPrice =
-			Number(item.price.value) * item.quantity.selected.count; // Calculate item total price
-		totalPrice += itemTotalPrice; // Add to total price
+    const breakup = items.map((item: any) => {
+        const itemTotalPrice =
+            Number(item.price.value) * item.quantity.selected.count; // Calculate item total price
+        totalPrice += itemTotalPrice; // Add to total price
 
-		return {
-			title: "BASE_FARE",
-			item: {
-				id: item.id,
-				price: {
-					currency: item.price.currency,
-					value: item.price.value,
-				},
-				quantity: {
-					selected: {
-						count: item.quantity.selected.count,
-					},
-				},
-			},
-			price: {
-				currency: item.price.currency,
-				value: itemTotalPrice.toFixed(2),
-			},
-		};
-	});
+        return {
+            title: "BASE_FARE",
+            item: {
+                id: item.id,
+                price: {
+                    currency: item.price.currency,
+                    value: item.price.value,
+                },
+                quantity: {
+                    selected: {
+                        count: item.quantity.selected.count,
+                    },
+                },
+            },
+            price: {
+                currency: item.price.currency,
+                value: itemTotalPrice.toFixed(2),
+            },
+        };
+    });
 
-	return {
-		price: {
-			value: totalPrice.toFixed(2), // Total price as a string with two decimal places
-			currency: items[0]?.price.currency || "INR", // Use currency from the first item or default to "INR"
-		},
-		breakup,
-	};
+    return {
+        price: {
+            value: totalPrice.toFixed(2), // Total price as a string with two decimal places
+            currency: items[0]?.price.currency || "INR", // Use currency from the first item or default to "INR"
+        },
+        breakup,
+    };
 };
 
 function createAndAppendFulfillments(items: any[], fulfillments: any[]): void {
@@ -46,9 +46,9 @@ function createAndAppendFulfillments(items: any[], fulfillments: any[]): void {
 				(f) => f.id === parentFulfillmentId
 			);
 
-			if (parentFulfillment) {
-				// Get the quantity based on the selected count
-				const quantity = item.quantity.selected.count;
+            if (parentFulfillment) {
+                // Get the quantity based on the selected count
+                const quantity = item.quantity.selected.count;
 
 				for (let i = 0; i < quantity; i++) {
 					// Create a deep copy of the parent fulfillment
@@ -57,8 +57,8 @@ function createAndAppendFulfillments(items: any[], fulfillments: any[]): void {
 						id: `F${Math.random().toString(36).substring(2, 9)}`, // Unique ID for new fulfillment
 					};
 
-					// Append the new fulfillment to the fulfillments array
-					fulfillments.push(newFulfillment);
+                    // Append the new fulfillment to the fulfillments array
+                    fulfillments.push(newFulfillment);
 
 					// Append the new fulfillment's id to the item's fulfillment_ids
 					item.fulfillment_ids.push(newFulfillment.id);
@@ -72,8 +72,8 @@ function createAndAppendFulfillments(items: any[], fulfillments: any[]): void {
 
 
 function getUniqueFulfillmentIdsAndFilterFulfillments(
-	items: any[],
-	fulfillments: any[]
+    items: any[],
+    fulfillments: any[]
 ): any[] {
 	if (!Array.isArray(fulfillments)) {
 		fulfillments = fulfillments ? [fulfillments] : [];
@@ -90,19 +90,19 @@ function getUniqueFulfillmentIdsAndFilterFulfillments(
 }
 
 const filterItemsBySelectedIds = (
-	items: any[],
-	selectedIds: string | string[]
+    items: any[],
+    selectedIds: string | string[]
 ): any[] => {
-	// Convert selectedIds to an array if it's a string
-	const idsToFilter = Array.isArray(selectedIds) ? selectedIds : [selectedIds];
+    // Convert selectedIds to an array if it's a string
+    const idsToFilter = Array.isArray(selectedIds) ? selectedIds : [selectedIds];
 
-	// Filter the items array based on the presence of ids in selectedIds
-	return items.filter((item) => idsToFilter.includes(item.id));
+    // Filter the items array based on the presence of ids in selectedIds
+    return items.filter((item) => idsToFilter.includes(item.id));
 };
 
 export async function onSelectGenerator(
-	existingPayload: any,
-	sessionData: SessionData
+    existingPayload: any,
+    sessionData: SessionData
 ) {
 	let items = filterItemsBySelectedIds(
 		sessionData.items,

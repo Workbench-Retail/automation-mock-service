@@ -50,7 +50,7 @@ function getDetailsByActionId(
 	throw new Error("Invalid action id found!");
 }
 
-export async function createMockReponse2(
+export async function createMockResponseMETRO201(
 	actionID: string,
 	sessionData: SessionData
 ) {
@@ -59,7 +59,7 @@ export async function createMockReponse2(
 	// 3. run faker
 
 	const factoryData = loadFactoryYaml(
-		path.resolve(__dirname, "../2.0.1/factory.yaml")
+		path.resolve(__dirname, "../../factory.yaml")
 	);
 	const api_details = getDetailsByActionId(actionID, factoryData);
 	const context_object = {
