@@ -1,4 +1,4 @@
-import { SessionData } from "../session-types";
+import { SessionData } from "../../../session-types";
 
 export async function initGenerator(existingPayload: any,sessionData: SessionData){
     if (sessionData.billing && Object.keys(sessionData.billing).length > 0) {

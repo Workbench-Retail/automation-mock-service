@@ -1,4 +1,4 @@
-import { SessionData } from "../../session-types";
+import { SessionData } from "../../../session-types";
 
 function getRandomStations(data: any) {
     // Flatten all stops across all fulfillments

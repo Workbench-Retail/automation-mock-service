@@ -1,4 +1,4 @@
-import { SessionData } from "../session-types";
+import { SessionData } from "../../../session-types";
 
 const createQuoteFromItems = (items: any): any => {
 	let totalPrice = 0; // Initialize total price
