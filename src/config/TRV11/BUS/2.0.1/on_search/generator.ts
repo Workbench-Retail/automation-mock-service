@@ -1,4 +1,4 @@
-import { SessionData } from "../../session-types";
+import { SessionData } from "../../../session-types";
 import { createFullfillment } from "./fullfillment-generator";
 
 const createCustomRoute = (
