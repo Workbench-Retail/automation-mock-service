@@ -4,9 +4,10 @@ import { getMockResponseMetaData } from "../services/mock-services";
 import { createMockResponse } from "../config/TRV11/METRO/version-factory";
 import { sendToApiService } from "../utils/request-utils";
 import { BecknContext } from "../config/TRV11/session-types";
+import { ApiRequest } from "../routes/manual";
 
 export async function initAsyncMiddleware(
-	req: Request,
+	req: ApiRequest,
 	res: Response,
 	next: NextFunction
 ) {

@@ -17,6 +17,7 @@ interface QuerySettings {
 	action_id: string;
 	version: string;
 	subscriber_url?: string;
+	session_id : string;
 	[key: string]: undefined | string | string[] | any;
 }
 export interface TriggerRequest extends Request {

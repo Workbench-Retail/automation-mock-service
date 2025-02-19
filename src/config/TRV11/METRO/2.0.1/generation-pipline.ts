@@ -50,7 +50,7 @@ function getDetailsByActionId(
 	throw new Error("Invalid action id found!");
 }
 
-export async function createMockReponse2(
+export async function createMockResponseMETRO201(
 	actionID: string,
 	sessionData: SessionData
 ) {
