@@ -32,6 +32,7 @@ export async function generateMockResponseMiddleware(
 			txn,
 			req.queryData.subscriber_url
 		);
+		console.log("query data is", req.queryData)
 		const mockResponse = await createMockResponse(
 			req.queryData.session_id ?? "",
 			sessionData,
