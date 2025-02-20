@@ -31,7 +31,7 @@ export interface SessionData {
 	error_message: string | undefined;
 	ref_id: string | undefined;
 	ttl: string | undefined;
-	useCaseId : string | undefined;
+	usecaseId : string | undefined;
 }
 
 export type BecknContext = {
