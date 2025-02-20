@@ -9,15 +9,16 @@ export async function createMockResponse(
   sessionData: SessionData,
   action_id: string
 ) {
-  const apiCache = new ApiServiceCache(RedisService);
   RedisService.useDb(0)
   console.log("session id in create mock response",session_id)
   const api_session =
-    (await apiCache.getSessionIdFromAPIService(session_id)) ?? "";
+    (await RedisService.getKey(session_id)) ?? "";
     console.log("api_session is ",api_session)
   const data = JSON.parse(api_session) as SessionCache;
   console.log("data is",data)
   const { version, usecaseId } = data;
+  console.log(version,usecaseId)
+  
   if (usecaseId === "METRO") {
     if (version === "2.0.0") {
       return createMockResponseMETRO200(action_id, sessionData);
@@ -29,4 +30,5 @@ export async function createMockResponse(
       return createMockReponseBUS200(action_id, sessionData);
     }
   }
+
 }
