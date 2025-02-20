@@ -30,3 +30,4 @@ session_data:
   quote: null
   ref_id: null
   ttl: null
+  useCaseId: null
