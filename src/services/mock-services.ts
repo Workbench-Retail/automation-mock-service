@@ -33,8 +33,8 @@ export async function getSessionData(
 export async function getSafeActions(
 	transaction_id: string,
 	subscriber_url?: string,
-	usecaseId?: string,
 	mock_type?: string,
+	usecaseId?: string,
 ) {
 	const sessionData = await getSessionData(transaction_id, subscriber_url);
 	sessionData.mock_type = mock_type;
