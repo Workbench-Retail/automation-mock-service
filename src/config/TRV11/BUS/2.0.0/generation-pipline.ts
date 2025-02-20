@@ -85,7 +85,7 @@ export async function createMockReponseBUS200(
 	}
 	console.log(api_details);
 	const default_message = yamlToJson(
-		path.resolve(__dirname, api_details.default)
+		path.resolve(__dirname, `../../${api_details.default}`)
 	);
 	const payload: any = {
 		context: { ...context },
