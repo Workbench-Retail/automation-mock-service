@@ -4,7 +4,7 @@ message:
       name: Transit Solutions
       images:
         - url: 'https://transitsolutions.in/logos/logo.ico'
-          size_type: xs
+          # size_type: xs
     providers:
       - id: P1
         descriptor:
