@@ -24,43 +24,43 @@ export async function Generator(
 	sessionData: any
 ) {
 	switch (action_id) {
-		case "search1":
+		case "search1_METRO":
 			return await search1Generator(existingPayload, sessionData);
-		case "search2":
+		case "search2_METRO":
 			return await search2Generator(existingPayload, sessionData);
-		case "select":
+		case "select_METRO":
 			return await selectGenerator(existingPayload, sessionData);
-		case "init":
+		case "init_METRO":
 			return await initGenerator(existingPayload, sessionData);
-		case "confirm":
+		case "confirm_METRO":
 			return await confirmGenerator(existingPayload, sessionData);
-		case "status":
+		case "status_METRO":
 			return await statusActiveGenerator(existingPayload, sessionData);
-		case "status_tech_cancel":
+		case "status_tech_cancel_METRO":
 			return await statusTechCancelGenerator(existingPayload, sessionData);
-		case "cancel_soft":
+		case "cancel_soft_METRO":
 			return await cancelSoftGenerator(existingPayload, sessionData);
-		case "cancel_hard":
+		case "cancel_hard_METRO":
 			return await cancelHardGenerator(existingPayload, sessionData);
-		case "on_search1":
+		case "on_search1_METRO":
 			return await onSearch1Generator(existingPayload, sessionData);
-		case "on_search2":
+		case "on_search2_METRO":
 			return await onSearch2Generator(existingPayload, sessionData);
-		case "on_select":
+		case "on_select_METRO":
 			return await onSelectGenerator(existingPayload, sessionData);
-		case "on_init":
+		case "on_init_METRO":
 			return await onInitGenerator(existingPayload, sessionData);
-		case "on_confirm":
+		case "on_confirm_METRO":
 			return await onConfirmGenerator(existingPayload, sessionData);
 		case "on_status":
 			return await onStatusActiveGenerator(existingPayload, sessionData);
-		case "on_status_complete":
+		case "on_status_complete_METRO":
 			return await onStatusCompleteGenerator(existingPayload, sessionData);
-		case "on_confirm_delayed":
+		case "on_confirm_delayed_METRO":
 			return await onConfirmDelayedGenerator(existingPayload, sessionData);
-		case "on_cancel_soft":
+		case "on_cancel_soft_METRO":
 			return await onCancelSoftGenerator(existingPayload, sessionData);
-		case "on_cancel_hard":
+		case "on_cancel_hard_METRO":
 			return await onCancelHardGenerator(existingPayload, sessionData);
 		default:
 			throw new Error(`Invalid request type ${action_id}`);
