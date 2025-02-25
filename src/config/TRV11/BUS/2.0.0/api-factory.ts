@@ -51,6 +51,8 @@ export async function Generator(
 			return await onInitGenerator(existingPayload, sessionData);
 		case "on_confirm":
 			return await onConfirmGenerator(existingPayload, sessionData);
+		case "on_status":
+				return await onStatusActiveGenerator(existingPayload, sessionData);
 		case "on_status_complete":
 			return await onStatusActiveGenerator(existingPayload, sessionData);
 		case "on_confirm_delayed":

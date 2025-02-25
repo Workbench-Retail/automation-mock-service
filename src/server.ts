@@ -2,7 +2,7 @@ import express, { Application, Request, Response, NextFunction } from "express";
 import cors from "cors";
 import logger from "./utils/logger";
 import { config } from "./config/serverConfig";
-import defaultRouter from "./routes/defaultRoute";
+// import defaultRouter from "./routes/defaultRoute";
 import manualRouter from "./routes/manual";
 import triggerRouter from "./routes/trigger";
 import { setAckResponse, setBadRequestNack } from "./utils/ackUtils";
@@ -23,7 +23,7 @@ const createServer = (): Application => {
 	}
 
 	app.use("/manual", manualRouter);
-	app.use("/mock", defaultRouter);
+	// app.use("/mock", defaultRouter);
 	app.use("/trigger", triggerRouter);
 
 	// Health Check
