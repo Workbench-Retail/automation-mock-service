@@ -52,7 +52,7 @@ export async function Generator(
 			return await onInitGenerator(existingPayload, sessionData);
 		case "on_confirm_METRO":
 			return await onConfirmGenerator(existingPayload, sessionData);
-		case "on_status":
+		case "on_status_active_METRO":
 			return await onStatusActiveGenerator(existingPayload, sessionData);
 		case "on_status_complete_METRO":
 			return await onStatusCompleteGenerator(existingPayload, sessionData);
