@@ -19,15 +19,26 @@ export async function createMockResponse(
   const { version, usecaseId } = data;
   console.log(version, usecaseId);
 
+  let payload: any = {};
+
   if (usecaseId === "METRO") {
     if (version === "2.0.0") {
-      return createMockResponseMETRO200(action_id, sessionData);
+      payload = await createMockResponseMETRO200(action_id, sessionData);
+      
     } else if (version === "2.0.1") {
-      return createMockResponseMETRO201(action_id, sessionData);
+      payload = await createMockResponseMETRO201(action_id, sessionData);
     }
   } else if (usecaseId === "BUS") {
     if (version === "2.0.0") {
-      return createMockReponseBUS200(action_id, sessionData);
+      payload = await createMockReponseBUS200(action_id, sessionData);
     }
   }
+
+  if(data.npType === "BAP") {
+    payload.context.bap_uri = data.subscriberUrl
+  } else  {
+    payload.context.bpp_uri = data.subscriberUrl
+  }
+
+  return payload
 }

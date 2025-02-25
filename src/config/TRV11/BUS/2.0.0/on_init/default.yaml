@@ -28,7 +28,7 @@ message:
         images:
           - url: >-
               https://dtc.delhi.gov.in/sites/default/files/DTC/logo/dtc_logo_2.png
-            size_type: xs
+            # size_type: xs
     fulfillments:
       - id: F1
         type: TRIP

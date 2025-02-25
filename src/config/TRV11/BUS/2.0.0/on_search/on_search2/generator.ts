@@ -65,7 +65,7 @@ export async function onSearch2Generator(
         }
         const fulfillments = getFulfillmentPath(route, start_code, end_code);
 
-        existingPayload.message.catalog.providers[0].fulfillments = fulfillments;
+        existingPayload.message.catalog.providers[0].fulfillments = [fulfillments];
         existingPayload.message.catalog.providers[0].items.forEach((item:any) => {
             item.fulfillment_ids = [fulfillments.id]
         })
