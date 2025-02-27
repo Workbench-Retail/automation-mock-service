@@ -55,5 +55,6 @@ export async function selectGenerator(existingPayload: any, sessionData: any) {
 	if(sessionData.provider_id){
 		existingPayload.message.order.provider.id = sessionData.provider_id
 	  }
+	console.log(existingPayload.message.order)
 	return existingPayload;
 }
