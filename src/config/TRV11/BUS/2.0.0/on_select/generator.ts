@@ -128,7 +128,7 @@ export async function onSelectGenerator(
         },
     })).filter((item) => item.quantity.selected.count > 0);
 
-    console.log("updated_items",updatedItems)
+    items = updatedItems
     createAndAppendFulfillments(updatedItems, fulfillments);
     const quote = createQuoteFromItems(updatedItems);
     existingPayload.message.order.items = items;
