@@ -82,7 +82,7 @@ function getActionConfig() {
 			  "code": 111,
 			  "action_id": "status_METRO",
 			  "action": "status",
-			  "default": "METRO/2.0.0/status/default.yaml",
+			  "default": "METRO/2.0.0/status/status_active/default.yaml",
 			  "message_id": true
 			},
 			{
