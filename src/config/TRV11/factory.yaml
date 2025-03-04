@@ -97,12 +97,12 @@ codes:
   - code: 119
     action_id: on_cancel_soft_METRO
     action: on_cancel
-    default: METRO/2.0.0/on_cancel/default.yaml
+    default: METRO/2.0.0/on_cancel/on_cancel_soft/default.yaml
     message_id: false
   - code: 120
     action_id: on_cancel_hard_METRO
     action: on_cancel
-    default: METRO/2.0.0/on_cancel/default.yaml
+    default: METRO/2.0.0/on_cancel/on_cancel_hard/default.yaml
     message_id: false
   - code: 121
     action_id: on_cancel_init_METRO
