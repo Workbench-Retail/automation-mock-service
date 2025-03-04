@@ -533,27 +533,6 @@ const exampleFullfillment = {
 			vehicle: {
 				category: "METRO",
 			},
-			tags: [
-				{
-					descriptor: {
-						code: "ROUTE_INFO",
-					},
-					list: [
-						{
-							descriptor: {
-								code: "ROUTE_ID",
-							},
-							value: "242",
-						},
-						{
-							descriptor: {
-								code: "ROUTE_NAME",
-							},
-							value: "Yellow Line",
-						},
-					],
-				},
-			],
 		},
 	],
 };
