@@ -110,7 +110,7 @@ function getActionConfig() {
       "code": 115,
       "action_id": "cancel_METRO",
       "action": "cancel",
-      "default": "METRO/2.0.0/cancel/cancel/default.yaml",
+      "default": "METRO/2.0.0/cancel/cancel_hard/default.yaml",
       "message_id": true
     },
     {
@@ -131,7 +131,7 @@ function getActionConfig() {
       "code": 118,
       "action_id": "on_cancel_METRO",
       "action": "on_cancel",
-      "default": "METRO/2.0.0/on_cancel/default.yaml",
+      "default": "METRO/2.0.0/on_cancel/on_cancel_hard/default.yaml",
       "message_id": false
     },
     {
