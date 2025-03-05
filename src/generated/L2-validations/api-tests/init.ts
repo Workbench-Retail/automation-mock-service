@@ -34,7 +34,7 @@ export default function init(input: validationInput): validationOutput {
                     buyer_finder_fees,
                     buyer_fee,
                 );
-
+                console.log("The value for validate is", validate)
                 if (!validate) {
                     return [
                         {
