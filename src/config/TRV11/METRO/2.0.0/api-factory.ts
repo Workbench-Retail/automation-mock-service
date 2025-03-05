@@ -40,6 +40,8 @@ export async function Generator(
 			return await statusTechCancelGenerator(existingPayload, sessionData);
 		case "cancel_soft_METRO":
 			return await cancelSoftGenerator(existingPayload, sessionData);
+		case "cancel_METRO":
+			return await cancelHardGenerator(existingPayload, sessionData);
 		case "cancel_hard_METRO":
 			return await cancelHardGenerator(existingPayload, sessionData);
 		case "on_search1_METRO":
