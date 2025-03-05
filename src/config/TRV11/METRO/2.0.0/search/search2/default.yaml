@@ -21,7 +21,7 @@ message:
           list:
             - descriptor:
                 code: BUYER_FINDER_FEES_PERCENTAGE
-              value: '1'
+              value: '3'
             - descriptor:
                 code: BUYER_FINDER_FEES_TYPE
               value: percent
