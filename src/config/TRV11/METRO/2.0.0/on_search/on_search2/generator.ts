@@ -77,7 +77,7 @@ export async function onSearch2Generator(
 
 		const fulfillments = createCustomRoute(route, start_code, end_code);
 		existingPayload.message.catalog.providers[0].fulfillments = fulfillments;
-		existingPayload.message.order.fulfillments.forEach((fulfillment: any) => {
+		existingPayload.message.catalog.providers[0].fulfillments.forEach((fulfillment: any) => {
 			if (fulfillment.type === "ROUTE") {
 				fulfillment.type = "TRIP";
 			  }
