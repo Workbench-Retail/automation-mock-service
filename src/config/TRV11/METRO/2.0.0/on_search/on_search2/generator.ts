@@ -74,9 +74,14 @@ export async function onSearch2Generator(
 		if (!start_code || !end_code) {
 			throw new Error("Start and End station codes are required");
 		}
-		const fulfillments = createCustomRoute(route, start_code, end_code);
 
+		const fulfillments = createCustomRoute(route, start_code, end_code);
 		existingPayload.message.catalog.providers[0].fulfillments = fulfillments;
+		existingPayload.message.order.fulfillments.forEach((fulfillment: any) => {
+			if (fulfillment.type === "ROUTE") {
+				fulfillment.type = "TRIP";
+			  }
+		})
 		return existingPayload;
 
 	} catch (err) {
