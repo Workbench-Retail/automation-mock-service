@@ -9,13 +9,17 @@ import logger from "../utils/logger";
 import { sendToApiService } from "../utils/request-utils";
 import { setAckResponse } from "../utils/ackUtils";
 import { getSafeActions } from "../services/mock-services";
+import { RedisService } from "ondc-automation-cache-lib";
+import { SessionCache } from "../types/api-session-cache";
 
 const triggerRouter = Router();
 
 interface QuerySettings {
 	transaction_id: string;
 	action_id: string;
+	version: string;
 	subscriber_url?: string;
+	session_id : string;
 	[key: string]: undefined | string | string[] | any;
 }
 export interface TriggerRequest extends Request {
@@ -59,8 +63,16 @@ triggerRouter.get("/safe-actions", async (req, res) => {
 		res.status(400).send("Mock type not found in query data");
 		return;
 	}
+	RedisService.useDb(0)
+  const api_session =
+	(await RedisService.getKey(req.query.session_id as string)) ?? "";
+	console.log("api_session is ", api_session, "session_id is ",req.query.session_id)
 
-	const safeActions = await getSafeActions(transaction_id, undefined, mockType);
+  const data = JSON.parse(api_session) as SessionCache;
+  console.log("data is", data)
+
+  const { usecaseId } = data;
+	const safeActions = await getSafeActions(transaction_id, undefined, mockType,usecaseId);
 	logger.info(`Returning safe actions ${JSON.stringify(safeActions)}`);
 	res.status(200).send(safeActions);
 });

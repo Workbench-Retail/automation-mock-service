@@ -29,6 +29,9 @@ export interface SessionData {
 	status: string;
 	error_code: string | undefined;
 	error_message: string | undefined;
+	ref_id: string | undefined;
+	ttl: string | undefined;
+	usecaseId : string | undefined;
 }
 
 export type BecknContext = {

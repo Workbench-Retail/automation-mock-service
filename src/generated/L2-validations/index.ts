@@ -20,6 +20,7 @@ export function performL2Validations(
                 },
             });
         case "init":
+            console.log("running test cases for init")
             return init({
                 payload: payload,
                 externalData: externalData,
