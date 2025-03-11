@@ -255,9 +255,9 @@ function getActionConfig() {
     },
     {
       "code": 136,
-      "action_id": "on_status_complete_BUS",
+      "action_id": "on_status_active_BUS",
       "action": "on_status",
-      "default": "BUS/2.0.0/on_status/on_status_complete/default.yaml",
+      "default": "BUS/2.0.0/on_status/on_status_active/default.yaml",
       "message_id": false
     },
     {
