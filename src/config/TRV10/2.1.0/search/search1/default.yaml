@@ -11,23 +11,23 @@ message:
         list:
           - descriptor:
               code: BUYER_FINDER_FEES_PERCENTAGE
-            value: "1"
+            value: "3"
           - descriptor:
               code: SETTLEMENT_WINDOW
-            value: PT1D
+            value: PT24H
           - descriptor:
               code: SETTLEMENT_BASIS
             value: DELIVERY
           - descriptor:
               code: STATIC_TERMS
-            value: https://example-test-bap.com/static-terms.txt
+            value: https://example-test-bap.com/mobility/terms.html
     fulfillment:
       stops:
         - location:
-            gps: "13.008935, 77.644408"
-          type: START
+            gps: "12.9346123,77.6202671"
+            type: START
         - location:
-            gps: "12.971186, 77.586812"
-          type: END
+            gps: "12.9121181,77.6445548"
+            type: END
     payment:
       collected_by: BPP

@@ -1,72 +1,72 @@
 message:
   order:
     billing:
-      name: Joe Adams
+      name: Amit Patel # Customer's full name
     fulfillments:
       - customer:
           contact:
-            phone: "9876556789"
+            phone: "9876123450" # Customer's contact number
           person:
-            name: Joe Adams
-        id: F1
+            name: Amit Patel # Customer's name for the ride
+        id: TRIP_003 # Unique trip identifier
         stops:
           - location:
-              gps: "13.008935, 77.644408"
+              gps: "12.9698,77.7500" # Whitefield, Bangalore
             type: START
             instructions:
-              short_desc: short description of the location
-              long_desc: long description of the location
+              short_desc: Near Phoenix Mall # Landmark for pickup
+              long_desc: Pickup at Phoenix Marketcity mall entrance, Whitefield main road # Detailed pickup instructions
           - location:
-              gps: "12.971186, 77.586812"
+              gps: "12.9854,77.7081" # Mahadevapura, Bangalore
             type: END
-        type: SELF_PICKUP
+        type: SELF_PICKUP # Customer will be at pickup point
         vehicle:
-          category: AUTO_RICKSHAW
-          variant: AUTO_RICKSHAW
+          category: AUTO_RICKSHAW # Vehicle type requested
+          variant: AUTO_RICKSHAW # Specific variant of the vehicle
     items:
-      - id: I1
+      - id: ITEM_AUTO_003 # Reference to the selected auto-rickshaw
     payments:
-      - collected_by: BPP
-        status: NOT-PAID
-        type: ON-FULFILLMENT
+      - collected_by: BPP # Payment collected by mobility service provider
+        status: NOT-PAID # Current payment status
+        type: ON-FULFILLMENT # Payment collected after trip completion
     provider:
-      id: P1
+      id: PROV_MOBILITY_003 # Different mobility service provider ID
     tags:
       - descriptor:
-          name: BAP Terms of Engagement
+          name: BAP Terms of Engagement # Business terms between BAP and BPP
           code: BAP_TERMS
         display: false
         list:
           - descriptor:
               code: BUYER_FINDER_FEES_PERCENTAGE
-            value: "1"
+            value: "3" # Standard marketplace fee percentage
           - descriptor:
               code: SETTLEMENT_WINDOW
-            value: PT60M
+            value: PT24H # 24 hour settlement window
           - descriptor:
               code: SETTLEMENT_BASIS
-            value: DELIVERY
+            value: DELIVERY # Settlement after successful delivery/trip completion
           - descriptor:
               code: SETTLEMENT_TYPE
-            value: UPI
+            value: UPI # Payment settlement method
           - descriptor:
               code: MANDATORY_ARBITRATION
-            value: "true"
+            value: "true" # Mandatory arbitration for disputes
           - descriptor:
               code: COURT_JURISDICTION
-            value: New Delhi
+            value: Bangalore # Legal jurisdiction for disputes
           - descriptor:
               code: DELAY_INTEREST
-            value: "5"
+            value: "12" # Annual interest rate for delayed settlements
           - descriptor:
               code: STATIC_TERMS
-            value: https://example-test-bpp.com/static-terms.txt
+            value: https://example-test-bpp.com/mobility/terms-v3.html # Terms and conditions URL
           - descriptor:
               code: SETTLEMENT_BANK_CODE
-            value: XXXXXXXX
+            value: SBIN0001234 # Bank IFSC code
           - descriptor:
               code: SETTLEMENT_BANK_ACCOUNT_NUMBER
-            value: xxxxxxxxxxxxxx
+            value: "50100047218905" # Settlement bank account number
           - descriptor:
               code: SETTLEMENT_VIRTUAL_PAYMENT_ADDRESS
-            value: 9988199772@okicic
+            value: mobility.provider@sbi # UPI VPA for settlements
