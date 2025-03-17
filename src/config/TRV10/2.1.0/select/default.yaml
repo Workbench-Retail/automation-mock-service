@@ -1,11 +1,6 @@
 message:
   order:
     items:
-      - id: ITEM_AUTO_001 # Unique identifier for the auto-rickshaw booking
-        add_ons:
-          - id: ADDON_LUGGAGE_001 # Additional luggage space add-on
-            quantity:
-              selected:
-                count: 2 # Number of extra luggage items
+      - id: I1 # Reference to the selected item from search results
     provider:
-      id: PROV_MOBILITY_001 # Mobility service provider ID
+      id: P1 # Mobility service provider ID
