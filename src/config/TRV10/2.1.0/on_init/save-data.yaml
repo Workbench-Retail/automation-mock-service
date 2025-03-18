@@ -3,4 +3,4 @@ save-data:
   updated_fulfillments: "$.message.order.fulfillments[*]"
   payments: "$.message.order.payments[*]"
   payment_ids: "$.message.order.payments[*].id"
-  
+  items: "$.message.order.items[*]"
