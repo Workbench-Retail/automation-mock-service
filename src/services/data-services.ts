@@ -62,15 +62,24 @@ export async function saveData(
 ) {
 	try {
 		const sessionData = await loadSessionData(payload?.context.transaction_id);
+
+		let relativePath = ""
+
+		if(payload.context.domain === "nic2004:60232") {
+			relativePath = `../config/NIC2004:60232/LOGISTICS/${payload.context.core_version}/${action}`
+		} else {
+			relativePath = `../config/TRV11/METRO/${payload.context.version}/${action}`
+		}
 		
 		const actionFolderPath = path.resolve(
 			__dirname,
-			`../config/TRV11/METRO/${payload.context.version}/${action}`
+			relativePath
 		);
 		const saveDataFilePath = path.join(actionFolderPath, "save-data.yaml");
 		const fileContent = fs.readFileSync(saveDataFilePath, "utf8");
 		const saveData = yaml.load(fileContent) as any;
 		updateSessionData(saveData["save-data"], payload, sessionData, errorData);
+		// console.log("updated session data", sessionData)
 		await RedisService.setKey(
 			payload?.context.transaction_id,
 			JSON.stringify(sessionData)

@@ -1,0 +1,6 @@
+save-data:
+  provider_id: $.message.catalog["bpp/providers"][0].id
+  location_id: $.message.catalog["bpp/providers"][0].locations[0].id
+  bpp_id: "$.context.bpp_id"
+  bpp_uri: "$.context.bpp_uri"
+  city_code: "$.context.location.city.code"

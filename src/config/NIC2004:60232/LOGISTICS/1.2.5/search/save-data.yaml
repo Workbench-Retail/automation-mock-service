@@ -1,0 +1,13 @@
+save-data:
+  category_id: "$.message.intent.category.id"
+  shipment_method: "$.message.intent.item.descriptor.code"
+  start_location: "$.message.intent.fulfillment.start.location.gps"
+  start_area_code: "$.message.intent.fulfillment.start.location.address.area_code"
+  end_location: "$.message.intent.fulfillment.end.location.gps"
+  end_area_code: "$.message.intent.fulfillment.end.location.address.area_code"
+  fulfillments: "$.message.intent.fulfillment"
+  transaction_id: "$.context.transaction_id"
+  message_id: "$.context.message_id"
+  bap_id: "$.context.bap_id"
+  bap_uri: "$.context.bap_uri"
+  city_code: "$.context.city"

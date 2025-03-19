@@ -1,0 +1,26 @@
+codes:
+  - code: 100
+    action_id: search_LOGISTICS
+    action: search
+    default: search/default.yaml
+    message_id: true
+  - code: 101
+    action_id: init_LOGISTICS
+    action: search
+    default: init/default.yaml
+    message_id: true
+  - code: 102
+    action_id: confirm_LOGISTICS
+    action: confirm
+    default: confirm/default.yaml
+    message_id: true
+  - code: 103
+    action_id: update_LOGISTICS
+    action: update
+    default: update/default.yaml
+    message_id: true
+  - code: 104
+    action_id: track_LOGISTICS
+    action: track
+    default: track/default.yaml
+    message_id: true
