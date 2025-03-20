@@ -1,3 +1,4 @@
 save-data:
   order_status: "$.message.order.id"
   fulfillment_status: "$.message.order.fulfillments[0].state.descriptor.code"
+  fulfillment_pickup_timestamp: "$.message.order.fulfillments[?(@.type=='Delivery')].start.time.timestamp"

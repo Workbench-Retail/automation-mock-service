@@ -1,2 +1,3 @@
 save-data:
   fulfillments: "$.message.order.fulfillments"
+  billing: "$.message.order.billing"

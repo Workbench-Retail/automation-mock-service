@@ -1,0 +1,75 @@
+{
+  "_TESTS_": {
+    "action": [
+      {
+        "_NAME_": "first_search_request_LOGISTICS",
+        "mockType": "$._EXTERNAL.mock_type",
+        "forType": ["BAP"],
+        "usecaseId": "$._EXTERNAL.usecaseId",
+        "forUsecaseId": ["LOGISTICS"],
+        "_RETURN_": "(mockType equal to forType) && (usecaseId equal to forUsecaseId)",
+        "_SUCCESS_CODE_": 100
+      },
+      //provider id availbale
+      {
+        "_NAME_": "init_request_METRO",
+        "mockType": "$._EXTERNAL.mock_type",
+        "forType": ["BAP"],
+        "usecaseId": "$._EXTERNAL.usecaseId",
+        "forUsecaseId": ["LOGISTICS"],
+        "_RETURN_": "(mockType equal to forType) && (usecaseId equal to forUsecaseId)",
+        "_SUCCESS_CODE_": 102
+      },
+      // quote_price should be persent
+      {
+        "_NAME_": "confirm_request_METRO",
+        "mockType": "$._EXTERNAL.mock_type",
+        "forType": ["BAP"],
+        "usecaseId": "$._EXTERNAL.usecaseId",
+        "forUsecaseId": ["METRO"],
+        "_RETURN_": "(mockType equal to forType) && (usecaseId equal to forUsecaseId)",
+        "_SUCCESS_CODE_": 103
+      },
+      // order_id present and fulfillment_status present
+      {
+        "_NAME_": "update_request_METRO",
+        "mockType": "$._EXTERNAL.mock_type",
+        "forType": ["BAP"],
+        "usecaseId": "$._EXTERNAL.usecaseId",
+        "forUsecaseId": ["METRO"],
+        "_RETURN_": "(mockType equal to forType) && (usecaseId equal to forUsecaseId)",
+        "_SUCCESS_CODE_": 103
+      },
+      // fulfillment_pickup_timestamp shoould be present
+      {
+        "_NAME_": "track_request_METRO",
+        "mockType": "$._EXTERNAL.mock_type",
+        "forType": ["BAP"],
+        "usecaseId": "$._EXTERNAL.usecaseId",
+        "forUsecaseId": ["METRO"],
+        "_RETURN_": "(mockType equal to forType) && (usecaseId equal to forUsecaseId)",
+        "_SUCCESS_CODE_": 103
+      },
+      // order_id should be present
+      {
+        "_NAME_": "cancel_request_METRO",
+        "mockType": "$._EXTERNAL.mock_type",
+        "forType": ["BAP"],
+        "usecaseId": "$._EXTERNAL.usecaseId",
+        "forUsecaseId": ["METRO"],
+        "_RETURN_": "(mockType equal to forType) && (usecaseId equal to forUsecaseId)",
+        "_SUCCESS_CODE_": 103
+      }
+      // on_search to mock type and usecase
+      // on_init billing should be present
+      // on_confirm order_id should be present
+      // on_update order_id should be present
+      // on_status order_id should be present
+      // on_track  is_track_execute should be "true"
+      // on_cancel is_cancel_executed shoudl be "true"
+    ]
+  },
+  "_SESSION_DATA_": {
+    "search": {}
+  }
+}

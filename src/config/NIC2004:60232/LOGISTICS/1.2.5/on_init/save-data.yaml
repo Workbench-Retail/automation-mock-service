@@ -1,2 +1,3 @@
 save-data:
   fulfillments: "$.message.order.fulfillments"
+  quote_price: "$.message.order.quote.price"

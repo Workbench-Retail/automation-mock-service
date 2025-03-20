@@ -1,14 +1,17 @@
 export interface SessionData {
+  subscriber_url: string | undefined;
+  transaction_id: string | undefined;
+  message_id: string | undefined;
+  last_action: string | undefined;
+  mock_type: string | undefined;
+  city_code: string | undefined;
+  bap_id: string | undefined;
+  bap_uri: string | undefined;
+  bpp_id: string | undefined;
+  bpp_uri: string | undefined;
   category_id?: string;
   shipment_method?: string;
   fulfillments?: string;
-  transaction_id?: string;
-  message_id?: string;
-  bap_id?: string;
-  bap_uri?: string;
-  bpp_id?: string;
-  bpp_uri?: string;
-  city_code?: string;
   provider_id?: string;
   location_id?: string;
   error_code?: string;

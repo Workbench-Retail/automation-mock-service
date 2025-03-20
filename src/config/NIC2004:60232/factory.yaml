@@ -24,3 +24,23 @@ codes:
     action: track
     default: track/default.yaml
     message_id: true
+  - code: 105
+    action_id: on_search_LOGISTICS
+    action: on_search
+    default: on_search/default.yaml
+    message_id: true
+  - code: 106
+    action_id: on_init_LOGISTICS
+    action: on_init
+    default: on_init/default.yaml
+    message_id: true
+  - code: 107
+    action_id: on_confirm_LOGISTICS
+    action: on_confirm
+    default: on_confirm/default.yaml
+    message_id: true
+  - code: 108
+    action_id: cancel_LOGISTICS
+    action: cancel
+    default: cancel/default.yaml
+    message_id: true
