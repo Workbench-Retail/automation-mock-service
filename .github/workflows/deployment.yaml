@@ -193,6 +193,6 @@ jobs:
 
             # Start the containers using Docker Compose
             echo "Running docker-compose up -d --build"
-            sudo docker compose -d --build
+            sudo docker compose -p automation-staging up -d --build
             EOF
 
