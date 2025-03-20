@@ -1,12 +1,16 @@
 name: ONDC Automation Mock Service Deployment
 
 on:
+  workflow_dispatch:
   push:
-    branches: ["main"]
+    branches: ["draft-logistics"]
 
 jobs:
-  ssh-ec2:
+  de:
     runs-on: ubuntu-latest
+    environment:  
+          name: ${{ github.ref_name }}
+          url: https://github.com
 
     steps:
       - name: Checkout code
@@ -20,7 +24,7 @@ jobs:
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
           ssh -i ./key.pem ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} -T <<EOF
-          REPO_DIR=~/ONDC-automation-framework/automation-mock-service
+          REPO_DIR=~/ONDC-automation-framework/mock/automation-mock-service-${{ github.ref_name }}
           echo "Removing existing repository directory if exists"
           rm -rf \$REPO_DIR
           echo "Cloning repository from main branch"
@@ -45,7 +49,7 @@ jobs:
         run: |
           echo "Writing secrets to .env file"
           ssh -i ./key.pem ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} <<EOF
-          REPO_DIR=~/ONDC-automation-framework/automation-mock-service
+          REPO_DIR=~/ONDC-automation-framework/mock/automation-mock-service-${{ github.ref_name }}
           echo "Writing environment variables to .env file"
           echo "REDIS_USERNAME=${{ secrets.REDIS_USERNAME }}" >> \$REPO_DIR/.env
           echo "REDIS_HOST=${{ secrets.REDIS_HOST }}" >> \$REPO_DIR/.env
@@ -53,12 +57,13 @@ jobs:
           echo "REDIS_PORT=${{ secrets.REDIS_PORT }}" >> \$REPO_DIR/.env
           echo "PORT=${{ secrets.PORT }}" >> \$REPO_DIR/.env
           echo "API_SERVICE_LAYER=${{ secrets.API_SERVICE_LAYER }}" >> \$REPO_DIR/.env
+          echo "CONTAINER_NAME=${{ secrets.CONTAINER_NAME }}" >> \$REPO_DIR/.env
           EOF
 
       - name: Verify .env and docker-compose.yml files
         run: |
           ssh -i ./key.pem ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} <<EOF
-          REPO_DIR=~/ONDC-automation-framework/automation-mock-service
+          REPO_DIR=~/ONDC-automation-framework/mock/automation-mock-service-${{ github.ref_name }}
           # Check if .env and docker-compose.yml files exist
           if [ ! -f \$REPO_DIR/.env ]; then
             echo ".env file not found in \$REPO_DIR!"
@@ -75,7 +80,7 @@ jobs:
         run: |
           echo "Deploying with Docker Compose"
           ssh -i ./key.pem ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} <<EOF
-          REPO_DIR=~/ONDC-automation-framework/automation-mock-service
+          REPO_DIR=~/ONDC-automation-framework/mock/automation-mock-service-${{ github.ref_name }}
           cd \$REPO_DIR
  
           # Ensure the .env and docker-compose.yml files exist
