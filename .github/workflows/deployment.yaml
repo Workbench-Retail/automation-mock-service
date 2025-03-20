@@ -58,7 +58,7 @@ jobs:
           echo "API_SERVICE_LAYER=${{ secrets.API_SERVICE_LAYER }}" >> \$REPO_DIR/.env
           echo "BAP_URI=${{ secrets.BAP_URI }}" >> \$REPO_DIR/.env
           echo "BPP_URI=${{ secrets.BPP_URI }}" >> \$REPO_DIR/.env
-
+          echo "CONTAINER_NAME=${{ secrets.CONTAINER_NAME }}" >> \$REPO_DIR/.env
           EOF
 
       - name: Verify .env and docker-compose.yml files
@@ -193,6 +193,6 @@ jobs:
 
             # Start the containers using Docker Compose
             echo "Running docker-compose up -d --build"
-            sudo docker compose -p automation-staging up -d --build
+            sudo docker compose -d --build
             EOF
 
