@@ -1,0 +1,10 @@
+{
+  "message": {
+    "cancellation_reason_id": "7",
+    "descriptor": {
+      "code": "SOFT_CANCEL",
+      "name": "Ride Cancellation"
+    },
+    "order_id": "O1"
+  }
+}

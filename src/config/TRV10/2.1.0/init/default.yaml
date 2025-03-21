@@ -13,9 +13,13 @@ message:
           - location:
               gps: "13.008935, 77.644408" # Koramangala, Bangalore
             type: START
+            instructions:
+              short_desc: "short description of the location"
+              long_desc: "long description of the location"            
           - location:
               gps: "12.971186, 77.586812" # Basavanagudi, Bangalore
             type: END
+        type: "SELF_PICKUP"
         vehicle:
           category: AUTO_RICKSHAW # Vehicle type requested
           variant: AUTO_RICKSHAW # Specific variant of the vehicle

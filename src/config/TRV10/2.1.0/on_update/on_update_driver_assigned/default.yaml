@@ -127,6 +127,9 @@ message:
             location:
               gps: '13.008935, 77.644408'
             type: START
+            instructions:
+              short_desc: "short description of the location"
+              long_desc: "long description of the location"
           - location:
               gps: '12.971186, 77.586812'
             type: END
@@ -211,10 +214,24 @@ message:
             list:
               - descriptor:
                   code: DISTANCE_TO_NEAREST_DRIVER_METER
+                  name: "Level of Disability"
+                  short_desc: "Disability of Blind and low vision"
                 value: '661'
               - descriptor:
                   code: ETA_TO_NEAREST_DRIVER_MIN
+                  name: "Screen Reader Usage"
+                  short_desc: "Screen Reader Usage"
                 value: '3'
+              - descriptor:
+                  code: DOORSTEP_PICK_UP
+                  name: "Cane Usage"
+                  short_desc: "Cane Usage"
+                value: '4' 
+              - descriptor:
+                  code: "VIS_SPECIAL_REQUIREMENT"
+                  name: "special requirement"
+                  short_desc: "Custom description"
+                value: "5"               
     payments:
       - collected_by: BPP
         id: PA1
