@@ -10,63 +10,141 @@
         "_RETURN_": "(mockType equal to forType) && (usecaseId equal to forUsecaseId)",
         "_SUCCESS_CODE_": 100
       },
-      //provider id availbale
       {
-        "_NAME_": "init_request_METRO",
+        "_NAME_": "init_request_LOGISTICS",
         "mockType": "$._EXTERNAL.mock_type",
         "forType": ["BAP"],
         "usecaseId": "$._EXTERNAL.usecaseId",
         "forUsecaseId": ["LOGISTICS"],
-        "_RETURN_": "(mockType equal to forType) && (usecaseId equal to forUsecaseId)",
+        "providerId": "$._EXTERNAL.provider_id",
+        "_RETURN_": "(mockType equal to forType) && (usecaseId equal to forUsecaseId) && (providerId are present)",
         "_SUCCESS_CODE_": 102
       },
-      // quote_price should be persent
       {
-        "_NAME_": "confirm_request_METRO",
+        "_NAME_": "confirm_request_LOGISTICS",
         "mockType": "$._EXTERNAL.mock_type",
         "forType": ["BAP"],
         "usecaseId": "$._EXTERNAL.usecaseId",
-        "forUsecaseId": ["METRO"],
-        "_RETURN_": "(mockType equal to forType) && (usecaseId equal to forUsecaseId)",
+        "forUsecaseId": ["LOGISTICS"],
+        "quotePrice": "$._EXTERNAL.quote_price",
+        "_RETURN_": "(mockType equal to forType) && (usecaseId equal to forUsecaseId) && (quotePrice are present)",
         "_SUCCESS_CODE_": 103
       },
-      // order_id present and fulfillment_status present
       {
-        "_NAME_": "update_request_METRO",
+        "_NAME_": "update_request_LOGISTICS",
         "mockType": "$._EXTERNAL.mock_type",
         "forType": ["BAP"],
         "usecaseId": "$._EXTERNAL.usecaseId",
-        "forUsecaseId": ["METRO"],
-        "_RETURN_": "(mockType equal to forType) && (usecaseId equal to forUsecaseId)",
-        "_SUCCESS_CODE_": 103
+        "forUsecaseId": ["LOGISTICS"],
+        "orderId": "$._EXTERNAL.order_id",
+        "_RETURN_": "(mockType equal to forType) && (usecaseId equal to forUsecaseId) && (orderId are present)",
+        "_SUCCESS_CODE_": 104
       },
-      // fulfillment_pickup_timestamp shoould be present
       {
-        "_NAME_": "track_request_METRO",
+        "_NAME_": "track_request_LOGISTICS",
         "mockType": "$._EXTERNAL.mock_type",
         "forType": ["BAP"],
         "usecaseId": "$._EXTERNAL.usecaseId",
-        "forUsecaseId": ["METRO"],
-        "_RETURN_": "(mockType equal to forType) && (usecaseId equal to forUsecaseId)",
-        "_SUCCESS_CODE_": 103
+        "forUsecaseId": ["LOGISTICS"],
+        "pickupTimestamp": "$._EXTERNAL.fulfillment_pickup_timestamp",
+        "_RETURN_": "(mockType equal to forType) && (usecaseId equal to forUsecaseId) && (pickupTimestamp are present)",
+        "_SUCCESS_CODE_": 105
       },
-      // order_id should be present
       {
-        "_NAME_": "cancel_request_METRO",
+        "_NAME_": "cancel_request_LOGISTICS",
         "mockType": "$._EXTERNAL.mock_type",
         "forType": ["BAP"],
         "usecaseId": "$._EXTERNAL.usecaseId",
-        "forUsecaseId": ["METRO"],
-        "_RETURN_": "(mockType equal to forType) && (usecaseId equal to forUsecaseId)",
-        "_SUCCESS_CODE_": 103
+        "forUsecaseId": ["LOGISTICS"],
+        "orderId": "$._EXTERNAL.order_id",
+        "_RETURN_": "(mockType equal to forType) && (usecaseId equal to forUsecaseId) && (orderId are present)",
+        "_SUCCESS_CODE_": 108
+      },
+      {
+        "_NAME_": "on_search_request_LOGISTICS",
+        "mockType": "$._EXTERNAL.mock_type",
+        "city_code": "$._EXTERNAL.city_code",
+        "bap_uri": "$._EXTERNAL.bap_uri",
+        "forType": ["BPP"],
+        "usecaseId": "$._EXTERNAL.usecaseId",
+        "forUsecaseId": ["LOGISTICS"],
+        "_RETURN_": "(mockType equal to forType) && (bap_uri are present) && (city_code are present) && (usecaseId equal to forUsecaseId)",
+        "_SUCCESS_CODE_": 105
+      },
+      {
+        "_NAME_": "on_init_request_LOGISTICS",
+        "mockType": "$._EXTERNAL.mock_type",
+        "city_code": "$._EXTERNAL.city_code",
+        "bap_uri": "$._EXTERNAL.bap_uri",
+        "forType": ["BPP"],
+        "usecaseId": "$._EXTERNAL.usecaseId",
+        "forUsecaseId": ["LOGISTICS"],
+        "billing": "$._EXTERNAL.billing",
+        "_RETURN_": "(mockType equal to forType) && (bap_uri are present) && (city_code are present) && (usecaseId equal to forUsecaseId) && (billing are present)",
+        "_SUCCESS_CODE_": 106
+      },
+      {
+        "_NAME_": "on_confirm_request_LOGISTICS",
+        "mockType": "$._EXTERNAL.mock_type",
+        "city_code": "$._EXTERNAL.city_code",
+        "bap_uri": "$._EXTERNAL.bap_uri",
+        "forType": ["BPP"],
+        "usecaseId": "$._EXTERNAL.usecaseId",
+        "forUsecaseId": ["LOGISTICS"],
+        "orderId": "$._EXTERNAL.order_id",
+        "_RETURN_": "(mockType equal to forType) && (bap_uri are present) && (city_code are present) && (usecaseId equal to forUsecaseId) && (orderId are present)",
+        "_SUCCESS_CODE_": 107
+      },
+      {
+        "_NAME_": "on_update_request_LOGISTICS",
+        "mockType": "$._EXTERNAL.mock_type",
+        "city_code": "$._EXTERNAL.city_code",
+        "bap_uri": "$._EXTERNAL.bap_uri",
+        "forType": ["BPP"],
+        "usecaseId": "$._EXTERNAL.usecaseId",
+        "forUsecaseId": ["LOGISTICS"],
+        "orderId": "$._EXTERNAL.order_id",
+        "_RETURN_": "(mockType equal to forType) && (bap_uri are present) && (city_code are present) && (usecaseId equal to forUsecaseId) && (orderId are present)",
+        "_SUCCESS_CODE_": 109
+      },
+      {
+        "_NAME_": "on_status_request_LOGISTICS",
+        "mockType": "$._EXTERNAL.mock_type",
+        "city_code": "$._EXTERNAL.city_code",
+        "bap_uri": "$._EXTERNAL.bap_uri",
+        "forType": ["BPP"],
+        "usecaseId": "$._EXTERNAL.usecaseId",
+        "forUsecaseId": ["LOGISTICS"],
+        "orderId": "$._EXTERNAL.order_id",
+        "_RETURN_": "(mockType equal to forType) && (bap_uri are present) && (city_code are present) && (usecaseId equal to forUsecaseId) && (orderId are present)",
+        "_SUCCESS_CODE_": 110
+      },
+      {
+        "_NAME_": "on_track_request_LOGISTICS",
+        "mockType": "$._EXTERNAL.mock_type",
+        "city_code": "$._EXTERNAL.city_code",
+        "bap_uri": "$._EXTERNAL.bap_uri",
+        "forType": ["BPP"],
+        "usecaseId": "$._EXTERNAL.usecaseId",
+        "forUsecaseId": ["LOGISTICS"],
+        "isTrackExecuted": "$._EXTERNAL.is_track_execute",
+        "trackExecuted": ["true"],
+        "_RETURN_": "(mockType equal to forType) && (bap_uri are present) && (city_code are present) && (usecaseId equal to forUsecaseId) && (isTrackExecuted equal to trackExecuted)",
+        "_SUCCESS_CODE_": 111
+      },
+      {
+        "_NAME_": "on_cancel_request_LOGISTICS",
+        "mockType": "$._EXTERNAL.mock_type",
+        "city_code": "$._EXTERNAL.city_code",
+        "bap_uri": "$._EXTERNAL.bap_uri",
+        "forType": ["BPP"],
+        "usecaseId": "$._EXTERNAL.usecaseId",
+        "forUsecaseId": ["LOGISTICS"],
+        "isCancelExecuted": "$._EXTERNAL.is_cancel_executed",
+        "cancelExecuted": ["true"],
+        "_RETURN_": "(mockType equal to forType) && (bap_uri are present) && (city_code are present) && (usecaseId equal to forUsecaseId) && (isCancelExecuted equal to cancelExecuted)",
+        "_SUCCESS_CODE_": 110
       }
-      // on_search to mock type and usecase
-      // on_init billing should be present
-      // on_confirm order_id should be present
-      // on_update order_id should be present
-      // on_status order_id should be present
-      // on_track  is_track_execute should be "true"
-      // on_cancel is_cancel_executed shoudl be "true"
     ]
   },
   "_SESSION_DATA_": {

@@ -44,3 +44,18 @@ codes:
     action: cancel
     default: cancel/default.yaml
     message_id: true
+  - code: 109
+    action_id: on_update_LOGISTICS
+    action: on_update
+    default: on_update/default.yaml
+    message_id: true
+  - code: 110
+    action_id: on_status_LOGISTICS
+    action: on_status
+    default: on_status/default.yaml
+    message_id: true
+  - code: 111
+    action_id: on_track_LOGISTICS
+    action: on_track
+    default: on_track/default.yaml
+    message_id: true
