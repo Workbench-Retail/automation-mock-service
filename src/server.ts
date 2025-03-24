@@ -35,7 +35,7 @@ const createServer = (): Application => {
 	app.use(`${base}/trigger`, triggerRouter);
 
 	// Health Check
-	app.get("/health", (req: Request, res: Response) => {
+	app.get(`${base}/health`, (req: Request, res: Response) => {
 		res.status(200).send(setAckResponse(true));
 	});
 
