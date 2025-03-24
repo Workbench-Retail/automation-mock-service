@@ -23,3 +23,11 @@ export async function sendToApiService(
 		logger.error("Error in sending response to api service", err);
 	}
 }
+
+export function createSellerUrl(domain: string, version: string) {
+	return `${process.env.API_SERVICE_LAYER}/${domain}/${version}/seller`;
+}
+
+export function createBuyerUrl(domain: string, version: string) {
+	return `${process.env.API_SERVICE_LAYER}/${domain}/${version}/buyer`;
+}
