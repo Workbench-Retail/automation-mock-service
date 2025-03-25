@@ -1,6 +1,17 @@
 import { SessionData } from "../../session-types";
 import { onStatusMultipleStopsGenerator } from "./generator_multiple_stops";
 
+
+function updateFulfillmentStatus(order: any) {
+  // Check if fulfillments exist
+  if (order.fulfillments) {
+    order.fulfillments.forEach((fulfillment: any) => {
+        fulfillment.state.descriptor.code = "RIDE_ENDED";
+    });
+  }
+  return order;
+}
+
 function updatePaymentFromQuote(order: any) {
 
     const amount = order.quote.price.value; // Extract amount from quote
@@ -15,7 +26,8 @@ function updatePaymentFromQuote(order: any) {
     return order;
   }
 export async function onStatusRidePaidGenerator(existingPayload: any,sessionData: SessionData){
-    existingPayload = onStatusMultipleStopsGenerator(existingPayload,sessionData)
+    existingPayload = await onStatusMultipleStopsGenerator(existingPayload,sessionData)
     existingPayload.message.order = updatePaymentFromQuote(existingPayload.message.order)
+    existingPayload.message.order = updateFulfillmentStatus(existingPayload.message.order)
     return existingPayload;
 }

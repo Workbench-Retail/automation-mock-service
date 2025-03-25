@@ -19,9 +19,9 @@ export async function onInitMultipleStopsGenerator(
         existingPayload.message.order.items = sessionData.items;
         existingPayload.message.order.items[0]["payment_ids"] = [randomPaymentId]
     }
-    if (sessionData.fulfillments.length > 0) {
-    existingPayload.message.order.fulfillments = sessionData.fulfillments;
-    existingPayload.order.fulfillments[0]["customer"] = customer
+    if (sessionData.selected_fulfillments.length > 0) {
+    existingPayload.message.order.fulfillments = sessionData.selected_fulfillments;
+    existingPayload.message.order.fulfillments[0]["customer"] = customer
     existingPayload.message.order.fulfillments[0]["type"] = "DELIVERY"
     }
     if(sessionData.payments.length > 0){
@@ -30,5 +30,6 @@ export async function onInitMultipleStopsGenerator(
     if(sessionData.quote != null){
     existingPayload.message.order.quote = sessionData.quote
     }
+    console.log(existingPayload.message.order.fulfillments)
     return existingPayload;
 }

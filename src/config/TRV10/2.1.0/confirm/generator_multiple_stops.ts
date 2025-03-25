@@ -1,4 +1,4 @@
-import { SessionData } from "../../session-types";
+import { SessionData } from "../../session-types"
 
 const customer = {
     "contact": {
@@ -10,9 +10,9 @@ const customer = {
 }
 
 export async function confirmMultipleStopsGenerator(existingPayload: any,sessionData: SessionData){
-    existingPayload.message.order.fulfillments = sessionData.fulfillments
+    existingPayload.message.order.fulfillments = sessionData.selected_fulfillments
     existingPayload.message.order.fulfillments[0]["customer"] = customer
-    existingPayload.order.items[0] = {
+    existingPayload.message.order.items[0] = {
         id : sessionData.selected_item_id 
     }
     existingPayload.message.order.payments = sessionData.payments

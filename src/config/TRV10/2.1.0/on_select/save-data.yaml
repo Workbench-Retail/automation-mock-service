@@ -1,4 +1,4 @@
 save-data:
-  fulfillments: "$.message.order.fulfillments[*]"
+  selected_fulfillments: "$.message.order.fulfillments[*]"
   quote: "$.message.order.quote"
   items: "$.message.order.items[*]"

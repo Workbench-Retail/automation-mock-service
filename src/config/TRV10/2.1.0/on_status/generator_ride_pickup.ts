@@ -12,7 +12,8 @@ function updateFulfillmentStatus(order: any) {
   }
 
 export async function onStatusRideEnrouteGenerator(existingPayload: any,sessionData: SessionData){
-    existingPayload = onStatusMultipleStopsGenerator(existingPayload,sessionData)
+    existingPayload = await onStatusMultipleStopsGenerator(existingPayload,sessionData)
+    console.log(existingPayload.message.order)
     existingPayload.message.order = updateFulfillmentStatus(existingPayload.message.order)
     return existingPayload;
 }

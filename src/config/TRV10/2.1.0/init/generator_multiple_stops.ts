@@ -8,11 +8,11 @@ const customer = {
         "name": "Joe Adams"
     }
 }
-export async function initGenerator(existingPayload: any,sessionData: SessionData){
-    existingPayload.order.fulfillments = sessionData.fulfillments
-    existingPayload.order.fulfillments[0]["customer"] = customer
-    delete existingPayload.order.fulfillments[0].type
-    existingPayload.order.items[0] = {
+export async function initMultipleStopsGenerator(existingPayload: any,sessionData: SessionData){
+    existingPayload.message.order.fulfillments = sessionData.selected_fulfillments
+    console.log("In this func",sessionData)
+    delete existingPayload.message.order.fulfillments[0].type
+    existingPayload.message.order.items[0] = {
         id : sessionData.selected_item_id 
     }
     return existingPayload;

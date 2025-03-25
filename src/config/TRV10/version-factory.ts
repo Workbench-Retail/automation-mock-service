@@ -1,0 +1,34 @@
+import { SessionData } from "./session-types";
+import {RedisService} from "ondc-automation-cache-lib";
+import { SessionCache } from "../../types/api-session-cache";
+import { createMockReponseTRV10 } from "./2.1.0/generaton-pipeline";
+
+export async function createMockResponse(
+  session_id: string,
+  sessionData: SessionData,
+  action_id: string
+) {
+  RedisService.useDb(0);
+  // const api_session = (await RedisService.getKey(session_id)) ?? "";
+  // console.log(api_session)
+  // const data = JSON.parse(api_session) as SessionCache;
+  const version = "2.1.0"
+  const npType ="shduisgdfksgdbf"
+  const data = {
+    version:"2.1.0",
+    npType : "BAP",
+    subscriberUrl: "subscriberUrl"
+  }
+  // const { version, usecaseId } = data;
+
+  let payload: any = {};
+  if (version === "2.1.0"){
+    payload = await createMockReponseTRV10(action_id,sessionData)
+  }
+  if(data.npType === "BAP") {
+    payload.context.bap_uri = data.subscriberUrl
+  } else  {
+    payload.context.bpp_uri = data.subscriberUrl
+  }
+  return payload
+}

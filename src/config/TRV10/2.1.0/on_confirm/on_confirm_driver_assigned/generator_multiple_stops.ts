@@ -41,6 +41,7 @@ export async function onConfirmMultipleStopsGenerator(
     existingPayload: any,
     sessionData: SessionData
 ) {
+    console.log(JSON.stringify(sessionData.fulfillments))
     const randomId = Math.random().toString(36).substring(2, 15);
     const order_id = randomId;
     existingPayload.message.order.payments = sessionData.payments
@@ -52,10 +53,12 @@ export async function onConfirmMultipleStopsGenerator(
     }
 
     // Check if fulfillments is a non-empty array
-    if (sessionData.fulfillments.length > 0) {
-    existingPayload.message.order.fulfillments = sessionData.fulfillments;
+    if (sessionData.selected_fulfillments.length > 0) {
+    existingPayload.message.order.fulfillments = sessionData.selected_fulfillments;
     existingPayload.message.order.fulfillments = updateFulfillments(existingPayload.message.order.fulfillments)
     existingPayload.message.order.fulfillments[0]["agent"] = agent
+    existingPayload.message.order.fulfillments[0]["state"] = {"descriptor": {"code": "RIDE_ASSIGNED"}}
+    console.log("Hi, in this function")
     }
     if(sessionData.quote != null){
     existingPayload.message.order.quote = sessionData.quote

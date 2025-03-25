@@ -22,7 +22,7 @@ function updateFulfillmentAndAuthorization(order: any) {
   }
 
 export async function onStatusRideStartedGenerator(existingPayload: any,sessionData: SessionData){
-    existingPayload = onStatusMultipleStopsGenerator(existingPayload,sessionData)
+    existingPayload = await onStatusMultipleStopsGenerator(existingPayload,sessionData)
     existingPayload.message.order = updateFulfillmentAndAuthorization(existingPayload.message.order)
     return existingPayload;
 }

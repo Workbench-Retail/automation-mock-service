@@ -4,7 +4,7 @@ import yaml from "js-yaml";
 import { RedisService } from "ondc-automation-cache-lib";
 import jsonpath from "jsonpath";
 
-import { SessionData } from "../config/TRV11/session-types";
+import { SessionData } from "../config/TRV10/session-types";
 import logger from "../utils/logger";
 import { isArrayKey } from "../types/type-utils";
 
@@ -62,10 +62,9 @@ export async function saveData(
 ) {
 	try {
 		const sessionData = await loadSessionData(payload?.context.transaction_id);
-		
 		const actionFolderPath = path.resolve(
 			__dirname,
-			`../config/TRV11/METRO/${payload.context.version}/${action}`
+			`../config/TRV10/${payload.context.version}/${action}`
 		);
 		const saveDataFilePath = path.join(actionFolderPath, "save-data.yaml");
 		const fileContent = fs.readFileSync(saveDataFilePath, "utf8");
@@ -89,13 +88,13 @@ export async function loadSessionData(
 	let sessionData: SessionData = {} as SessionData;
 	if (!keyExists) {
 		const raw = yamlToJson(
-			path.resolve(__dirname, "../config/TRV11/session-data.yaml")
+			path.resolve(__dirname, "../config/TRV10/session-data.yaml")
 		) as any;
 		sessionData = raw.session_data;
 		sessionData.transaction_id = transactionID;
 		sessionData.bpp_id = sessionData.bap_id = "dev-automation.ondc.org";
-		sessionData.bap_uri = process.env.BAP_URI;
-		sessionData.bpp_uri = process.env.BPP_URI;
+		sessionData.bap_uri = "https://dev-automation.ondc.org/buyer";
+		sessionData.bpp_uri = "https://dev-automation.ondc.org/seller";
 		sessionData.subscriber_url = subscriber_url;
 		logger.info(`new session data is ${JSON.stringify(sessionData)}`);
 		return sessionData;

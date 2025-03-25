@@ -156,14 +156,12 @@ function filterItemsById(sessionData: any, selected_item_id: string) {
   }
 
 export async function onSelectMultipleStopsGenerator(existingPayload: any, sessionData: SessionData) {
-    const selected_id = sessionData.selected_item_id
-    const item = filterItemsById(sessionData,selected_id)
+    const selected_item_id = sessionData.selected_item_id
+    const item = filterItemsById(sessionData,selected_item_id)
     item[0]["tags"] = item_tags
-    const filteredFulfillments = filterFulfillmentsByItem(item,sessionData.fulfillments)
+    const filteredFulfillments = filterFulfillmentsByItem(item[0],sessionData.fulfillments)
     filteredFulfillments[0]["tags"] = fulfillment_tags
-    existingPayload.order.quote = generateQuoteFromItems(item)
-    existingPayload.order.fulfillments = filteredFulfillments
-
-
+    existingPayload.message.order.quote = generateQuoteFromItems(item)
+    existingPayload.message.order.fulfillments = filteredFulfillments
     return existingPayload;
 }
