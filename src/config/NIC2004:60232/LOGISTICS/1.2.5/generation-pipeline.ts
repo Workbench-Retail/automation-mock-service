@@ -71,14 +71,8 @@ export async function createMockReponseLOGISTICS200(
     bap_uri: sessionData?.bap_uri,
     bpp_id: sessionData?.bpp_id,
     bpp_uri: sessionData?.bpp_uri,
-    location: {
-      city: {
-        code: sessionData.city_code ?? "std:011",
-      },
-      country: {
-        code: "IND",
-      },
-    },
+    city: sessionData.city_code ?? "std:011",
+    country: "IND",
   };
 
   let context = createContext(context_object);
