@@ -3,23 +3,17 @@ import { BecknContext } from "../../session-types";
 export function createContext(partialContext: Partial<BecknContext>) {
   // const newContext
   const newContext: BecknContext = {
+    domain: "nic2004:60232",
+    country: "IND",
+    city: "std:011",
     action: "search",
+    core_version: "1.2.5",
     bap_id: "bap_id_not_set",
     bap_uri: "bap_uri_not_set",
-    domain: "nic2004:60232",
-    location: {
-      city: {
-        code: "std:011",
-      },
-      country: {
-        code: "IND",
-      },
-    },
     message_id: generateUuid(),
     timestamp: new Date().toISOString(),
     transaction_id: generateUuid(),
     ttl: "PT30S",
-    core_version: "1.2.5",
   };
 
   return { ...newContext, ...partialContext };

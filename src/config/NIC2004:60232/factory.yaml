@@ -28,19 +28,34 @@ codes:
     action_id: on_search_LOGISTICS
     action: on_search
     default: on_search/default.yaml
-    message_id: true
+    message_id: false
   - code: 106
     action_id: on_init_LOGISTICS
     action: on_init
     default: on_init/default.yaml
-    message_id: true
+    message_id: false
   - code: 107
     action_id: on_confirm_LOGISTICS
     action: on_confirm
     default: on_confirm/default.yaml
-    message_id: true
+    message_id: false
   - code: 108
     action_id: cancel_LOGISTICS
     action: cancel
     default: cancel/default.yaml
     message_id: true
+  - code: 109
+    action_id: on_update_LOGISTICS
+    action: on_update
+    default: on_update/default.yaml
+    message_id: false
+  - code: 110
+    action_id: on_status_LOGISTICS
+    action: on_status
+    default: on_status/default.yaml
+    message_id: false
+  - code: 111
+    action_id: on_track_LOGISTICS
+    action: on_track
+    default: on_track/default.yaml
+    message_id: false

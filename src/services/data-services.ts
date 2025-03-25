@@ -79,7 +79,7 @@ export async function saveData(
 		const fileContent = fs.readFileSync(saveDataFilePath, "utf8");
 		const saveData = yaml.load(fileContent) as any;
 		updateSessionData(saveData["save-data"], payload, sessionData, errorData);
-		// console.log("updated session data", sessionData)
+		console.log("updated session data", sessionData)
 		await RedisService.setKey(
 			payload?.context.transaction_id,
 			JSON.stringify(sessionData)
@@ -103,8 +103,9 @@ export async function loadSessionData(
 		sessionData = raw.session_data;
 		sessionData.transaction_id = transactionID;
 		sessionData.bpp_id = sessionData.bap_id = "dev-automation.ondc.org";
-		sessionData.bap_uri = "https://dev-automation.ondc.org/buyer";
-		sessionData.bpp_uri = "https://dev-automation.ondc.org/seller";
+		// NEED TO FIX
+		sessionData.bap_uri = "https://dev-automation.ondc.org/api-service/nic2004:60232/1.2.5/buyer";
+		sessionData.bpp_uri = "https://dev-automation.ondc.org/api-service/nic2004:60232/1.2.5/seller";
 		sessionData.subscriber_url = subscriber_url;
 		logger.info(`new session data is ${JSON.stringify(sessionData)}`);
 		return sessionData;

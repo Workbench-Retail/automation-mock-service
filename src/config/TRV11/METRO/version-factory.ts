@@ -33,7 +33,7 @@ export async function createMockResponse(
     if (version === "2.0.0") {
       payload = await createMockReponseBUS200(action_id, sessionData);
     }
-  } else if (usecaseId === "Logistics") {
+  } else if (usecaseId === "LOGISTICS") {
     if (version === "1.2.5") {
       payload = await createMockReponseLOGISTICS200(action_id, sessionData);
     }

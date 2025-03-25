@@ -25,7 +25,7 @@ export type BecknContext = {
   bpp_id?: string;
   bpp_uri?: string;
   domain: string;
-  location: {
+  location?: {
     city: {
       code: string;
     };
@@ -38,4 +38,6 @@ export type BecknContext = {
   transaction_id: string;
   ttl: string;
   core_version: string;
+  country?: string;
+  city?: string;
 };
