@@ -34,6 +34,9 @@ function updateQuoteWithAdditionalAmount(sessionData: any, updatePayload: any) {
 export async function updateQuoteGenerator(existingPayload: any,sessionData: SessionData){
     existingPayload.message.order.id = sessionData.order_id
     existingPayload.message.update_target = "order.quote.breakup"
+    delete existingPayload.message.order.fulfillments
+    delete existingPayload.message.order.status
     existingPayload = updateQuoteWithAdditionalAmount(sessionData, existingPayload)
+    console.log(existingPayload)
     return existingPayload;
 }

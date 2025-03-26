@@ -140,6 +140,55 @@ function getActionConfig() {
         "action": "on_update",
         "default": "2.1.0/on_update_/default.yaml",
         "message_id": false
+    },
+    {
+        "code": 120,
+        "action_id": "update_quote",
+        "action": "update",
+        "default": "2.1.0/update_/default.yaml",
+        "message_id": true
+    },
+    {
+        "code": 121,
+        "action_id": "on_update_quote",
+        "action": "on_update",
+        "default": "2.1.0/on_update/default.yaml",
+        "message_id": false
+    },
+    {
+        "code": 122,
+        "action_id": "search_rental",
+        "action": "search",
+        "default": "2.1.0/search/default.yaml",
+        "message_id": true
+    },
+    {
+        "code": 123,
+        "action_id": "on_search_rental",
+        "action": "on_search",
+        "default": "2.1.0/on_search/default-rental.yaml",
+        "message_id": false
+    },
+    {
+        "code": 124,
+        "action_id": "search_rental_end",
+        "action": "search",
+        "default": "2.1.0/search/default.yaml",
+        "message_id": true
+    },
+    {
+        "code": 125,
+        "action_id": "on_search_rental_end",
+        "action": "on_search",
+        "default": "2.1.0/on_search/default-rental-end.yaml",
+        "message_id": false
+    },
+    {
+        "code": 126,
+        "action_id": "cancel",
+        "action": "cancel",
+        "default": "2.1.0/cancel/default.yaml",
+        "message_id": false
     }
   ]
 	  };

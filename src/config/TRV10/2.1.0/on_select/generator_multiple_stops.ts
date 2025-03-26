@@ -163,5 +163,8 @@ export async function onSelectMultipleStopsGenerator(existingPayload: any, sessi
     filteredFulfillments[0]["tags"] = fulfillment_tags
     existingPayload.message.order.quote = generateQuoteFromItems(item)
     existingPayload.message.order.fulfillments = filteredFulfillments
+    existingPayload.message.order.quote.breakup = existingPayload.message.order.quote.breakup.filter(
+      (breakup: any) => breakup.title !== "ADD_ONS"
+    );
     return existingPayload;
 }
