@@ -13,7 +13,9 @@ function updateFulfillmentStatus(order: any) {
 
 export async function onUpdateRideSoftUpdateGenerator(existingPayload: any,sessionData: SessionData){
     existingPayload = await onUpdateMultipleStopsGenerator(existingPayload,sessionData)
-    existingPayload.message.order = updateFulfillmentStatus(existingPayload.message.order)
+    if(existingPayload.fulfillments){
+      existingPayload.message.order = updateFulfillmentStatus(existingPayload.message.order)
+    }
     existingPayload.message.order.status = "SOFT_UPDATE"
     return existingPayload;
 }
