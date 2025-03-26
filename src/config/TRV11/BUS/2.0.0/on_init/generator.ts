@@ -9,9 +9,13 @@ export async function onInitGenerator(
   const payments = [
     {
       id: randomId,
+      collected_by: "BAP",
+      status: "NOT-PAID",
+      type: "PRE-ORDER",
       params: {
         bank_code: "XXXXXXXX",
         bank_account_number: "xxxxxxxxxxxxxx",
+        virtual_payment_address: "9988199772@okicic"
       },
       tags: [
         {
