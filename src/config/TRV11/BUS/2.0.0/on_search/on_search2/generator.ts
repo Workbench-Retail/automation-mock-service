@@ -69,6 +69,11 @@ export async function onSearch2Generator(
         existingPayload.message.catalog.providers[0].items.forEach((item:any) => {
             item.fulfillment_ids = [fulfillments.id]
         })
+        existingPayload.message.catalog.providers[0].fulfillments.forEach((fulfillment: any) => {
+			if (fulfillment.type === "ROUTE") {
+				fulfillment.type = "TRIP";
+			  }
+		})
         return existingPayload;
 
     } catch (err) {

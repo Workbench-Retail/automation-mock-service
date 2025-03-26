@@ -4,6 +4,7 @@ import { createMockResponseMETRO200 } from "./2.0.0/generation-pipline";
 import { ApiServiceCache, RedisService } from "ondc-automation-cache-lib";
 import { SessionCache } from "../../../types/api-session-cache";
 import { createMockReponseBUS200 } from "../BUS/2.0.0/generation-pipline";
+import { createBuyerUrl, createSellerUrl } from "../../../utils/request-utils";
 
 import { createMockReponseLOGISTICS200 } from "./../../NIC2004:60232/LOGISTICS/1.2.5/generation-pipeline";
 
@@ -23,17 +24,7 @@ export async function createMockResponse(
 
   let payload: any = {};
 
-  if (usecaseId === "METRO") {
-    if (version === "2.0.0") {
-      payload = await createMockResponseMETRO200(action_id, sessionData);
-    } else if (version === "2.0.1") {
-      payload = await createMockResponseMETRO201(action_id, sessionData);
-    }
-  } else if (usecaseId === "BUS") {
-    if (version === "2.0.0") {
-      payload = await createMockReponseBUS200(action_id, sessionData);
-    }
-  } else if (usecaseId === "LOGISTICS") {
+  if (usecaseId === "LOGISTICS") {
     if (version === "1.2.5") {
       payload = await createMockReponseLOGISTICS200(action_id, sessionData);
     }
@@ -41,8 +32,10 @@ export async function createMockResponse(
 
   if (data.npType === "BAP") {
     payload.context.bap_uri = data.subscriberUrl;
+    payload.context.bpp_uri = createSellerUrl(data.domain, data.version);
   } else {
     payload.context.bpp_uri = data.subscriberUrl;
+    payload.context.bap_uri = createBuyerUrl(data.domain, data.version);
   }
 
   return payload;

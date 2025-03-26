@@ -74,11 +74,10 @@ function updateOrderTimestamps(payload: any) {
 export async function onConfirmDelayedGenerator(existingPayload: any,sessionData: any){
   const randomId = Math.random().toString(36).substring(2, 15);
   const order_id = randomId
-  const updated_payments = {
-      ...sessionData["updated_payments"]["params"],
-      "bank_code": "XXXXXXXX",
-      "bank_account_number": "xxxxxxxxxxxxxx"
-  }
+  sessionData["updated_payments"][0]["params"]["bank_code"] = "XXXXXXXX";
+	sessionData["updated_payments"][0]["params"]["bank_account_number"] =
+		"xxxxxxxxxxxxxx";
+	const updated_payments = sessionData.updated_payments;
   if (!Array.isArray(sessionData.updated_payments)) {
       sessionData.updated_payments = [sessionData.updated_payments];
   }

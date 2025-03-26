@@ -6,7 +6,7 @@ on:
     branches: ["draft-logistics"]
 
 jobs:
-  de:
+  deployment-dev:
     runs-on: ubuntu-latest
     environment:  
           name: ${{ github.ref_name }}
@@ -83,7 +83,7 @@ jobs:
           ssh -i ./key.pem ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} <<EOF
           REPO_DIR=~/ONDC-automation-framework/mock/automation-mock-service-${{ github.ref_name }}
           cd \$REPO_DIR
- 
+
           # Ensure the .env and docker-compose.yml files exist
           if [ ! -f .env ]; then
             echo ".env file not found!"
@@ -99,3 +99,4 @@ jobs:
           echo "Running docker-compose up -d --build"
           sudo docker compose up -d --build
           EOF
+
