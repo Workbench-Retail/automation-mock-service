@@ -30,6 +30,8 @@ export async function createMockResponse(
     }
   }
 
+  console.log("payload", payload.context, payload)
+
   if (data.npType === "BAP") {
     payload.context.bap_uri = data.subscriberUrl;
     payload.context.bpp_uri = createSellerUrl(data.domain, data.version);
