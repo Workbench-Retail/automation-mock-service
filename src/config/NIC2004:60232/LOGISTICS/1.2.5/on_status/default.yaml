@@ -202,7 +202,7 @@ message:
       time:
         timestamp: "2024-11-21T10:00:00.000Z"
       "@ondc/org/settlement_details":
-        - settlement_counterparty: buyer-app
+        - settlement_counterparty: lbnp
           settlement_type: upi
           upi_address: gft@oksbi
           settlement_bank_account_no: XXXXXXXXXX
