@@ -9,10 +9,15 @@ export async function createMockResponse(
   action_id: string
 ) {
   RedisService.useDb(0);
-  const api_session = (await RedisService.getKey(session_id)) ?? "";
-  console.log(api_session)
-  const data = JSON.parse(api_session) as SessionCache;
-  const { version, usecaseId } = data;
+  // const api_session = (await RedisService.getKey(session_id)) ?? "";
+const data = {
+  version: "2.1.0",
+  subscriberUrl: "https://api.example.com/mock/TRV10/2.1.0/search_ride",
+  npType: "BAP"
+}
+  // console.log(api_session)
+  // const data = JSON.parse(api_session) as SessionCache;
+  const { version, subscriberUrl, npType } = data;
 
   let payload: any = {};
   if (version === "2.1.0"){

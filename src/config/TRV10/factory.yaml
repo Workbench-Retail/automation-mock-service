@@ -137,3 +137,8 @@ codes:
     action_id: on_cancel
     action: on_cancel
     default: TRV10/2.1.0/on_cancel/on_cancel_soft/default.yaml
+  - code: 128
+    action_id: search_ride
+    action: search
+    default: TRV10/2.1.0/search/default.yaml
+    message_id: true

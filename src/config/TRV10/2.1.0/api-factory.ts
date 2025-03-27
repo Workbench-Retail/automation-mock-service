@@ -15,6 +15,7 @@ import { onTrackMultipleStopsGenerator } from "./on_track/generator_multiple_sto
 import { onUpdateRideSoftUpdateGenerator } from "./on_update/generator_ride_soft_update";
 import { onUpdateRideUpdatedGenerator } from "./on_update/generator_ride_updated";
 import { onUpdateUpdateQuoteGenerator } from "./on_update/generator_update_quote";
+import { searchGenerator } from "./search/generator";
 import { searchMultipleStopsGenerator } from "./search/generator_multiple_stops";
 import { searchMultipleStopsRentalGenerator } from "./search/generator_rental";
 import { searchMultipleStopsRentalEndGenerator } from "./search/generator_rental_end";
@@ -88,7 +89,9 @@ export async function Generator(
             return await cancelMultipleStopsGenerator(existingPayload, sessionData);
         case "on_cancel":
             return await onCancelSoftGenerator(existingPayload, sessionData);
-            default:
+        case "search_ride":
+            return await searchGenerator(existingPayload, sessionData);
+        default:
                 throw new Error(`Invalid request type ${action_id}`);
         }
 }

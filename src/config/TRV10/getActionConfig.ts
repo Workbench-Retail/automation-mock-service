@@ -189,7 +189,14 @@ function getActionConfig() {
         "action": "cancel",
         "default": "2.1.0/cancel/default.yaml",
         "message_id": false
-    }
+    },
+    {
+        "code": 127,
+        "action_id": "search_ride",
+        "action": "search",
+        "default": "2.1.0/search/default.yaml",
+        "message_id": true
+      },
   ]
 	  };
 }
