@@ -8,6 +8,8 @@ import { onInitGenerator } from "./on_init/generator";
 import { onConfirmGenerator } from "./on_confirm/generator";
 import { onUpdateGenerator } from "./on_update/generator";
 import { cancelGenerator } from "./cancel/generator";
+import { onStatusGenerator } from "./on_status/generator";
+import { onTrackGenerator } from "./on_track/generator";
 
 export async function Generator(
   action_id: string,
@@ -33,8 +35,18 @@ export async function Generator(
       return await onInitGenerator(existingPayload, sessionData);
     case "on_confirm_LOGISTICS":
       return await onConfirmGenerator(existingPayload, sessionData);
-    case "on_udpate_LOGISTICS":
+    case "on_update_LOGISTICS":
       return await onUpdateGenerator(existingPayload, sessionData);
+    case "on_status_LOGISTICS":
+      return await onStatusGenerator(existingPayload, sessionData);
+    case "on_status_1_LOGISTICS":
+      return await onStatusGenerator(existingPayload, sessionData);
+    case "on_status_2_LOGISTICS":
+      return await onStatusGenerator(existingPayload, sessionData);
+    case "on_status_3_LOGISTICS":
+      return await onStatusGenerator(existingPayload, sessionData);
+    case "on_track_LOGISTICS":
+      return await onTrackGenerator(existingPayload, sessionData);
     default:
       throw new Error(`Invalid request type ${action_id}`);
   }

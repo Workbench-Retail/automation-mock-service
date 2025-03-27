@@ -19,7 +19,7 @@ export const confirmGenerator = (
   //   existingPayload.
 
   // upate created at and update at at the root
-  existingPayload.message.order.create_at = new Date().toISOString();
+  existingPayload.message.order.created_at = new Date().toISOString();
   existingPayload.message.order.updated_at = new Date().toISOString();
 
   return existingPayload;
