@@ -71,7 +71,7 @@ message:
       type: ON-FULFILLMENT
       collected_by: BPP
       "@ondc/org/settlement_details":
-        - settlement_counterparty: buyer-app
+        - settlement_counterparty: lbnp
           settlement_type: upi
           beneficiary_name: xxxxx
           upi_address: gft@oksbi
