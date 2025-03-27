@@ -37,7 +37,7 @@ message:
         state:
           descriptor:
             code: "Pending"
-
+        tracking: false,
         "@ondc/org/awb_no": "1227262193237777"
         start:
           time:
