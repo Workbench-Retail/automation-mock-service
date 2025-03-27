@@ -16,6 +16,18 @@ export interface SessionData {
   location_id?: string;
   error_code?: string;
   error_message?: string;
+  cancellation_reason_id?: string;
+  order_id?: string;
+  order_status?: string;
+  billing?: string;
+  fulfillment_status?: string;
+  quote_price?: string;
+  fulfillment_pickup_timestamp?: string;
+  start_location?: string;
+  start_area_code?: string;
+  end_location?: string;
+  end_area_code?: string;
+  is_track_execute?: string;
 }
 
 export type BecknContext = {

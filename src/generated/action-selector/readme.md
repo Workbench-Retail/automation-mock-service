@@ -1,6 +1,6 @@
 
 
-- **action** : All the following sub conditions must pass as per the api requirement
+- **search** : All the following sub conditions must pass as per the api requirement
 
 	- **condition first_search_request_LOGISTICS**: all of the following sub conditions must be met:
 	
