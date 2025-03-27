@@ -34,6 +34,10 @@ message:
     fulfillments:
       - id: "1"
         type: Delivery
+        state:
+          descriptor:
+            code: "Pending"
+
         "@ondc/org/awb_no": "1227262193237777"
         start:
           time:
