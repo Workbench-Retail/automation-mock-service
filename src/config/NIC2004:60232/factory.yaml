@@ -79,3 +79,18 @@ codes:
     action: on_status
     default: on_status/default.yaml
     message_id: false
+  - code: 116
+    action_id: on_cancel_LOGISTICS
+    action: on_cancel
+    default: on_cancel/default.yaml
+    message_id: false
+  - code: 117
+    action_id: status_LOGISTICS
+    action: status
+    default: status/default.yaml
+    message_id: false
+  - code: 116
+    action_id: on_status_4_LOGISTICS
+    action: on_status
+    default: on_status/default.yaml
+    message_id: false
