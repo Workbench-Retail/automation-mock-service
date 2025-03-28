@@ -1,11 +1,17 @@
 const TatMapping: any = {
-  "Immediate Delivery": "PT60M",
-  "Same Day Delivery": "PT4H",
-  "Next Day Delivery": "P1D",
-  "Standard Delivery": "P2D",
-  "Express Delivery": "P2D",
-  "Instant Delivery": "PT10M",
+  "Immediate Delivery": { code: "PT60M", day: 0 },
+  "Same Day Delivery": { code: "PT4H", day: 0 },
+  "Next Day Delivery": { code: "P1D", day: 1 },
+  "Standard Delivery": { code: "P2D", day: 2 },
+  "Express Delivery": { code: "P2D", day: 2 },
+  "Instant Delivery": { code: "PT10M", day: 0 },
 };
+
+function getDateFromToday(days: number) {
+  const today = new Date();
+  today.setDate(today.getDate() + days);
+  return today.toISOString().split("T")[0];
+}
 
 export async function onSearch1Generator(
   existingPayload: any,
@@ -31,8 +37,8 @@ export async function onSearch1Generator(
     id: sessionData.category_id,
     time: {
       label: sessionData.shipment_method,
-      duration: TatMapping[sessionData.category_id],
-      timestamp: "2024-11-20", // Need to calculate
+      duration: TatMapping[sessionData.category_id].code,
+      timestamp: getDateFromToday(TatMapping[sessionData.category_id].day),
     },
   };
   existingPayload.message.catalog["bpp/providers"][0].categories[0] =
@@ -45,8 +51,8 @@ export async function onSearch1Generator(
       (item: any) => {
         item.time = {
           label: sessionData.shipment_method,
-          duration: TatMapping[sessionData.category_id],
-          timestamp: "2024-11-20", // Need to calculate
+          duration: TatMapping[sessionData.category_id].code,
+          timestamp: getDateFromToday(TatMapping[sessionData.category_id].day),
         };
 
         return item;
