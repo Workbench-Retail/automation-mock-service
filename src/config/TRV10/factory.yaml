@@ -132,8 +132,10 @@ codes:
   - code: 126
     action_id: cancel
     action: cancel
-    default: TRV10/2.1.0/search/default.yaml
+    default: TRV10/2.1.0/cancel/default.yaml
+    message_id: true
   - code: 127
     action_id: on_cancel
     action: on_cancel
     default: TRV10/2.1.0/on_cancel/on_cancel_soft/default.yaml
+    message_id: false

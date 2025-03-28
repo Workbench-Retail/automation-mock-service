@@ -15,5 +15,12 @@ export async function onStatusRideEnrouteGenerator(existingPayload: any,sessionD
     existingPayload = await onStatusMultipleStopsGenerator(existingPayload,sessionData)
     console.log(existingPayload.message.order)
     existingPayload.message.order = updateFulfillmentStatus(existingPayload.message.order)
+    if (existingPayload.message.order.fulfillments[0]["_EXTERNAL"]){
+      delete existingPayload.message.order.fulfillments[0]["_EXTERNAL"]
+  }
+  existingPayload.message.order.payments = sessionData.payments
+  if (existingPayload.message.order.payments[0]["_EXTERNAL"]){
+      delete existingPayload.message.order.payments[0]["_EXTERNAL"]
+  }
     return existingPayload;
 }

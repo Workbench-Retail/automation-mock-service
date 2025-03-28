@@ -78,7 +78,7 @@ message:
                 display: true
                 list:
                   - descriptor:
-                      code: "TOTAL_HOURS"
+                      code: "TOTAL_HOUR"
                     value: "1"
                   - descriptor:
                       code: "TOTAL_DISTANCE"
@@ -125,7 +125,7 @@ message:
                 display: true
                 list:
                   - descriptor:
-                      code: "TOTAL_HOURS"
+                      code: "TOTAL_HOUR"
                     value: "1"
                   - descriptor:
                       code: "TOTAL_DISTANCE"

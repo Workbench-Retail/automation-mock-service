@@ -3,10 +3,13 @@ import { onUpdateMultipleStopsGenerator } from "./generator_multiple_stops";
 
 export async function onUpdateUpdateQuoteGenerator(existingPayload: any,sessionData: SessionData){
     existingPayload = await onUpdateMultipleStopsGenerator(existingPayload,sessionData)
-    if(sessionData.quote != null){
-    existingPayload.message.order.quote = sessionData.update_quote
+    if (sessionData.quote != null) {
+        if (Array.isArray(sessionData.update_quote)) {
+            existingPayload.message.order.quote = sessionData.update_quote[0] || {}; // Assign first element or an empty object
+        } else {
+            existingPayload.message.order.quote = sessionData.update_quote;
+        }
     }
-    console.log(existingPayload.message)
-    existingPayload.message.order.status = "RIDE_ENDED"
+    existingPayload.message.order.status = "COMPLETE"
     return existingPayload;
 }
