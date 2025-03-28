@@ -142,3 +142,48 @@ codes:
     action: search
     default: TRV10/2.1.0/search/default.yaml
     message_id: true
+  - code: 129
+    action_id: on_search_ride
+    action: on_search
+    default: TRV10/2.1.0/on_search/default.yaml
+    message_id: false
+  - code: 130
+    action_id: select_ride
+    action: select
+    default: TRV10/2.1.0/select/default.yaml
+    message_id: true
+  - code: 131
+    action_id: on_select_ride
+    action: on_select
+    default: TRV10/2.1.0/on_select/default.yaml
+    message_id: false
+  - code: 132
+    action_id: init_ride
+    action: init
+    default: TRV10/2.1.0/init/default.yaml
+    message_id: true
+  - code: 133
+    action_id: on_init_ride
+    action: on_init
+    default: TRV10/2.1.0/on_init/default.yaml
+    message_id: false
+  - code: 134
+    action_id: confirm_ride
+    action: confirm
+    default: TRV10/2.1.0/confirm/default.yaml
+    message_id: true
+  - code: 135
+    action_id: on_confirm_ride
+    action: on_confirm
+    default: TRV10/2.1.0/on_confirm/default.yaml
+    message_id: false
+  - code: 136
+    action_id: track_ride
+    action: track
+    default: TRV10/2.1.0/track/default.yaml
+    message_id: true
+  - code: 137
+    action_id: on_track_ride
+    action: on_track
+    default: TRV10/2.1.0/on_track/default.yaml
+    message_id: false
