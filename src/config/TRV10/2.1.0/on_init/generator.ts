@@ -80,7 +80,7 @@ function applyCancellationCharges(quote: Quote, state: string): Quote {
     };
 }
 
-export async function onUpdateGenerator(
+export async function onInitGenerator(
     existingPayload: any,
     sessionData: SessionData
 ) {
