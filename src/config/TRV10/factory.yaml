@@ -192,3 +192,8 @@ codes:
     action: on_update
     default: TRV10/2.1.0/on_update/default.yaml
     message_id: true
+  - code: 139
+    action_id: on_confirm_driver_not_assigned
+    action: on_confirm
+    default: TRV10/2.1.0/on_confirm/on_confirm_driver_not_assigned/default.yaml
+    message_id: true

@@ -28,12 +28,14 @@ export async function onConfirmDriverNotAssignedGenerator(
     // Update order status to ACTIVE
     existingPayload.message.order.status = "ACTIVE";
 
+
+
     // Update fulfillments with state
     if (sessionData.fulfillments?.length > 0) {
         sessionData.fulfillments.forEach(fulfillment => {
             updateFulfillmentState(fulfillment);
         });
-        existingPayload.message.order.fulfillments = sessionData.fulfillments;
+        existingPayload.message.order.fulfillments = sessionData.selected_fulfillments;
     }
 
     // Update items if present
@@ -74,7 +76,15 @@ export async function onConfirmDriverNotAssignedGenerator(
             reason_required: true
         }
     ];
+    if (existingPayload.message.order.fulfillments[0]["_EXTERNAL"]){
+        delete existingPayload.message.order.fulfillments[0]["_EXTERNAL"]
+      }
+      existingPayload.message.order.payments = sessionData.payments
+      if (existingPayload.message.order.payments[0]["_EXTERNAL"]){
+          delete existingPayload.message.order.payments[0]["_EXTERNAL"]
+      }
 
+      console.log("inside on confirm driver not assigned generator")
     // Update timestamps
     existingPayload = updateOrderTimestamps(existingPayload);
 
