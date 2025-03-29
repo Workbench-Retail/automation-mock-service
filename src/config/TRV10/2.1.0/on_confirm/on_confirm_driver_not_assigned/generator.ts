@@ -1,5 +1,23 @@
 import { SessionData } from "../../../session-types";
 
+
+
+const agent  = {
+    "contact": {
+        "phone": "9856798567"
+    },
+    "person": {
+        "name": "Jason Roy"
+    }
+}
+const vehicle = {
+    category: "AUTO_RICKSHAW",
+    variant: "AUTO_RICKSHAW",
+    make: "Bajaj",
+    model: "Compact RE",
+    registration: "KA-01-AD-9876"
+};
+
 function updateOrderTimestamps(payload: any) {
     const now = new Date().toISOString();
     if (payload.message.order) {
@@ -37,6 +55,8 @@ export async function onConfirmDriverNotAssignedGenerator(
         });
         existingPayload.message.order.fulfillments = sessionData.selected_fulfillments;
         existingPayload.message.order.fulfillments[0]["state"] = {"descriptor": {"code": "RIDE_CONFIRMED"}}
+        existingPayload.message.order.fulfillments[0]["agent"] = agent
+        existingPayload.message.order.fulfillments[0]["vehicle"] = vehicle
     }
 
     // Update items if present

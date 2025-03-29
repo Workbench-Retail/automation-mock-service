@@ -121,7 +121,13 @@ export async function onConfirmGenerator(
             reason_required: true
         }
     ];
-
+    if (existingPayload.message.order.fulfillments[0]["_EXTERNAL"]){
+        delete existingPayload.message.order.fulfillments[0]["_EXTERNAL"]
+      }
+      existingPayload.message.order.payments = sessionData.payments
+      if (existingPayload.message.order.payments[0]["_EXTERNAL"]){
+          delete existingPayload.message.order.payments[0]["_EXTERNAL"]
+      }
     // Update timestamps
     existingPayload = updateOrderTimestamps(existingPayload);
     existingPayload.message.order.fulfillments["type"] = "DELIVERY"

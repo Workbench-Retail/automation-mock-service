@@ -97,8 +97,86 @@ export async function onUpdateGenerator(
         existingPayload.message.order.fulfillments = sessionData.fulfillments;
     }
 
+    // Ensure all fulfillments have the required 'type' property
+    if (existingPayload.message.order.fulfillments?.length > 0) {
+        existingPayload.message.order.fulfillments.forEach((fulfillment: any) => {
+            // Set default type to "DELIVERY" if not present
+            if (!fulfillment.type) {
+                fulfillment.type = "DELIVERY";
+            }
+            // Ensure type is one of the allowed values
+            else if (!["DELIVERY", "SELF_PICKUP"].includes(fulfillment.type)) {
+                fulfillment.type = "DELIVERY";
+            }
+            
+            // Ensure vehicle registration is present
+            if (!fulfillment.vehicle) {
+                fulfillment.vehicle = {
+                    registration: "DL01AB1234"
+                };
+            } else if (!fulfillment.vehicle.registration) {
+                fulfillment.vehicle.registration = "DL01AB1234";
+            }
+            
+            // Ensure agent.person.name is present
+            if (!fulfillment.agent) {
+                fulfillment.agent = {
+                    person: {
+                        name: "Driver Name"
+                    },
+                    contact: {
+                        phone: "9876543210"
+                    }
+                };
+            } else {
+                if (!fulfillment.agent.person) {
+                    fulfillment.agent.person = {
+                        name: "Driver Name"
+                    };
+                } else if (!fulfillment.agent.person.name) {
+                    fulfillment.agent.person.name = "Driver Name";
+                }
+                
+                // Ensure agent.contact.phone is present
+                if (!fulfillment.agent.contact) {
+                    fulfillment.agent.contact = {
+                        phone: "9876543210"
+                    };
+                } else if (!fulfillment.agent.contact.phone) {
+                    fulfillment.agent.contact.phone = "9876543210";
+                }
+            }
+            
+            // Valid ride states
+            const validRideStates = [
+                "RIDE_CANCELLED", 
+                "RIDE_ENDED", 
+                "RIDE_STARTED", 
+                "RIDE_ASSIGNED", 
+                "RIDE_ENROUTE_PICKUP", 
+                "RIDE_ARRIVED_PICKUP", 
+                "RIDE_CONFIRMED"
+            ];
+            
+            // Ensure state.descriptor.code is present and valid
+            if (!fulfillment.state) {
+                fulfillment.state = {
+                    descriptor: {
+                        code: "RIDE_ASSIGNED"
+                    }
+                };
+            } else if (!fulfillment.state.descriptor) {
+                fulfillment.state.descriptor = {
+                    code: "RIDE_ASSIGNED"
+                };
+            } else if (!fulfillment.state.descriptor.code || !validRideStates.includes(fulfillment.state.descriptor.code)) {
+                fulfillment.state.descriptor.code = "RIDE_ASSIGNED";
+            }
+        });
+    }
+
     // Update order status if present
-        if ('order_status' in sessionData) {
+    if ('order_status' in sessionData) {
         existingPayload.message.order.status = sessionData.order_status;
     }
 

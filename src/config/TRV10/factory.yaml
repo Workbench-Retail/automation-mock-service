@@ -197,3 +197,8 @@ codes:
     action: on_confirm
     default: TRV10/2.1.0/on_confirm/on_confirm_driver_not_assigned/default.yaml
     message_id: false
+  - code: 140
+    action_id: on_confirm_driver_not_found
+    action: on_confirm
+    default: TRV10/2.1.0/on_confirm/on_confirm_driver_not_found/default.yaml
+    message_id: false

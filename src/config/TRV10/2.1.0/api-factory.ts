@@ -137,7 +137,9 @@ export async function Generator(
         case "on_confirm_driver_not_found":
                 return await onConfirmDriverNotFound(existingPayload, sessionData);     
         case "on_confirm_driver_not_assigned":
-            return await onConfirmDriverNotAssignedGenerator(existingPayload, sessionData);                                                                            
+            return await onConfirmDriverNotAssignedGenerator(existingPayload, sessionData); 
+        case "track_ride_update":
+            return await trackGenerator(existingPayload, sessionData);
         default:
                 throw new Error(`Invalid request type ${action_id}`);
         }
