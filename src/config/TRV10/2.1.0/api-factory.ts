@@ -35,6 +35,7 @@ import { trackGenerator } from "./track/generator";
 import { onUpdateGenerator } from "./on_update/generator";
 import { statusGenerator } from "./status/generator";
 import { onConfirmDriverNotFound } from "./on_confirm/on_confirm_driver_not_found/generator";
+import { onConfirmDriverNotAssignedGenerator } from "./on_confirm/on_confirm_driver_not_assigned/generator";
 
 
 export async function Generator(
@@ -134,7 +135,9 @@ export async function Generator(
         case "cancel_rider":
                 return await cancelMultipleStopsGenerator(existingPayload, sessionData);     
         case "on_confirm_driver_not_found":
-                return await onConfirmDriverNotFound(existingPayload, sessionData);                                                                                 
+                return await onConfirmDriverNotFound(existingPayload, sessionData);     
+        case "on_confirm_driver_not_assigned":
+            return await onConfirmDriverNotAssignedGenerator(existingPayload, sessionData);                                                                            
         default:
                 throw new Error(`Invalid request type ${action_id}`);
         }

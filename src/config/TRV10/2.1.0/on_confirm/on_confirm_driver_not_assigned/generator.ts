@@ -36,6 +36,7 @@ export async function onConfirmDriverNotAssignedGenerator(
             updateFulfillmentState(fulfillment);
         });
         existingPayload.message.order.fulfillments = sessionData.selected_fulfillments;
+        existingPayload.message.order.fulfillments[0]["state"] = {"descriptor": {"code": "RIDE_CONFIRMED"}}
     }
 
     // Update items if present
@@ -76,17 +77,15 @@ export async function onConfirmDriverNotAssignedGenerator(
             reason_required: true
         }
     ];
-    if (existingPayload.message.order.fulfillments[0]["_EXTERNAL"]){
-        delete existingPayload.message.order.fulfillments[0]["_EXTERNAL"]
-      }
-      existingPayload.message.order.payments = sessionData.payments
-      if (existingPayload.message.order.payments[0]["_EXTERNAL"]){
-          delete existingPayload.message.order.payments[0]["_EXTERNAL"]
-      }
-
       console.log("inside on confirm driver not assigned generator")
     // Update timestamps
     existingPayload = updateOrderTimestamps(existingPayload);
-
+    if (existingPayload.message.order.fulfillments[0]["_EXTERNAL"]){
+        delete existingPayload.message.order.fulfillments[0]["_EXTERNAL"]
+      }
+    existingPayload.message.order.payments = sessionData.payments
+    if (existingPayload.message.order.payments[0]["_EXTERNAL"]){
+          delete existingPayload.message.order.payments[0]["_EXTERNAL"]
+    }
     return existingPayload;
 } 
