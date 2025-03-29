@@ -73,7 +73,7 @@ type Price = {
     }
   
     if (sessionData.fulfillments.length > 0) {
-      existingPayload.message.order.fulfillments = sessionData.fulfillments;
+      existingPayload.message.order.fulfillments = sessionData.selected_fulfillments;
     }
   
     if (sessionData.order_id) {

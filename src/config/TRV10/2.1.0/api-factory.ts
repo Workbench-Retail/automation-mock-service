@@ -1,4 +1,4 @@
-import { cancelMultipleStopsGenerator } from "./cancel/generator";
+import { cancelMultipleStopsSoftGenerator } from "./cancel/generator-soft-cancel";
 import { confirmMultipleStopsGenerator } from "./confirm/generator_multiple_stops";
 import { initMultipleStopsGenerator } from "./init/generator_multiple_stops";
 import { onCancelSoftGenerator } from "./on_cancel/on_cancel_soft/generator_soft_cancel";
@@ -36,6 +36,10 @@ import { onUpdateGenerator } from "./on_update/generator";
 import { statusGenerator } from "./status/generator";
 import { onConfirmDriverNotFound } from "./on_confirm/on_confirm_driver_not_found/generator";
 import { onConfirmDriverNotAssignedGenerator } from "./on_confirm/on_confirm_driver_not_assigned/generator";
+import { onCancelAsyncGenerator } from "./on_cancel/on_cancel_async/generator";
+import { cancelMultipleStopsHardGenerator } from "./cancel/generator-hard-cancel";
+import { onCancelHardGenerator } from "./on_cancel/on_cancel_hard/generator";
+import { onCancelRiderNotFoundGenerator } from "./on_cancel/on_cancel_rider_not_found/generator";
 
 
 export async function Generator(
@@ -97,7 +101,9 @@ export async function Generator(
         case "on_search_rental_end":
             return await onSearchMultipleStopsGenerator(existingPayload, sessionData);
         case "cancel":
-            return await cancelMultipleStopsGenerator(existingPayload, sessionData);
+            return await cancelMultipleStopsSoftGenerator(existingPayload, sessionData);
+        case "cancel_hard":
+            return await cancelMultipleStopsHardGenerator(existingPayload, sessionData);
         case "on_cancel":
             return await onCancelSoftGenerator(existingPayload, sessionData);
         case "search_ride":
@@ -125,21 +131,23 @@ export async function Generator(
         case "on_update_ride":
                 return await onUpdateGenerator(existingPayload, sessionData); 
         case "status_ride":
-                return await statusGenerator(existingPayload, sessionData);    
-        case "on_confirm_ride_cancel":
-                return await onConfirmGenerator(existingPayload, sessionData);  
+                return await statusGenerator(existingPayload, sessionData);      
         case "on_cancel_ride_cancel":
                 return await onCancelSoftGenerator(existingPayload, sessionData); 
         case "on_init_driver_pruple":
-                return await onInitGenerator(existingPayload, sessionData);  
-        case "cancel_rider":
-                return await cancelMultipleStopsGenerator(existingPayload, sessionData);     
+                return await onInitGenerator(existingPayload, sessionData);     
         case "on_confirm_driver_not_found":
                 return await onConfirmDriverNotFound(existingPayload, sessionData);     
         case "on_confirm_driver_not_assigned":
             return await onConfirmDriverNotAssignedGenerator(existingPayload, sessionData); 
         case "track_ride_update":
             return await trackGenerator(existingPayload, sessionData);
+        case "on_cancel_async":
+            return await onCancelAsyncGenerator(existingPayload,sessionData)
+        case "on_cancel_hard":
+            return await onCancelHardGenerator(existingPayload,sessionData)
+        case "on_cancel_rider_not_found":
+            return await onCancelRiderNotFoundGenerator(existingPayload,sessionData)
         default:
                 throw new Error(`Invalid request type ${action_id}`);
         }

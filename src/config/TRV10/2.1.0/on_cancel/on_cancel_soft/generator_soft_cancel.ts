@@ -10,7 +10,7 @@ export async function onCancelSoftGenerator(existingPayload: any,sessionData: Se
     }
   
     if (sessionData.fulfillments.length > 0) {
-    existingPayload.message.order.fulfillments = sessionData.fulfillments;
+    existingPayload.message.order.fulfillments = sessionData.selected_fulfillments;
     }
     if (sessionData.order_id) {
     existingPayload.message.order.id = sessionData.order_id;
