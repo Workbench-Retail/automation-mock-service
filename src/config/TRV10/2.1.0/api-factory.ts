@@ -133,7 +133,7 @@ export async function Generator(
                 return await onInitGenerator(existingPayload, sessionData);  
         case "cancel_rider":
                 return await cancelMultipleStopsGenerator(existingPayload, sessionData);     
-        case "on_confirm_driver":
+        case "on_confirm_driver_not_found":
                 return await onConfirmDriverNotFound(existingPayload, sessionData);                                                                                 
         default:
                 throw new Error(`Invalid request type ${action_id}`);

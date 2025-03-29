@@ -18,7 +18,7 @@ function updateFulfillmentState(fulfillment: any): void {
     };
 }
 
-export async function onConfirmGenerator(
+export async function onConfirmDriverNotAssignedGenerator(
     existingPayload: any,
     sessionData: SessionData
 ) {
