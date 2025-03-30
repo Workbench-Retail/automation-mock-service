@@ -36,3 +36,10 @@ export function getTimestampFromDuration(
 export function removeTagsByCodes(tags: Tag[], codesToRemove: string[]): Tag[] {
   return tags.filter((tag) => !codesToRemove.includes(tag.code));
 }
+
+export function getFutureDate(daysAhead: number): string {
+  const futureDate = new Date();
+  futureDate.setDate(futureDate.getDate() + daysAhead);
+
+  return futureDate.toISOString().split("T")[0];
+}

@@ -264,27 +264,4 @@ message:
           height:
             unit: centimeter
             value: 1
-    tags:
-      - code: diff_dim
-        list:
-          - code: unit
-            value: centimeter
-          - code: length
-            value: "1.5"
-          - code: breadth
-            value: "1.5"
-          - code: height
-            value: "1.5"
-      - code: diff_weight
-        list:
-          - code: unit
-            value: kilogram
-          - code: weight
-            value: "1.5"
-      - code: diff_proof
-        list:
-          - code: type
-            value: image
-          - code: url
-            value: "https://lsp.com/sorter/images1.png"
     updated_at: "2024-11-20T23:00:30.000Z"

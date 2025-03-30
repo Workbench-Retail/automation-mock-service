@@ -7,3 +7,4 @@ save-data:
   fulfillments: "$.message.order.fulfillments[*]"
   confirm_fulfillments: "$.message.order.fulfillments[*]"
   items: "$.message.order.items[*]"
+  quote: "$.message.order.quote"

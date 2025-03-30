@@ -35,25 +35,39 @@ export const confirmGenerator = (
     duration: sessionData.on_search_fulfillment.start.time.duration,
   };
 
-  existingPayload.message.order.fulfillments[0].start.instructions = {
-    code: "2",
-    short_desc: "123123",
-    long_desc: "additional instructions for pickup",
-    additional_desc: {
-      content_type: "text/html",
-      url: "http://description.com",
-    },
-  };
+  let isReadyToShip = false;
 
-  existingPayload.message.order.fulfillments[0].end.instructions = {
-    code: "2",
-    short_desc: "987657",
-    long_desc: "additional instructions for delivery",
-    additional_desc: {
-      content_type: "text/html",
-      url: "http://description.com",
-    },
-  };
+  existingPayload.message.order.fulfillments[0].tags.forEach((tag: any) => {
+    if (tag.code === "state") {
+      tag.list.forEach((item: any) => {
+        if (item.code === "ready_to_ship" && item.value == "yes") {
+          isReadyToShip = true;
+        }
+      });
+    }
+  });
+
+  if (isReadyToShip) {
+    existingPayload.message.order.fulfillments[0].start.instructions = {
+      code: "2",
+      short_desc: "123123",
+      long_desc: "additional instructions for pickup",
+      additional_desc: {
+        content_type: "text/html",
+        url: "http://description.com",
+      },
+    };
+
+    existingPayload.message.order.fulfillments[0].end.instructions = {
+      code: "2",
+      short_desc: "987657",
+      long_desc: "additional instructions for delivery",
+      additional_desc: {
+        content_type: "text/html",
+        url: "http://description.com",
+      },
+    };
+  }
 
   existingPayload.message.order.fulfillments[0].start.person = {
     name: "person_name_1",
@@ -84,6 +98,12 @@ export const confirmGenerator = (
     {
       code: "linked_order",
       list: [
+        ...(sessionData?.is_cod === "yes"
+          ? [
+              { code: "cod_order", value: "yes" },
+              { code: "collection_amount", value: "325.00" },
+            ]
+          : []),
         {
           code: "id",
           value: "RO1",

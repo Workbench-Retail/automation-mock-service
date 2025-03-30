@@ -11,6 +11,8 @@ export const onConfirmGenerator = (
     existingPayload.message.order.billing = sessionData.billing;
   }
 
+  existingPayload.message.order.items = sessionData?.items;
+
   if (sessionData?.confirm_create_at_timestamp) {
     existingPayload.message.order.created_at =
       sessionData.confirm_create_at_timestamp;
@@ -68,7 +70,10 @@ export const onConfirmGenerator = (
           {
             code: "value",
             value: (
-              5000 - parseInt(existingPayload.message.order.quote.price.value || "4850")
+              5000 -
+              parseInt(
+                existingPayload.message.order.quote.price.value || "4850"
+              )
             ).toString(),
           },
         ],

@@ -54,9 +54,9 @@ message:
             fulfillment_id: "1"
             descriptor:
               code: P2P
-              name: 60 min delivery
-              short_desc: 60 min delivery for F&B
-              long_desc: 60 min delivery for F&B
+              name: Fast delivery
+              short_desc: Fast delivery services
+              long_desc: Fast delivery services
             price:
               currency: INR
               value: "59.00"
