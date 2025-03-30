@@ -289,5 +289,22 @@ export const confirmGenerator = (
     existingPayload.message.order.payment = sessionData.payment;
   }
 
+  if (
+    (sessionData.payment_type === "POST-FULFILLMENT" ||
+      sessionData.payment_type === "ON-FULFILLMENT") &&
+    existingPayload.message.order.payment.collected_by === "BPP"
+  ) {
+    existingPayload.message.order.payment["@ondc/org/settlement_details"] = [
+      {
+        settlement_counterparty: "lsp",
+        settlement_type: "upi",
+        beneficiary_name: "xxxxx",
+        upi_address: "gft@oksbi",
+        settlement_bank_account_no: "XXXXXXXXXX",
+        settlement_ifsc_code: "XXXXXXXXX",
+      },
+    ];
+  }
+
   return existingPayload;
 };

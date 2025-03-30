@@ -80,7 +80,8 @@ export const onInitGenerator = (
   }
 
   if (
-    sessionData.payment_type === "POST-FULFILLMENT" &&
+    (sessionData.payment_type === "POST-FULFILLMENT" ||
+      sessionData.payment_type === "ON-FULFILLMENT") &&
     existingPayload.message.order.payment.collected_by === "BAP"
   ) {
     existingPayload.message.order.payment["@ondc/org/settlement_details"] = [
