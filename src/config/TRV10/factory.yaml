@@ -228,3 +228,8 @@ codes:
     action: on_cancel
     default: TRV10/2.1.0/on_cancel/on_cancel_rider_not_found/default.yaml
     message_id: true
+  - code: 146
+    action_id: on_update_2
+    action: on_update
+    default: TRV10/2.1.0/on_update/default.yaml
+    message_id: true

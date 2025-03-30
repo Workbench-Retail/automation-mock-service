@@ -40,6 +40,7 @@ import { onCancelAsyncGenerator } from "./on_cancel/on_cancel_async/generator";
 import { cancelMultipleStopsHardGenerator } from "./cancel/generator-hard-cancel";
 import { onCancelHardGenerator } from "./on_cancel/on_cancel_hard/generator";
 import { onCancelRiderNotFoundGenerator } from "./on_cancel/on_cancel_rider_not_found/generator";
+import { onUpdateMultipleStopsGenerator } from "./on_update/generator_multiple_stops";
 
 
 export async function Generator(
@@ -75,7 +76,9 @@ export async function Generator(
         case "on_status_ride_started":
             return await onStatusRideStartedGenerator(existingPayload, sessionData);
         case "on_update":
-            return await onStatusRideStartedGenerator(existingPayload, sessionData);
+            return await onUpdateMultipleStopsGenerator(existingPayload, sessionData);
+        case "on_update_2":
+            return await onUpdateMultipleStopsGenerator(existingPayload, sessionData);
         case "status":
             return await statusMultipleStopsGenerator(existingPayload, sessionData);
         case "on_status_solicited":
@@ -148,6 +151,7 @@ export async function Generator(
             return await onCancelHardGenerator(existingPayload,sessionData)
         case "on_cancel_rider_not_found":
             return await onCancelRiderNotFoundGenerator(existingPayload,sessionData)
+        
         default:
                 throw new Error(`Invalid request type ${action_id}`);
         }
