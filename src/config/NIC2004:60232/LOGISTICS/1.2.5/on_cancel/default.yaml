@@ -61,7 +61,7 @@ message:
           descriptor:
             code: RTO
         "@ondc/org/awb_no": "1227262193237777"
-        tracking: false
+        tracking: true
         start:
           person:
             name: person_name

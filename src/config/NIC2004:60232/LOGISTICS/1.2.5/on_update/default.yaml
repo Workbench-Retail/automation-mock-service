@@ -36,9 +36,8 @@ message:
         type: Delivery
         state:
           descriptor:
-            code: Order-picked-up
-        "@ondc/org/awb_no": "1227262193237777"
-        tracking: false
+            code: Agent-assigned
+        tracking: true
         start:
           person:
             name: Ramu

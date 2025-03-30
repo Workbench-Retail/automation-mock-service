@@ -1,3 +1,4 @@
+import { removeTagsByCodes } from "../../../../../utils/generic-utils";
 import { SessionData } from "../../../session-types";
 
 export const onCancelGenerator = (
@@ -5,7 +6,156 @@ export const onCancelGenerator = (
   sessionData: SessionData
 ) => {
   existingPayload.message.order.id = sessionData.order_id;
-  existingPayload.message.order.fulfillments[0].start.time.timestamp =
-    sessionData.fulfillment_pickup_timestamp;
+
+  if (sessionData?.fulfillments) {
+    existingPayload.message.order.fulfillments = sessionData.fulfillments;
+  }
+
+  if (sessionData?.billing) {
+    existingPayload.message.order.billing = sessionData.billing;
+  }
+
+  if (sessionData?.is_cancel_called === "cancel") {
+    existingPayload.message.order.state = "Cancelled";
+
+    existingPayload.message.order.quote = sessionData.quote;
+
+    existingPayload.cancellation = {
+      cancelled_by: existingPayload.context.bap_id,
+      reason: {
+        id: sessionData?.cancellation_reason_id,
+      },
+    };
+
+    existingPayload.message.order.fulfillments =
+      existingPayload.message.order.fulfillments.map((fulfillment: any) => {
+        fulfillment.tags.push({
+          code: "precancel_state",
+          list: [
+            {
+              code: "fulfillment_state",
+              value: fulfillment.state.descriptor.code,
+            },
+            {
+              code: "updated_at",
+              value: sessionData?.order_updated_at_timestamp,
+            },
+          ],
+        });
+        fulfillment.state.descriptor.code = "Cancelled";
+
+        return fulfillment;
+      });
+  } else {
+    existingPayload.message.order.state = "In-progress";
+
+    existingPayload.message.order.cancellation = {
+      cancelled_by: existingPayload.context.bpp_id,
+      reason: {
+        id: sessionData?.shipment_method === "P2P" ? "127" : "226",
+      },
+    };
+
+    existingPayload.message.order.fulfillments =
+      existingPayload.message.order.fulfillments.map((fulfillment: any) => {
+        if (fulfillment.type === "Delivery") {
+          fulfillment.tags.push({
+            code: "precancel_state",
+            list: [
+              {
+                code: "fulfillment_state",
+                value: fulfillment.state.descriptor.code,
+              },
+              {
+                code: "updated_at",
+                value: sessionData?.order_updated_at_timestamp,
+              },
+            ],
+          });
+          fulfillment.state.descriptor.code = "RTO";
+
+          fulfillment.tags.push({
+            code: "rto_event",
+            list: [
+              {
+                code: "retry_count",
+                value: "3",
+              },
+              {
+                code: "rto_id",
+                value: sessionData?.rto_id,
+              },
+              {
+                code: "cancellation_reason_id",
+                value: sessionData?.shipment_method === "P2P" ? "127" : "226",
+              },
+              {
+                code: "cancelled_by",
+                value: existingPayload.context.bpp_id,
+              },
+            ],
+          });
+
+          fulfillment.tags = removeTagsByCodes(fulfillment.tags, ["tracking"]);
+        }
+
+        return fulfillment;
+      });
+
+    existingPayload.message.order.fulfillments.push({
+      id: sessionData?.rto_id,
+      type: "RTO",
+      state: {
+        descriptor: {
+          code: "RTO-Initiated",
+        },
+      },
+      start: {
+        time: {
+          timestamp: existingPayload.context.timestamp,
+        },
+      },
+    });
+
+    existingPayload.message.order.items = sessionData.items;
+
+    let rtoItem: any = null;
+
+    sessionData?.on_search_items?.forEach((item: any) => {
+      if (item.parent_item_id === sessionData.items[0].id) {
+        delete item.price;
+        delete item.parent_item_id;
+        rtoItem = item;
+      }
+    });
+
+    existingPayload.message.order.items.push(rtoItem);
+
+    existingPayload.message.order.quote.breakup = [
+      ...existingPayload.message.order.quote.breakup,
+      {
+        "@ondc/org/item_id": rtoItem.id,
+        "@ondc/org/title_type": "rto",
+        price: {
+          currency: "INR",
+          value: "20.0",
+        },
+      },
+      {
+        "@ondc/org/item_id": rtoItem.id,
+        "@ondc/org/title_type": "tax",
+        price: {
+          currency: "INR",
+          value: "3.60",
+        },
+      },
+    ];
+
+    existingPayload.message.order.quote.price = {
+      currency: "INR",
+      value: "82.60",
+    };
+  }
+
   return existingPayload;
 };

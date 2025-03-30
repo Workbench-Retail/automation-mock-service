@@ -58,8 +58,6 @@ export async function createMockReponseLOGISTICS200(
   // 2. load default
   // 3. run faker
 
-  console.log("gettting here>>>>>>");
-
   const factoryData = loadFactoryYaml(
     path.resolve(__dirname, "../../factory.yaml")
   );

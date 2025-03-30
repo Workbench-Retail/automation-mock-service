@@ -18,6 +18,7 @@ export async function Generator(
   existingPayload: any,
   sessionData: any
 ) {
+  console.log("inside generator");
   switch (action_id) {
     case "search_LOGISTICS":
       return await searchGenerator(existingPayload, sessionData);
@@ -42,13 +43,25 @@ export async function Generator(
     case "on_status_LOGISTICS":
       return await onStatusGenerator(existingPayload, sessionData);
     case "on_status_1_LOGISTICS":
-      return await onStatusGenerator(existingPayload, sessionData);
+      return await onStatusGenerator(existingPayload, {
+        ...sessionData,
+        stateCode: "Order-picked-up",
+      });
     case "on_status_2_LOGISTICS":
-      return await onStatusGenerator(existingPayload, sessionData);
+      return await onStatusGenerator(existingPayload, {
+        ...sessionData,
+        stateCode: "Out-for-delivery",
+      });
     case "on_status_3_LOGISTICS":
-      return await onStatusGenerator(existingPayload, sessionData);
+      return await onStatusGenerator(existingPayload, {
+        ...sessionData,
+        stateCode: "Order-delivered",
+      });
     case "on_status_4_LOGISTICS":
-      return await onStatusGenerator(existingPayload, sessionData);
+      return await onStatusGenerator(existingPayload, {
+        ...sessionData,
+        stateCode: "RTO-Delivered",
+      });
     case "on_track_LOGISTICS":
       return await onTrackGenerator(existingPayload, sessionData);
     case "on_cancel_LOGISTICS":

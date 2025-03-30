@@ -1,22 +1,86 @@
-function getOneHourBeforeTimestamp() {
-  const now = new Date();
-  now.setHours(now.getHours() - 1);
-  return now.toISOString();
-}
+import { SessionData } from "../../../session-types";
 
-export const initGenerator = async (existingPayload: any, sessionData: any) => {
+export const initGenerator = async (
+  existingPayload: any,
+  sessionData: SessionData
+) => {
   existingPayload.message.order.provider.id = sessionData.provider_id;
   existingPayload.message.order.provider.locations[0].id =
     sessionData.location_id;
 
-  existingPayload.message.order.items[0].category_id = sessionData.category_id;
-  existingPayload.message.order.items[0].descriptor.code =
-    sessionData.shipment_method;
+  sessionData?.on_search_items?.forEach((item: any) => {
+    if (item.fulfillment_id === sessionData.on_search_fulfillment.id) {
+      existingPayload.message.order.items[0] = {
+        id: item.id,
+        fulfillment_id: sessionData.on_search_fulfillment.id,
+        category_id: item.category_id,
+        descriptor: {
+          code: item.descriptor.code,
+        },
+      };
+    }
+  });
 
-  // biiling mai created at and upated at timestamp needs to be upated
+  existingPayload.message.order.fulfillments[0] = {
+    id: sessionData.on_search_fulfillment.id,
+    type: sessionData.on_search_fulfillment.type,
+    start: {
+      location: {
+        id: "S1",
+        gps: sessionData.start_location,
+        address: {
+          name: "My store name 1",
+          building: "My building name 1",
+          locality: "My street name 1",
+          city: "my city 1",
+          state: "my state 1",
+          country: "India",
+          area_code: sessionData.start_area_code,
+        },
+      },
+      contact: {
+        phone: "9886098860",
+        email: "abcd.efgh@gmail.com",
+      },
+    },
+    end: {
+      location: {
+        gps: sessionData.end_location,
+        address: {
+          name: "My store name 2",
+          building: "My building name 2",
+          locality: "My street name 2",
+          city: "my city name 2",
+          state: "my state 2",
+          country: "India",
+          area_code: sessionData.end_area_code,
+        },
+      },
+      contact: {
+        phone: "9123426789",
+        email: "xyz.qweq@gmail.com",
+      },
+    },
+    tags: [
+      {
+        code: "linked_provider",
+        list: [
+          {
+            code: "id",
+            value: sessionData.provider_id,
+          },
+          {
+            code: "name",
+            value: "Seller",
+          },
+        ],
+      },
+    ],
+  };
+
   existingPayload.message.order.billing.created_at =
-    getOneHourBeforeTimestamp();
+    existingPayload.context.timestamp;
   existingPayload.message.order.billing.updated_at =
-    getOneHourBeforeTimestamp();
+    existingPayload.context.timestamp;
   return existingPayload;
 };

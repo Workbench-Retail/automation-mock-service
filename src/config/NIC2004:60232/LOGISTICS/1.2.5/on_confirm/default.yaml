@@ -1,7 +1,7 @@
 message:
   order:
     id: O2
-    state: Created
+    state: Accepted
     provider:
       id: P1
       locations:
@@ -37,8 +37,7 @@ message:
         state:
           descriptor:
             code: "Pending"
-        tracking: false
-        "@ondc/org/awb_no": "1227262193237777"
+        tracking: true
         start:
           time:
             duration: PT15M

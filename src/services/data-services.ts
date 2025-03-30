@@ -4,7 +4,7 @@ import yaml from "js-yaml";
 import { RedisService } from "ondc-automation-cache-lib";
 import jsonpath from "jsonpath";
 
-import { SessionData } from "../config/TRV11/session-types";
+import { SessionData } from "../config/NIC2004:60232/session-types";
 import logger from "../utils/logger";
 import { isArrayKey } from "../types/type-utils";
 
@@ -21,7 +21,13 @@ export function updateSessionData(
 	try {
 		for (const key in saveData) {
 			const jsonPath = saveData[key as keyof typeof saveData];
-			const result = jsonpath.query(payload, jsonPath);
+		
+ 			const result = jsonpath.query(payload, jsonPath);
+			 if(key === "on_search_items") {
+				console.log("jsonpath", jsonPath)
+				console.log("payload", JSON.stringify(payload, null, 2))
+				console.log("resuult: ", JSON.stringify(result,null, 2))
+			}
 			logger.debug(`updating ${key} for path $${jsonPath}`);
 			if (
 				isArrayKey<SessionData>(key as keyof typeof sessionData, sessionData)
@@ -98,7 +104,7 @@ export async function loadSessionData(
 	let sessionData: SessionData = {} as SessionData;
 	if (!keyExists) {
 		const raw = yamlToJson(
-			path.resolve(__dirname, "../config/TRV11/session-data.yaml")
+			path.resolve(__dirname, "../config/NIC2004:60232/session-data.yaml")
 		) as any;
 		sessionData = raw.session_data;
 		sessionData.transaction_id = transactionID;

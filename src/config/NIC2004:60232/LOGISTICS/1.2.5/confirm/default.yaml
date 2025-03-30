@@ -154,7 +154,7 @@ message:
           - code: rto_action
             list:
               - code: return_to_origin
-                value: "no"
+                value: "yes"
     billing:
       name: ONDC Logistics Buyer NP
       address:

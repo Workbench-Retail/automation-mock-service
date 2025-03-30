@@ -1,4 +1,4 @@
-import { SessionData } from "../session-types";
+import { SessionData } from "../../NIC2004:60232/session-types";
 import { createMockResponseMETRO201 } from "./2.0.1/generation-pipline";
 import { createMockResponseMETRO200 } from "./2.0.0/generation-pipline";
 import { ApiServiceCache, RedisService } from "ondc-automation-cache-lib";
@@ -30,7 +30,7 @@ export async function createMockResponse(
     }
   }
 
-  console.log("payload", payload.context, payload)
+  console.log("payload", payload.context, payload);
 
   if (data.npType === "BAP") {
     payload.context.bap_uri = data.subscriberUrl;

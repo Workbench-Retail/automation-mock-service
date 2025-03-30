@@ -10,7 +10,7 @@ export interface SessionData {
   bpp_id: string | undefined;
   bpp_uri: string | undefined;
   category_id?: string;
-  shipment_method?: string;
+  shipment_method?: any;
   fulfillments?: string;
   provider_id?: string;
   location_id?: string;
@@ -28,6 +28,19 @@ export interface SessionData {
   end_location?: string;
   end_area_code?: string;
   is_track_execute?: string;
+  confirm_create_at_timestamp?: string;
+  tat?: string;
+  confirm_fulfillments?: any;
+  stateCode?: string;
+  is_cancel_called?: string;
+  order_updated_at_timestamp?: string;
+  rto_id?: string;
+  update_fulfillments?: any;
+  items?: any;
+  on_search_fulfillment?: any;
+  on_search_items?: any[];
+  quote?: any;
+  usecaseId?: string;
 }
 
 export type BecknContext = {

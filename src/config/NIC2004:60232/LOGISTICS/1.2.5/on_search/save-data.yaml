@@ -4,3 +4,6 @@ save-data:
   bpp_id: "$.context.bpp_id"
   bpp_uri: "$.context.bpp_uri"
   city_code: "$.context.location.city.code"
+  rto_id: $.message.catalog["bpp/providers"][*].fulfillments[?(@.type=="RTO")].id
+  on_search_items: $.message.catalog["bpp/providers"][*].items[*]
+  on_search_fulfillment: $.message.catalog["bpp/providers"][*].fulfillments[?(@.type=="Delivery")]

@@ -36,7 +36,7 @@ export async function onSearch1Generator(
   const categoriesData = {
     id: sessionData.category_id,
     time: {
-      label: sessionData.shipment_method,
+      label: "TAT",
       duration: TatMapping[sessionData.category_id].code,
       timestamp: getDateFromToday(TatMapping[sessionData.category_id].day),
     },
@@ -50,7 +50,7 @@ export async function onSearch1Generator(
     existingPayload.message.catalog["bpp/providers"][0].items.map(
       (item: any) => {
         item.time = {
-          label: sessionData.shipment_method,
+          label: "TAT",
           duration: TatMapping[sessionData.category_id].code,
           timestamp: getDateFromToday(TatMapping[sessionData.category_id].day),
         };

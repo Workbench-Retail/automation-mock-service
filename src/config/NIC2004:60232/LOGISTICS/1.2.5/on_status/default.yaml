@@ -39,7 +39,7 @@ message:
           descriptor:
             code: Order-picked-up
             short_desc: pickup or delivery failed reason code
-        tracking: false
+        tracking: true
         start:
           person:
             name: person_name

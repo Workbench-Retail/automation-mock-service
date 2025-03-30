@@ -31,3 +31,4 @@ session_data:
   ref_id: null
   ttl: null
   usecaseId: null
+  on_search_items: []
