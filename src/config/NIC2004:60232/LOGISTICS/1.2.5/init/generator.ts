@@ -1,4 +1,3 @@
-import { String } from "aws-sdk/clients/apigateway";
 import { SessionData } from "../../../session-types";
 
 const getPayemntFields = (paymentType: string) => {
@@ -121,7 +120,7 @@ export const initGenerator = async (
 
   existingPayload.message.order.payment = {
     type: sessionData.payment_type,
-    ...getPayemntFields(sessionData.payment_type as String),
+    ...getPayemntFields(sessionData.payment_type as string),
   };
 
   return existingPayload;
