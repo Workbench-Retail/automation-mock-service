@@ -1,5 +1,23 @@
 import { SessionData } from "../../../session-types";
 
+
+
+const agent  = {
+    "contact": {
+        "phone": "9856798567"
+    },
+    "person": {
+        "name": "Jason Roy"
+    }
+}
+const vehicle = {
+    category: "AUTO_RICKSHAW",
+    variant: "AUTO_RICKSHAW",
+    make: "Bajaj",
+    model: "Compact RE",
+    registration: "KA-01-AD-9876"
+};
+
 function updateOrderTimestamps(payload: any) {
     const now = new Date().toISOString();
     if (payload.message.order) {
@@ -18,7 +36,7 @@ function updateFulfillmentState(fulfillment: any): void {
     };
 }
 
-export async function onConfirmGenerator(
+export async function onConfirmDriverNotAssignedGenerator(
     existingPayload: any,
     sessionData: SessionData
 ) {
@@ -28,12 +46,17 @@ export async function onConfirmGenerator(
     // Update order status to ACTIVE
     existingPayload.message.order.status = "ACTIVE";
 
+
+
     // Update fulfillments with state
     if (sessionData.fulfillments?.length > 0) {
         sessionData.fulfillments.forEach(fulfillment => {
             updateFulfillmentState(fulfillment);
         });
-        existingPayload.message.order.fulfillments = sessionData.fulfillments;
+        existingPayload.message.order.fulfillments = sessionData.selected_fulfillments;
+        existingPayload.message.order.fulfillments[0]["state"] = {"descriptor": {"code": "RIDE_CONFIRMED"}}
+        existingPayload.message.order.fulfillments[0]["agent"] = agent
+        existingPayload.message.order.fulfillments[0]["vehicle"] = vehicle
     }
 
     // Update items if present
@@ -74,9 +97,15 @@ export async function onConfirmGenerator(
             reason_required: true
         }
     ];
-
+      console.log("inside on confirm driver not assigned generator")
     // Update timestamps
     existingPayload = updateOrderTimestamps(existingPayload);
-
+    if (existingPayload.message.order.fulfillments[0]["_EXTERNAL"]){
+        delete existingPayload.message.order.fulfillments[0]["_EXTERNAL"]
+      }
+    existingPayload.message.order.payments = sessionData.payments
+    if (existingPayload.message.order.payments[0]["_EXTERNAL"]){
+          delete existingPayload.message.order.payments[0]["_EXTERNAL"]
+    }
     return existingPayload;
 } 

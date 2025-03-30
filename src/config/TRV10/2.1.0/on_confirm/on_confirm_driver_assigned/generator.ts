@@ -7,6 +7,21 @@ interface Agent {
     phone?: string;
 }
 
+const agent  = {
+    "contact": {
+        "phone": "9856798567"
+    },
+    "person": {
+        "name": "Jason Roy"
+    }
+}
+const vehicle = {
+    category: "AUTO_RICKSHAW",
+    variant: "AUTO_RICKSHAW",
+    make: "Bajaj",
+    model: "Compact RE",
+    registration: "KA-01-AD-9876"
+};
 function generateOTP(): string {
     return Math.floor(100000 + Math.random() * 900000).toString();
 }
@@ -37,34 +52,6 @@ function updateFulfillmentWithDriverInfo(fulfillment: any, sessionData: SessionD
             status: "UNCLAIMED"
         };
     }
-
-    // Ensure agent details are present
-    if (!fulfillment.agent) {
-        const defaultAgent: Agent = {
-            name: "Driver Name",
-            phone: "9856798567"
-        };
-        
-        fulfillment.agent = {
-            person: {
-                name: defaultAgent.name
-            },
-            contact: {
-                phone: defaultAgent.phone
-            }
-        };
-    }
-
-    // Add vehicle details if not present
-    if (!fulfillment.vehicle) {
-        fulfillment.vehicle = {
-            category: "AUTO_RICKSHAW",
-            variant: "AUTO_RICKSHAW",
-            make: "Bajaj",
-            model: "Compact RE",
-            registration: "KA-01-AD-9876"
-        };
-    }
 }
 
 export async function onConfirmGenerator(
@@ -77,12 +64,23 @@ export async function onConfirmGenerator(
     // Update order status to ACTIVE
     existingPayload.message.order.status = "ACTIVE";
 
+    if (existingPayload.message.order.fulfillments[0]["_EXTERNAL"]){
+        delete existingPayload.message.order.fulfillments[0]["_EXTERNAL"]
+      }
+      existingPayload.message.order.payments = sessionData.payments
+      if (existingPayload.message.order.payments[0]["_EXTERNAL"]){
+          delete existingPayload.message.order.payments[0]["_EXTERNAL"]
+      }
+
     // Update fulfillments with driver information
     if (sessionData.fulfillments?.length > 0) {
         sessionData.fulfillments.forEach(fulfillment => {
             updateFulfillmentWithDriverInfo(fulfillment, sessionData);
         });
-        existingPayload.message.order.fulfillments = sessionData.fulfillments;
+        existingPayload.message.order.fulfillments = sessionData.selected_fulfillments;
+        existingPayload.message.order.fulfillments[0]["state"] = {"descriptor": {"code": "RIDE_ASSIGNED"}}
+        existingPayload.message.order.fulfillments[0]["agent"] = agent
+        existingPayload.message.order.fulfillments[0]["vehicle"] = vehicle
     }
 
     // Update items if present
@@ -123,9 +121,22 @@ export async function onConfirmGenerator(
             reason_required: true
         }
     ];
-
+    if (existingPayload.message.order.fulfillments[0]["_EXTERNAL"]){
+        delete existingPayload.message.order.fulfillments[0]["_EXTERNAL"]
+      }
+      existingPayload.message.order.payments = sessionData.payments
+      if (existingPayload.message.order.payments[0]["_EXTERNAL"]){
+          delete existingPayload.message.order.payments[0]["_EXTERNAL"]
+      }
     // Update timestamps
     existingPayload = updateOrderTimestamps(existingPayload);
-
+    existingPayload.message.order.fulfillments["type"] = "DELIVERY"
+    if (existingPayload.message.order.fulfillments[0]["_EXTERNAL"]){
+        delete existingPayload.message.order.fulfillments[0]["_EXTERNAL"]
+    }
+    existingPayload.message.order.payments = sessionData.payments
+    if (existingPayload.message.order.payments[0]["_EXTERNAL"]){
+        delete existingPayload.message.order.payments[0]["_EXTERNAL"]
+    }
     return existingPayload;
 }

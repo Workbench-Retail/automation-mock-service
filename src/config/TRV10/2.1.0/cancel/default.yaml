@@ -1,10 +1,6 @@
-{
-  "message": {
-    "cancellation_reason_id": "007",
-    "descriptor": {
-      "code": "SOFT_CANCEL",
-      "name": "Ride Cancellation"
-    },
-    "order_id": "O1"
-  }
-}
+message:
+  cancellation_reason_id: '005'
+  descriptor:
+    code: SOFT_CANCEL
+    name: Ride Cancellation
+  order_id: O1

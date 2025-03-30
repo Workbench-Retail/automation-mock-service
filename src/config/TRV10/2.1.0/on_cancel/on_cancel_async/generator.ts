@@ -1,3 +1,5 @@
+import { SessionData } from "../../../session-types";
+
 type Price = {
   value: string;
   currency: string;
@@ -76,7 +78,7 @@ function applyCancellation(quote: Quote, cancellationCharges: number): Quote {
   };
 }
 
-export async function onCancelAsyncGenerator(existingPayload: any, sessionData: any) {
+export async function onCancelAsyncGenerator(existingPayload: any, sessionData: SessionData) {
   if (sessionData.updated_payments?.length > 0) {
     existingPayload.message.order.payments = sessionData.updated_payments;
   }
@@ -86,7 +88,7 @@ export async function onCancelAsyncGenerator(existingPayload: any, sessionData: 
   }
 
   if (sessionData.fulfillments?.length > 0) {
-    existingPayload.message.order.fulfillments = sessionData.fulfillments;
+    existingPayload.message.order.fulfillments = sessionData.selected_fulfillments;
   }
 
   if (sessionData.order_id) {
@@ -97,6 +99,5 @@ export async function onCancelAsyncGenerator(existingPayload: any, sessionData: 
     // Using standard cancellation charges for async cancellation
     existingPayload.message.order.quote = applyCancellation(sessionData.quote, 20);
   }
-
   return existingPayload;
 }

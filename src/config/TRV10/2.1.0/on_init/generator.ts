@@ -80,10 +80,11 @@ function applyCancellationCharges(quote: Quote, state: string): Quote {
     };
 }
 
-export async function onUpdateGenerator(
+export async function onInitGenerator(
     existingPayload: any,
     sessionData: SessionData
 ) {
+    const randomPaymentId = Math.random().toString(36).substring(2, 15);
     // Update payments if present
     if (sessionData.updated_payments?.length > 0) {
         existingPayload.message.order.payments = sessionData.updated_payments;
@@ -91,12 +92,14 @@ export async function onUpdateGenerator(
 
     // Update items if present
     if (sessionData.items?.length > 0) {
+        
         existingPayload.message.order.items = sessionData.items;
+        existingPayload.message.order.items[0]["payment_ids"] = [randomPaymentId]
     }
 
     // Update fulfillments if present
     if (sessionData.fulfillments?.length > 0) {
-        existingPayload.message.order.fulfillments = sessionData.fulfillments;
+        existingPayload.message.order.fulfillments = sessionData.selected_fulfillments;
     }
 
     // Update order status if present
@@ -127,6 +130,19 @@ export async function onUpdateGenerator(
             }
         };
     }
+
+
+    if(sessionData.payments.length > 0){
+        existingPayload.message.order.payments["id"] = randomPaymentId
+        }
+
+    if (existingPayload.message.order.fulfillments[0]["_EXTERNAL"]){
+        delete existingPayload.message.order.fulfillments[0]["_EXTERNAL"]
+      }
+      existingPayload.message.order.payments = sessionData.payments
+      if (existingPayload.message.order.payments[0]["_EXTERNAL"]){
+        delete existingPayload.message.order.payments[0]["_EXTERNAL"]
+      }
 
     // Update timestamps
     existingPayload.message.order.updated_at = new Date().toISOString();

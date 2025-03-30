@@ -58,7 +58,6 @@ export async function onConfirmMultipleStopsGenerator(
     existingPayload.message.order.fulfillments = updateFulfillments(existingPayload.message.order.fulfillments)
     existingPayload.message.order.fulfillments[0]["agent"] = agent
     existingPayload.message.order.fulfillments[0]["state"] = {"descriptor": {"code": "RIDE_ASSIGNED"}}
-    console.log("Hi, in this function")
     }
     if(sessionData.quote != null){
     existingPayload.message.order.quote = sessionData.quote
@@ -69,5 +68,12 @@ export async function onConfirmMultipleStopsGenerator(
     existingPayload.message.order.id = order_id;
     existingPayload.message.order.status = "ACTIVE"
     existingPayload.message.order.payments = sessionData.payments;
+    if (existingPayload.message.order.fulfillments[0]["_EXTERNAL"]){
+        delete existingPayload.message.order.fulfillments[0]["_EXTERNAL"]
+    }
+    existingPayload.message.order.payments = sessionData.payments
+    if (existingPayload.message.order.payments[0]["_EXTERNAL"]){
+        delete existingPayload.message.order.payments[0]["_EXTERNAL"]
+    }
     return existingPayload;
 }
