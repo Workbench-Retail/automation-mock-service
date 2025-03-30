@@ -12,6 +12,8 @@ const getPaymentStatus = (paymentType: string, orderState: string) => {
   if (paymentType === "POST-FULFILLMENT") {
     return "NOT-PAID";
   }
+
+  return "NOT-PAID";
 };
 
 export const onStatusGenerator = async (
