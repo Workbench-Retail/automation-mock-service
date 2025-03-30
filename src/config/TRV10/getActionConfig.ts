@@ -188,6 +188,13 @@ function getActionConfig() {
         "action_id": "cancel",
         "action": "cancel",
         "default": "2.1.0/cancel/default.yaml",
+        "message_id": true
+    },
+    {
+        "code": 127,
+        "action_id": "on_cancel",
+        "action": "on_cancel",
+        "default": "2.1.0/on_cancel/on_cancel_soft/default.yaml",
         "message_id": false
     },
     {

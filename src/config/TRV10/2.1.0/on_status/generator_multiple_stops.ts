@@ -20,10 +20,10 @@ export async function onStatusMultipleStopsGenerator(existingPayload: any,sessio
     }
     if (existingPayload.message.order.fulfillments[0]["_EXTERNAL"]){
       delete existingPayload.message.order.fulfillments[0]["_EXTERNAL"]
-    }
-    existingPayload.message.order.payments = sessionData.payments
-    if (existingPayload.message.order.payments[0]["_EXTERNAL"]){
-        delete existingPayload.message.order.payments[0]["_EXTERNAL"]
-    }
+  }
+  existingPayload.message.order.payments = sessionData.payments
+  if (existingPayload.message.order.payments[0]["_EXTERNAL"]){
+      delete existingPayload.message.order.payments[0]["_EXTERNAL"]
+  }
     return existingPayload;
 }

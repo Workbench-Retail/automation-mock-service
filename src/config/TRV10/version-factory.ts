@@ -20,11 +20,11 @@ export async function createMockResponse(
     payload = await createMockReponseTRV10(action_id,sessionData)
   }
   if (data.npType === "BAP") {
-    payload.context.bap_uri = data.subscriberUrl;
-    payload.context.bpp_uri = createSellerUrl(data.domain, data.version);
-  } else {
-    payload.context.bpp_uri = data.subscriberUrl;
-    payload.context.bap_uri = createBuyerUrl(data.domain, data.version);
-  }
+		payload.context.bap_uri = data.subscriberUrl;
+		payload.context.bpp_uri = createSellerUrl(data.domain, data.version);
+	} else {
+		payload.context.bpp_uri = data.subscriberUrl;
+		payload.context.bap_uri = createBuyerUrl(data.domain, data.version);
+	}
   return payload
 }

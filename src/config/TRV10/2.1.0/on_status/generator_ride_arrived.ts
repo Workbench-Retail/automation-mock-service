@@ -14,5 +14,12 @@ function updateFulfillmentStatus(order: any) {
 export async function onStatusRideArrivedGenerator(existingPayload: any,sessionData: SessionData){
     existingPayload = await onStatusMultipleStopsGenerator(existingPayload,sessionData)
     existingPayload.message.order = updateFulfillmentStatus(existingPayload.message.order)
+    if (existingPayload.message.order.fulfillments[0]["_EXTERNAL"]){
+      delete existingPayload.message.order.fulfillments[0]["_EXTERNAL"]
+    }
+    existingPayload.message.order.payments = sessionData.payments
+    if (existingPayload.message.order.payments[0]["_EXTERNAL"]){
+      delete existingPayload.message.order.payments[0]["_EXTERNAL"]
+    }
     return existingPayload;
 }
