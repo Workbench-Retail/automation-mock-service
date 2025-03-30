@@ -3,3 +3,4 @@ save-data:
   billing: "$.message.order.billing"
   message_id: "$.context.message_id"
   items: "$.message.order.items[*]"
+  payment: "$.message.order.payment"

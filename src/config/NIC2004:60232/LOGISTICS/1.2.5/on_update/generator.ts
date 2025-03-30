@@ -78,5 +78,9 @@ export const onUpdateGenerator = (
 
   existingPayload.message.order.quote = sessionData.quote;
 
+  if (sessionData.payment) {
+    existingPayload.message.order.payment = sessionData.payment;
+  }
+
   return existingPayload;
 };

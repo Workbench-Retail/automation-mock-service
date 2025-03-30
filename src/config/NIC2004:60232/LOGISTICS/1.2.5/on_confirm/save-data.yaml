@@ -3,3 +3,4 @@ save-data:
   fulfillment_status: "$.message.order.fulfillments[0].state.descriptor.code"
   fulfillments: "$.message.order.fulfillments[*]"
   order_updated_at_timestamp: "$.message.order.updated_at"
+  payment: "$.message.order.payment"

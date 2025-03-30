@@ -12,6 +12,7 @@ import { onStatusGenerator } from "./on_status/generator";
 import { onTrackGenerator } from "./on_track/generator";
 import { onCancelGenerator } from "./on_cancel/generators";
 import { statusGenerator } from "./status/generator";
+import { search1Generator } from "./search/search_1/generator";
 
 export async function Generator(
   action_id: string,
@@ -62,12 +63,19 @@ export async function Generator(
         ...sessionData,
         stateCode: "RTO-Delivered",
       });
+    case "on_status_5_LOGISTICS":
+      return await onStatusGenerator(existingPayload, {
+        ...sessionData,
+        stateCode: "At-pickup",
+      });
     case "on_track_LOGISTICS":
       return await onTrackGenerator(existingPayload, sessionData);
     case "on_cancel_LOGISTICS":
       return await onCancelGenerator(existingPayload, sessionData);
     case "status_LOGISTICS":
       return await statusGenerator(existingPayload, sessionData);
+    case "search_1_LOGISITCS":
+      return await search1Generator(existingPayload, sessionData);
     default:
       throw new Error(`Invalid request type ${action_id}`);
   }

@@ -4,3 +4,4 @@ save-data:
   fulfillment_pickup_timestamp: "$.message.order.fulfillments[?(@.type=='Delivery')].start.time.timestamp"
   fulfillments: "$.message.order.fulfillments[*]"
   order_updated_at_timestamp: "$.message.order.updated_at"
+  payment: "$.message.order.payment"

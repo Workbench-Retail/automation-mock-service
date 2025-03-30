@@ -74,7 +74,7 @@ export const populateFulfillmentConfim = (
       fulfillment.tags.forEach((tag: any) => {
         if (tag.code === "state") {
           tag.list.forEach((item: any) => {
-            if (item.code === "ready_to_ship" && item.value == "yse") {
+            if (item.code === "ready_to_ship" && item.value == "yes") {
               isReadyToShip = true;
             }
           });
@@ -84,7 +84,11 @@ export const populateFulfillmentConfim = (
       fulfillment.tracking = true;
 
       if (isReadyToShip) {
-        fulfillment.state.descriptor.code = "Agent-assigned";
+        fulfillment.state = {
+          descriptor: {
+            code: "Agent-assigned",
+          },
+        };
         fulfillment.agent = {
           name: "person_name",
           phone: "9886098860",

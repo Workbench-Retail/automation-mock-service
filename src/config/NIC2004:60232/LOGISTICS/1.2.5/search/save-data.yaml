@@ -11,3 +11,5 @@ save-data:
   bap_id: "$.context.bap_id"
   bap_uri: "$.context.bap_uri"
   city_code: "$.context.city"
+  payment_type: "$.message.intent.payment.type"
+  is_cod: $.message.intent.fulfillment.tags[?(@.code == "linked_order")].list[?(@.code == "cod_order")].value

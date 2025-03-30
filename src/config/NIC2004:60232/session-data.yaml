@@ -32,3 +32,6 @@ session_data:
   ttl: null
   usecaseId: null
   on_search_items: []
+  payment_type: null
+  payment: {}
+  is_cod: null

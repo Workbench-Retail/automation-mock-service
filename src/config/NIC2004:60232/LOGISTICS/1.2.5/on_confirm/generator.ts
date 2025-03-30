@@ -44,5 +44,37 @@ export const onConfirmGenerator = (
 
   existingPayload.message.order.quote = sessionData.quote;
 
+  if (sessionData.payment) {
+    existingPayload.message.order.payment = sessionData.payment;
+  }
+
+  if (
+    sessionData.payment_type === "ON-ORDER" &&
+    existingPayload.message.order.payment.collected_by === "BPP"
+  ) {
+    existingPayload.message.order.payment.params = {
+      currency: "INR",
+      transaction_id: "txn1234",
+      amount: existingPayload.message.order.quote.price.value,
+    };
+    existingPayload.message.order.payment.tags = [
+      {
+        code: "wallet_balance",
+        list: [
+          {
+            code: "currency",
+            value: "INR",
+          },
+          {
+            code: "value",
+            value: (
+              5000 - parseInt(existingPayload.message.order.quote.price.value || "4850")
+            ).toString(),
+          },
+        ],
+      },
+    ];
+  }
+
   return existingPayload;
 };

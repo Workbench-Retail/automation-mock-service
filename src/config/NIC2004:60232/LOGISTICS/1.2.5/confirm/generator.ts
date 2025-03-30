@@ -197,13 +197,61 @@ export const confirmGenerator = (
       list: [
         {
           code: "ready_to_ship",
-          value: "no",
+          value:
+            sessionData.category_id === "Immediate Delivery" ? "yes" : "no",
         },
       ],
     },
     {
       code: "rto_action",
+      list: [
+        {
+          code: "return_to_origin",
+          value: "yes",
+        },
+      ],
     },
+    ...(sessionData?.is_cod === "yes"
+      ? [
+          {
+            code: "cod_settlement_detail",
+            list: [
+              {
+                code: "settlement_window",
+                value: "P0D",
+              },
+              {
+                code: "settlement_type",
+                value: "neft",
+              },
+              {
+                code: "beneficiary_name",
+                value: "XXXXXXXXXX",
+              },
+              {
+                code: "upi_address",
+                value: "",
+              },
+              {
+                code: "bank_account_no",
+                value: "XXXXXXXXXX",
+              },
+              {
+                code: "ifsc_code",
+                value: "XXXXXXXXX",
+              },
+              {
+                code: "bank_name",
+                value: "xxxx",
+              },
+              {
+                code: "branch_name",
+                value: "xxxx",
+              },
+            ],
+          },
+        ]
+      : []),
   ];
 
   existingPayload.message.order.fulfillments[0].tags = tags;
@@ -216,6 +264,10 @@ export const confirmGenerator = (
 
   existingPayload.message.order.created_at = existingPayload.context.timestamp;
   existingPayload.message.order.updated_at = existingPayload.context.timestamp;
+
+  if (sessionData.payment) {
+    existingPayload.message.order.payment = sessionData.payment;
+  }
 
   return existingPayload;
 };

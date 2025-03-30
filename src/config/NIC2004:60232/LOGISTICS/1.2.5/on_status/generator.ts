@@ -1,5 +1,19 @@
 import { SessionData } from "../../../session-types";
 
+const getPaymentStatus = (paymentType: string, orderState: string) => {
+  if (paymentType === "ON-FULFILLMENT" && orderState === "Completed") {
+    return "PAID";
+  }
+
+  if (paymentType === "ON-ORDER") {
+    return "PAID";
+  }
+
+  if (paymentType === "POST-FULFILLMENT") {
+    return "NOT-PAID";
+  }
+};
+
 export const onStatusGenerator = async (
   existingPayload: any,
   sessionData: SessionData
@@ -57,12 +71,43 @@ export const onStatusGenerator = async (
           return fulfillemt;
         });
       break;
+    case "At-pickup":
+      existingPayload.message.order.state = "In-progress";
+      existingPayload.message.order.fulfillments =
+        existingPayload.message.order.fulfillments.map((fulfillemt: any) => {
+          fulfillemt.state.descriptor.code = sessionData.stateCode;
+          return fulfillemt;
+        });
+      break;
     case "Order-delivered":
       existingPayload.message.order.state = "Completed";
       existingPayload.message.order.fulfillments =
         existingPayload.message.order.fulfillments.map((fulfillemt: any) => {
           fulfillemt.state.descriptor.code = sessionData.stateCode;
           fulfillemt.end.time.timestamp = existingPayload.context.timestamp;
+          if (sessionData?.is_cod === "yes") {
+            fulfillemt.tags.push({
+              code: "cod_collection_detail",
+              list: [
+                {
+                  code: "currency",
+                  value: "INR",
+                },
+                {
+                  code: "value",
+                  value: "325.00",
+                },
+                {
+                  code: "transaction_id",
+                  value: "3937",
+                },
+                {
+                  code: "timestamp",
+                  value: existingPayload.context.timestamp,
+                },
+              ],
+            });
+          }
           return fulfillemt;
         });
       break;
@@ -109,6 +154,31 @@ export const onStatusGenerator = async (
   existingPayload.message.order.updated_at = existingPayload.context.timestamp;
 
   existingPayload.message.order.quote = sessionData.quote;
+
+  if (sessionData.payment) {
+    existingPayload.message.order.payment = sessionData.payment;
+  }
+
+  existingPayload.message.order.payment.status = getPaymentStatus(
+    sessionData.payment_type as string,
+    existingPayload.message.order.state
+  );
+
+  if (
+    sessionData.payment_type === "ON-FULFILLMENT" &&
+    existingPayload.message.order.state === "Completed"
+  ) {
+    existingPayload.message.order.payment["@ondc/org/settlement_details"] = [
+      {
+        ...existingPayload.message.order.payment[
+          "@ondc/org/settlement_details"
+        ][0],
+        settlement_status: "PAID",
+        settlement_reference: "XXXXXXXXX",
+        settlement_timestamp: existingPayload.context.timestamp,
+      },
+    ];
+  }
 
   return existingPayload;
 };

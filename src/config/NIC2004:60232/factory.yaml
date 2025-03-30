@@ -94,3 +94,13 @@ codes:
     action: on_status
     default: on_status/default.yaml
     message_id: false
+  - code: 116
+    action_id: on_status_5_LOGISTICS
+    action: on_status
+    default: on_status/default.yaml
+    message_id: false
+  - code: 117
+    action_id: search_1_LOGISITCS
+    action: search
+    default: search/search_1/default.yaml
+    message_id: true

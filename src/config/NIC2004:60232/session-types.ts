@@ -11,7 +11,7 @@ export interface SessionData {
   bpp_uri: string | undefined;
   category_id?: string;
   shipment_method?: any;
-  fulfillments?: string;
+  fulfillments?: any[];
   provider_id?: string;
   location_id?: string;
   error_code?: string;
@@ -41,6 +41,9 @@ export interface SessionData {
   on_search_items?: any[];
   quote?: any;
   usecaseId?: string;
+  payment_type?: string;
+  payment?: any;
+  is_cod?: string;
 }
 
 export type BecknContext = {

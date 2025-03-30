@@ -1,7 +1,7 @@
 message:
   tracking:
     id: F1
-    url: "https://lsp.com/ondc/track/F1"
+    url: "https://lsp.com/ondc/track/"
     location:
       gps: "12.9740,77.6134"
       time:

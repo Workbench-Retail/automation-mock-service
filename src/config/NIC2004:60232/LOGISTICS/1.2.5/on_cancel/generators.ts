@@ -157,5 +157,9 @@ export const onCancelGenerator = (
     };
   }
 
+  if (sessionData.payment) {
+    existingPayload.message.order.payment = sessionData.payment;
+  }
+
   return existingPayload;
 };

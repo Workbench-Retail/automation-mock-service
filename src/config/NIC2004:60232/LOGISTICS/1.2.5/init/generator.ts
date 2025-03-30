@@ -1,4 +1,19 @@
+import { String } from "aws-sdk/clients/apigateway";
 import { SessionData } from "../../../session-types";
+
+const getPayemntFields = (paymentType: string) => {
+  if (paymentType === "ON-ORDER" || paymentType === "ON-FULFILLMENT") {
+    return { collected_by: "BPP" };
+  }
+
+  if (paymentType === "POST-FULFILLMENT") {
+    return {
+      collected_by: "BAP",
+      "@ondc/org/settlement_basis": "invoicing",
+      "@ondc/org/settlement_window": "P15D",
+    };
+  }
+};
 
 export const initGenerator = async (
   existingPayload: any,
@@ -10,14 +25,35 @@ export const initGenerator = async (
 
   sessionData?.on_search_items?.forEach((item: any) => {
     if (item.fulfillment_id === sessionData.on_search_fulfillment.id) {
-      existingPayload.message.order.items[0] = {
-        id: item.id,
-        fulfillment_id: sessionData.on_search_fulfillment.id,
-        category_id: item.category_id,
-        descriptor: {
-          code: item.descriptor.code,
-        },
-      };
+      if (
+        !(sessionData?.is_cod === "yes") ||
+        (sessionData?.is_cod === "yes" && item.tags[0].list[0].value === "base")
+      ) {
+        existingPayload.message.order.items[0] = {
+          id: item.id,
+          fulfillment_id: sessionData.on_search_fulfillment.id,
+          category_id: item.category_id,
+          descriptor: {
+            code: item.descriptor.code,
+          },
+          tags: sessionData?.is_cod === "yes" ? item?.tags : undefined,
+        };
+      }
+
+      if (
+        sessionData?.is_cod === "yes" &&
+        item.tags[0].list[0].value === "cod"
+      ) {
+        existingPayload.message.order.items[1] = {
+          id: item.id,
+          fulfillment_id: sessionData.on_search_fulfillment.id,
+          category_id: item.category_id,
+          descriptor: {
+            code: item.descriptor.code,
+          },
+          tags: item?.tags,
+        };
+      }
     }
   });
 
@@ -82,5 +118,11 @@ export const initGenerator = async (
     existingPayload.context.timestamp;
   existingPayload.message.order.billing.updated_at =
     existingPayload.context.timestamp;
+
+  existingPayload.message.order.payment = {
+    type: sessionData.payment_type,
+    ...getPayemntFields(sessionData.payment_type as String),
+  };
+
   return existingPayload;
 };

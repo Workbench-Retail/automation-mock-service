@@ -1,3 +1,5 @@
+import { SessionData } from "../../../session-types";
+
 const TatMapping: any = {
   "Immediate Delivery": { code: "PT60M", day: 0 },
   "Same Day Delivery": { code: "PT4H", day: 0 },
@@ -15,7 +17,7 @@ function getDateFromToday(days: number) {
 
 export async function onSearch1Generator(
   existingPayload: any,
-  sessionData: any
+  sessionData: SessionData
 ) {
   // bb/descriptor mai date should be same as context "effective_date"
 
@@ -37,8 +39,10 @@ export async function onSearch1Generator(
     id: sessionData.category_id,
     time: {
       label: "TAT",
-      duration: TatMapping[sessionData.category_id].code,
-      timestamp: getDateFromToday(TatMapping[sessionData.category_id].day),
+      duration: TatMapping[sessionData?.category_id as string].code,
+      timestamp: getDateFromToday(
+        TatMapping[sessionData?.category_id as string].day
+      ),
     },
   };
   existingPayload.message.catalog["bpp/providers"][0].categories[0] =
@@ -51,20 +55,81 @@ export async function onSearch1Generator(
       (item: any) => {
         item.time = {
           label: "TAT",
-          duration: TatMapping[sessionData.category_id].code,
-          timestamp: getDateFromToday(TatMapping[sessionData.category_id].day),
+          duration: TatMapping[sessionData.category_id as string].code,
+          timestamp: getDateFromToday(
+            TatMapping[sessionData.category_id as string].day
+          ),
         };
 
         return item;
       }
     );
 
-  let items = existingPayload.message.catalog["bpp/providers"][0].items;
+  existingPayload.message.catalog["bpp/providers"][0].items =
+    existingPayload.message.catalog["bpp/providers"][0].items.map(
+      (item: any) => {
+        item.category_id = sessionData?.category_id;
+        item.descriptor.code = sessionData?.shipment_method;
 
-  items[0].category_id = sessionData?.category_id;
-  items[0].descriptor.code = sessionData?.shipment_method;
-  items[1].category_id = sessionData?.category_id;
-  items[1].descriptor.code = sessionData?.shipment_method;
+        return item;
+      }
+    );
+
+  if (sessionData?.is_cod === "yes") {
+    existingPayload.message.catalog["bpp/providers"][0].items[0].tags = [
+      {
+        code: "type",
+        list: [
+          {
+            code: "type",
+            value: "base",
+          },
+        ],
+      },
+    ];
+  }
+
+  if (sessionData?.is_cod === "yes") {
+    existingPayload.message.catalog["bpp/providers"][0].items.push({
+      id: "C1",
+      parent_item_id: "..",
+      category_id: sessionData?.category_id,
+      fulfillment_id: "1",
+      descriptor: {
+        code: "P2P",
+        name: "COD Fee",
+        short_desc: "COD Fee",
+        long_desc: "Cash on delivery fee",
+      },
+      price: {
+        currency: "INR",
+        value: "19.18",
+      },
+      tags: [
+        {
+          code: "type",
+          list: [
+            {
+              code: "type",
+              value: "cod",
+            },
+          ],
+        },
+      ],
+    });
+
+    existingPayload.message.catalog["bpp/providers"][0].tags = [
+      {
+        code: "special_req",
+        list: [
+          {
+            code: "cod_order",
+            value: "yes",
+          },
+        ],
+      },
+    ];
+  }
 
   return existingPayload;
 }
