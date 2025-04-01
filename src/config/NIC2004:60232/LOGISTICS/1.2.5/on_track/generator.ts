@@ -9,13 +9,15 @@ export const onTrackGenerator = async (
   }
 
   const contextTimestamp = existingPayload.context.timestamp;
-  existingPayload.message.tracking.location = {
-    gps: "12.9740,77.6134",
-    time: {
-      timestamp: contextTimestamp,
-    },
-    updated_at: contextTimestamp,
-  };
+  if (sessionData.shipment_method === "P2P") {
+    existingPayload.message.tracking.location = {
+      gps: "12.9740,77.6134",
+      time: {
+        timestamp: contextTimestamp,
+      },
+      updated_at: contextTimestamp,
+    };
+  }
 
   const tags = [
     {
