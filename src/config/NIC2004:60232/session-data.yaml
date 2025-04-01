@@ -35,3 +35,4 @@ session_data:
   payment_type: null
   payment: {}
   is_cod: null
+  cancellation: {}

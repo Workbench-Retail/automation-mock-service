@@ -44,6 +44,7 @@ export interface SessionData {
   payment_type?: string;
   payment?: any;
   is_cod?: string;
+  cancellation?: any;
 }
 
 export type BecknContext = {

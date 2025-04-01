@@ -15,6 +15,8 @@ export const onUpdateGenerator = (
   existingPayload: any,
   sessionData: SessionData
 ) => {
+  existingPayload.message.order.id = sessionData.order_id;
+
   if (sessionData?.fulfillments) {
     existingPayload.message.order.fulfillments = sessionData.fulfillments;
   }
@@ -80,6 +82,18 @@ export const onUpdateGenerator = (
 
   if (sessionData.payment) {
     existingPayload.message.order.payment = sessionData.payment;
+  }
+
+  if (sessionData?.items) {
+    existingPayload.message.order.items = sessionData.items;
+  }
+
+  if (sessionData?.billing) {
+    existingPayload.message.order.billing = sessionData.billing;
+  }
+
+  if (sessionData?.quote) {
+    existingPayload.message.order.quote = sessionData.quote;
   }
 
   return existingPayload;

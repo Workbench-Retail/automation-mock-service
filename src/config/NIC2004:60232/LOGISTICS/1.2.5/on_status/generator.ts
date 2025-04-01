@@ -145,10 +145,6 @@ export const onStatusGenerator = async (
       existingPayload.message.order.state = "In-progress";
   }
 
-  existingPayload.message.order.fulfillments.forEach((fulfillment: any) => {
-    fulfillment.start.time.timestamp = existingPayload.context.timestamp;
-  });
-
   if (sessionData?.billing) {
     existingPayload.message.order.billing = sessionData.billing;
   }
@@ -180,6 +176,14 @@ export const onStatusGenerator = async (
         settlement_timestamp: existingPayload.context.timestamp,
       },
     ];
+  }
+
+  if (sessionData?.items) {
+    existingPayload.message.order.items = sessionData.items;
+  }
+
+  if (sessionData?.cancellation) {
+    existingPayload.message.order.cancellation = sessionData.cancellation;
   }
 
   return existingPayload;
