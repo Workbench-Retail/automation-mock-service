@@ -5,3 +5,4 @@ save-data:
   end_location: "$.message.intent.fulfillment.stops[?(@.type=='END')].location.gps"
   payment_collected_by: "$.message.intent.payment.collected_by"
   stops: "$.message.intent.fulfillment.stops[*]"
+  collected_by: "$.message.intent.payment.collected_by"

@@ -36,3 +36,6 @@ session_data:
   update_quote: []
   selected_fulfillments: []
   bap_items: []
+  collected_by: null
+  updated_price: null
+  selected_add_ons: []

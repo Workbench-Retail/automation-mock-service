@@ -41,6 +41,15 @@ import { cancelMultipleStopsHardGenerator } from "./cancel/generator-hard-cancel
 import { onCancelHardGenerator } from "./on_cancel/on_cancel_hard/generator";
 import { onCancelRiderNotFoundGenerator } from "./on_cancel/on_cancel_rider_not_found/generator";
 import { onUpdateMultipleStopsGenerator } from "./on_update/generator_multiple_stops";
+import { onStatusRideAssignedGenerator } from "./on_status/generator_ride_assigned";
+import { onUpdateRideEndedGenerator } from "./on_update/generator_ride_ended";
+import { selectPreOrderBidGenerator } from "./select/generator-pre-order-bid";
+import { selectMultipleStopsRentalGenerator } from "./select/generator-rental";
+import { onSelectMultipleStopsRentalGenerator } from "./on_select/generator-rental";
+import { searchMultipleStopsScheduleRentalGenerator } from "./search/generator-schedule-rental";
+import { onSearchScheduleRentalGenerator } from "./on_search/generator_schedule_rental";
+import { onUpdateRideAssignedGenerator } from "./on_update/generator_ride_assigned";
+import { searchMultipleStopsScheduleTripGenerator } from "./search/generator-schedule-trip";
 
 
 export async function Generator(
@@ -73,12 +82,12 @@ export async function Generator(
             return await onTrackMultipleStopsGenerator(existingPayload, sessionData);
         case "on_status_ride_arrived":
             return await onStatusRideArrivedGenerator(existingPayload, sessionData);
+        case "on_status_ride_arrived_2":
+            return await onStatusRideArrivedGenerator(existingPayload, sessionData);
         case "on_status_ride_started":
             return await onStatusRideStartedGenerator(existingPayload, sessionData);
         case "on_update":
-            return await onUpdateMultipleStopsGenerator(existingPayload, sessionData);
-        case "on_update_2":
-            return await onUpdateMultipleStopsGenerator(existingPayload, sessionData);
+            return await onUpdateRideEndedGenerator(existingPayload, sessionData);
         case "status":
             return await statusMultipleStopsGenerator(existingPayload, sessionData);
         case "on_status_solicited":
@@ -151,7 +160,22 @@ export async function Generator(
             return await onCancelHardGenerator(existingPayload,sessionData)
         case "on_cancel_rider_not_found":
             return await onCancelRiderNotFoundGenerator(existingPayload,sessionData)
-        
+        case "select_preorder_bid":
+            return await selectPreOrderBidGenerator(existingPayload, sessionData);
+        case "select_rental":
+            return await selectMultipleStopsRentalGenerator(existingPayload,sessionData)
+        case "on_select_rental":
+            return await onSelectMultipleStopsRentalGenerator(existingPayload,sessionData)
+        case "search_schedule_rental":
+            return await searchMultipleStopsScheduleRentalGenerator(existingPayload,sessionData)
+        case "on_search_schedule_rental":
+            return await onSearchScheduleRentalGenerator(existingPayload,sessionData)
+        case "on_update_ride_assigned":
+            return await onUpdateRideAssignedGenerator(existingPayload,sessionData)
+        case "search_schedule_trip":
+            return await searchMultipleStopsScheduleTripGenerator(existingPayload,sessionData)
+        case "on_search_schedule_trip":
+            return await onSearchMultipleStopsGenerator(existingPayload,sessionData)
         default:
                 throw new Error(`Invalid request type ${action_id}`);
         }

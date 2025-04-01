@@ -1,3 +1,4 @@
+import { add } from "winston";
 import { SessionData } from "../../session-types";
 const fulfillment_tags = [
     {
@@ -154,9 +155,46 @@ function filterItemsById(sessionData: any, selected_item_id: string) {
     }
     return [];
   }
+  function generateAddOnQuote(addOn: any, items: any[]) {
+    for (const item of items) {
+        const foundAddOn = item.add_ons.find((a:any) => a.id === addOn.id);
+        if (foundAddOn) {
+            // Extract price and calculate total
+            const pricePerUnit = parseFloat(foundAddOn.price.value);
+            const quantity = addOn.quantity.selected.count;
+            const totalPrice = pricePerUnit * quantity;
 
-export async function onSelectMultipleStopsGenerator(existingPayload: any, sessionData: SessionData) {
-  console.log("In this function")
+            // Return the formatted output
+            return {
+                title: "ADD_ONS",
+                item: {
+                    id: item.id,
+                    add_ons: [
+                        {
+                            id: foundAddOn.id,
+                            price: {
+                                currency: foundAddOn.price.currency,
+                                value: foundAddOn.price.value
+                            },
+                            quantity: {
+                                selected: {
+                                    count: quantity
+                                }
+                            }
+                        }
+                    ]
+                },
+                price: {
+                    currency: foundAddOn.price.currency,
+                    value: totalPrice.toFixed(2)
+                }
+            };
+        }
+    }
+
+    return null; // Return null if no matching add-on is found
+}
+export async function onSelectMultipleStopsRentalGenerator(existingPayload: any, sessionData: SessionData) {
     const selected_item_id = sessionData.selected_item_id
     const item = filterItemsById(sessionData,selected_item_id)
     item[0]["tags"] = item_tags
@@ -164,12 +202,17 @@ export async function onSelectMultipleStopsGenerator(existingPayload: any, sessi
     if(sessionData.updated_price){
       existingPayload.message.order.items[0].price.value = sessionData.updated_price
     }
+    existingPayload.message.order.items[0].add_ons[0].quantity = {"selected": {
+        "count": sessionData.selected_add_ons[0].quantity.selected.count
+    }}
     const filteredFulfillments = filterFulfillmentsByItem(item[0],sessionData.fulfillments)
     filteredFulfillments[0]["tags"] = fulfillment_tags
     existingPayload.message.order.quote = generateQuoteFromItems(item)
+    const old_price = existingPayload.message.order.quote.price.value
+    const addon = generateAddOnQuote(sessionData.selected_add_ons[0],item)
+    const new_price = Number(old_price) + Number(addon?.price.value)
+    existingPayload.message.order.quote.price.value = String(new_price)
+    existingPayload.message.order.quote.breakup.push(addon)
     existingPayload.message.order.fulfillments = filteredFulfillments
-    existingPayload.message.order.quote.breakup = existingPayload.message.order.quote.breakup.filter(
-      (breakup: any) => breakup.title !== "ADD_ONS"
-    );
     return existingPayload;
 }

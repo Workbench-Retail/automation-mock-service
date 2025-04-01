@@ -12,13 +12,23 @@ const agent  = {
 function updateFulfillments(fulfillments: any[]) {
     return fulfillments.map(fulfillment => {
         // Add the vehicle object to each fulfillment
-        fulfillment.vehicle = {
-        category: "AUTO_RICKSHAW",
-        variant: "AUTO_RICKSHAW",
-        make: "Bajaj",
-        model: "Compact RE",
-        registration: "KA-01-AD-9876"
-        };
+        if(fulfillment.vehicle.category === "AUTO_RICKSHAW"){
+            fulfillment.vehicle = {
+                category: "AUTO_RICKSHAW",
+                variant: "AUTO_RICKSHAW",
+                make: "Bajaj",
+                model: "Compact RE",
+                registration: "KA-01-AD-9876"
+            };
+        } else {
+            fulfillment.vehicle = {
+                category: "CAB",
+                variant: "SEDAN",
+                make: "Maruti",
+                model: "Swift Dzire",
+                registration: "KA-01-AD-9876"
+            };
+        } 
     
         // Find the stop with type "START"
         const startStop = fulfillment.stops.find((stop:any) => stop.type === "START");
@@ -68,12 +78,5 @@ export async function onConfirmMultipleStopsGenerator(
     existingPayload.message.order.id = order_id;
     existingPayload.message.order.status = "ACTIVE"
     existingPayload.message.order.payments = sessionData.payments;
-    if (existingPayload.message.order.fulfillments[0]["_EXTERNAL"]){
-        delete existingPayload.message.order.fulfillments[0]["_EXTERNAL"]
-    }
-    existingPayload.message.order.payments = sessionData.payments
-    if (existingPayload.message.order.payments[0]["_EXTERNAL"]){
-        delete existingPayload.message.order.payments[0]["_EXTERNAL"]
-    }
     return existingPayload;
 }

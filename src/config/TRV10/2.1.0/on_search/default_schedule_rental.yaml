@@ -12,9 +12,8 @@ message:
                 instructions:
                   short_desc: short description of the location
                   long_desc: long description of the location
-              - location:
-                  gps: '12.971186, 77.586812'
-                type: END
+                time:
+                  timestamp: '2024-11-07T00:32:19.000Z'
             type: DELIVERY
             vehicle:
               category: AUTO_RICKSHAW
@@ -27,9 +26,8 @@ message:
                 instructions:
                   short_desc: short description of the location
                   long_desc: long description of the location
-              - location:
-                  gps: '12.971186, 77.586812'
-                type: END
+                time:
+                  timestamp: '2024-11-07T00:32:19.000Z'
             type: DELIVERY
             vehicle:
               category: CAB
@@ -40,7 +38,7 @@ message:
               code: RIDE
               name: Auto Ride
             category_ids:
-              - '198392'
+              - C4
             fulfillment_ids:
               - F1
             id: I1
@@ -52,19 +50,42 @@ message:
               maximum_value: '176'
               minimum_value: '136'
               value: '146'
+            add_ons:
+              - id: A1
+                price:
+                  currency: INR
+                  value: '20'
+                quantity:
+                  allocated:
+                    count: 1
+                  maximum:
+                    count: 10
+                  minimum:
+                    count: 1
+                  unitized:
+                    measure:
+                      value: '10'
+                      unit: KILOMETERS
+                descriptor:
+                  name: distance
+                  code: DISTANCE
             tags:
               - descriptor:
-                  code: FEATURE_LIST
-                  name: Feature list
+                  code: INFO
+                  name: General Information
+                display: true
                 list:
-                  - value: NON_AC
-                  - value: LOW_PRICE
-                  - value: DOORSTEP_PICK_UP
+                  - descriptor:
+                      code: TOTAL_HOUR
+                    value: '1'
+                  - descriptor:
+                      code: TOTAL_DISTANCE
+                    value: '10'
           - descriptor:
               code: RIDE
               name: CAB Economy Ride
             category_ids:
-              - '198392'
+              - C4
             fulfillment_ids:
               - F2
             id: I2
@@ -76,14 +97,37 @@ message:
               maximum_value: '236'
               minimum_value: '206'
               value: '206'
+            add_ons:
+              - id: A2
+                price:
+                  currency: INR
+                  value: '20'
+                quantity:
+                  allocated:
+                    count: 1
+                  maximum:
+                    count: 10
+                  minimum:
+                    count: 1
+                  unitized:
+                    measure:
+                      value: '1'
+                      unit: HOURS
+                descriptor:
+                  name: time
+                  code: TIME
             tags:
               - descriptor:
-                  code: FEATURE_LIST
-                  name: Feature list
+                  code: INFO
+                  name: General Information
+                display: true
                 list:
-                  - value: AC
-                  - value: LOW_PRICE
-                  - value: FREE_WIFI
+                  - descriptor:
+                      code: TOTAL_HOUR
+                    value: '1'
+                  - descriptor:
+                      code: TOTAL_DISTANCE
+                    value: '10'
         locations:
           - gps: '12.916468,77.608998'
             id: L1
@@ -96,14 +140,15 @@ message:
         payments:
           - collected_by: BPP
         categories:
-          - id: '198392'
+          - id: C4
             descriptor:
-              code: ON_DEMAND_TRIP
-              name: on demand
+              code: SCHEDULED_RENTAL
+              name: Rental
     tags:
       - descriptor:
           code: BPP_TERMS
           name: BPP Terms of Engagement
+        display: false
         list:
           - descriptor:
               code: BUYER_FINDER_FEES_PERCENTAGE

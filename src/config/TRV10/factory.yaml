@@ -233,3 +233,48 @@ codes:
     action: on_update
     default: TRV10/2.1.0/on_update/default.yaml
     message_id: true
+  - code: 147
+    action_id: select_preorder_bid
+    action: select
+    default: TRV10/2.1.0/select/default.yaml
+    message_id: true
+  - code: 148
+    action_id: on_status_ride_arrived_2
+    action: on_status
+    default: TRV10/2.1.0/on_status/default.yaml
+    message_id: true
+  - code: 149
+    action_id: select_rental
+    action: select
+    default: TRV10/2.1.0/select/default.yaml
+    message_id: true
+  - code: 150
+    action_id: on_select_rental
+    action: on_select
+    default: TRV10/2.1.0/on_select/default.yaml
+    message_id: false
+  - code: 151
+    action_id: search_schedule_rental
+    action: search
+    default: TRV10/2.1.0/search/default_schedule_rental.yaml
+    message_id: true
+  - code: 152
+    action_id: on_update_ride_assigned
+    action: on_update
+    default: TRV10/2.1.0/on_update/default.yaml
+    message_id: true
+  - code: 153
+    action_id: on_search_schedule_rental
+    action: on_search
+    default: TRV10/2.1.0/on_search/default_schedule_rental.yaml
+    message_id: false
+  - code: 154
+    action_id: search_schedule_trip
+    action: search
+    default: TRV10/2.1.0/search/default_schedule_trip.yaml
+    message_id: true
+  - code: 155
+    action_id: on_search_schedule_trip
+    action: on_search
+    default: TRV10/2.1.0/on_search/default_schedule_trip.yaml
+    message_id: false

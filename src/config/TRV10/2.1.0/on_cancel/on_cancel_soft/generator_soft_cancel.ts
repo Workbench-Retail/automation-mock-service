@@ -18,12 +18,22 @@ export async function onCancelSoftGenerator(existingPayload: any,sessionData: Se
     if(sessionData.quote != null){
     existingPayload.message.order.quote = sessionData.quote
     }
-    if (existingPayload.message.order.fulfillments[0]["_EXTERNAL"]){
-      delete existingPayload.message.order.fulfillments[0]["_EXTERNAL"]
-    }
-    existingPayload.message.order.payments = sessionData.payments
-    if (existingPayload.message.order.payments[0]["_EXTERNAL"]){
-      delete existingPayload.message.order.payments[0]["_EXTERNAL"]
-    }
+    let quote  = existingPayload.message.order.quote
+    const refund_price = existingPayload.message.order.quote.price.value
+    quote.breakup.push({
+      title: "CANCELLATION_CHARGES",
+      price: {
+          currency: "INR",
+          value: "10"
+      }
+    },{
+      title: "REFUND",
+      price: {
+          currency: "INR",
+          value: String("-" + refund_price)
+      }
+      })
+    existingPayload.message.order.quote.price = {currency: "INR",
+      value: "10"}
     return existingPayload;
 }

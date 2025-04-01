@@ -4,3 +4,4 @@ save-data:
   selected_items: "$.message.order.items[*]"
   selected_provider_id: "$.message.order.provider.id"
   updated_price: "$.message.order.items[0].price.value"
+  selected_add_ons: "$.message.order.items[*].add_ons[*]"
