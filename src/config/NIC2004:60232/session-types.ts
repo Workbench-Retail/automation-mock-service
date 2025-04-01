@@ -65,7 +65,7 @@ export type BecknContext = {
   message_id: string;
   timestamp: string;
   transaction_id: string;
-  ttl: string;
+  ttl?: string;
   core_version: string;
   country?: string;
   city?: string;

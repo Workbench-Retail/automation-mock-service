@@ -40,5 +40,10 @@ export async function createMockResponse(
     payload.context.bap_uri = createBuyerUrl(data.domain, data.version);
   }
 
+  if (action_id.startsWith("search")) {
+    delete payload.context.bpp_id;
+    delete payload.context.bpp_uri;
+  }
+
   return payload;
 }

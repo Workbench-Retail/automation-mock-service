@@ -74,6 +74,16 @@ export async function createMockReponseLOGISTICS200(
   };
 
   let context = createContext(context_object);
+
+  if (actionID.startsWith("search")) {
+    delete context.bpp_id;
+    delete context.bpp_uri;
+  }
+
+  if (actionID.startsWith("on_")) {
+    delete context.ttl;
+  }
+
   if (!api_details.message_id) {
     context.message_id = sessionData.message_id as string;
   }
