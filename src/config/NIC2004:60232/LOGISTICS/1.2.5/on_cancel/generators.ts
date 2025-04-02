@@ -102,7 +102,7 @@ export const onCancelGenerator = (
         }
 
         // check for diff tags
-        fulfillment.tags.mpa((tag: any) => {
+        fulfillment.tags.map((tag: any) => {
           if (tag.code === "linked_order_diff") {
             areDiffTagsPresent = true;
           }

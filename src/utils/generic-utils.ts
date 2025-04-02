@@ -43,3 +43,7 @@ export function getFutureDate(daysAhead: number): string {
 
   return futureDate.toISOString().split("T")[0];
 }
+
+export function isEmpty(obj: any) {
+  return Object.keys(obj).length === 0;
+}

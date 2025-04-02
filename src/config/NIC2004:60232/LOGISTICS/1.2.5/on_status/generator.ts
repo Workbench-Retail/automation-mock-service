@@ -1,5 +1,7 @@
 import { SessionData } from "../../../session-types";
 
+import { isEmpty } from "../../../../../utils/generic-utils";
+
 const getPaymentStatus = (paymentType: string, orderState: string) => {
   if (paymentType === "ON-FULFILLMENT" && orderState === "Completed") {
     return "PAID";
@@ -196,7 +198,7 @@ export const onStatusGenerator = async (
     existingPayload.message.order.items = sessionData.items;
   }
 
-  if (sessionData?.cancellation) {
+  if (isEmpty(sessionData?.cancellation)) {
     existingPayload.message.order.cancellation = sessionData.cancellation;
   }
 
