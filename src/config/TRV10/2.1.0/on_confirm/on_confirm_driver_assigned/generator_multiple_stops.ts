@@ -35,10 +35,12 @@ function updateFulfillments(fulfillments: any[]) {
     
         // If found, add the authorization object
         if (startStop) {
+            const now = new Date();
+            const newTime = new Date(now.getTime() + 15 * 60000).toISOString();
         startStop.authorization = {
             token: "234234",
             type: "OTP",
-            valid_to: "2023-12-10T08:05:34.294Z",
+            valid_to: newTime,
             status: "UNCLAIMED"
         };
         }
@@ -78,5 +80,8 @@ export async function onConfirmMultipleStopsGenerator(
     existingPayload.message.order.id = order_id;
     existingPayload.message.order.status = "ACTIVE"
     existingPayload.message.order.payments = sessionData.payments;
+    const now = new Date().toISOString();
+    existingPayload.message.order.created_at = now
+    existingPayload.message.order.updated_at = now 
     return existingPayload;
 }

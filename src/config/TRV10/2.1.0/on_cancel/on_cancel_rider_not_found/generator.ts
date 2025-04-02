@@ -38,6 +38,9 @@ export async function onCancelRiderNotFoundGenerator(existingPayload: any, sessi
 
     // Ensure order status is CANCELLED
     existingPayload.message.order.status = "CANCELLED";
+    const now = new Date().toISOString();
+    existingPayload.message.order.created_at = sessionData.created_at
+    existingPayload.message.order.updated_at = now 
 
     return existingPayload;
 }

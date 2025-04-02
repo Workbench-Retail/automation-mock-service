@@ -18,5 +18,9 @@ export async function onStatusMultipleStopsGenerator(existingPayload: any,sessio
     if(sessionData.quote != null){
     existingPayload.message.order.quote = sessionData.quote
     }
+    const now = new Date().toISOString();
+    existingPayload.message.order.created_at = sessionData.created_at
+    existingPayload.message.order.updated_at = now 
+    existingPayload.message.order.provider.id = sessionData.provider_id
     return existingPayload;
 }

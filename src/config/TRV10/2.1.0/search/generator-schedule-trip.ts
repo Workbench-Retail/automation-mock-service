@@ -2,5 +2,8 @@
 import { SessionData } from "../../session-types";
 
 export async function searchMultipleStopsScheduleTripGenerator(existingPayload: any,sessionData: SessionData){
+    const futureDate = new Date();
+    futureDate.setMonth(futureDate.getMonth() + 6);
+    existingPayload.message.intent.fulfillment.stops[0].time.timestamp = futureDate
     return existingPayload;
 }

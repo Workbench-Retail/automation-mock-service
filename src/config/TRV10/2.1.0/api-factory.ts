@@ -50,6 +50,7 @@ import { searchMultipleStopsScheduleRentalGenerator } from "./search/generator-s
 import { onSearchScheduleRentalGenerator } from "./on_search/generator_schedule_rental";
 import { onUpdateRideAssignedGenerator } from "./on_update/generator_ride_assigned";
 import { searchMultipleStopsScheduleTripGenerator } from "./search/generator-schedule-trip";
+import { onSelectMultipleStopsPreOrderGenerator } from "./on_select/generator-pre-order-bid";
 
 
 export async function Generator(
@@ -176,6 +177,8 @@ export async function Generator(
             return await searchMultipleStopsScheduleTripGenerator(existingPayload,sessionData)
         case "on_search_schedule_trip":
             return await onSearchMultipleStopsGenerator(existingPayload,sessionData)
+        case "on_select_preorder":
+            return await onSelectMultipleStopsPreOrderGenerator(existingPayload,sessionData)
         default:
                 throw new Error(`Invalid request type ${action_id}`);
         }

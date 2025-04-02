@@ -39,3 +39,4 @@ session_data:
   collected_by: null
   updated_price: null
   selected_add_ons: []
+  created_at: null

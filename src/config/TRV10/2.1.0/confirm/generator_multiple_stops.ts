@@ -16,5 +16,6 @@ export async function confirmMultipleStopsGenerator(existingPayload: any,session
         id : sessionData.selected_item_id 
     }
     existingPayload.message.order.payments = sessionData.payments
+    existingPayload.message.order.provider.id = sessionData.provider_id
     return existingPayload;
 }

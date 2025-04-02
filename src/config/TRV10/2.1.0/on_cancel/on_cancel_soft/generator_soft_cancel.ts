@@ -35,5 +35,8 @@ export async function onCancelSoftGenerator(existingPayload: any,sessionData: Se
       })
     existingPayload.message.order.quote.price = {currency: "INR",
       value: "10"}
+    const now = new Date().toISOString();
+    existingPayload.message.order.created_at = sessionData.created_at
+    existingPayload.message.order.updated_at = now 
     return existingPayload;
 }

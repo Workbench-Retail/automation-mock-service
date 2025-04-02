@@ -278,3 +278,8 @@ codes:
     action: on_search
     default: TRV10/2.1.0/on_search/default_schedule_trip.yaml
     message_id: false
+  - code: 156
+    action_id: on_select_preorder
+    action: on_select
+    default: TRV10/2.1.0/on_select/default.yaml
+    message_id: false
