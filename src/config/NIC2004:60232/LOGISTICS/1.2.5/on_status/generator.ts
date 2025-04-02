@@ -198,7 +198,7 @@ export const onStatusGenerator = async (
     existingPayload.message.order.items = sessionData.items;
   }
 
-  if (isEmpty(sessionData?.cancellation)) {
+  if (!isEmpty(sessionData?.cancellation)) {
     existingPayload.message.order.cancellation = sessionData.cancellation;
   }
 
