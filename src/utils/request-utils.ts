@@ -8,7 +8,8 @@ export async function sendToApiService(
 	queryData = {}
 ) {
 	try {
-		const domain = process.env.DOMAIN;
+		// const domain = process.env.DOMAIN;
+		const domain = body.context.domain
 		const version = body.context.version ?? body.context.core_version;
 		const url = `${process.env.API_SERVICE_LAYER}/${domain}/${version}/mock/${action}`;
 		console.log(action, JSON.stringify(body.message, null, 2));
