@@ -10,8 +10,6 @@ message:
       - id: I1
         fulfillment_id: "1"
         category_id: Same Day Delivery
-        descriptor:
-          code: P2P
         time:
           label: TAT
           duration: PT45M
@@ -66,7 +64,7 @@ message:
             short_desc: value of PCC
             long_desc: additional instructions for pickup
             images:
-              - link to downloadable shipping label (required for P2H2P)
+              - link to downloadable shipping label (required for ONDC:LOG11)
             additional_desc:
               content_type: text/html
               url: ..

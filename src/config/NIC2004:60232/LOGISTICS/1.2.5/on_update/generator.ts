@@ -23,7 +23,7 @@ export const onUpdateGenerator = (
 
   existingPayload = populateFulfillmentUpdate(existingPayload, sessionData);
 
-  if (sessionData.shipment_method === "P2H2P") {
+  if (sessionData.domain === "ONDC:LOG11") {
     existingPayload.message.order.fulfillments =
       existingPayload.message.order.fulfillments.map((fulfillment: any) => {
         fulfillment["@ondc/org/awb_no"] = "1227262193237777";
@@ -94,6 +94,11 @@ export const onUpdateGenerator = (
 
   if (sessionData?.quote) {
     existingPayload.message.order.quote = sessionData.quote;
+  }
+
+  if (sessionData.linked_order) {
+    existingPayload.message.order["@ondc/org/linked_order"] =
+      sessionData.linked_order;
   }
 
   return existingPayload;

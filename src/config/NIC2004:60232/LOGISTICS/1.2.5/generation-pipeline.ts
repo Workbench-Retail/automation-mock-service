@@ -52,7 +52,8 @@ function getDetailsByActionId(
 
 export async function createMockReponseLOGISTICS200(
   actionID: string,
-  sessionData: any
+  sessionData: any,
+  domain: string
 ) {
   // 1. create context
   // 2. load default
@@ -70,6 +71,7 @@ export async function createMockReponseLOGISTICS200(
     bpp_id: sessionData?.bpp_id,
     bpp_uri: sessionData?.bpp_uri,
     city: sessionData.city_code ?? "std:011",
+    domain: domain,
     country: "IND",
   };
 

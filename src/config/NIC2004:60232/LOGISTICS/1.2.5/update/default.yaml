@@ -5,8 +5,6 @@ message:
     items:
       - id: I1
         category_id: Same Day Delivery
-        descriptor:
-          code: P2P
     fulfillments:
       - id: "1"
         type: Delivery

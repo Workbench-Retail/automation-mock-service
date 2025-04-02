@@ -45,6 +45,8 @@ export interface SessionData {
   payment?: any;
   is_cod?: string;
   cancellation?: any;
+  domain?: string;
+  linked_order?: any;
 }
 
 export type BecknContext = {

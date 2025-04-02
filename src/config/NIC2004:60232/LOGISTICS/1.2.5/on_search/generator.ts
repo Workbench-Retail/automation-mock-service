@@ -69,7 +69,6 @@ export async function onSearch1Generator(
     existingPayload.message.catalog["bpp/providers"][0].items.map(
       (item: any) => {
         item.category_id = sessionData?.category_id;
-        item.descriptor.code = sessionData?.shipment_method;
 
         return item;
       }
@@ -96,7 +95,6 @@ export async function onSearch1Generator(
       category_id: sessionData?.category_id,
       fulfillment_id: "1",
       descriptor: {
-        code: "P2P",
         name: "COD Fee",
         short_desc: "COD Fee",
         long_desc: "Cash on delivery fee",

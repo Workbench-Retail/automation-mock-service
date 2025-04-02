@@ -63,7 +63,7 @@ codes:
     action_id: on_status_1_LOGISTICS
     action: on_status
     default: on_status/default.yaml
-    message_id: false
+    message_id: true
   - code: 113
     action_id: on_status_2_LOGISTICS
     action: on_status
@@ -104,3 +104,18 @@ codes:
     action: search
     default: search/search_1/default.yaml
     message_id: true
+  - code: 118
+    action_id: on_status_6_LOGISTICS
+    action: on_status
+    default: on_status/default.yaml
+    message_id: true
+  - code: 119
+    action_id: on_status_7_LOGISTICS
+    action: on_status
+    default: on_status/default.yaml
+    message_id: true
+  - code: 120
+    action_id: on_update_1_LOGISTICS
+    action: on_update
+    default: on_update/on_update_1/default.yaml
+    message_id: false

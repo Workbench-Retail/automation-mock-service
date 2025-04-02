@@ -60,7 +60,7 @@ export const onStatusGenerator = async (
 
           fulfillemt.tags.push({
             code: "tracking",
-            list: sessionData?.shipment_method === "P2P" ? p2pList : p2h2pList,
+            list: sessionData?.domain === "ONDC:LOG10" ? p2pList : p2h2pList,
           });
           return fulfillemt;
         });
@@ -141,6 +141,20 @@ export const onStatusGenerator = async (
           return fulfillment;
         });
       break;
+    case "At-destination-hub":
+      existingPayload.message.order.fulfillments =
+        existingPayload.message.order.fulfillments.map((fulfillemt: any) => {
+          fulfillemt.state.descriptor.code = sessionData.stateCode;
+          return fulfillemt;
+        });
+      break;
+    case "In-transit":
+      existingPayload.message.order.fulfillments =
+        existingPayload.message.order.fulfillments.map((fulfillemt: any) => {
+          fulfillemt.state.descriptor.code = sessionData.stateCode;
+          return fulfillemt;
+        });
+      break;
     default:
       existingPayload.message.order.state = "In-progress";
   }
@@ -184,6 +198,11 @@ export const onStatusGenerator = async (
 
   if (sessionData?.cancellation) {
     existingPayload.message.order.cancellation = sessionData.cancellation;
+  }
+
+  if (sessionData.linked_order) {
+    existingPayload.message.order["@ondc/org/linked_order"] =
+      sessionData.linked_order;
   }
 
   return existingPayload;

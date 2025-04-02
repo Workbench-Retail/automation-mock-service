@@ -52,9 +52,11 @@ export const onCancelGenerator = (
     existingPayload.message.order.cancellation = {
       cancelled_by: existingPayload.context.bpp_id,
       reason: {
-        id: sessionData?.shipment_method === "P2P" ? "127" : "226",
+        id: sessionData?.domain === "ONDC:LOG10" ? "127" : "226",
       },
     };
+
+    let areDiffTagsPresent = false;
 
     existingPayload.message.order.fulfillments =
       existingPayload.message.order.fulfillments.map((fulfillment: any) => {
@@ -87,7 +89,7 @@ export const onCancelGenerator = (
               },
               {
                 code: "cancellation_reason_id",
-                value: sessionData?.shipment_method === "P2P" ? "127" : "226",
+                value: sessionData?.domain === "ONDC:LOG10" ? "127" : "226",
               },
               {
                 code: "cancelled_by",
@@ -98,6 +100,13 @@ export const onCancelGenerator = (
 
           fulfillment.tags = removeTagsByCodes(fulfillment.tags, ["tracking"]);
         }
+
+        // check for diff tags
+        fulfillment.tags.mpa((tag: any) => {
+          if (tag.code === "linked_order_diff") {
+            areDiffTagsPresent = true;
+          }
+        });
 
         return fulfillment;
       });
@@ -138,7 +147,7 @@ export const onCancelGenerator = (
         "@ondc/org/title_type": "rto",
         price: {
           currency: "INR",
-          value: "20.0",
+          value: "80.0",
         },
       },
       {
@@ -146,19 +155,44 @@ export const onCancelGenerator = (
         "@ondc/org/title_type": "tax",
         price: {
           currency: "INR",
-          value: "3.60",
+          value: "8.50",
         },
       },
+      ...(areDiffTagsPresent
+        ? [
+            {
+              "@ondc/org/item_id": rtoItem.id,
+              "@ondc/org/title_type": "diff",
+              price: {
+                currency: "INR",
+                value: "2.0",
+              },
+            },
+            {
+              "@ondc/org/item_id": rtoItem.id,
+              "@ondc/org/title_type": "tax_diff",
+              price: {
+                currency: "INR",
+                value: "1.00",
+              },
+            },
+          ]
+        : []),
     ];
 
     existingPayload.message.order.quote.price = {
       currency: "INR",
-      value: "82.60",
+      value: areDiffTagsPresent ? "150.50" : "147.50",
     };
   }
 
   if (sessionData.payment) {
     existingPayload.message.order.payment = sessionData.payment;
+  }
+
+  if (sessionData.linked_order) {
+    existingPayload.message.order["@ondc/org/linked_order"] =
+      sessionData.linked_order;
   }
 
   return existingPayload;

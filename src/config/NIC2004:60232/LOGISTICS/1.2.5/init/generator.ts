@@ -32,9 +32,6 @@ export const initGenerator = async (
           id: item.id,
           fulfillment_id: sessionData.on_search_fulfillment.id,
           category_id: item.category_id,
-          descriptor: {
-            code: item.descriptor.code,
-          },
           tags: sessionData?.is_cod === "yes" ? item?.tags : undefined,
         };
       }
@@ -47,9 +44,6 @@ export const initGenerator = async (
           id: item.id,
           fulfillment_id: sessionData.on_search_fulfillment.id,
           category_id: item.category_id,
-          descriptor: {
-            code: item.descriptor.code,
-          },
           tags: item?.tags,
         };
       }

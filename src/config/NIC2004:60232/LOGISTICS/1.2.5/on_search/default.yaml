@@ -53,7 +53,6 @@ message:
             category_id: Immediate Delivery
             fulfillment_id: "1"
             descriptor:
-              code: P2P
               name: Fast delivery
               short_desc: Fast delivery services
               long_desc: Fast delivery services
@@ -69,7 +68,6 @@ message:
             category_id: Immediate Delivery
             fulfillment_id: "2"
             descriptor:
-              code: P2P
               name: RTO quote
               short_desc: RTO quote
               long_desc: RTO quote

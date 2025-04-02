@@ -9,9 +9,6 @@ export async function updateGenerator(
   existingPayload.message.order.items[0] = {
     id: sessionData.items[0].id,
     category_id: sessionData.items[0].category_id,
-    descriptor: {
-      code: sessionData.items[0].descriptor.code,
-    },
   };
 
   if (sessionData?.fulfillments)

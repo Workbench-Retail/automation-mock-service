@@ -14,8 +14,6 @@ message:
       - id: I1
         fulfillment_id: "1"
         category_id: Same Day Delivery
-        descriptor:
-          code: P2P
         time:
           label: TAT
           duration: PT45M
@@ -23,8 +21,6 @@ message:
       - id: I2
         fulfillment_id: 1-RTO
         category_id: Same Day Delivery
-        descriptor:
-          code: P2P
         time:
           label: TAT
           duration: PT45M

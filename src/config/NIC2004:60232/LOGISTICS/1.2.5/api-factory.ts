@@ -13,6 +13,7 @@ import { onTrackGenerator } from "./on_track/generator";
 import { onCancelGenerator } from "./on_cancel/generators";
 import { statusGenerator } from "./status/generator";
 import { search1Generator } from "./search/search_1/generator";
+import { onUpdate1Generator } from "./on_update/on_update_1/generator";
 
 export async function Generator(
   action_id: string,
@@ -68,6 +69,16 @@ export async function Generator(
         ...sessionData,
         stateCode: "At-pickup",
       });
+    case "on_status_6_LOGISTICS":
+      return await onStatusGenerator(existingPayload, {
+        ...sessionData,
+        stateCode: "At-destination-hub",
+      });
+    case "on_status_7_LOGISTICS":
+      return await onStatusGenerator(existingPayload, {
+        ...sessionData,
+        stateCode: "In-transit",
+      });
     case "on_track_LOGISTICS":
       return await onTrackGenerator(existingPayload, sessionData);
     case "on_cancel_LOGISTICS":
@@ -76,6 +87,8 @@ export async function Generator(
       return await statusGenerator(existingPayload, sessionData);
     case "search_1_LOGISITCS":
       return await search1Generator(existingPayload, sessionData);
+    case "on_update_1_LOGISTICS":
+      return await onUpdate1Generator(existingPayload, sessionData);
     default:
       throw new Error(`Invalid request type ${action_id}`);
   }

@@ -9,7 +9,7 @@ export const onTrackGenerator = async (
   }
 
   const contextTimestamp = existingPayload.context.timestamp;
-  if (sessionData.shipment_method === "P2P") {
+  if (sessionData.domain === "ONDC:LOG10") {
     existingPayload.message.tracking.location = {
       gps: "12.9740,77.6134",
       time: {
@@ -17,6 +17,8 @@ export const onTrackGenerator = async (
       },
       updated_at: contextTimestamp,
     };
+  } else {
+    delete existingPayload.message.tracking.location;
   }
 
   const tags = [
@@ -35,18 +37,17 @@ export const onTrackGenerator = async (
         {
           code: "attr",
           value:
-            sessionData.shipment_method === "P2P"
+            sessionData.domain === "ONDC:LOG10"
               ? "tracking.location.gps"
               : "tracking.url",
         },
         {
           code: "type",
-          value:
-            sessionData.shipment_method === "P2P" ? "live_poll" : "deferred",
+          value: sessionData.domain === "ONDC:LOG10" ? "live_poll" : "deferred",
         },
       ],
     },
-    ...(sessionData.shipment_method === "P2P"
+    ...(sessionData.domain === "ONDC:LOG10"
       ? [
           {
             code: "path",

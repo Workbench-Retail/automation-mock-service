@@ -19,16 +19,12 @@ export async function createMockResponse(
   console.log("api_session is ", api_session);
   const data = JSON.parse(api_session) as SessionCache;
   console.log("data is", data);
-  const { version, usecaseId } = data;
+  const { version, usecaseId, domain } = data;
   console.log(version, usecaseId);
 
   let payload: any = {};
 
-  if (usecaseId === "LOGISTICS") {
-    if (version === "1.2.5") {
-      payload = await createMockReponseLOGISTICS200(action_id, sessionData);
-    }
-  }
+  payload = await createMockReponseLOGISTICS200(action_id, sessionData, domain);
 
   console.log("payload", payload.context, payload);
 

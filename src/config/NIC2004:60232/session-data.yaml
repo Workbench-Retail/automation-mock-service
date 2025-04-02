@@ -36,3 +36,5 @@ session_data:
   payment: {}
   is_cod: null
   cancellation: {}
+  domain: null
+  linked_order: {}

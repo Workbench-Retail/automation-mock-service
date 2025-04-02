@@ -81,5 +81,10 @@ export const onConfirmGenerator = (
     ];
   }
 
+  if (sessionData.linked_order) {
+    existingPayload.message.order["@ondc/org/linked_order"] =
+      sessionData.linked_order;
+  }
+
   return existingPayload;
 };

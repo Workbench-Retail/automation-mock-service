@@ -9,3 +9,4 @@ save-data:
   items: "$.message.order.items[*]"
   quote: "$.message.order.quote"
   payment: "$.message.order.payment"
+  linked_order: $.message.order["@ondc/org/linked_order"]
