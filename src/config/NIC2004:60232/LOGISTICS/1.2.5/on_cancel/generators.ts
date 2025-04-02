@@ -195,5 +195,11 @@ export const onCancelGenerator = (
       sessionData.linked_order;
   }
 
+  if(sessionData?.confirm_create_at_timestamp) {
+    existingPayload.message.order.created_at = sessionData?.confirm_create_at_timestamp
+  }
+
+  existingPayload.message.order.updated_at = existingPayload.context.timestamp
+
   return existingPayload;
 };

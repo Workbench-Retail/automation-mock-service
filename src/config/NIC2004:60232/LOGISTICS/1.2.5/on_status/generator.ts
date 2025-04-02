@@ -138,7 +138,9 @@ export const onStatusGenerator = async (
             });
 
             fulfillment.state.descriptor.code = fulfillmentState;
-            fulfillment.end.time.timestamp = existingPayload.context.timestamp;
+            fulfillment.end = {
+              time: { timestamp: existingPayload.context.timestamp },
+            };
           }
           return fulfillment;
         });
