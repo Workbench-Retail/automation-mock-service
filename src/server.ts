@@ -28,7 +28,7 @@ const createServer = (): Application => {
     throw new Error("Domain and version are required in env");
   }
 
-  const base = `/mock/${domain}/2.1.0`;
+  const base = `/mock/${domain}`;
   logger.info("hosting at base url: " + base);
   app.use(`${base}/manual`, manualRouter);
   //   app.use("/mock", defaultRouter);
