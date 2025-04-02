@@ -10,6 +10,7 @@ export async function onUpdateUpdateQuoteGenerator(existingPayload: any,sessionD
             existingPayload.message.order.quote = sessionData.update_quote;
         }
     }
+    existingPayload.message.order.items[0].price.value = sessionData.updated_price
     existingPayload.message.order.status = "COMPLETE"
     return existingPayload;
 }

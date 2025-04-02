@@ -15,12 +15,6 @@ export async function confirmMultipleStopsGenerator(existingPayload: any,session
     existingPayload.message.order.items[0] = {
         id : sessionData.selected_item_id 
     }
-    if (existingPayload.message.order.fulfillments[0]["_EXTERNAL"]){
-        delete existingPayload.message.order.fulfillments[0]["_EXTERNAL"]
-    }
     existingPayload.message.order.payments = sessionData.payments
-    if (existingPayload.message.order.payments[0]["_EXTERNAL"]){
-        delete existingPayload.message.order.payments[0]["_EXTERNAL"]
-    }
     return existingPayload;
 }

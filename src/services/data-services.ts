@@ -69,7 +69,6 @@ export async function saveData(
 		if (/\/update$/.test(actionFolderPath)) {
 			actionFolderPath += "_";
 		  }
-		console.log("action folder path",actionFolderPath)
 		const saveDataFilePath = path.join(actionFolderPath, "save-data.yaml");
 		const fileContent = fs.readFileSync(saveDataFilePath, "utf8");
 		const saveData = yaml.load(fileContent) as any;

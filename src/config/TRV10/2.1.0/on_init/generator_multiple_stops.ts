@@ -25,11 +25,12 @@ export async function onInitMultipleStopsGenerator(
     existingPayload.message.order.fulfillments[0]["type"] = "DELIVERY"
     }
     if(sessionData.payments.length > 0){
-        existingPayload.message.order.payments["id"] = randomPaymentId
+        existingPayload.message.order.payments[0]["collected_by"] = sessionData.collected_by
+        existingPayload.message.order.payments[0]["id"] = randomPaymentId
         }
     if(sessionData.quote != null){
     existingPayload.message.order.quote = sessionData.quote
     }
-    console.log(existingPayload.message.order.fulfillments)
+    console.log(sessionData.payments)
     return existingPayload;
 }

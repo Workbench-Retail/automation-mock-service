@@ -15,12 +15,12 @@ function updateFulfillmentStatus(order: any) {
 function updatePaymentFromQuote(order: any,transaction_id: any) {
 
     const amount = order.quote.price.value; // Extract amount from quote
-  
+    const randomPaymentId = Math.random().toString(36).substring(2, 15);
     if (order.payments) {
       order.payments.forEach((payment: any) => {
           payment.params = { 
             amount: amount ,
-            transaction_id: transaction_id
+            transaction_id: randomPaymentId
           }; // Set amount from quote
           payment.status = "PAID"; // Change status to PAID
       });
@@ -32,12 +32,5 @@ export async function onStatusRidePaidGenerator(existingPayload: any,sessionData
     existingPayload = await onStatusMultipleStopsGenerator(existingPayload,sessionData)
     existingPayload.message.order = updatePaymentFromQuote(existingPayload.message.order,sessionData.transaction_id)
     existingPayload.message.order = updateFulfillmentStatus(existingPayload.message.order)
-    if (existingPayload.message.order.fulfillments[0]["_EXTERNAL"]){
-      delete existingPayload.message.order.fulfillments[0]["_EXTERNAL"]
-  }
-  existingPayload.message.order.payments = sessionData.payments
-  if (existingPayload.message.order.payments[0]["_EXTERNAL"]){
-      delete existingPayload.message.order.payments[0]["_EXTERNAL"]
-  }
     return existingPayload;
 }

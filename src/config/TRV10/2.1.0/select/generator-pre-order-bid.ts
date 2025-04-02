@@ -1,9 +1,11 @@
 import { SessionData } from "../../session-types";
 import { selectMultipleStopsGenerator } from "./generator";
 
-function findItem(sessionData: any, itemId: string) {
-    return sessionData?.items?.find((item: any) => item.id === itemId) || null;
-  }
+function findItem(items: any[], itemId: string) {
+  
+  return items.find(item => item.id === itemId);
+}
+
   
   function updateItemPrice(item: any, amount: number) {
     if (!item || !item.price || typeof item.price.value !== "string") return null;
@@ -18,8 +20,12 @@ function findItem(sessionData: any, itemId: string) {
 
 export async function selectPreOrderBidGenerator(existingPayload: any, sessionData: SessionData) {
     existingPayload = await selectMultipleStopsGenerator(existingPayload,sessionData)
-    const item = findItem(sessionData,existingPayload.message.order.items[0].id)
+    const item = findItem(sessionData.items,String(existingPayload.message.order.items[0].id))
     const updatedItem = updateItemPrice(item,20)
+    existingPayload.message.order.items[0].price = {
+      currency: "INR",
+      value: updatedItem.price.value
+    }
     
     return existingPayload;
 }

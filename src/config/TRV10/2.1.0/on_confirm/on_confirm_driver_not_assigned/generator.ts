@@ -100,12 +100,5 @@ export async function onConfirmDriverNotAssignedGenerator(
       console.log("inside on confirm driver not assigned generator")
     // Update timestamps
     existingPayload = updateOrderTimestamps(existingPayload);
-    if (existingPayload.message.order.fulfillments[0]["_EXTERNAL"]){
-        delete existingPayload.message.order.fulfillments[0]["_EXTERNAL"]
-      }
-    existingPayload.message.order.payments = sessionData.payments
-    if (existingPayload.message.order.payments[0]["_EXTERNAL"]){
-          delete existingPayload.message.order.payments[0]["_EXTERNAL"]
-    }
     return existingPayload;
 } 
