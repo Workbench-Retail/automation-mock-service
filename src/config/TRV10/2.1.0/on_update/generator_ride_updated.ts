@@ -15,5 +15,8 @@ export async function onUpdateRideUpdatedGenerator(existingPayload: any,sessionD
     existingPayload = await onUpdateMultipleStopsGenerator(existingPayload,sessionData)
     existingPayload.message.order = updateFulfillmentStatus(existingPayload.message.order)
     existingPayload.message.order.status = "UPDATED"
+    if (sessionData.order_id) {
+      existingPayload.message.order.id = sessionData.order_id;
+    }
     return existingPayload;
 }

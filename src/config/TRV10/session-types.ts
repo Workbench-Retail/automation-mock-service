@@ -40,6 +40,7 @@ export interface SessionData {
 	collected_by: string | undefined
 	updated_price: string
 	selected_add_ons: any[]
+	created_at: string
 }
 
 export type BecknContext = {

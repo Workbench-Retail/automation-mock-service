@@ -36,6 +36,7 @@
     "jsonpath": "^1.1.1",
     "jsonpath-plus": "^10.2.0",
     "ondc-automation-cache-lib": "^2.1.0",
+    "require": "^2.4.20",
     "uuid": "^11.0.3",
     "winston": "^3.17.0",
     "winston-daily-rotate-file": "^5.0.0"

@@ -161,9 +161,6 @@ export async function onSelectMultipleStopsGenerator(existingPayload: any, sessi
     const item = filterItemsById(sessionData,selected_item_id)
     item[0]["tags"] = item_tags
     existingPayload.message.order.items = item
-    if(sessionData.updated_price){
-      existingPayload.message.order.items[0].price.value = sessionData.updated_price
-    }
     const filteredFulfillments = filterFulfillmentsByItem(item[0],sessionData.fulfillments)
     filteredFulfillments[0]["tags"] = fulfillment_tags
     existingPayload.message.order.quote = generateQuoteFromItems(item)
@@ -171,5 +168,6 @@ export async function onSelectMultipleStopsGenerator(existingPayload: any, sessi
     existingPayload.message.order.quote.breakup = existingPayload.message.order.quote.breakup.filter(
       (breakup: any) => breakup.title !== "ADD_ONS"
     );
+    existingPayload.message.order.provider.id = sessionData.provider_id
     return existingPayload;
 }

@@ -99,5 +99,8 @@ export async function onCancelAsyncGenerator(existingPayload: any, sessionData: 
     // Using standard cancellation charges for async cancellation
     existingPayload.message.order.quote = applyCancellation(sessionData.quote, 20);
   }
+  const now = new Date().toISOString();
+  existingPayload.message.order.created_at = sessionData.created_at
+  existingPayload.message.order.updated_at = now 
   return existingPayload;
 }

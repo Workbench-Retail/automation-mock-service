@@ -31,6 +31,6 @@ export async function onInitMultipleStopsGenerator(
     if(sessionData.quote != null){
     existingPayload.message.order.quote = sessionData.quote
     }
-    console.log(sessionData.payments)
+    existingPayload.message.order.provider.id = sessionData.provider_id
     return existingPayload;
 }

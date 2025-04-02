@@ -98,6 +98,9 @@ type Price = {
       // Using higher cancellation charges for hard cancellation (e.g., 30 instead of 15)
       existingPayload.message.order.quote = applyCancellation(sessionData.quote, 30);
     }
+    const now = new Date().toISOString();
+    existingPayload.message.order.created_at = sessionData.created_at
+    existingPayload.message.order.updated_at = now 
   
     return existingPayload;
   }

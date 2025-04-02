@@ -22,7 +22,7 @@ function updateFulfillmentStops(sessionData: any, existingPayload: any) {
   }
 
 export async function onUpdateUpdateFulfillmentGenerator(existingPayload: any,sessionData: SessionData){
-    existingPayload = onUpdateMultipleStopsGenerator(existingPayload,sessionData)
+    existingPayload = await onUpdateMultipleStopsGenerator(existingPayload,sessionData)
     updateFulfillmentStops(sessionData,existingPayload)
     return existingPayload;
 }

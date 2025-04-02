@@ -21,7 +21,8 @@ function findItem(items: any[], itemId: string) {
 export async function selectPreOrderBidGenerator(existingPayload: any, sessionData: SessionData) {
     existingPayload = await selectMultipleStopsGenerator(existingPayload,sessionData)
     const item = findItem(sessionData.items,String(existingPayload.message.order.items[0].id))
-    const updatedItem = updateItemPrice(item,20)
+    const randomNum = Math.floor(Math.random() * (50 - 10 + 1)) + 10;
+    const updatedItem = updateItemPrice(item,randomNum)
     existingPayload.message.order.items[0].price = {
       currency: "INR",
       value: updatedItem.price.value
