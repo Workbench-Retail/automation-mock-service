@@ -156,7 +156,6 @@ function filterItemsById(sessionData: any, selected_item_id: string) {
   }
 
 export async function onSelectMultipleStopsGenerator(existingPayload: any, sessionData: SessionData) {
-  console.log("In this function")
     const selected_item_id = sessionData.selected_item_id
     const item = filterItemsById(sessionData,selected_item_id)
     item[0]["tags"] = item_tags
