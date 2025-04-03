@@ -7,9 +7,11 @@ function getRandomId(items: any[]): number {
   }
   
 export async function selectMultipleStopsGenerator(existingPayload: any, sessionData: SessionData) {
-    const item_ids = sessionData.item_ids
+    if (sessionData.item_ids){
+      const item_ids = sessionData.item_ids
     const item_id = getRandomId(item_ids)
     existingPayload.message.order.items[0].id = item_id
     existingPayload.message.order.provider.id = sessionData.provider_id
+    }
     return existingPayload;
 }
