@@ -149,7 +149,7 @@ const item_tags = [
           : []),
       ],
       price: { currency, value: newPrice.toString() },
-      ttl: "P200s",
+      ttl: "PT200S",
     };
   }
 function filterFulfillmentsByItem(item: any, fulfillments: any[]) {

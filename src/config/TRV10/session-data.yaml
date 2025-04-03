@@ -8,8 +8,9 @@ session_data:
   bap_uri: null
   bpp_id: null
   bpp_uri: null
-  start_code: null
-  end_code: null
+  start_location: null
+  intermediate_location: null
+  end_location: null
   buyer_app_fee: null
   vehicle_type: null
   fulfillments: []

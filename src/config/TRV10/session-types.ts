@@ -9,8 +9,9 @@ export interface SessionData {
 	bap_uri: string | undefined;
 	bpp_id: string | undefined;
 	bpp_uri: string | undefined;
-	start_code: string | undefined;
-	end_code: string | undefined;
+	start_location: string | undefined;
+	intermediate_location: string | undefined;
+	end_location: string | undefined;
 	buyer_app_fee: string | undefined;
 	vehicle_type: string | undefined;
 	fulfillments: any[]; // Replace `any` with a specific type if known

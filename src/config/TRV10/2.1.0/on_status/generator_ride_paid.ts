@@ -32,5 +32,6 @@ export async function onStatusRidePaidGenerator(existingPayload: any,sessionData
     existingPayload = await onStatusMultipleStopsGenerator(existingPayload,sessionData)
     existingPayload.message.order = updatePaymentFromQuote(existingPayload.message.order,sessionData.transaction_id)
     existingPayload.message.order = updateFulfillmentStatus(existingPayload.message.order)
+    existingPayload.message.order.status = "COMPLETED"
     return existingPayload;
 }

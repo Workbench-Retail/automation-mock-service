@@ -41,7 +41,7 @@ const createQuoteFromItems = (items: any): any => {
             currency: items[0]?.price.currency || "INR"
         },
         breakup,
-        ttl: "P200s"
+        ttl: "PT200S"
     };
 };
 
