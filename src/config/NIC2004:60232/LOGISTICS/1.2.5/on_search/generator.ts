@@ -1,12 +1,12 @@
 import { SessionData } from "../../../session-types";
 
 const TatMapping: any = {
-  "Immediate Delivery": { code: "PT60M", day: 0 },
-  "Same Day Delivery": { code: "PT4H", day: 0 },
-  "Next Day Delivery": { code: "P1D", day: 1 },
-  "Standard Delivery": { code: "P2D", day: 2 },
-  "Express Delivery": { code: "P2D", day: 2 },
-  "Instant Delivery": { code: "PT10M", day: 0 },
+  "Immediate Delivery": { code: "PT60M", day: 0, pickupTime: "PT15M" },
+  "Same Day Delivery": { code: "PT4H", day: 0, pickupTime: "PT1H" },
+  "Next Day Delivery": { code: "P1D", day: 1, pickupTime: "PT4H" },
+  "Standard Delivery": { code: "P2D", day: 2, pickupTime: "PT12H" },
+  "Express Delivery": { code: "P3D", day: 2, pickupTime: "P1D" },
+  "Instant Delivery": { code: "PT10M", day: 0, pickupTime: "PT2M" },
 };
 
 function getDateFromToday(days: number) {
@@ -71,6 +71,18 @@ export async function onSearch1Generator(
         item.category_id = sessionData?.category_id;
 
         return item;
+      }
+    );
+
+  existingPayload.message.catalog["bpp/providers"][0].fulfillments =
+    existingPayload.message.catalog["bpp/providers"][0].fulfillments.map(
+      (fulfillment: any) => {
+        if (fulfillment.type === "Delivery") {
+          fulfillment.start.time.duration =
+            TatMapping[sessionData.category_id as string].pickupTime;
+        }
+
+        return fulfillment;
       }
     );
 
