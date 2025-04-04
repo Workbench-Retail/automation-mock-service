@@ -18,12 +18,13 @@ import { onUpdate1Generator } from "./on_update/on_update_1/generator";
 export async function Generator(
   action_id: string,
   existingPayload: any,
-  sessionData: any
+  sessionData: any,
+  inputs?: Record<string, string>
 ) {
   console.log("inside generator");
   switch (action_id) {
     case "search_LOGISTICS":
-      return await searchGenerator(existingPayload, sessionData);
+      return await searchGenerator(existingPayload, sessionData, inputs);
     case "init_LOGISTICS":
       return await initGenerator(existingPayload, sessionData);
     case "confirm_LOGISTICS":
@@ -35,7 +36,7 @@ export async function Generator(
     case "cancel_LOGISTICS":
       return await cancelGenerator(existingPayload, sessionData);
     case "on_search_LOGISTICS":
-      return await onSearch1Generator(existingPayload, sessionData);
+      return await onSearch1Generator(existingPayload, sessionData, inputs);
     case "on_init_LOGISTICS":
       return await onInitGenerator(existingPayload, sessionData);
     case "on_confirm_LOGISTICS":

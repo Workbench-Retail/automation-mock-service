@@ -72,3 +72,14 @@ export type BecknContext = {
   country?: string;
   city?: string;
 };
+
+export interface Input {
+  category?: string;
+  paymentType?: string;
+  city_code?: string;
+  start_gps?: string;
+  end_gps?: string;
+  start_code?: string;
+  end_code?: string;
+  feature_discovery?: string[];
+}

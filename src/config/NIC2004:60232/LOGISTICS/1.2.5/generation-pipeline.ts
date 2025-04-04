@@ -53,7 +53,8 @@ function getDetailsByActionId(
 export async function createMockReponseLOGISTICS200(
   actionID: string,
   sessionData: any,
-  domain: string
+  domain: string,
+  inputs?: Record<string, string>
 ) {
   // 1. create context
   // 2. load default
@@ -107,5 +108,5 @@ export async function createMockReponseLOGISTICS200(
     logger.debug(`Error payload is ${JSON.stringify(payload)}`);
     return payload;
   }
-  return await Generator(actionID, payload, sessionData);
+  return await Generator(actionID, payload, sessionData, inputs);
 }

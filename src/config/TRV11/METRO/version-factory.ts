@@ -11,7 +11,8 @@ import { createMockReponseLOGISTICS200 } from "./../../NIC2004:60232/LOGISTICS/1
 export async function createMockResponse(
   session_id: string,
   sessionData: SessionData,
-  action_id: string
+  action_id: string,
+  inputs?: Record<any, any>
 ) {
   RedisService.useDb(0);
   console.log("session id in create mock response", session_id);
@@ -24,7 +25,7 @@ export async function createMockResponse(
 
   let payload: any = {};
 
-  payload = await createMockReponseLOGISTICS200(action_id, sessionData, domain);
+  payload = await createMockReponseLOGISTICS200(action_id, sessionData, domain, inputs);
 
   console.log("payload", payload.context, payload);
 

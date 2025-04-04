@@ -37,6 +37,7 @@ export async function generateMockResponseMiddleware(
 			req.queryData.session_id ?? "",
 			sessionData,
 			req.queryData?.action_id,
+			req.body.input
 		);
 		req.mockResponse = mockResponse;
 		next();

@@ -1,4 +1,4 @@
-import { SessionData } from "../../../session-types";
+import { SessionData, Input } from "../../../session-types";
 
 const TatMapping: any = {
   "Immediate Delivery": { code: "PT60M", day: 0, pickupTime: "PT15M" },
@@ -17,7 +17,8 @@ function getDateFromToday(days: number) {
 
 export async function onSearch1Generator(
   existingPayload: any,
-  sessionData: SessionData
+  sessionData: SessionData,
+  inputs?: Input
 ) {
   // bb/descriptor mai date should be same as context "effective_date"
 
@@ -139,6 +140,26 @@ export async function onSearch1Generator(
         ],
       },
     ];
+  }
+
+  if (inputs?.feature_discovery) {
+    let codesArray = inputs.feature_discovery;
+
+    existingPayload.message.intent.tags =
+      existingPayload.message.intent.tags.map((tag: any) => {
+        if (tag.code === "lsp_features") {
+          const newTags = codesArray.map((code) => {
+            return {
+              code: code,
+              value: "yes",
+            };
+          });
+
+          tag.list = newTags;
+        }
+
+        return tag;
+      });
   }
 
   return existingPayload;
