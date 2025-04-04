@@ -2,7 +2,6 @@ import { SessionData } from "../../session-types";
 
 function generateNearbyLocations(startGps:any, endGps:any) {
     const [startLat, startLon] = startGps.split(',').map(Number);
-    const [endLat, endLon] = endGps.split(',').map(Number);
 
     const getRandomOffset = () => (Math.random() - 0.5) * 0.01; // Small offset (~1km)
 

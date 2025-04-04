@@ -1,30 +1,5 @@
 import { add } from "winston";
 import { SessionData } from "../../session-types";
-const fulfillment_tags = [
-    {
-      "descriptor": {
-        "code": "ROUTE_INFO",
-        "name": "Route Information"
-      },
-      "display": true,
-      "list": [
-        {
-          "descriptor": {
-            "code": "ENCODED_POLYLINE",
-            "name": "Path"
-          },
-          "value": "_p~iF~ps|U_ulLnnqC_mqNvxq`@"
-        },
-        {
-          "descriptor": {
-            "code": "WAYPOINTS",
-            "name": "Waypoints"
-          },
-          "value": "[{\"gps\":\"12.909982, 77.611822\"},{\"gps\":\"12.909982,77.611822\"},{\"gps\":\"12.909982,77.611822\"},{\"gps\":\"12.909982, 77.611822\"}]"
-        }
-      ]
-    }
-  ]
 const item_tags = [
     {
       "descriptor": {
@@ -85,26 +60,44 @@ const item_tags = [
     },
     {
       "descriptor": {
-        "code": "INFO",
-        "name": "General Information"
+          "code": "INFO",
+          "name": "General Information"
       },
       "display": true,
       "list": [
-        {
-          "descriptor": {
-            "code": "DISTANCE_TO_NEAREST_DRIVER_METER"
+         {
+              "descriptor": {
+                  "code": "TOTAL_HOURS"
+              },
+              "value": "1"
           },
-          "value": "661"
-        },
-        {
-          "descriptor": {
-            "code": "ETA_TO_NEAREST_DRIVER_MIN"
-          },
-          "value": "3"
-        }
+         {
+              "descriptor": {
+                  "code": "TOTAL_DISTANCE"
+              },
+              "value": "10"
+          }
       ]
+  }
+]
+function transformTags(tags:any, quantity:any) {
+  const updatedTags = JSON.parse(JSON.stringify(tags)); // deep clone
+
+  for (const tag of updatedTags) {
+    if (tag.descriptor.code === "INFO" && Array.isArray(tag.list)) {
+      for (const item of tag.list) {
+        if (["TOTAL_HOURS", "TOTAL_DISTANCE"].includes(item.descriptor.code)) {
+          const originalValue = parseFloat(item.value);
+          if (!isNaN(originalValue)) {
+            item.value = (originalValue * quantity).toString();
+          }
+        }
+      }
     }
-  ]
+  }
+
+  return updatedTags;
+}
   function generateQuoteFromItems(items: any[]) {
     if (!Array.isArray(items) || items.length === 0) return null;
   
@@ -197,7 +190,6 @@ function filterItemsById(sessionData: any, selected_item_id: string) {
 export async function onSelectMultipleStopsRentalGenerator(existingPayload: any, sessionData: SessionData) {
     const selected_item_id = sessionData.selected_item_id
     const item = filterItemsById(sessionData,selected_item_id)
-    item[0]["tags"] = item_tags
     existingPayload.message.order.items = item
     if(sessionData.updated_price){
       existingPayload.message.order.items[0].price.value = sessionData.updated_price
@@ -205,8 +197,9 @@ export async function onSelectMultipleStopsRentalGenerator(existingPayload: any,
     existingPayload.message.order.items[0].add_ons[0].quantity = {"selected": {
         "count": sessionData.selected_add_ons[0].quantity.selected.count
     }}
+    const updated_tags = transformTags(item_tags,sessionData.selected_add_ons[0].quantity.selected.count)
+    item[0]["tags"] = updated_tags
     const filteredFulfillments = filterFulfillmentsByItem(item[0],sessionData.fulfillments)
-    filteredFulfillments[0]["tags"] = fulfillment_tags
     existingPayload.message.order.quote = generateQuoteFromItems(item)
     const old_price = existingPayload.message.order.quote.price.value
     const addon = generateAddOnQuote(sessionData.selected_add_ons[0],item)

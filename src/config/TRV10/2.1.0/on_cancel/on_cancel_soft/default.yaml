@@ -204,13 +204,13 @@ message:
             value: New Delhi
           - descriptor:
               code: DELAY_INTEREST
-            value: '2.5'
+            value: '5'
           - descriptor:
               code: STATIC_TERMS
-            value: 'https://www.icicibank.com/personal-banking/loans/personal-loan'
+            value: 'https://example-test-bap.com/static-terms.txt'
           - descriptor:
               code: SETTLEMENT_AMOUNT
-            value: '85'
+            value: '1.46'
           - descriptor:
               code: SETTLEMENT_BANK_CODE
             value: XXXXXXXX
@@ -230,7 +230,7 @@ message:
             value: '1'
           - descriptor:
               code: DELAY_INTEREST
-            value: '2.5'
+            value: '5'
           - descriptor:
               code: SETTLEMENT_TYPE
             value: UPI
@@ -248,7 +248,7 @@ message:
             value: New Delhi
           - descriptor:
               code: STATIC_TERMS
-            value: 'https://www.icicibank.com/personal-banking/loans/personal-loan'
+            value: 'https://example-test-bpp.com/static-terms.txt'
           - descriptor:
               code: SETTLEMENT_AMOUNT
-            value: '85'
+            value: '1.46'

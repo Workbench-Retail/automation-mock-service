@@ -195,7 +195,7 @@ message:
             value: "UPI"
           - descriptor:
               code: "SETTLEMENT_WINDOW"
-            value: "PT2D"
+            value: "PT60M"
           - descriptor:
               code: "SETTLEMENT_BASIS"
             value: "DELIVERY"

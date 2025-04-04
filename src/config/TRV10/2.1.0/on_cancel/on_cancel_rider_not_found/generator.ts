@@ -1,7 +1,7 @@
 export async function onCancelRiderNotFoundGenerator(existingPayload: any, sessionData: any) {
     // Update payments if available
-    if (sessionData.updated_payments?.length > 0) {
-        existingPayload.message.order.payments = sessionData.updated_payments;
+    if (sessionData.payments?.length > 0) {
+        existingPayload.message.order.payments = sessionData.payments;
     }
 
     // Update items if available

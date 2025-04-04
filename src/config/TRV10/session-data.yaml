@@ -41,3 +41,5 @@ session_data:
   updated_price: null
   selected_add_ons: []
   created_at: null
+  cancellation_reason_id: null
+  cancellation_quote: []

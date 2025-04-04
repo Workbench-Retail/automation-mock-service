@@ -42,6 +42,8 @@ export interface SessionData {
 	updated_price: string
 	selected_add_ons: any[]
 	created_at: string
+	cancellation_reason_id: string
+	cancellation_quote: any[]
 }
 
 export type BecknContext = {

@@ -1,10 +1,10 @@
 import { SessionData } from "../../../session-types";
 
 export async function onCancelSoftGenerator(existingPayload: any,sessionData: SessionData){
-    if (sessionData.updated_payments.length > 0) {
-      existingPayload.message.order.payments = sessionData.updated_payments;
+    if (sessionData.payments.length > 0) {
+      existingPayload.message.order.payments = sessionData.payments;
       }
-    
+      existingPayload.message.order.cancellation.reason.descriptor.code = sessionData.cancellation_reason_id
     if (sessionData.items.length > 0) {
     existingPayload.message.order.items = sessionData.items;
     }
