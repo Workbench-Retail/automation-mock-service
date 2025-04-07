@@ -30,11 +30,11 @@ export default function search(input: validationInput): validationOutput {
                     testObj,
                     "$._EXTERNAL.usecaseId",
                 );
-                const forUsecaseId = ["LOGISTICS"];
+                const forUsecaseId = ["LOGISTICS (P2P)", "LOGISTICS (P2H2P)"];
 
                 const validate =
                     validations.equalTo(mockType, forType) &&
-                    validations.equalTo(usecaseId, forUsecaseId);
+                    validations.anyIn(usecaseId, forUsecaseId);
 
                 if (!validate) {
                     return [
@@ -44,7 +44,7 @@ export default function search(input: validationInput): validationOutput {
                             description: `- **condition first_search_request_LOGISTICS**: all of the following sub conditions must be met:
 
   - **condition first_search_request_LOGISTICS.1**: $._EXTERNAL.mock_type must be equal to ["BAP"]
-  - **condition first_search_request_LOGISTICS.2**: $._EXTERNAL.usecaseId must be equal to ["LOGISTICS"]`,
+  - **condition first_search_request_LOGISTICS.2**: at least one element of $._EXTERNAL.usecaseId must be in ["LOGISTICS (P2P)", "LOGISTICS (P2H2P)"]`,
                         },
                     ];
                 }
@@ -70,7 +70,7 @@ export default function search(input: validationInput): validationOutput {
                     testObj,
                     "$._EXTERNAL.usecaseId",
                 );
-                const forUsecaseId = ["LOGISTICS"];
+                const forUsecaseId = ["LOGISTICS (P2P)", "LOGISTICS (P2H2P)"];
                 const providerId = payloadUtils.getJsonPath(
                     testObj,
                     "$._EXTERNAL.provider_id",
@@ -78,7 +78,7 @@ export default function search(input: validationInput): validationOutput {
 
                 const validate =
                     validations.equalTo(mockType, forType) &&
-                    validations.equalTo(usecaseId, forUsecaseId) &&
+                    validations.anyIn(usecaseId, forUsecaseId) &&
                     validations.arePresent(providerId);
 
                 if (!validate) {
@@ -91,7 +91,7 @@ export default function search(input: validationInput): validationOutput {
   - **condition init_request_LOGISTICS.1**: all of the following sub conditions must be met:
 
     - **condition init_request_LOGISTICS.1.1**: $._EXTERNAL.mock_type must be equal to ["BAP"]
-    - **condition init_request_LOGISTICS.1.2**: $._EXTERNAL.usecaseId must be equal to ["LOGISTICS"]
+    - **condition init_request_LOGISTICS.1.2**: at least one element of $._EXTERNAL.usecaseId must be in ["LOGISTICS (P2P)", "LOGISTICS (P2H2P)"]
   - **condition init_request_LOGISTICS.2**: $._EXTERNAL.provider_id must be present in the payload`,
                         },
                     ];
@@ -99,7 +99,7 @@ export default function search(input: validationInput): validationOutput {
 
                 delete testObj._EXTERNAL;
             }
-            return [{ valid: valid, code: 102 }, ...subResults];
+            return [{ valid: valid, code: 101 }, ...subResults];
         }
         function confirm_request_LOGISTICS(
             input: validationInput,
@@ -118,7 +118,7 @@ export default function search(input: validationInput): validationOutput {
                     testObj,
                     "$._EXTERNAL.usecaseId",
                 );
-                const forUsecaseId = ["LOGISTICS"];
+                const forUsecaseId = ["LOGISTICS (P2P)", "LOGISTICS (P2H2P)"];
                 const quotePrice = payloadUtils.getJsonPath(
                     testObj,
                     "$._EXTERNAL.quote_price",
@@ -126,7 +126,7 @@ export default function search(input: validationInput): validationOutput {
 
                 const validate =
                     validations.equalTo(mockType, forType) &&
-                    validations.equalTo(usecaseId, forUsecaseId) &&
+                    validations.anyIn(usecaseId, forUsecaseId) &&
                     validations.arePresent(quotePrice);
 
                 if (!validate) {
@@ -139,7 +139,7 @@ export default function search(input: validationInput): validationOutput {
   - **condition confirm_request_LOGISTICS.1**: all of the following sub conditions must be met:
 
     - **condition confirm_request_LOGISTICS.1.1**: $._EXTERNAL.mock_type must be equal to ["BAP"]
-    - **condition confirm_request_LOGISTICS.1.2**: $._EXTERNAL.usecaseId must be equal to ["LOGISTICS"]
+    - **condition confirm_request_LOGISTICS.1.2**: at least one element of $._EXTERNAL.usecaseId must be in ["LOGISTICS (P2P)", "LOGISTICS (P2H2P)"]
   - **condition confirm_request_LOGISTICS.2**: $._EXTERNAL.quote_price must be present in the payload`,
                         },
                     ];
@@ -147,7 +147,7 @@ export default function search(input: validationInput): validationOutput {
 
                 delete testObj._EXTERNAL;
             }
-            return [{ valid: valid, code: 103 }, ...subResults];
+            return [{ valid: valid, code: 102 }, ...subResults];
         }
         function update_request_LOGISTICS(
             input: validationInput,
@@ -166,7 +166,7 @@ export default function search(input: validationInput): validationOutput {
                     testObj,
                     "$._EXTERNAL.usecaseId",
                 );
-                const forUsecaseId = ["LOGISTICS"];
+                const forUsecaseId = ["LOGISTICS (P2P)", "LOGISTICS (P2H2P)"];
                 const orderId = payloadUtils.getJsonPath(
                     testObj,
                     "$._EXTERNAL.order_id",
@@ -174,7 +174,7 @@ export default function search(input: validationInput): validationOutput {
 
                 const validate =
                     validations.equalTo(mockType, forType) &&
-                    validations.equalTo(usecaseId, forUsecaseId) &&
+                    validations.anyIn(usecaseId, forUsecaseId) &&
                     validations.arePresent(orderId);
 
                 if (!validate) {
@@ -187,7 +187,7 @@ export default function search(input: validationInput): validationOutput {
   - **condition update_request_LOGISTICS.1**: all of the following sub conditions must be met:
 
     - **condition update_request_LOGISTICS.1.1**: $._EXTERNAL.mock_type must be equal to ["BAP"]
-    - **condition update_request_LOGISTICS.1.2**: $._EXTERNAL.usecaseId must be equal to ["LOGISTICS"]
+    - **condition update_request_LOGISTICS.1.2**: at least one element of $._EXTERNAL.usecaseId must be in ["LOGISTICS (P2P)", "LOGISTICS (P2H2P)"]
   - **condition update_request_LOGISTICS.2**: $._EXTERNAL.order_id must be present in the payload`,
                         },
                     ];
@@ -195,7 +195,7 @@ export default function search(input: validationInput): validationOutput {
 
                 delete testObj._EXTERNAL;
             }
-            return [{ valid: valid, code: 104 }, ...subResults];
+            return [{ valid: valid, code: 103 }, ...subResults];
         }
         function track_request_LOGISTICS(
             input: validationInput,
@@ -214,7 +214,7 @@ export default function search(input: validationInput): validationOutput {
                     testObj,
                     "$._EXTERNAL.usecaseId",
                 );
-                const forUsecaseId = ["LOGISTICS"];
+                const forUsecaseId = ["LOGISTICS (P2P)", "LOGISTICS (P2H2P)"];
                 const pickupTimestamp = payloadUtils.getJsonPath(
                     testObj,
                     "$._EXTERNAL.fulfillment_pickup_timestamp",
@@ -222,7 +222,7 @@ export default function search(input: validationInput): validationOutput {
 
                 const validate =
                     validations.equalTo(mockType, forType) &&
-                    validations.equalTo(usecaseId, forUsecaseId) &&
+                    validations.anyIn(usecaseId, forUsecaseId) &&
                     validations.arePresent(pickupTimestamp);
 
                 if (!validate) {
@@ -235,7 +235,7 @@ export default function search(input: validationInput): validationOutput {
   - **condition track_request_LOGISTICS.1**: all of the following sub conditions must be met:
 
     - **condition track_request_LOGISTICS.1.1**: $._EXTERNAL.mock_type must be equal to ["BAP"]
-    - **condition track_request_LOGISTICS.1.2**: $._EXTERNAL.usecaseId must be equal to ["LOGISTICS"]
+    - **condition track_request_LOGISTICS.1.2**: at least one element of $._EXTERNAL.usecaseId must be in ["LOGISTICS (P2P)", "LOGISTICS (P2H2P)"]
   - **condition track_request_LOGISTICS.2**: $._EXTERNAL.fulfillment_pickup_timestamp must be present in the payload`,
                         },
                     ];
@@ -243,7 +243,7 @@ export default function search(input: validationInput): validationOutput {
 
                 delete testObj._EXTERNAL;
             }
-            return [{ valid: valid, code: 105 }, ...subResults];
+            return [{ valid: valid, code: 104 }, ...subResults];
         }
         function cancel_request_LOGISTICS(
             input: validationInput,
@@ -262,7 +262,7 @@ export default function search(input: validationInput): validationOutput {
                     testObj,
                     "$._EXTERNAL.usecaseId",
                 );
-                const forUsecaseId = ["LOGISTICS"];
+                const forUsecaseId = ["LOGISTICS (P2P)", "LOGISTICS (P2H2P)"];
                 const orderId = payloadUtils.getJsonPath(
                     testObj,
                     "$._EXTERNAL.order_id",
@@ -270,7 +270,7 @@ export default function search(input: validationInput): validationOutput {
 
                 const validate =
                     validations.equalTo(mockType, forType) &&
-                    validations.equalTo(usecaseId, forUsecaseId) &&
+                    validations.anyIn(usecaseId, forUsecaseId) &&
                     validations.arePresent(orderId);
 
                 if (!validate) {
@@ -283,7 +283,7 @@ export default function search(input: validationInput): validationOutput {
   - **condition cancel_request_LOGISTICS.1**: all of the following sub conditions must be met:
 
     - **condition cancel_request_LOGISTICS.1.1**: $._EXTERNAL.mock_type must be equal to ["BAP"]
-    - **condition cancel_request_LOGISTICS.1.2**: $._EXTERNAL.usecaseId must be equal to ["LOGISTICS"]
+    - **condition cancel_request_LOGISTICS.1.2**: at least one element of $._EXTERNAL.usecaseId must be in ["LOGISTICS (P2P)", "LOGISTICS (P2H2P)"]
   - **condition cancel_request_LOGISTICS.2**: $._EXTERNAL.order_id must be present in the payload`,
                         },
                     ];
@@ -318,13 +318,13 @@ export default function search(input: validationInput): validationOutput {
                     testObj,
                     "$._EXTERNAL.usecaseId",
                 );
-                const forUsecaseId = ["LOGISTICS"];
+                const forUsecaseId = ["LOGISTICS (P2P)", "LOGISTICS (P2H2P)"];
 
                 const validate =
                     validations.equalTo(mockType, forType) &&
                     validations.arePresent(bap_uri) &&
                     validations.arePresent(city_code) &&
-                    validations.equalTo(usecaseId, forUsecaseId);
+                    validations.anyIn(usecaseId, forUsecaseId);
 
                 if (!validate) {
                     return [
@@ -340,7 +340,7 @@ export default function search(input: validationInput): validationOutput {
       - **condition on_search_request_LOGISTICS.1.1.1**: $._EXTERNAL.mock_type must be equal to ["BPP"]
       - **condition on_search_request_LOGISTICS.1.1.2**: $._EXTERNAL.bap_uri must be present in the payload
     - **condition on_search_request_LOGISTICS.1.2**: $._EXTERNAL.city_code must be present in the payload
-  - **condition on_search_request_LOGISTICS.2**: $._EXTERNAL.usecaseId must be equal to ["LOGISTICS"]`,
+  - **condition on_search_request_LOGISTICS.2**: at least one element of $._EXTERNAL.usecaseId must be in ["LOGISTICS (P2P)", "LOGISTICS (P2H2P)"]`,
                         },
                     ];
                 }
@@ -374,7 +374,7 @@ export default function search(input: validationInput): validationOutput {
                     testObj,
                     "$._EXTERNAL.usecaseId",
                 );
-                const forUsecaseId = ["LOGISTICS"];
+                const forUsecaseId = ["LOGISTICS (P2P)", "LOGISTICS (P2H2P)"];
                 const billing = payloadUtils.getJsonPath(
                     testObj,
                     "$._EXTERNAL.billing",
@@ -384,7 +384,7 @@ export default function search(input: validationInput): validationOutput {
                     validations.equalTo(mockType, forType) &&
                     validations.arePresent(bap_uri) &&
                     validations.arePresent(city_code) &&
-                    validations.equalTo(usecaseId, forUsecaseId) &&
+                    validations.anyIn(usecaseId, forUsecaseId) &&
                     validations.arePresent(billing);
 
                 if (!validate) {
@@ -403,7 +403,7 @@ export default function search(input: validationInput): validationOutput {
         - **condition on_init_request_LOGISTICS.1.1.1.1**: $._EXTERNAL.mock_type must be equal to ["BPP"]
         - **condition on_init_request_LOGISTICS.1.1.1.2**: $._EXTERNAL.bap_uri must be present in the payload
       - **condition on_init_request_LOGISTICS.1.1.2**: $._EXTERNAL.city_code must be present in the payload
-    - **condition on_init_request_LOGISTICS.1.2**: $._EXTERNAL.usecaseId must be equal to ["LOGISTICS"]
+    - **condition on_init_request_LOGISTICS.1.2**: at least one element of $._EXTERNAL.usecaseId must be in ["LOGISTICS (P2P)", "LOGISTICS (P2H2P)"]
   - **condition on_init_request_LOGISTICS.2**: $._EXTERNAL.billing must be present in the payload`,
                         },
                     ];
@@ -438,7 +438,7 @@ export default function search(input: validationInput): validationOutput {
                     testObj,
                     "$._EXTERNAL.usecaseId",
                 );
-                const forUsecaseId = ["LOGISTICS"];
+                const forUsecaseId = ["LOGISTICS (P2P)", "LOGISTICS (P2H2P)"];
                 const orderId = payloadUtils.getJsonPath(
                     testObj,
                     "$._EXTERNAL.order_id",
@@ -448,7 +448,7 @@ export default function search(input: validationInput): validationOutput {
                     validations.equalTo(mockType, forType) &&
                     validations.arePresent(bap_uri) &&
                     validations.arePresent(city_code) &&
-                    validations.equalTo(usecaseId, forUsecaseId) &&
+                    validations.anyIn(usecaseId, forUsecaseId) &&
                     validations.arePresent(orderId);
 
                 if (!validate) {
@@ -467,7 +467,7 @@ export default function search(input: validationInput): validationOutput {
         - **condition on_confirm_request_LOGISTICS.1.1.1.1**: $._EXTERNAL.mock_type must be equal to ["BPP"]
         - **condition on_confirm_request_LOGISTICS.1.1.1.2**: $._EXTERNAL.bap_uri must be present in the payload
       - **condition on_confirm_request_LOGISTICS.1.1.2**: $._EXTERNAL.city_code must be present in the payload
-    - **condition on_confirm_request_LOGISTICS.1.2**: $._EXTERNAL.usecaseId must be equal to ["LOGISTICS"]
+    - **condition on_confirm_request_LOGISTICS.1.2**: at least one element of $._EXTERNAL.usecaseId must be in ["LOGISTICS (P2P)", "LOGISTICS (P2H2P)"]
   - **condition on_confirm_request_LOGISTICS.2**: $._EXTERNAL.order_id must be present in the payload`,
                         },
                     ];
@@ -502,7 +502,7 @@ export default function search(input: validationInput): validationOutput {
                     testObj,
                     "$._EXTERNAL.usecaseId",
                 );
-                const forUsecaseId = ["LOGISTICS"];
+                const forUsecaseId = ["LOGISTICS (P2P)", "LOGISTICS (P2H2P)"];
                 const orderId = payloadUtils.getJsonPath(
                     testObj,
                     "$._EXTERNAL.order_id",
@@ -512,7 +512,7 @@ export default function search(input: validationInput): validationOutput {
                     validations.equalTo(mockType, forType) &&
                     validations.arePresent(bap_uri) &&
                     validations.arePresent(city_code) &&
-                    validations.equalTo(usecaseId, forUsecaseId) &&
+                    validations.anyIn(usecaseId, forUsecaseId) &&
                     validations.arePresent(orderId);
 
                 if (!validate) {
@@ -531,7 +531,7 @@ export default function search(input: validationInput): validationOutput {
         - **condition on_update_request_LOGISTICS.1.1.1.1**: $._EXTERNAL.mock_type must be equal to ["BPP"]
         - **condition on_update_request_LOGISTICS.1.1.1.2**: $._EXTERNAL.bap_uri must be present in the payload
       - **condition on_update_request_LOGISTICS.1.1.2**: $._EXTERNAL.city_code must be present in the payload
-    - **condition on_update_request_LOGISTICS.1.2**: $._EXTERNAL.usecaseId must be equal to ["LOGISTICS"]
+    - **condition on_update_request_LOGISTICS.1.2**: at least one element of $._EXTERNAL.usecaseId must be in ["LOGISTICS (P2P)", "LOGISTICS (P2H2P)"]
   - **condition on_update_request_LOGISTICS.2**: $._EXTERNAL.order_id must be present in the payload`,
                         },
                     ];
@@ -566,7 +566,7 @@ export default function search(input: validationInput): validationOutput {
                     testObj,
                     "$._EXTERNAL.usecaseId",
                 );
-                const forUsecaseId = ["LOGISTICS"];
+                const forUsecaseId = ["LOGISTICS (P2P)", "LOGISTICS (P2H2P)"];
                 const orderId = payloadUtils.getJsonPath(
                     testObj,
                     "$._EXTERNAL.order_id",
@@ -576,7 +576,7 @@ export default function search(input: validationInput): validationOutput {
                     validations.equalTo(mockType, forType) &&
                     validations.arePresent(bap_uri) &&
                     validations.arePresent(city_code) &&
-                    validations.equalTo(usecaseId, forUsecaseId) &&
+                    validations.anyIn(usecaseId, forUsecaseId) &&
                     validations.arePresent(orderId);
 
                 if (!validate) {
@@ -595,7 +595,7 @@ export default function search(input: validationInput): validationOutput {
         - **condition on_status_request_LOGISTICS.1.1.1.1**: $._EXTERNAL.mock_type must be equal to ["BPP"]
         - **condition on_status_request_LOGISTICS.1.1.1.2**: $._EXTERNAL.bap_uri must be present in the payload
       - **condition on_status_request_LOGISTICS.1.1.2**: $._EXTERNAL.city_code must be present in the payload
-    - **condition on_status_request_LOGISTICS.1.2**: $._EXTERNAL.usecaseId must be equal to ["LOGISTICS"]
+    - **condition on_status_request_LOGISTICS.1.2**: at least one element of $._EXTERNAL.usecaseId must be in ["LOGISTICS (P2P)", "LOGISTICS (P2H2P)"]
   - **condition on_status_request_LOGISTICS.2**: $._EXTERNAL.order_id must be present in the payload`,
                         },
                     ];
@@ -630,7 +630,7 @@ export default function search(input: validationInput): validationOutput {
                     testObj,
                     "$._EXTERNAL.usecaseId",
                 );
-                const forUsecaseId = ["LOGISTICS"];
+                const forUsecaseId = ["LOGISTICS (P2P)", "LOGISTICS (P2H2P)"];
                 const isTrackExecuted = payloadUtils.getJsonPath(
                     testObj,
                     "$._EXTERNAL.is_track_execute",
@@ -641,7 +641,7 @@ export default function search(input: validationInput): validationOutput {
                     validations.equalTo(mockType, forType) &&
                     validations.arePresent(bap_uri) &&
                     validations.arePresent(city_code) &&
-                    validations.equalTo(usecaseId, forUsecaseId) &&
+                    validations.anyIn(usecaseId, forUsecaseId) &&
                     validations.equalTo(isTrackExecuted, trackExecuted);
 
                 if (!validate) {
@@ -660,7 +660,7 @@ export default function search(input: validationInput): validationOutput {
         - **condition on_track_request_LOGISTICS.1.1.1.1**: $._EXTERNAL.mock_type must be equal to ["BPP"]
         - **condition on_track_request_LOGISTICS.1.1.1.2**: $._EXTERNAL.bap_uri must be present in the payload
       - **condition on_track_request_LOGISTICS.1.1.2**: $._EXTERNAL.city_code must be present in the payload
-    - **condition on_track_request_LOGISTICS.1.2**: $._EXTERNAL.usecaseId must be equal to ["LOGISTICS"]
+    - **condition on_track_request_LOGISTICS.1.2**: at least one element of $._EXTERNAL.usecaseId must be in ["LOGISTICS (P2P)", "LOGISTICS (P2H2P)"]
   - **condition on_track_request_LOGISTICS.2**: $._EXTERNAL.is_track_execute must be equal to ["true"]`,
                         },
                     ];
@@ -695,7 +695,7 @@ export default function search(input: validationInput): validationOutput {
                     testObj,
                     "$._EXTERNAL.usecaseId",
                 );
-                const forUsecaseId = ["LOGISTICS"];
+                const forUsecaseId = ["LOGISTICS (P2P)", "LOGISTICS (P2H2P)"];
                 const isCancelExecuted = payloadUtils.getJsonPath(
                     testObj,
                     "$._EXTERNAL.is_cancel_executed",
@@ -706,7 +706,7 @@ export default function search(input: validationInput): validationOutput {
                     validations.equalTo(mockType, forType) &&
                     validations.arePresent(bap_uri) &&
                     validations.arePresent(city_code) &&
-                    validations.equalTo(usecaseId, forUsecaseId) &&
+                    validations.anyIn(usecaseId, forUsecaseId) &&
                     validations.equalTo(isCancelExecuted, cancelExecuted);
 
                 if (!validate) {
@@ -725,7 +725,7 @@ export default function search(input: validationInput): validationOutput {
         - **condition on_cancel_request_LOGISTICS.1.1.1.1**: $._EXTERNAL.mock_type must be equal to ["BPP"]
         - **condition on_cancel_request_LOGISTICS.1.1.1.2**: $._EXTERNAL.bap_uri must be present in the payload
       - **condition on_cancel_request_LOGISTICS.1.1.2**: $._EXTERNAL.city_code must be present in the payload
-    - **condition on_cancel_request_LOGISTICS.1.2**: $._EXTERNAL.usecaseId must be equal to ["LOGISTICS"]
+    - **condition on_cancel_request_LOGISTICS.1.2**: at least one element of $._EXTERNAL.usecaseId must be in ["LOGISTICS (P2P)", "LOGISTICS (P2H2P)"]
   - **condition on_cancel_request_LOGISTICS.2**: $._EXTERNAL.is_cancel_executed must be equal to ["true"]`,
                         },
                     ];

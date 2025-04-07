@@ -159,6 +159,70 @@ export const onStatusGenerator = async (
           return fulfillemt;
         });
       break;
+    case "Pickup-rescheduled":
+      existingPayload.message.order.fulfillments =
+        existingPayload.message.order.fulfillments.map((fulfillemt: any) => {
+          fulfillemt.state.descriptor.code = sessionData.stateCode;
+          fulfillemt.tags.push({
+            code: "fulfillment_delay",
+            list: [
+              {
+                code: "state",
+                value: "Order-picked-up",
+              },
+              {
+                code: "reason_id",
+                value: "004",
+              },
+              {
+                code: "timestamp",
+                value: existingPayload.context.timestamp,
+              },
+              {
+                code: "attempt",
+                value: "yes",
+              },
+            ],
+          });
+          return fulfillemt;
+        });
+      break;
+    case "Out-for-pickup":
+      existingPayload.message.order.fulfillments =
+        existingPayload.message.order.fulfillments.map((fulfillemt: any) => {
+          fulfillemt.state.descriptor.code = sessionData.stateCode;
+          return fulfillemt;
+        });
+      break;
+    case "Delivery-rescheduled":
+      existingPayload.message.order.fulfillments =
+        existingPayload.message.order.fulfillments.map((fulfillemt: any) => {
+          fulfillemt.state.descriptor.code = sessionData.stateCode;
+          fulfillemt.tags.push({
+            code: "fulfillment_delay",
+            list: [
+              {
+                code: "state",
+                value: "Order-delivered",
+              },
+              {
+                code: "reason_id",
+                value: "005",
+              },
+              {
+                code: "timestamp",
+                value: existingPayload.context.timestamp,
+              },
+              {
+                code: "attempt",
+                value: "yes",
+              },
+            ],
+          });
+          return fulfillemt;
+        });
+      break;
+
     default:
       existingPayload.message.order.state = "In-progress";
   }

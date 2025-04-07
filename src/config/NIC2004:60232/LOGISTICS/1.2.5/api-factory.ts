@@ -80,6 +80,21 @@ export async function Generator(
         ...sessionData,
         stateCode: "In-transit",
       });
+    case "on_status_8_LOGISTICS":
+      return await onStatusGenerator(existingPayload, {
+        ...sessionData,
+        stateCode: "Pickup-rescheduled",
+      });
+    case "on_status_9_LOGISTICS":
+      return await onStatusGenerator(existingPayload, {
+        ...sessionData,
+        stateCode: "Out-for-pickup",
+      });
+    case "on_status_10_LOGISTICS":
+      return await onStatusGenerator(existingPayload, {
+        ...sessionData,
+        stateCode: "Delivery-rescheduled",
+      });
     case "on_track_LOGISTICS":
       return await onTrackGenerator(existingPayload, sessionData);
     case "on_cancel_LOGISTICS":

@@ -10,7 +10,6 @@ export type validationOutput = {
 
 /*
 {% comment %} export type ExternalData = {
-    subscriber_url?: string[];
     transaction_id?: string[];
     message_id?: string[];
     last_action?: string[];
@@ -20,25 +19,37 @@ export type validationOutput = {
     bap_uri?: string[];
     bpp_id?: string[];
     bpp_uri?: string[];
-    category_id?: string[];
-    shipment_method?: string[];
+    start_code?: string[];
+    end_code?: string[];
+    buyer_app_fee?: string[];
+    vehicle_type?: string[];
     fulfillments?: string[];
+    category_ids?: string[];
     provider_id?: string[];
-    location_id?: string[];
+    fulfillment_ids?: string[];
+    item_ids?: string[];
+    items?: string[];
+    selected_items?: string[];
+    selected_item_ids?: string[];
+    billing?: string[];
+    payments?: string[];
+    updated_payments?: string[];
+    order_id?: string[];
+    status?: string[];
     error_code?: string[];
     error_message?: string[];
-    cancellation_reason_id?: string[];
-    order_id?: string[];
-    order_status?: string[];
-    billing?: string[];
-    fulfillment_status?: string[];
-    quote_price?: string[];
-    fulfillment_pickup_timestamp?: string[];
-    start_location?: string[];
-    start_area_code?: string[];
-    end_location?: string[];
-    end_area_code?: string[];
-    is_track_execute?: string[];
+    quote?: string[];
+    ref_id?: string[];
+    ttl?: string[];
+    usecaseId?: string[];
+    on_search_items?: string[];
+    payment_type?: string[];
+    payment?: string[];
+    is_cod?: string[];
+    cancellation?: string[];
+    domain?: string[];
+    linked_order?: string[];
+    confirm_fulfillments?: string[];
 }; {% endcomment %}
 */
 

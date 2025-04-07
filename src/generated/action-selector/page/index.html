@@ -16,7 +16,7 @@
 <li><p><strong>condition first_search_request_LOGISTICS</strong>: all of the following sub conditions must be met:</p>
 <ul>
 <li><strong>condition first_search_request_LOGISTICS.1</strong>: $._EXTERNAL.mock_type must be equal to [&quot;BAP&quot;]</li>
-<li><strong>condition first_search_request_LOGISTICS.2</strong>: $._EXTERNAL.usecaseId must be equal to [&quot;LOGISTICS&quot;]</li>
+<li><strong>condition first_search_request_LOGISTICS.2</strong>: at least one element of $._EXTERNAL.usecaseId must be in [&quot;LOGISTICS (P2P)&quot;, &quot;LOGISTICS (P2H2P)&quot;]</li>
 </ul>
 </li>
 <li><p><strong>condition init_request_LOGISTICS</strong>: all of the following sub conditions must be met:</p>
@@ -24,7 +24,7 @@
 <li><p><strong>condition init_request_LOGISTICS.1</strong>: all of the following sub conditions must be met:</p>
 <ul>
 <li><strong>condition init_request_LOGISTICS.1.1</strong>: $._EXTERNAL.mock_type must be equal to [&quot;BAP&quot;]</li>
-<li><strong>condition init_request_LOGISTICS.1.2</strong>: $._EXTERNAL.usecaseId must be equal to [&quot;LOGISTICS&quot;]</li>
+<li><strong>condition init_request_LOGISTICS.1.2</strong>: at least one element of $._EXTERNAL.usecaseId must be in [&quot;LOGISTICS (P2P)&quot;, &quot;LOGISTICS (P2H2P)&quot;]</li>
 </ul>
 </li>
 <li><p><strong>condition init_request_LOGISTICS.2</strong>: $._EXTERNAL.provider_id must be present in the payload</p>
@@ -36,7 +36,7 @@
 <li><p><strong>condition confirm_request_LOGISTICS.1</strong>: all of the following sub conditions must be met:</p>
 <ul>
 <li><strong>condition confirm_request_LOGISTICS.1.1</strong>: $._EXTERNAL.mock_type must be equal to [&quot;BAP&quot;]</li>
-<li><strong>condition confirm_request_LOGISTICS.1.2</strong>: $._EXTERNAL.usecaseId must be equal to [&quot;LOGISTICS&quot;]</li>
+<li><strong>condition confirm_request_LOGISTICS.1.2</strong>: at least one element of $._EXTERNAL.usecaseId must be in [&quot;LOGISTICS (P2P)&quot;, &quot;LOGISTICS (P2H2P)&quot;]</li>
 </ul>
 </li>
 <li><p><strong>condition confirm_request_LOGISTICS.2</strong>: $._EXTERNAL.quote_price must be present in the payload</p>
@@ -48,7 +48,7 @@
 <li><p><strong>condition update_request_LOGISTICS.1</strong>: all of the following sub conditions must be met:</p>
 <ul>
 <li><strong>condition update_request_LOGISTICS.1.1</strong>: $._EXTERNAL.mock_type must be equal to [&quot;BAP&quot;]</li>
-<li><strong>condition update_request_LOGISTICS.1.2</strong>: $._EXTERNAL.usecaseId must be equal to [&quot;LOGISTICS&quot;]</li>
+<li><strong>condition update_request_LOGISTICS.1.2</strong>: at least one element of $._EXTERNAL.usecaseId must be in [&quot;LOGISTICS (P2P)&quot;, &quot;LOGISTICS (P2H2P)&quot;]</li>
 </ul>
 </li>
 <li><p><strong>condition update_request_LOGISTICS.2</strong>: $._EXTERNAL.order_id must be present in the payload</p>
@@ -60,7 +60,7 @@
 <li><p><strong>condition track_request_LOGISTICS.1</strong>: all of the following sub conditions must be met:</p>
 <ul>
 <li><strong>condition track_request_LOGISTICS.1.1</strong>: $._EXTERNAL.mock_type must be equal to [&quot;BAP&quot;]</li>
-<li><strong>condition track_request_LOGISTICS.1.2</strong>: $._EXTERNAL.usecaseId must be equal to [&quot;LOGISTICS&quot;]</li>
+<li><strong>condition track_request_LOGISTICS.1.2</strong>: at least one element of $._EXTERNAL.usecaseId must be in [&quot;LOGISTICS (P2P)&quot;, &quot;LOGISTICS (P2H2P)&quot;]</li>
 </ul>
 </li>
 <li><p><strong>condition track_request_LOGISTICS.2</strong>: $._EXTERNAL.fulfillment_pickup_timestamp must be present in the payload</p>
@@ -72,7 +72,7 @@
 <li><p><strong>condition cancel_request_LOGISTICS.1</strong>: all of the following sub conditions must be met:</p>
 <ul>
 <li><strong>condition cancel_request_LOGISTICS.1.1</strong>: $._EXTERNAL.mock_type must be equal to [&quot;BAP&quot;]</li>
-<li><strong>condition cancel_request_LOGISTICS.1.2</strong>: $._EXTERNAL.usecaseId must be equal to [&quot;LOGISTICS&quot;]</li>
+<li><strong>condition cancel_request_LOGISTICS.1.2</strong>: at least one element of $._EXTERNAL.usecaseId must be in [&quot;LOGISTICS (P2P)&quot;, &quot;LOGISTICS (P2H2P)&quot;]</li>
 </ul>
 </li>
 <li><p><strong>condition cancel_request_LOGISTICS.2</strong>: $._EXTERNAL.order_id must be present in the payload</p>
@@ -93,7 +93,7 @@
 </li>
 </ul>
 </li>
-<li><p><strong>condition on_search_request_LOGISTICS.2</strong>: $._EXTERNAL.usecaseId must be equal to [&quot;LOGISTICS&quot;]</p>
+<li><p><strong>condition on_search_request_LOGISTICS.2</strong>: at least one element of $._EXTERNAL.usecaseId must be in [&quot;LOGISTICS (P2P)&quot;, &quot;LOGISTICS (P2H2P)&quot;]</p>
 </li>
 </ul>
 </li>
@@ -113,7 +113,7 @@
 </li>
 </ul>
 </li>
-<li><p><strong>condition on_init_request_LOGISTICS.1.2</strong>: $._EXTERNAL.usecaseId must be equal to [&quot;LOGISTICS&quot;]</p>
+<li><p><strong>condition on_init_request_LOGISTICS.1.2</strong>: at least one element of $._EXTERNAL.usecaseId must be in [&quot;LOGISTICS (P2P)&quot;, &quot;LOGISTICS (P2H2P)&quot;]</p>
 </li>
 </ul>
 </li>
@@ -137,7 +137,7 @@
 </li>
 </ul>
 </li>
-<li><p><strong>condition on_confirm_request_LOGISTICS.1.2</strong>: $._EXTERNAL.usecaseId must be equal to [&quot;LOGISTICS&quot;]</p>
+<li><p><strong>condition on_confirm_request_LOGISTICS.1.2</strong>: at least one element of $._EXTERNAL.usecaseId must be in [&quot;LOGISTICS (P2P)&quot;, &quot;LOGISTICS (P2H2P)&quot;]</p>
 </li>
 </ul>
 </li>
@@ -161,7 +161,7 @@
 </li>
 </ul>
 </li>
-<li><p><strong>condition on_update_request_LOGISTICS.1.2</strong>: $._EXTERNAL.usecaseId must be equal to [&quot;LOGISTICS&quot;]</p>
+<li><p><strong>condition on_update_request_LOGISTICS.1.2</strong>: at least one element of $._EXTERNAL.usecaseId must be in [&quot;LOGISTICS (P2P)&quot;, &quot;LOGISTICS (P2H2P)&quot;]</p>
 </li>
 </ul>
 </li>
@@ -185,7 +185,7 @@
 </li>
 </ul>
 </li>
-<li><p><strong>condition on_status_request_LOGISTICS.1.2</strong>: $._EXTERNAL.usecaseId must be equal to [&quot;LOGISTICS&quot;]</p>
+<li><p><strong>condition on_status_request_LOGISTICS.1.2</strong>: at least one element of $._EXTERNAL.usecaseId must be in [&quot;LOGISTICS (P2P)&quot;, &quot;LOGISTICS (P2H2P)&quot;]</p>
 </li>
 </ul>
 </li>
@@ -209,7 +209,7 @@
 </li>
 </ul>
 </li>
-<li><p><strong>condition on_track_request_LOGISTICS.1.2</strong>: $._EXTERNAL.usecaseId must be equal to [&quot;LOGISTICS&quot;]</p>
+<li><p><strong>condition on_track_request_LOGISTICS.1.2</strong>: at least one element of $._EXTERNAL.usecaseId must be in [&quot;LOGISTICS (P2P)&quot;, &quot;LOGISTICS (P2H2P)&quot;]</p>
 </li>
 </ul>
 </li>
@@ -233,7 +233,7 @@
 </li>
 </ul>
 </li>
-<li><p><strong>condition on_cancel_request_LOGISTICS.1.2</strong>: $._EXTERNAL.usecaseId must be equal to [&quot;LOGISTICS&quot;]</p>
+<li><p><strong>condition on_cancel_request_LOGISTICS.1.2</strong>: at least one element of $._EXTERNAL.usecaseId must be in [&quot;LOGISTICS (P2P)&quot;, &quot;LOGISTICS (P2H2P)&quot;]</p>
 </li>
 </ul>
 </li>

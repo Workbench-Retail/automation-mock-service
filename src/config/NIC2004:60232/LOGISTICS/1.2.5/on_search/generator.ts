@@ -145,8 +145,8 @@ export async function onSearch1Generator(
   if (inputs?.feature_discovery) {
     let codesArray = inputs.feature_discovery;
 
-    existingPayload.message.intent.tags =
-      existingPayload.message.intent.tags.map((tag: any) => {
+    existingPayload.message.catalog.tags =
+      existingPayload.message.catalog.tags.map((tag: any) => {
         if (tag.code === "lsp_features") {
           const newTags = codesArray.map((code) => {
             return {
@@ -156,6 +156,16 @@ export async function onSearch1Generator(
           });
 
           tag.list = newTags;
+
+          if (sessionData.payment_type === "ON-ORDER") {
+            tag.list = [
+              ...tag.list,
+              {
+                code: "00D",
+                value: "yes",
+              },
+            ];
+          }
         }
 
         return tag;
