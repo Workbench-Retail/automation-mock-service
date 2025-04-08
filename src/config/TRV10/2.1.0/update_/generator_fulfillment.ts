@@ -26,5 +26,6 @@ function updateStop(updatePayload: any, anotherAPIResponse: any) {
 
 export async function updateFulfillmentSoftGenerator(existingPayload: any,sessionData: SessionData){
     existingPayload.message.order.id = sessionData.order_id
+    existingPayload.message.order.fulfillments[0].id = sessionData.selected_fulfillment_id
     return existingPayload;
 }

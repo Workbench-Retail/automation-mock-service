@@ -40,5 +40,11 @@ export async function onUpdateRideSoftUpdateGenerator(existingPayload: any,sessi
     existingPayload.message.order.status = "SOFT_UPDATE"
     console.log("the updated stop is ",sessionData.update_stop)
     existingPayload = updateStops(existingPayload,sessionData.update_stop[0])
+    for (const fulfillment of existingPayload.message.order.fulfillments) {
+      for (const stop of fulfillment.stops) {
+        delete stop.id;
+        delete stop.parent_stop_id;
+      }
+    }
     return existingPayload;
 }
