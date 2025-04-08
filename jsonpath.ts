@@ -416,7 +416,7 @@ const path = '$.message.catalog["bpp/providers"][*].items[*]';
 // const result = jsonpath.query(payload, path);
 
 const results = JSONPath({
-  path: '$.message.intent["@ondc/org/payload_details"]',
+  path: "$.message.intent",
   json,
   resultType: "all",
 });

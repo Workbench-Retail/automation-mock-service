@@ -32,7 +32,7 @@ export const initGenerator = async (
         }
       });
 
-      if (!(sessionData?.is_cod === "yes") || isBaseItem) {
+      if (!(sessionData?.is_cod === "yes") && isBaseItem) {
         existingPayload.message.order.items[0] = {
           id: item.id,
           fulfillment_id:

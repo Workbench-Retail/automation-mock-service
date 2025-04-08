@@ -1,4 +1,5 @@
 import { JSONPath } from "jsonpath-plus";
+import jsonpath from "jsonpath"
 
 /**
  * Updates a JSON object at a specific JSONPath with a new value.
@@ -13,27 +14,29 @@ function updateJsonPath<T extends object>(
 	jsonPath: string,
 	newValue: any
 ): T {
-	const results = JSONPath({
-		path: jsonPath,
-		json,
-		resultType: "all",
-	});
+	// const results = JSONPath({
+	// 	path: jsonPath,
+	// 	json,
+	// 	resultType: "all",
+	// });
 
-	if (!results.length) {
-		throw new Error(`No match found for JSONPath: ${jsonPath}`);
-	}
+	// if (!results.length) {
+	// 	throw new Error(`No match found for JSONPath: ${jsonPath}`);
+	// }
 
-	for (const result of results) {
-		// Use the pointer to navigate the JSON structure
-		const { pointer, parent, parentProperty } = result;
+	// for (const result of results) {
+	// 	// Use the pointer to navigate the JSON structure
+	// 	const { pointer, parent, parentProperty } = result;
 
-		if (!parent || !parentProperty) {
-			throw new Error(`Invalid result structure for JSONPath: ${jsonPath}`);
-		}
+	// 	if (!parent || !parentProperty) {
+	// 		throw new Error(`Invalid result structure for JSONPath: ${jsonPath}`);
+	// 	}
 
-		// Update the target property
-		parent[parentProperty] = newValue;
-	}
+	// 	// Update the target property
+	// 	parent[parentProperty] = newValue;
+	// }
+
+	jsonpath.apply(json, jsonPath, (_) => newValue);
 
 	return json;
 }
