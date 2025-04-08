@@ -54,7 +54,7 @@ message:
             value: "5" # Annual interest rate for delayed settlements
           - descriptor:
               code: STATIC_TERMS
-            value: https://example-test-bpp.com/static-terms.txt # Terms and conditions URL
+            value: https://example-test-bap.com/static-terms.txt # Terms and conditions URL
           - descriptor:
               code: SETTLEMENT_BANK_CODE
             value: XXXXXXXXX # Bank IFSC code

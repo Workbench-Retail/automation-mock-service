@@ -1,7 +1,7 @@
 export async function onCancelRiderNotFoundGenerator(existingPayload: any, sessionData: any) {
     // Update payments if available
-    if (sessionData.updated_payments?.length > 0) {
-        existingPayload.message.order.payments = sessionData.updated_payments;
+    if (sessionData.payments?.length > 0) {
+        existingPayload.message.order.payments = sessionData.payments;
     }
 
     // Update items if available
@@ -12,6 +12,7 @@ export async function onCancelRiderNotFoundGenerator(existingPayload: any, sessi
     // Update fulfillments if available
     if (sessionData.fulfillments?.length > 0) {
         existingPayload.message.order.fulfillments = sessionData.selected_fulfillments;
+        existingPayload.message.order.fulfillments[0].state.descriptor.code = 'RIDE_CANCELLED';
     }
 
     // Update order ID if available

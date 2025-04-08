@@ -79,8 +79,8 @@ function applyCancellation(quote: Quote, cancellationCharges: number): Quote {
 }
 
 export async function onCancelAsyncGenerator(existingPayload: any, sessionData: SessionData) {
-  if (sessionData.updated_payments?.length > 0) {
-    existingPayload.message.order.payments = sessionData.updated_payments;
+  if (sessionData.payments?.length > 0) {
+    existingPayload.message.order.payments = sessionData.payments;
   }
   
   if (sessionData.items?.length > 0) {

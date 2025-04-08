@@ -283,3 +283,8 @@ codes:
     action: on_select
     default: TRV10/2.1.0/on_select/default.yaml
     message_id: false
+  - code: 157
+    action_id: on_confirm_rental
+    action: on_confirm
+    default: TRV10/2.1.0/on_confirm/on_confirm_driver_not_assigned/default.yaml
+    message_id: false

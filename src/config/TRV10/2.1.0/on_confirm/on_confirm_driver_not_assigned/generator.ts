@@ -97,7 +97,6 @@ export async function onConfirmDriverNotAssignedGenerator(
             reason_required: true
         }
     ];
-      console.log("inside on confirm driver not assigned generator")
     // Update timestamps
     existingPayload = updateOrderTimestamps(existingPayload);
     return existingPayload;

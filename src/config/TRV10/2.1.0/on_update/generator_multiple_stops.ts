@@ -1,7 +1,7 @@
 import { SessionData } from "../../session-types";
 
 export async function onUpdateMultipleStopsGenerator(existingPayload: any,sessionData: SessionData){
-    if (sessionData.updated_payments.length > 0) {
+    if (sessionData.payments.length > 0) {
         existingPayload.message.order.payments = sessionData.payments;
       }
     

@@ -90,7 +90,7 @@ message:
             value: UPI # Payment settlement method
           - descriptor:
               code: SETTLEMENT_WINDOW
-            value: PT2D # 2 days settlement window
+            value: PT60M # 2 days settlement window
           - descriptor:
               code: SETTLEMENT_BASIS
             value: DELIVERY # Settlement after successful delivery/trip completion

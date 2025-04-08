@@ -137,7 +137,7 @@ const item_tags = [
         currency: items[0].price.currency,
         value: items.reduce((total, item) => total + parseFloat(item.price.value), 0).toString(),
       },
-      ttl: "P200s",
+      ttl: "PT200S",
     };
   }
 function filterFulfillmentsByItem(item: any, fulfillments: any[]) {

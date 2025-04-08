@@ -5,5 +5,7 @@ export async function searchMultipleStopsScheduleRentalGenerator(existingPayload
     const futureDate = new Date();
     futureDate.setMonth(futureDate.getMonth() + 6);
     existingPayload.message.intent.fulfillment.stops[0].time.timestamp = futureDate
+    delete existingPayload.context.bpp_uri
+    delete existingPayload.context.bpp_id
     return existingPayload;
 }

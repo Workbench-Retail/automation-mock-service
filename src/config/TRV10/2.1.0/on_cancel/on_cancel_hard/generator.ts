@@ -23,6 +23,10 @@ type Price = {
     price: Price;
     breakup: Breakup[];
   };
+
+  function generateOTP(): string {
+    return Math.floor(100000 + Math.random() * 900000).toString();
+  }
   
   function applyCancellation(quote: Quote, cancellationCharges: number): Quote {
     // Parse the current price
@@ -78,8 +82,8 @@ type Price = {
   }
   
   export async function onCancelHardGenerator(existingPayload: any, sessionData: any) {
-    if (sessionData.updated_payments?.length > 0) {
-      existingPayload.message.order.payments = sessionData.updated_payments;
+    if (sessionData.payments?.length > 0) {
+      existingPayload.message.order.payments = sessionData.payments;
     }
     
     if (sessionData.items?.length > 0) {
@@ -88,6 +92,18 @@ type Price = {
   
     if (sessionData.fulfillments?.length > 0) {
       existingPayload.message.order.fulfillments = sessionData.selected_fulfillments;
+    }
+
+    for (const fulfillment of existingPayload.message.order.fulfillments) {
+      if (fulfillment.stops && Array.isArray(fulfillment.stops)) {
+        fulfillment.stops = fulfillment.stops.map((stop: any) => ({
+          ...stop,
+          authorization: {
+            type: "OTP",
+            token: generateOTP(),
+          },
+        }));
+      }
     }
   
     if (sessionData.order_id) {

@@ -12,5 +12,7 @@ function updateSearchPayload(payload: any) {
   }
 export async function searchMultipleStopsRentalGenerator(existingPayload: any,sessionData: SessionData){
     updateSearchPayload(existingPayload)
+    delete existingPayload.context.bpp_uri
+    delete existingPayload.context.bpp_id
     return existingPayload;
 }
