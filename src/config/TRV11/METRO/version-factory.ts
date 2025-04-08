@@ -4,6 +4,7 @@ import { createMockResponseMETRO200 } from "./2.0.0/generation-pipline";
 import { ApiServiceCache, RedisService } from "ondc-automation-cache-lib";
 import { SessionCache } from "../../../types/api-session-cache";
 import { createMockReponseBUS200 } from "../BUS/2.0.0/generation-pipline";
+import { createBuyerUrl, createSellerUrl } from "../../../utils/request-utils";
 
 export async function createMockResponse(
   session_id: string,
@@ -34,11 +35,16 @@ export async function createMockResponse(
     }
   }
 
-  if(data.npType === "BAP") {
-    payload.context.bap_uri = data.subscriberUrl
-  } else  {
-    payload.context.bpp_uri = data.subscriberUrl
-  }
+  if (data.npType === "BAP") {
+		payload.context.bap_uri = data.subscriberUrl;
+		payload.context.bpp_uri = createSellerUrl(data.domain, data.version);
+	} else {
+    if(payload.context.action !== "search"){
+      payload.context.bpp_uri = data.subscriberUrl;
+    }
+		payload.context.bap_uri = createBuyerUrl(data.domain, data.version);
+	}
+
 
   return payload
 }

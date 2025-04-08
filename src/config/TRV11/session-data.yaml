@@ -31,3 +31,4 @@ session_data:
   ref_id: null
   ttl: null
   usecaseId: null
+  collected_by: null

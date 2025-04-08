@@ -23,43 +23,43 @@ export async function Generator(
 	sessionData: any
 ) {
 	switch (action_id) {
-		case "search1_BUS":
+		case "search1_BUS_200":
 			return await search1Generator(existingPayload, sessionData);
-		case "search2_BUS":
+		case "search2_BUS_200":
 			return await search2Generator(existingPayload, sessionData);
-		case "select_BUS":
+		case "select_BUS_200":
 			return await selectGenerator(existingPayload, sessionData);
-		case "init_BUS":
+		case "init_BUS_200":
 			return await initGenerator(existingPayload, sessionData);
-		case "confirm_BUS":
+		case "confirm_BUS_200":
 			return await confirmGenerator(existingPayload, sessionData);
-		case "status_BUS":
+		case "status_BUS_200":
 			return await statusGenerator(existingPayload, sessionData);
-		case "status_tech_cancel_BUS":
+		case "status_tech_cancel_BUS_200":
 			return await statusTechCancelGenerator(existingPayload,sessionData)
-		case "cancel_soft_BUS":
+		case "cancel_soft_BUS_200":
 			return await cancelSoftGenerator(existingPayload, sessionData);
-		case "cancel_hard_BUS":
+		case "cancel_hard_BUS_200":
 			return await cancelHardGenerator(existingPayload, sessionData);
-		case "on_search1_BUS":
+		case "on_search1_BUS_200":
 			return await onSearch1Generator(existingPayload, sessionData);
-		case "on_search2_BUS":
+		case "on_search2_BUS_200":
 			return await onSearch2Generator(existingPayload, sessionData);
-		case "on_select_BUS":
+		case "on_select_BUS_200":
 			return await onSelectGenerator(existingPayload, sessionData);
-		case "on_init_BUS":
+		case "on_init_BUS_200":
 			return await onInitGenerator(existingPayload, sessionData);
-		case "on_confirm_BUS":
+		case "on_confirm_BUS_200":
 			return await onConfirmGenerator(existingPayload, sessionData);
-		case "on_status_BUS":
+		case "on_status_BUS_200":
 			return await onStatusActiveGenerator(existingPayload, sessionData);
-		case "on_status_active_BUS":
+		case "on_status_active_BUS_200":
 			return await onStatusActiveGenerator(existingPayload, sessionData);
-		case "on_confirm_delayed_BUS":
+		case "on_confirm_delayed_BUS_200":
 			return await onConfirmDelayedGenerator(existingPayload, sessionData);
-		case "on_cancel_soft_BUS":
+		case "on_cancel_soft_BUS_200":
 			return await onCancelSoftGenerator(existingPayload, sessionData);
-		case "on_cancel_hard_BUS":
+		case "on_cancel_hard_BUS_200":
 			return await onCancelHardGenerator(existingPayload, sessionData);
 		default:
 			throw new Error(`Invalid request type ${action_id}`);

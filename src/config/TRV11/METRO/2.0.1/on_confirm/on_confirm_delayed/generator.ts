@@ -1,4 +1,14 @@
 import { randomBytes } from "crypto";
+function isoDurationToSeconds(duration: string): number {
+  const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+  if (!match) return 0; // Invalid format, return 0
+
+  const hours = parseInt(match[1] || "0", 10);
+  const minutes = parseInt(match[2] || "0", 10);
+  const seconds = parseInt(match[3] || "0", 10);
+
+  return hours * 3600 + minutes * 60 + seconds;
+}
 
 function delay(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -63,14 +73,13 @@ function updateFulfillmentsWithParentInfo(fulfillments: any[]): void {
 export async function onConfirmDelayedGenerator(existingPayload: any,sessionData: any){
   const randomId = Math.random().toString(36).substring(2, 15);
   const order_id = randomId
-  const updated_payments = {
-      ...sessionData["updated_payments"]["params"],
-      "bank_code": "XXXXXXXX",
-      "bank_account_number": "xxxxxxxxxxxxxx"
-  }
-  if (!Array.isArray(sessionData.updated_payments)) {
-      sessionData.updated_payments = [sessionData.updated_payments];
-  }
+  sessionData["updated_payments"][0]["params"]["bank_code"] = "XXXXXXXX";
+	sessionData["updated_payments"][0]["params"]["bank_account_number"] =
+		"xxxxxxxxxxxxxx";
+	const updated_payments = sessionData.updated_payments;
+	if (!Array.isArray(sessionData.updated_payments)) {
+		sessionData.updated_payments = [sessionData.updated_payments];
+	}
   updateFulfillmentsWithParentInfo(sessionData.fulfillments)
   existingPayload.message.order.payments = updated_payments;
 	
@@ -87,6 +96,9 @@ export async function onConfirmDelayedGenerator(existingPayload: any,sessionData
 	existingPayload.message.order.quote = sessionData.quote
 	}
 	existingPayload.message.order.id = order_id;
-  await delay(30000);
+  console.log(sessionData.ttl)
+  const delay_duration = isoDurationToSeconds(sessionData.ttl) + 2
+  console.log("the delay duration is", delay_duration)
+  await delay(delay_duration*1000);
   return existingPayload;
 }

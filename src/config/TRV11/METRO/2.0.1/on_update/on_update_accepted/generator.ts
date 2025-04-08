@@ -89,7 +89,7 @@ export async function onUpdateAcceptedGenerator(existingPayload: any,sessionData
 	existingPayload.message.order.fulfillments = sessionData.fulfillments;
 	}
 	if (sessionData.order_id) {
-	existingPayload.message.order_id = sessionData.order_id;
+	existingPayload.message.order.id = sessionData.order_id;
 	}
 	if(sessionData.quote != null){
 	existingPayload.message.order.quote = applyCancellation(sessionData.quote,15)

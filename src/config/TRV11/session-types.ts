@@ -32,6 +32,7 @@ export interface SessionData {
 	ref_id: string | undefined;
 	ttl: string | undefined;
 	usecaseId : string | undefined;
+	collected_by: string
 }
 
 export type BecknContext = {
