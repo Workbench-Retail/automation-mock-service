@@ -44,6 +44,7 @@ export interface SessionData {
 	created_at: string
 	cancellation_reason_id: string
 	cancellation_quote: any[]
+	selected_fulfillment_id: string
 }
 
 export type BecknContext = {

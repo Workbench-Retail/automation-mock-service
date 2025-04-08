@@ -69,7 +69,7 @@ export async function onConfirmMultipleStopsGenerator(
     existingPayload.message.order.fulfillments = sessionData.selected_fulfillments;
     existingPayload.message.order.fulfillments = updateFulfillments(existingPayload.message.order.fulfillments)
     existingPayload.message.order.fulfillments[0]["agent"] = agent
-    existingPayload.message.order.fulfillments[0]["state"] = {"descriptor": {"code": "RIDE_CONFIRMED"}}
+    existingPayload.message.order.fulfillments[0]["state"] = {"descriptor": {"code": "RIDE_ASSIGNED"}}
     }
     if(sessionData.quote != null){
     existingPayload.message.order.quote = sessionData.quote
