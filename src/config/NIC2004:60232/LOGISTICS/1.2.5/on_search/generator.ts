@@ -246,6 +246,17 @@ export async function onSearch1Generator(
   if (inputs?.feature_discovery) {
     let codesArray = inputs.feature_discovery;
 
+    existingPayload.message.catalog.tags = [
+      {
+        code: "lsp_features",
+        list: [
+          { code: "005", value: "yes" },
+          { code: "009", value: "yes" },
+          { code: "00C", value: "yes" },
+        ],
+      },
+    ];
+
     existingPayload.message.catalog.tags =
       existingPayload.message.catalog.tags.map((tag: any) => {
         if (tag.code === "lsp_features") {

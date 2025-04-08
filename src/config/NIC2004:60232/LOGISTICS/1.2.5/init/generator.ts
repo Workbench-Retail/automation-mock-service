@@ -35,6 +35,14 @@ export const initGenerator = async (
         });
       }
 
+      if (!isBaseItem && !sessionData?.rate_basis) {
+        existingPayload.message.order.items[0] = {
+          id: item.id,
+          fulfillment_id: sessionData.on_search_fulfillment.id,
+          category_id: item.category_id,
+        };
+      }
+
       if (!(sessionData?.is_cod === "yes") && isBaseItem) {
         existingPayload.message.order.items[0] = {
           id: item.id,
