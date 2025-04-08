@@ -12,6 +12,7 @@ export async function onCancelRiderNotFoundGenerator(existingPayload: any, sessi
     // Update fulfillments if available
     if (sessionData.fulfillments?.length > 0) {
         existingPayload.message.order.fulfillments = sessionData.selected_fulfillments;
+        existingPayload.message.order.fulfillments[0].state.descriptor.code = 'RIDE_CANCELLED';
     }
 
     // Update order ID if available

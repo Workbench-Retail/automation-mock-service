@@ -162,7 +162,7 @@ export async function onUpdateGenerator(
             if (!fulfillment.state) {
                 fulfillment.state = {
                     descriptor: {
-                        code: "RIDE_ASSIGNED"
+                        code: "RIDE_ENDED"
                     }
                 };
             } else if (!fulfillment.state.descriptor) {

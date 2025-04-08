@@ -16,7 +16,20 @@ function generateNearbyLocations(startGps:any, endGps:any) {
 
 export async function onSearchMultipleStopsGenerator(existingPayload: any, sessionData: SessionData) {
     for(let fulfillment of existingPayload.message.catalog.providers[0].fulfillments){
-        fulfillment.stops = sessionData.stops
+        fulfillment.stops = sessionData.stops.map(stop => {
+            const newStop = {
+                ...stop,
+                instructions: {
+                    short_desc: "short description of the location",
+                    long_desc: "long description of the location"
+                }
+            };
+    
+            // Remove parent_stop_id if it exists
+            delete newStop.parent_stop_id;
+    
+            return newStop;
+        });
     }
     for (let payment of existingPayload.message.catalog.providers[0].payments){
         payment.collected_by = sessionData.collected_by
