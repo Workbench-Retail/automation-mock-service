@@ -1,6 +1,10 @@
 import { SessionData } from "../../../session-types";
 
-import { isEmpty } from "../../../../../utils/generic-utils";
+import {
+  isEmpty,
+  getFutureDateInMinutes,
+  removeTagsByCodes,
+} from "../../../../../utils/generic-utils";
 
 const getPaymentStatus = (paymentType: string, orderState: string) => {
   if (paymentType === "ON-FULFILLMENT" && orderState === "Completed") {
@@ -33,7 +37,10 @@ export const onStatusGenerator = async (
       existingPayload.message.order.fulfillments =
         existingPayload.message.order.fulfillments.map((fulfillemt: any) => {
           fulfillemt.state.descriptor.code = sessionData.stateCode;
-          fulfillemt.start.time.timestamp = existingPayload.context?.timestamp;
+          fulfillemt.start.time = {
+            ...fulfillemt.start.time,
+            timestamp: existingPayload.context?.timestamp,
+          };
           const p2pList = [
             {
               code: "gps_enabled",
@@ -163,6 +170,14 @@ export const onStatusGenerator = async (
       existingPayload.message.order.fulfillments =
         existingPayload.message.order.fulfillments.map((fulfillemt: any) => {
           fulfillemt.state.descriptor.code = sessionData.stateCode;
+          fulfillemt.start.time.range = {
+            start: getFutureDateInMinutes(10),
+            end: getFutureDateInMinutes(30),
+          };
+          fulfillemt.end.time.range = {
+            start: getFutureDateInMinutes(120),
+            end: getFutureDateInMinutes(150),
+          };
           fulfillemt.tags.push({
             code: "fulfillment_delay",
             list: [
@@ -198,6 +213,10 @@ export const onStatusGenerator = async (
       existingPayload.message.order.fulfillments =
         existingPayload.message.order.fulfillments.map((fulfillemt: any) => {
           fulfillemt.state.descriptor.code = sessionData.stateCode;
+          fulfillemt.end.time.range = {
+            start: getFutureDateInMinutes(30),
+            end: getFutureDateInMinutes(50),
+          };
           fulfillemt.tags.push({
             code: "fulfillment_delay",
             list: [
@@ -222,7 +241,58 @@ export const onStatusGenerator = async (
           return fulfillemt;
         });
       break;
-
+    case "Agent-assigned":
+      existingPayload.message.order.fulfillments =
+        existingPayload.message.order.fulfillments.map((fulfillemt: any) => {
+          fulfillemt.state.descriptor.code = sessionData.stateCode;
+          fulfillemt.tags = [
+            ...removeTagsByCodes(fulfillemt.tags, [
+              "weather_check",
+              "rto_action",
+              "state",
+            ]),
+            ...(sessionData?.rate_basis
+              ? [
+                  {
+                    code: "rider_details",
+                    list: [
+                      {
+                        code: "name",
+                        value: "person_name1",
+                      },
+                      {
+                        code: "phone",
+                        value: "9886098860",
+                      },
+                      {
+                        code: "vehicle_registration",
+                        value: "3LVJ945",
+                      },
+                    ],
+                  },
+                  {
+                    code: "rider_details",
+                    list: [
+                      {
+                        code: "name",
+                        value: "person_name2",
+                      },
+                      {
+                        code: "phone",
+                        value: "9886098860",
+                      },
+                      {
+                        code: "vehicle_registration",
+                        value: "3KVJ947",
+                      },
+                    ],
+                  },
+                ]
+              : []),
+          ];
+          return fulfillemt;
+        });
+      break;
     default:
       existingPayload.message.order.state = "In-progress";
   }

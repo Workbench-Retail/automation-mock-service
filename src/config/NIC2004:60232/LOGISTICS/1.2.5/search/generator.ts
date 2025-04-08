@@ -1,44 +1,9 @@
-import { getFutureDate } from "../../../../../utils/generic-utils";
+import {
+  getFutureDate,
+  TatMapping,
+  getFutureDateInMinutes,
+} from "../../../../../utils/generic-utils";
 import { SessionData, Input } from "../../../session-types";
-
-const TatMapping: any = {
-  "Immediate Delivery": {
-    code: "PT60M",
-    day: 0,
-    pickupTime: "PT15M",
-    orderPrepTime: "PT10M",
-  },
-  "Same Day Delivery": {
-    code: "PT4H",
-    day: 0,
-    pickupTime: "PT1H",
-    orderPrepTime: "PT1H",
-  },
-  "Next Day Delivery": {
-    code: "P1D",
-    day: 1,
-    pickupTime: "PT4H",
-    orderPrepTime: "PT4H",
-  },
-  "Standard Delivery": {
-    code: "P2D",
-    day: 2,
-    pickupTime: "PT12H",
-    orderPrepTime: "PT12H",
-  },
-  "Express Delivery": {
-    code: "P3D",
-    day: 2,
-    pickupTime: "P1D",
-    orderPrepTime: "PT1D",
-  },
-  "Instant Delivery": {
-    code: "PT10M",
-    day: 0,
-    pickupTime: "PT2M",
-    orderPrepTime: "PT2M",
-  },
-};
 
 export async function searchGenerator(
   existingPayload: any,
@@ -76,6 +41,75 @@ export async function searchGenerator(
     existingPayload.message.intent.provider.time.duration =
       TatMapping[inputs?.category].orderPrepTime;
   }
+
+  if (inputs?.fulfillRequest) {
+    const tag = {
+      code: "fulfill_request",
+      list: [
+        ...(inputs.fulfillRequest === "Rider"
+          ? [
+              {
+                code: "rider_count",
+                value: "2",
+              },
+              {
+                code: "rate_basis",
+                value: "rider",
+              },
+            ]
+          : [
+              {
+                code: "order_count",
+                value: "10",
+              },
+              {
+                code: "rate_basis",
+                value: "order",
+              },
+            ]),
+        {
+          code: "motorable_distance",
+          value: "3.0",
+        },
+        {
+          code: "pickup_slot_start",
+          value: getFutureDateInMinutes(10),
+        },
+        {
+          code: "pickup_slot_end",
+          value: getFutureDateInMinutes(12),
+        },
+        {
+          code: "delivery_slot_start",
+          value: getFutureDateInMinutes(20),
+        },
+        {
+          code: "delivery_slot_end",
+          value: getFutureDateInMinutes(30),
+        },
+      ],
+    };
+
+    existingPayload.message.intent.fulfillment.tags.push(tag);
+  }
+
+  existingPayload.message.intent.fulfillment.tags =
+    existingPayload.message.intent.fulfillment.tags.map((tag: any) => {
+      if (tag.code === "linked_order") {
+        tag.list.map((item: any) => {
+          if (item.code === "category") {
+            return {
+              code: item.code,
+              value: inputs?.retailCategory || "",
+            };
+          }
+
+          return item;
+        });
+      }
+
+      return tag
+    });
 
   return existingPayload;
 }

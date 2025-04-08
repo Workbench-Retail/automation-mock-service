@@ -28,7 +28,7 @@ export async function Generator(
     case "init_LOGISTICS":
       return await initGenerator(existingPayload, sessionData);
     case "confirm_LOGISTICS":
-      return await confirmGenerator(existingPayload, sessionData);
+      return await confirmGenerator(existingPayload, sessionData, inputs);
     case "update_LOGISTICS":
       return await updateGenerator(existingPayload, sessionData);
     case "track_LOGISTICS":
@@ -94,6 +94,11 @@ export async function Generator(
       return await onStatusGenerator(existingPayload, {
         ...sessionData,
         stateCode: "Delivery-rescheduled",
+      });
+    case "on_status_11_LOGISTICS":
+      return await onStatusGenerator(existingPayload, {
+        ...sessionData,
+        stateCode: "Agent-assigned",
       });
     case "on_track_LOGISTICS":
       return await onTrackGenerator(existingPayload, sessionData);

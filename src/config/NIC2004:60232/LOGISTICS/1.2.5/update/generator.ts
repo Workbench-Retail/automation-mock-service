@@ -1,4 +1,5 @@
 import { SessionData } from "../../../session-types";
+import { removeTagsByCodes } from "../../../../../utils/generic-utils";
 
 export async function updateGenerator(
   existingPayload: any,
@@ -11,183 +12,105 @@ export async function updateGenerator(
     category_id: sessionData.items[0].category_id,
   };
 
-  if (sessionData?.fulfillments)
-    existingPayload.message.order.fulfillments[0] = {
-      id: sessionData.fulfillments[0].id,
-      type: sessionData.fulfillments[0].type,
-      start: {
-        instructions: {
-          code: "2",
-          short_desc: "123123",
-          long_desc: "additional instructions for pickup",
-          additional_desc: {
-            content_type: "text/html",
-            url: "http://description.com",
-          },
-        },
-      },
-      end: {
-        instructions: {
-          code: "2",
-          short_desc: "987657",
-          long_desc: "additional instructions for delivery",
-          additional_desc: {
-            content_type: "text/html",
-            url: "http://description.com",
-          },
-        },
-      },
+  if (sessionData?.fulfillments) {
+    let agentDetails: any = {
+      count: 0,
+      details: [],
     };
 
-  const tags = [
-    {
-      code: "linked_provider",
-      list: [
-        {
-          code: "id",
-          value: sessionData.provider_id,
-        },
-        {
-          code: "name",
-          value: "Seller1",
-        },
-        {
-          code: "address",
-          value: "shop_name,building_name,locality,city,state,pincode",
-        },
-      ],
-    },
-    {
-      code: "linked_order",
-      list: [
-        {
-          code: "id",
-          value: "RO1",
-        },
-        {
-          code: "currency",
-          value: "INR",
-        },
-        {
-          code: "declared_value",
-          value: "300.0",
-        },
-        {
-          code: "weight_unit",
-          value: "kilogram",
-        },
-        {
-          code: "weight_value",
-          value: "3.0",
-        },
-        {
-          code: "dim_unit",
-          value: "centimeter",
-        },
-        {
-          code: "length",
-          value: "1.0",
-        },
-        {
-          code: "breadth",
-          value: "1.0",
-        },
-        {
-          code: "height",
-          value: "1.0",
-        },
-        {
-          code: "shipment_type",
-          value: "box",
-        },
-      ],
-    },
-    {
-      code: "linked_order_item",
-      list: [
-        {
-          code: "category",
-          value: "Grocery",
-        },
-        {
-          code: "name",
-          value: "Atta",
-        },
-        {
-          code: "currency",
-          value: "INR",
-        },
-        {
-          code: "value",
-          value: "70.0",
-        },
-        {
-          code: "quantity",
-          value: "2",
-        },
-        {
-          code: "weight_unit",
-          value: "kilogram",
-        },
-        {
-          code: "weight_value",
-          value: "1.0",
-        },
-      ],
-    },
-    {
-      code: "linked_order_item",
-      list: [
-        {
-          code: "category",
-          value: "Grocery",
-        },
-        {
-          code: "name",
-          value: "Basmati Rice",
-        },
-        {
-          code: "currency",
-          value: "INR",
-        },
-        {
-          code: "value",
-          value: "160.0",
-        },
-        {
-          code: "quantity",
-          value: "1",
-        },
-        {
-          code: "weight_unit",
-          value: "kilogram",
-        },
-        {
-          code: "weight_value",
-          value: "1.0",
-        },
-      ],
-    },
-    {
-      code: "state",
-      list: [
-        {
-          code: "ready_to_ship",
-          value: "yes",
-        },
-        ...(sessionData.category_id === "Immediate Delivery"
-          ? [
-              {
-                code: "order_ready",
-                value: "yes",
-              },
-            ]
-          : []),
-      ],
-    },
-  ];
+    sessionData?.fulfillments[0].tags.map((tag: any) => {
+      if (tag.code === "rider_details") {
+        agentDetails.count += 1;
+        const tempData: any = {};
+        tag.list.forEach((item: any) => {
+          if (item.code === "name") {
+            tempData.name = item.value;
+          }
 
-  existingPayload.message.order.fulfillments[0].tags = tags;
+          if (item.code === "phone") {
+            tempData.phone = item.value;
+          }
+
+          if (item.code === "vehicle_registration") {
+            tempData.registration = item.value;
+          }
+        });
+        agentDetails.details.push({
+          agent: {
+            name: tempData.name,
+            phone: tempData.phone,
+          },
+          vehicle: {
+            registration: tempData.registration,
+          },
+        });
+      }
+    });
+
+    existingPayload.message.order.fulfillments = sessionData?.fulfillments?.map(
+      (fulfillment: any, index: number) => {
+        fulfillment.start = {
+          instructions: {
+            code: "2",
+            short_desc: "123123",
+            long_desc: "additional instructions for pickup",
+            additional_desc: {
+              content_type: "text/html",
+              url: "http://description.com",
+            },
+          },
+        };
+
+        fulfillment.end = {
+          instructions: {
+            code: "2",
+            short_desc: "987657",
+            long_desc: "additional instructions for delivery",
+            additional_desc: {
+              content_type: "text/html",
+              url: "http://description.com",
+            },
+          },
+        };
+
+        let preTags = [
+          ...fulfillment.tags,
+          {
+            code: "state",
+            list: [
+              {
+                code: "ready_to_ship",
+                value: sessionData?.rate_basis ? "no" : "yes",
+              },
+              ...(sessionData.category_id === "Immediate Delivery"
+                ? [
+                    {
+                      code: "order_ready",
+                      value: "yes",
+                    },
+                  ]
+                : []),
+            ],
+          },
+        ];
+
+        preTags = removeTagsByCodes(preTags, ["weather_check", "rto_action"]);
+        fulfillment.tags = preTags;
+
+        if (sessionData?.rate_basis) {
+          if (index > agentDetails.count) {
+            index = 0;
+          }
+          fulfillment.agent = agentDetails.details[index].agent;
+          fulfillment.vehicle = agentDetails.details[index].vehicle;
+        }
+
+        delete fulfillment.state
+
+        return fulfillment;
+      }
+    );
+  }
 
   existingPayload.message.order.updated_at = existingPayload.context.timestamp;
 

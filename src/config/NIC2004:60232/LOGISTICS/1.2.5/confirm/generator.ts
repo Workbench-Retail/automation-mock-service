@@ -1,9 +1,11 @@
 import { v4 as uuidv4 } from "uuid";
-import { SessionData } from "../../../session-types";
+import { SessionData, Input } from "../../../session-types";
+import { removeTagsByCodes } from "../../../../../utils/generic-utils";
 
 export const confirmGenerator = (
   existingPayload: any,
-  sessionData: SessionData
+  sessionData: SessionData,
+  inputs: Input | undefined
 ) => {
   existingPayload.message.order.id = uuidv4();
 
@@ -26,6 +28,23 @@ export const confirmGenerator = (
   });
 
   existingPayload.message.order.items[0].time = time;
+
+  if (sessionData?.rate_basis) {
+    existingPayload.message.order.items =
+      existingPayload.message.order.items.map((item: any) => {
+        delete item.fulfillment_id;
+        let fulfiillmentIds: any[] = [];
+
+        sessionData?.on_init_items?.forEach((oninitItem) => {
+          if (oninitItem.id === item.id) {
+            fulfiillmentIds = oninitItem.fulfillment_ids;
+          }
+        });
+
+        item.fulfillment_ids = fulfiillmentIds;
+        return item;
+      });
+  }
 
   if (sessionData.fulfillments) {
     existingPayload.message.order.fulfillments = sessionData.fulfillments;
@@ -117,11 +136,11 @@ export const confirmGenerator = (
       list: [
         {
           code: "category",
-          value: "Grocery",
+          value: inputs?.retailCategory,
         },
         {
           code: "name",
-          value: "Atta",
+          value: "Item1",
         },
         {
           code: "currency",
@@ -150,11 +169,11 @@ export const confirmGenerator = (
       list: [
         {
           code: "category",
-          value: "Grocery",
+          value: inputs?.retailCategory,
         },
         {
           code: "name",
-          value: "Basmati Rice",
+          value: "item2",
         },
         {
           code: "currency",
@@ -240,8 +259,24 @@ export const confirmGenerator = (
       : []),
   ];
 
-  existingPayload.message.order.fulfillments[0].tags = tags;
+  let allTags = tags;
 
+  if (sessionData.rate_basis) {
+    const preTags = removeTagsByCodes(
+      existingPayload.message.order.fulfillments[1].tags,
+      ["linked_provider"]
+    );
+
+    allTags = [...allTags, ...preTags];
+  }
+
+  allTags = removeTagsByCodes(allTags, ["rider_check"]);
+
+  existingPayload.message.order.fulfillments =
+    existingPayload.message.order.fulfillments.map((fulfillment: any) => {
+      fulfillment.tags = allTags;
+      return fulfillment;
+    });
   let isReadyToShip = false;
 
   existingPayload.message.order.fulfillments[0].tags.forEach((tag: any) => {

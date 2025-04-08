@@ -47,6 +47,9 @@ export interface SessionData {
   cancellation?: any;
   domain?: string;
   linked_order?: any;
+  rate_basis?: string;
+  fulfillment?: any;
+  on_init_items?: any[];
 }
 
 export type BecknContext = {
@@ -82,4 +85,6 @@ export interface Input {
   start_code?: string;
   end_code?: string;
   feature_discovery?: string[];
+  fulfillRequest?: string;
+  retailCategory?: string;
 }

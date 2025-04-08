@@ -20,22 +20,20 @@ export async function onSearch1Generator(
   sessionData: SessionData,
   inputs?: Input
 ) {
-  // bb/descriptor mai date should be same as context "effective_date"
+  existingPayload.message.catalog["bpp/descriptor"].tags[0].list =
+    existingPayload.message.catalog["bpp/descriptor"].tags[0].list.map(
+      (item: any) => {
+        if (item.code === "effective_date") {
+          return {
+            code: item.code,
+            value: existingPayload.context.timestamp,
+          };
+        }
 
-  existingPayload.message.catalog["bpp/descriptor"].tags[0].list.map(
-    (item: any) => {
-      if (item.code === "effective_date") {
-        return {
-          code: item.code,
-          value: new Date().toISOString(),
-        };
+        return item;
       }
+    );
 
-      return item;
-    }
-  );
-  // category should be updated based on seach
-  // change tinestamp in category
   const categoriesData = {
     id: sessionData.category_id,
     time: {
@@ -49,7 +47,55 @@ export async function onSearch1Generator(
   existingPayload.message.catalog["bpp/providers"][0].categories[0] =
     categoriesData;
 
-  // update time in items as per category
+  let isFulfillRequest = false;
+
+  sessionData?.fulfillment?.tags?.map((tag: any) => {
+    if (tag.code === "fulfill_request") {
+      isFulfillRequest = true;
+    }
+  });
+
+  if (isFulfillRequest) {
+    existingPayload.message.catalog["bpp/providers"][0].items.push({
+      id: "I3",
+      parent_item_id: "",
+      category_id: "Instant Delivery",
+      fulfillment_id: "1",
+      descriptor: {
+        name: "Fast delivery",
+        short_desc: "Fast delivery services",
+        long_desc: "Fast delivery services",
+      },
+      price: {
+        currency: "INR",
+        value: "88.50",
+      },
+      time: {
+        label: "TAT",
+        duration: "PT10M",
+        timestamp: "2024-11-20",
+      },
+      tags: [
+        {
+          code: "type",
+          list: [
+            {
+              code: "type",
+              value: sessionData?.rate_basis,
+            },
+            ...(sessionData?.rate_basis === "rider"
+              ? [
+                  {
+                    code: "unit",
+                    value: "hour",
+                  },
+                ]
+              : []),
+          ],
+        },
+      ],
+    });
+  }
 
   existingPayload.message.catalog["bpp/providers"][0].items =
     existingPayload.message.catalog["bpp/providers"][0].items.map(
@@ -71,6 +117,20 @@ export async function onSearch1Generator(
       (item: any) => {
         item.category_id = sessionData?.category_id;
 
+        if (isFulfillRequest && item.id === "I1") {
+          item.tags = [
+            {
+              code: "type",
+              list: [
+                {
+                  code: "type",
+                  value: "base",
+                },
+              ],
+            },
+          ];
+        }
+
         return item;
       }
     );
@@ -79,6 +139,47 @@ export async function onSearch1Generator(
     existingPayload.message.catalog["bpp/providers"][0].fulfillments.map(
       (fulfillment: any) => {
         if (fulfillment.type === "Delivery") {
+          if (isFulfillRequest) {
+            fulfillment.tags = [
+              ...fulfillment.tags,
+              {
+                code: "fulfill_response",
+                list: [
+                  ...(sessionData?.rate_basis === "rider"
+                    ? [
+                        {
+                          code: "rider_count",
+                          value: "2",
+                        },
+                        {
+                          code: "rate_basis",
+                          value: "rider",
+                        },
+                      ]
+                    : [
+                        {
+                          code: "order_count",
+                          value: "10",
+                        },
+                        {
+                          code: "rate_basis",
+                          value: "order",
+                        },
+                      ]),
+                ],
+              },
+              ...sessionData?.fulfillment.tags
+                .map((tag: any) => {
+                  if (
+                    tag.code === "fulfill_request" ||
+                    tag.code === "linked_provider"
+                  ) {
+                    return tag;
+                  }
+                })
+                .filter((item: any) => item),
+            ];
+          }
           fulfillment.start.time.duration =
             TatMapping[sessionData.category_id as string].pickupTime;
         }

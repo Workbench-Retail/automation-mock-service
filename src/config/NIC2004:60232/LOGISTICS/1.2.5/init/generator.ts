@@ -1,4 +1,5 @@
 import { SessionData } from "../../../session-types";
+import { removeTagsByCodes } from "../../../../../utils/generic-utils";
 
 const getPayemntFields = (paymentType: string) => {
   if (paymentType === "ON-ORDER" || paymentType === "ON-FULFILLMENT") {
@@ -30,7 +31,11 @@ export const initGenerator = async (
       ) {
         existingPayload.message.order.items[0] = {
           id: item.id,
-          fulfillment_id: sessionData.on_search_fulfillment.id,
+          fulfillment_id:
+            sessionData?.rate_basis === "rider" ||
+            sessionData?.rate_basis === "order"
+              ? ""
+              : sessionData.on_search_fulfillment.id,
           category_id: item.category_id,
           tags: sessionData?.is_cod === "yes" ? item?.tags : undefined,
         };
@@ -42,7 +47,11 @@ export const initGenerator = async (
       ) {
         existingPayload.message.order.items[1] = {
           id: item.id,
-          fulfillment_id: sessionData.on_search_fulfillment.id,
+          fulfillment_id:
+            sessionData?.rate_basis === "rider" ||
+            sessionData?.rate_basis === "order"
+              ? ""
+              : sessionData.on_search_fulfillment.id,
           category_id: item.category_id,
           tags: item?.tags,
         };
@@ -51,7 +60,10 @@ export const initGenerator = async (
   });
 
   existingPayload.message.order.fulfillments[0] = {
-    id: sessionData.on_search_fulfillment.id,
+    id:
+      sessionData?.rate_basis === "rider" || sessionData?.rate_basis === "order"
+        ? ""
+        : sessionData.on_search_fulfillment.id,
     type: sessionData.on_search_fulfillment.type,
     start: {
       location: {
@@ -90,22 +102,34 @@ export const initGenerator = async (
         email: "xyz.qweq@gmail.com",
       },
     },
-    tags: [
-      {
-        code: "linked_provider",
-        list: [
-          {
-            code: "id",
-            value: sessionData.provider_id,
-          },
-          {
-            code: "name",
-            value: "Seller",
-          },
-        ],
-      },
-    ],
+    tags: removeTagsByCodes(sessionData?.on_search_fulfillment.tags, [
+      "distance",
+    ]),
   };
+
+  let isLinkedOrderPresent = false;
+
+  existingPayload.message.order.fulfillments[0].tags.map((tag: any) => {
+    if (tag.code === "linked_provider") {
+      isLinkedOrderPresent = true;
+    }
+  });
+
+  if (!isLinkedOrderPresent) {
+    existingPayload.message.order.fulfillments[0].tags.push({
+      code: "linked_provider",
+      list: [
+        {
+          code: "id",
+          value: sessionData.provider_id,
+        },
+        {
+          code: "name",
+          value: "Seller",
+        },
+      ],
+    });
+  }
 
   existingPayload.message.order.billing.created_at =
     existingPayload.context.timestamp;

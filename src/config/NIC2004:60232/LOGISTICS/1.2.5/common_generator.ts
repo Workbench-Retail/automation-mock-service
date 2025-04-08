@@ -26,7 +26,7 @@ export const populateFulfillmentUpdate = (
 
       fulfillment.tracking = true;
 
-      if (isReadyToShip) {
+      if (isReadyToShip && !sessionData?.rate_basis) {
         fulfillment.state.descriptor.code = "Agent-assigned";
         fulfillment.agent = {
           name: "person_name",

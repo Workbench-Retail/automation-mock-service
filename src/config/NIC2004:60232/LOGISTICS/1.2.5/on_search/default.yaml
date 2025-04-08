@@ -49,7 +49,7 @@ message:
               state: KA
         items:
           - id: I1
-            parent_item_id: "P1"
+            parent_item_id: ""
             category_id: Immediate Delivery
             fulfillment_id: "1"
             descriptor:

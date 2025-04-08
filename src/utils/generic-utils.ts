@@ -33,7 +33,7 @@ export function getTimestampFromDuration(
   return futureDate.toISOString();
 }
 
-export function removeTagsByCodes(tags: Tag[], codesToRemove: string[]): Tag[] {
+export function removeTagsByCodes(tags: any[], codesToRemove: string[]): Tag[] {
   return tags.filter((tag) => !codesToRemove.includes(tag.code));
 }
 
@@ -47,3 +47,48 @@ export function getFutureDate(daysAhead: number): string {
 export function isEmpty(obj: any) {
   return Object.keys(obj).length === 0;
 }
+
+export const getFutureDateInMinutes = (minutes: number): string => {
+  const now = new Date();
+  const future = new Date(now.getTime() + minutes * 60 * 1000);
+  return future.toISOString();
+};
+
+export const TatMapping: any = {
+  "Immediate Delivery": {
+    code: "PT60M",
+    day: 0,
+    pickupTime: "PT15M",
+    orderPrepTime: "PT10M",
+  },
+  "Same Day Delivery": {
+    code: "PT4H",
+    day: 0,
+    pickupTime: "PT1H",
+    orderPrepTime: "PT1H",
+  },
+  "Next Day Delivery": {
+    code: "P1D",
+    day: 1,
+    pickupTime: "PT4H",
+    orderPrepTime: "PT4H",
+  },
+  "Standard Delivery": {
+    code: "P2D",
+    day: 2,
+    pickupTime: "PT12H",
+    orderPrepTime: "PT12H",
+  },
+  "Express Delivery": {
+    code: "P3D",
+    day: 2,
+    pickupTime: "P1D",
+    orderPrepTime: "PT1D",
+  },
+  "Instant Delivery": {
+    code: "PT10M",
+    day: 0,
+    pickupTime: "PT2M",
+    orderPrepTime: "PT2M",
+  },
+};

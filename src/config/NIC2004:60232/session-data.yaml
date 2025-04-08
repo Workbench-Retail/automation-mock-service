@@ -39,3 +39,6 @@ session_data:
   domain: null
   linked_order: {}
   confirm_fulfillments: []
+  rate_basis: null
+  fulfillment: {}
+  on_init_items: []

@@ -1,5 +1,14 @@
 import { SessionData } from "../../../session-types";
 
+const calculateQuotePrice = (breakup: any) => {
+  let totalPrice = 0;
+  breakup.forEach((item: any) => {
+    totalPrice += parseInt(item.price.value) || 0;
+  });
+
+  return totalPrice.toString();
+};
+
 export const onInitGenerator = (
   existingPayload: any,
   sessionData: SessionData
@@ -12,25 +21,25 @@ export const onInitGenerator = (
 
   tempItems.forEach((item: any) => {
     delete item.category_id;
-    delete item.descriptor;
     delete item.tags;
+
+    if (sessionData?.rate_basis) {
+      delete item.fulfillment_id;
+      item.fulfillment_ids = ["F1", "F2"];
+    }
   });
 
   existingPayload.message.order.items = tempItems;
   existingPayload.message.order.fulfillments = sessionData.fulfillments;
 
   existingPayload.message.order.quote = {
-    price: {
-      currency: "INR",
-      value: sessionData?.is_cod === "yes" ? "70:00" : "59.00",
-    },
     breakup: [
       {
         "@ondc/org/item_id": sessionData.items[0].id,
         "@ondc/org/title_type": "delivery",
         price: {
           currency: "INR",
-          value: "50.00",
+          value: sessionData?.rate_basis ? "100.00" : "50.00",
         },
       },
       {
@@ -38,7 +47,7 @@ export const onInitGenerator = (
         "@ondc/org/title_type": "tax",
         price: {
           currency: "INR",
-          value: "9.00",
+          value: sessionData?.rate_basis ? "18.00" : "9.00",
         },
       },
       ...(sessionData?.is_cod === "yes"
@@ -65,15 +74,33 @@ export const onInitGenerator = (
     ttl: "PT15M",
   };
 
-  existingPayload.message.order.fulfillments[0].tags.push({
-    code: "rider_check",
-    list: [
-      {
-        code: "inline_check_for_rider",
-        value: "yes",
-      },
-    ],
-  });
+  existingPayload.message.order.quote.price = {
+    currency: "INR",
+    value: calculateQuotePrice(existingPayload.message.order.quote.breakup),
+  };
+
+  if (sessionData?.rate_basis) {
+    existingPayload.message.order.fulfillments[0].id = "F1";
+    existingPayload.message.order.fulfillments.push({
+      ...existingPayload.message.order.fulfillments[0],
+      id: "F2",
+    });
+  }
+
+  existingPayload.message.order.fulfillments =
+    existingPayload.message.order.fulfillments.map((fulfullment: any) => {
+      fulfullment.tags.push({
+        code: "rider_check",
+        list: [
+          {
+            code: "inline_check_for_rider",
+            value: "yes",
+          },
+        ],
+      });
+
+      return fulfullment;
+    });
 
   if (sessionData.payment) {
     existingPayload.message.order.payment = sessionData.payment;
