@@ -79,12 +79,3 @@ message:
         currency: INR
         value: "300.00"
       dangerous_goods: false
-    tags:
-      - code: lbnp_features
-        list:
-          - code: 00B
-            value: "yes"
-          - code: 00E
-            value: "yes"
-          - code: 01D
-            value: "yes"

@@ -78,12 +78,3 @@ message:
               label: TAT
               duration: PT60M
               timestamp: "2024-11-20"
-    tags:
-      - code: lsp_features
-        list:
-          - code: "005"
-            value: "yes"
-          - code: "009"
-            value: "yes"
-          - code: 00C
-            value: "yes"

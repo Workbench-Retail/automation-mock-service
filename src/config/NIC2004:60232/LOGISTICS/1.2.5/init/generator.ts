@@ -26,7 +26,7 @@ export const initGenerator = async (
   sessionData?.on_search_items?.forEach((item: any) => {
     if (item.fulfillment_id === sessionData.on_search_fulfillment.id) {
       let isBaseItem = false;
-      item.tags[0].list.forEach((val: any) => {
+      item?.tags[0]?.list?.forEach((val: any) => {
         if (val.value === "base") {
           isBaseItem = true;
         }
