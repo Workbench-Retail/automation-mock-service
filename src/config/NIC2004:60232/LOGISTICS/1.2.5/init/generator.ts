@@ -26,11 +26,14 @@ export const initGenerator = async (
   sessionData?.on_search_items?.forEach((item: any) => {
     if (item.fulfillment_id === sessionData.on_search_fulfillment.id) {
       let isBaseItem = false;
-      item?.tags[0]?.list?.forEach((val: any) => {
-        if (val.value === "base") {
-          isBaseItem = true;
-        }
-      });
+
+      if (item?.tags?.length) {
+        item.tags[0].list.forEach((val: any) => {
+          if (val.value === "base") {
+            isBaseItem = true;
+          }
+        });
+      }
 
       if (!(sessionData?.is_cod === "yes") && isBaseItem) {
         existingPayload.message.order.items[0] = {
