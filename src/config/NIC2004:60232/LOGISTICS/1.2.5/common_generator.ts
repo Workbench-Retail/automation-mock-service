@@ -36,6 +36,7 @@ export const populateFulfillmentUpdate = (
 
         if (!fulfillment.start?.time?.range) {
           fulfillment.start.time = {
+            ...fulfillment.start.time,
             range: {
               start: existingPayload.context.timestamp,
               end: getTimestampFromDuration(
