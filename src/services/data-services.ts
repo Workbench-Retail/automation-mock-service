@@ -23,11 +23,6 @@ export function updateSessionData(
       const jsonPath = saveData[key as keyof typeof saveData];
 
       const result = jsonpath.query(payload, jsonPath);
-      if (key === "on_search_items") {
-        console.log("jsonpath", jsonPath);
-        console.log("payload", JSON.stringify(payload, null, 2));
-        console.log("resuult: ", JSON.stringify(result, null, 2));
-      }
       logger.debug(`updating ${key} for path $${jsonPath}`);
       if (
         isArrayKey<SessionData>(key as keyof typeof sessionData, sessionData)

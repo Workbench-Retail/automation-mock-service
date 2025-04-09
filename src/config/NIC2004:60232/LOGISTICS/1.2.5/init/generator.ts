@@ -26,24 +26,24 @@ export const initGenerator = async (
   sessionData?.on_search_items?.forEach((item: any) => {
     if (item.fulfillment_id === sessionData.on_search_fulfillment.id) {
       let isBaseItem = false;
+      let isCodeTagPresent = false;
 
       if (item?.tags?.length) {
         item.tags[0].list.forEach((val: any) => {
           if (val.value === "base") {
             isBaseItem = true;
           }
+          if (val.value === "cod") {
+            isCodeTagPresent = true;
+          }
         });
       }
 
-      if (!isBaseItem && !sessionData?.rate_basis) {
-        existingPayload.message.order.items[0] = {
-          id: item.id,
-          fulfillment_id: sessionData.on_search_fulfillment.id,
-          category_id: item.category_id,
-        };
-      }
+      // cod yes && base > select
+      // !rate_basis && !base > select with tag
+      //
 
-      if (!(sessionData?.is_cod === "yes") && isBaseItem) {
+      if (!isCodeTagPresent) {
         existingPayload.message.order.items[0] = {
           id: item.id,
           fulfillment_id:
@@ -52,9 +52,38 @@ export const initGenerator = async (
               ? ""
               : sessionData.on_search_fulfillment.id,
           category_id: item.category_id,
-          tags: sessionData?.is_cod === "yes" ? item?.tags : undefined,
+          tags:
+            sessionData?.is_cod === "yes" || sessionData?.rate_basis
+              ? item?.tags
+              : undefined,
         };
       }
+
+      // if (!isBaseItem && !sessionData?.rate_basis) {
+      //   existingPayload.message.order.items[0] = {
+      //     id: item.id,
+      //     fulfillment_id: sessionData.on_search_fulfillment.id,
+      //     category_id: item.category_id,
+      //   };
+      // } else if (sessionData?.is_cod === "yes" && isBaseItem) {
+      //   existingPayload.message.order.items[0] = {
+      //     id: item.id,
+      //     fulfillment_id: sessionData.on_search_fulfillment.id,
+      //     category_id: item.category_id,
+      //     tags: item?.tags,
+      //   };
+      // } else if (!(sessionData?.is_cod === "yes") && isBaseItem) {
+      //   existingPayload.message.order.items[0] = {
+      //     id: item.id,
+      //     fulfillment_id:
+      //       sessionData?.rate_basis === "rider" ||
+      //       sessionData?.rate_basis === "order"
+      //         ? ""
+      //         : sessionData.on_search_fulfillment.id,
+      //     category_id: item.category_id,
+      //     tags: sessionData?.is_cod === "yes" ? item?.tags : undefined,
+      //   };
+      // }
 
       if (
         sessionData?.is_cod === "yes" &&

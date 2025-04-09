@@ -12,7 +12,7 @@ export async function sendToApiService(
 		const domain = body.context.domain
 		const version = body.context.version ?? body.context.core_version;
 		const url = `${process.env.API_SERVICE_LAYER}/${domain}/${version}/mock/${action}`;
-		console.log(action, JSON.stringify(body.message, null, 2));
+		// console.log(action, JSON.stringify(body.message, null, 2));
 		await saveData(action, body);
 		logger.debug(`Sending response to api service ${url} ${action}`);
 		await axios.post(url, body, {

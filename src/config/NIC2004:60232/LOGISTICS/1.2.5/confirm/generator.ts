@@ -19,15 +19,21 @@ export const confirmGenerator = (
 
   existingPayload.message.order.items = sessionData.items;
 
-  let time = null;
+  let time: any = null;
 
   sessionData?.on_search_items?.forEach((item: any) => {
+    console.log("::::::::::::", item.id, existingPayload.message.order.items[0].id, item)
     if (item.id === existingPayload.message.order.items[0].id) {
       time = item.time;
     }
   });
 
-  existingPayload.message.order.items[0].time = time;
+  existingPayload.message.order.items = existingPayload.message.order.items.map(
+    (item: any) => {
+      item.time = time;
+      return item
+    }
+  );
 
   if (sessionData?.rate_basis) {
     existingPayload.message.order.items =

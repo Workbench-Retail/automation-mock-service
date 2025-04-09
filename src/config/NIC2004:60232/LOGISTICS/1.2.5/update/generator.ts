@@ -80,7 +80,7 @@ export async function updateGenerator(
             list: [
               {
                 code: "ready_to_ship",
-                value: sessionData?.rate_basis ? "no" : "yes",
+                value: "yes",
               },
               ...(sessionData.category_id === "Immediate Delivery"
                 ? [
@@ -105,7 +105,7 @@ export async function updateGenerator(
           fulfillment.vehicle = agentDetails.details[index].vehicle;
         }
 
-        delete fulfillment.state
+        delete fulfillment.state;
 
         return fulfillment;
       }
