@@ -72,9 +72,9 @@ export async function updateGenerator(
             },
           },
         };
-
-        let preTags = [
-          ...fulfillment.tags,
+       let preTags = removeTagsByCodes(fulfillment.tags, ["weather_check", "rto_action","cod_settlement_detail","state"]);
+        preTags = [
+          ...preTags,
           {
             code: "state",
             list: [
@@ -94,7 +94,7 @@ export async function updateGenerator(
           },
         ];
 
-        preTags = removeTagsByCodes(preTags, ["weather_check", "rto_action","cod_settlement_detail"]);
+       
         fulfillment.tags = preTags;
 
         if (sessionData?.rate_basis) {
