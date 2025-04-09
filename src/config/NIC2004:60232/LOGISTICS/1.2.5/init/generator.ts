@@ -26,7 +26,8 @@ export const initGenerator = async (
   sessionData?.on_search_items?.forEach((item: any) => {
     if (item.fulfillment_id === sessionData.on_search_fulfillment.id) {
       let isBaseItem = false;
-      let isCodeTagPresent = false;
+      let isCodTagPresent = false;
+      let isRiderTagPresent = false;
 
       if (item?.tags?.length) {
         item.tags[0].list.forEach((val: any) => {
@@ -34,7 +35,10 @@ export const initGenerator = async (
             isBaseItem = true;
           }
           if (val.value === "cod") {
-            isCodeTagPresent = true;
+            isCodTagPresent = true;
+          }
+          if (val.value === "rider" || val.value === "order") {
+            isRiderTagPresent = true;
           }
         });
       }
@@ -43,14 +47,12 @@ export const initGenerator = async (
       // !rate_basis && !base > select with tag
       //
 
-      if (!isCodeTagPresent) {
+      if (!isCodTagPresent && !isRiderTagPresent) {
         existingPayload.message.order.items[0] = {
           id: item.id,
-          fulfillment_id:
-            sessionData?.rate_basis === "rider" ||
-            sessionData?.rate_basis === "order"
-              ? ""
-              : sessionData.on_search_fulfillment.id,
+          fulfillment_id: sessionData?.rate_basis
+            ? ""
+            : sessionData.on_search_fulfillment.id,
           category_id: item.category_id,
           tags:
             sessionData?.is_cod === "yes" || sessionData?.rate_basis
