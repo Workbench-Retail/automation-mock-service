@@ -17,5 +17,8 @@ export async function onCancelInitGenerator(existingPayload: any,sessionData: an
 	existingPayload.message.order.quote = sessionData.quote
 	}
     existingPayload.message.order.status = "CANCELLATION_INITIATED"
+	const now = new Date().toISOString();
+  	existingPayload.message.order.created_at = sessionData.created_at
+  	existingPayload.message.order.updated_at = now
     return existingPayload;
 }

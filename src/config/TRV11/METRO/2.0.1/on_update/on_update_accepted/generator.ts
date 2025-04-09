@@ -94,5 +94,8 @@ export async function onUpdateAcceptedGenerator(existingPayload: any,sessionData
 	if(sessionData.quote != null){
 	existingPayload.message.order.quote = applyCancellation(sessionData.quote,15)
 	}
+  const now = new Date().toISOString();
+  existingPayload.message.order.created_at = sessionData.created_at
+  existingPayload.message.order.updated_at = now
     return existingPayload;
 }

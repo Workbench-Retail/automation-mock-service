@@ -82,6 +82,8 @@ export async function onConfirmDelayedGenerator(existingPayload: any,sessionData
 	}
   updateFulfillmentsWithParentInfo(sessionData.fulfillments)
   existingPayload.message.order.payments = updated_payments;
+  existingPayload.message.order.payments[0].params.amount = sessionData.price
+  existingPayload.message.order.payments[0].id = sessionData.payment_id
 	
 	  // Check if items is a non-empty array
 	if (sessionData.items.length > 0) {
@@ -99,6 +101,9 @@ export async function onConfirmDelayedGenerator(existingPayload: any,sessionData
   console.log(sessionData.ttl)
   const delay_duration = isoDurationToSeconds(sessionData.ttl) + 2
   console.log("the delay duration is", delay_duration)
+  const now = new Date().toISOString();
+  existingPayload.message.order.created_at = now
+  existingPayload.message.order.updated_at = now 
   await delay(delay_duration*1000);
   return existingPayload;
 }

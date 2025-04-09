@@ -33,6 +33,9 @@ export interface SessionData {
 	ttl: string | undefined;
 	usecaseId : string | undefined;
 	collected_by: string
+	price: string
+	payment_id: string
+	created_at: string
 }
 
 export type BecknContext = {

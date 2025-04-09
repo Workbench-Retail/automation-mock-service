@@ -71,7 +71,8 @@ export async function onConfirmGenerator(
 	}
 	updateFulfillmentsWithParentInfo(sessionData.fulfillments);
 	existingPayload.message.order.payments = updated_payments;
-	
+	existingPayload.message.order.payments[0].params.amount = sessionData.price
+  existingPayload.message.order.payments[0].id = sessionData.payment_id
 	  // Check if items is a non-empty array
 	if (sessionData.items.length > 0) {
 	existingPayload.message.order.items = sessionData.items;
@@ -85,5 +86,8 @@ export async function onConfirmGenerator(
 	existingPayload.message.order.quote = sessionData.quote
 	}
 	existingPayload.message.order.id = order_id;
+  const now = new Date().toISOString();
+  existingPayload.message.order.created_at = now
+  existingPayload.message.order.updated_at = now 
 	return existingPayload;
 }
