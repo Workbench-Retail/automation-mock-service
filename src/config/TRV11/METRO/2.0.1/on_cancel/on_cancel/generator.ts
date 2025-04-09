@@ -92,11 +92,15 @@ export async function onCancelGenerator(existingPayload: any,sessionData: any){
     existingPayload.message.order.fulfillments = sessionData.fulfillments;
   }
 	if (sessionData.order_id) {
-    existingPayload.message.order_id = sessionData.order_id;
+    existingPayload.message.order.id = sessionData.order_id;
   }
   if(sessionData.quote != null){
     existingPayload.message.order.quote = applyCancellation(sessionData.quote,15)
+    existingPayload.message.order.quote = sessionData.quote
   }
+  const now = new Date().toISOString();
+  existingPayload.message.order.created_at = sessionData.created_at
+  existingPayload.message.order.updated_at = now
   existingPayload.message.order.status = "CANCELLED"
   return existingPayload;
 }

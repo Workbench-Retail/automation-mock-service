@@ -34,13 +34,16 @@ export async function createMockResponse(
 		}
 	}
 
-	if (data.npType === "BAP") {
+  if (data.npType === "BAP") {
 		payload.context.bap_uri = data.subscriberUrl;
 		payload.context.bpp_uri = createSellerUrl(data.domain, data.version);
 	} else {
-		payload.context.bpp_uri = data.subscriberUrl;
+    if(payload.context.action !== "search"){
+      payload.context.bpp_uri = data.subscriberUrl;
+    }
 		payload.context.bap_uri = createBuyerUrl(data.domain, data.version);
 	}
+
 
 	return payload;
 }

@@ -19,6 +19,9 @@ import { onSearch1Generator } from "./on_search/on_search1/generator";
 import { onSearch2Generator } from "./on_search/on_search2/generator";
 import { onStatusCompleteGenerator } from "./on_status/on_status_complete/generator";
 import { statusTechCancelGenerator } from "./status/status_tech_cancel/generator";
+import { onUpdateAcceptedGenerator } from "./on_update/on_update_accepted/generator";
+import { onStatusActiveGenerator } from "./on_status/on_status_active/generator";
+import { onStatusCancelGenerator } from "./on_status/on_status_cancelled/generator";
 
 export async function Generator(
 	action_id: string,
@@ -26,48 +29,54 @@ export async function Generator(
 	sessionData: any
 ) {
 	switch (action_id) {
-		case "search1":
+		case "search1_METRO_201":
 			return await search1Generator(existingPayload, sessionData);
-		case "search2":
+		case "search2_METRO_201":
 			return await search2Generator(existingPayload, sessionData);
-		case "select":
+		case "select_METRO_201":
 			return await selectGenerator(existingPayload, sessionData);
-		case "init":
+		case "init_METRO_201":
 			return await initGenerator(existingPayload, sessionData);
-		case "confirm":
+		case "confirm_METRO_201":
 			return await confirmGenerator(existingPayload, sessionData);
-		case "status":
+		case "status_METRO_201":
 			return await statusActiveGenerator(existingPayload, sessionData);
-		case "status_tech_cancel":
+		case "status_tech_cancel_METRO_201":
 			return await statusTechCancelGenerator(existingPayload, sessionData);
-		case "cancel":
+		case "cancel_METRO_201":
 			return await cancelGenerator(existingPayload, sessionData);
-		case "cancel_soft":
+		case "cancel_soft_METRO_201":
 			return await cancelSoftGenerator(existingPayload, sessionData);
-		case "cancel_hard":
+		case "cancel_hard_METRO_201":
 			return await cancelHardGenerator(existingPayload, sessionData);
-		case "on_search1":
+		case "on_search1_METRO_201":
 			return await onSearch1Generator(existingPayload, sessionData);
-		case "on_search2":
+		case "on_search2_METRO_201":
 			return await onSearch2Generator(existingPayload, sessionData);
-		case "on_select":
+		case "on_select_METRO_201":
 			return await onSelectGenerator(existingPayload, sessionData);
-		case "on_init":
+		case "on_init_METRO_201":
 			return await onInitGenerator(existingPayload, sessionData);
-		case "on_confirm":
+		case "on_confirm_METRO_201":
 			return await onConfirmGenerator(existingPayload, sessionData);
-		case "on_status_complete":
+		case "on_status_complete_METRO_201":
 			return await onStatusCompleteGenerator(existingPayload, sessionData);
-		case "on_confirm_delayed":
+		case "on_status_active_METRO_201":
+			return await onStatusActiveGenerator(existingPayload,sessionData)
+		case "on_status_cancel_METRO_201":
+			return await onStatusCancelGenerator(existingPayload,sessionData)
+		case "on_confirm_delayed_METRO_201":
 			return await onConfirmDelayedGenerator(existingPayload, sessionData);
-		case "on_cancel_soft":
+		case "on_cancel_soft_METRO_201":
 			return await onCancelSoftGenerator(existingPayload, sessionData);
-		case "on_cancel_hard":
+		case "on_cancel_hard_METRO_201":
 			return await onCancelHardGenerator(existingPayload, sessionData);
-		case "on_cancel":
+		case "on_cancel_METRO_201":
 			return await onCancelGenerator(existingPayload, sessionData);
-		case "on_cancel_init":
+		case "on_cancel_init_METRO_201":
 			return await onCancelInitGenerator(existingPayload, sessionData);
+		case "on_update_accepted_METRO_201":
+			return await onUpdateAcceptedGenerator(existingPayload,sessionData)
 		default:
 			throw new Error(`Invalid request type ${action_id}`);
 	}

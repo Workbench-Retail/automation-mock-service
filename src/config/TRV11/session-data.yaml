@@ -31,3 +31,7 @@ session_data:
   ref_id: null
   ttl: null
   usecaseId: null
+  collected_by: null
+  price: null
+  payment_id: null
+  created_at: null

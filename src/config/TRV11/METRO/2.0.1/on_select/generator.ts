@@ -141,7 +141,7 @@ export async function onSelectGenerator(
 				count: ids_with_quantities["items"][item.id] ?? 0, // Default to 0 if not in the mapping
 			},
 		},
-	}));
+	})).filter((item) => item.quantity.selected.count > 0);
 	items = updatedItems;
 	createAndAppendFulfillments(updatedItems, fulfillments);
 	const quote = createQuoteFromItems(updatedItems);

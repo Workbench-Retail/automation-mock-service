@@ -6,9 +6,11 @@ export async function onInitGenerator(
 	sessionData: SessionData
 ) {
 	const randomId = Math.random().toString(36).substring(2, 15);
-
 	const payments = [
 		{
+			collected_by: sessionData.collected_by,
+            status: "NOT-PAID",
+			type: "PRE-ORDER",
 			id: randomId,
 			params: {
 				bank_code: "XXXXXXXX",
