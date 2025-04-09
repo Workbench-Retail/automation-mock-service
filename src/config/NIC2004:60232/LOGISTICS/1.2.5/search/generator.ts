@@ -18,7 +18,7 @@ export async function searchGenerator(
   if (inputs?.feature_discovery?.length) {
     let codesArray = inputs.feature_discovery;
 
-    existingPayload.message.catalog.tags = [
+    existingPayload.message.intent.tags = [
       {
         code: "lbnp_features",
         list: [

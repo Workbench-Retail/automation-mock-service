@@ -94,7 +94,7 @@ export async function updateGenerator(
           },
         ];
 
-        preTags = removeTagsByCodes(preTags, ["weather_check", "rto_action"]);
+        preTags = removeTagsByCodes(preTags, ["weather_check", "rto_action","cod_settlement_detail"]);
         fulfillment.tags = preTags;
 
         if (sessionData?.rate_basis) {
