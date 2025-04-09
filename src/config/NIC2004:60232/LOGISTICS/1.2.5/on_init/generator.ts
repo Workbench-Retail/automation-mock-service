@@ -3,10 +3,10 @@ import { SessionData } from "../../../session-types";
 const calculateQuotePrice = (breakup: any) => {
   let totalPrice = 0;
   breakup.forEach((item: any) => {
-    totalPrice += parseInt(item.price.value) || 0;
+    totalPrice += parseFloat(item.price.value) || 0;
   });
 
-  return totalPrice.toString();
+  return totalPrice.toFixed(2); // returns a string with 2 decimal places
 };
 
 export const onInitGenerator = (
