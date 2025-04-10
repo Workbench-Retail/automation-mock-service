@@ -1,0 +1,11 @@
+codes:
+  - code: 100
+    action_id: search
+    action: search
+    default: search/default.yaml
+    message_id: true
+  - code: 101
+    action_id: on_search
+    action: on_search
+    default: on_search/default.yaml
+    message_id: true

@@ -1,8 +1,0 @@
-save-data:
-  provider_id: $.message.catalog["bpp/providers"][0].id
-  location_id: $.message.catalog["bpp/providers"][0].locations[0].id
-  bpp_id: "$.context.bpp_id"
-  bpp_uri: "$.context.bpp_uri"
-  rto_id: $.message.catalog["bpp/providers"][*].fulfillments[?(@.type=="RTO")].id
-  on_search_items: $.message.catalog["bpp/providers"][*].items[*]
-  on_search_fulfillment: $.message.catalog["bpp/providers"][*].fulfillments[?(@.type=="Delivery")]

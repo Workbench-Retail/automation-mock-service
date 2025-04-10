@@ -4,7 +4,7 @@ import yaml from "js-yaml";
 import { RedisService } from "ondc-automation-cache-lib";
 import jsonpath from "jsonpath";
 
-import { SessionData } from "../config/NIC2004:60232/session-types";
+import { SessionData } from "../config/RET11/session-types";
 import logger from "../utils/logger";
 import { isArrayKey } from "../types/type-utils";
 
@@ -66,7 +66,7 @@ export async function saveData(
 
     let relativePath = "";
 
-    relativePath = `../config/NIC2004:60232/LOGISTICS/${payload.context.core_version}/${action}`;
+    relativePath = `../config/RET11/F&B/${payload.context.core_version}/${action}`;
 
     const actionFolderPath = path.resolve(__dirname, relativePath);
     const saveDataFilePath = path.join(actionFolderPath, "save-data.yaml");
@@ -92,16 +92,16 @@ export async function loadSessionData(
   let sessionData: SessionData = {} as SessionData;
   if (!keyExists) {
     const raw = yamlToJson(
-      path.resolve(__dirname, "../config/NIC2004:60232/session-data.yaml")
+      path.resolve(__dirname, "../config/RET11/session-data.yaml")
     ) as any;
     sessionData = raw.session_data;
     sessionData.transaction_id = transactionID;
     sessionData.bpp_id = sessionData.bap_id = "dev-automation.ondc.org";
     // NEED TO FIX
     sessionData.bap_uri =
-      "https://dev-automation.ondc.org/api-service/nic2004:60232/1.2.5/buyer";
+      "https://dev-automation.ondc.org/api-service/ONDC:RET11/1.2.5/buyer";
     sessionData.bpp_uri =
-      "https://dev-automation.ondc.org/api-service/nic2004:60232/1.2.5/seller";
+      "https://dev-automation.ondc.org/api-service/ONDC:RET11/1.2.5/seller";
     sessionData.subscriber_url = subscriber_url;
     logger.info(`new session data is ${JSON.stringify(sessionData)}`);
     return sessionData;

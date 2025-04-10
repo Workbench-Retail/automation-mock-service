@@ -1,6 +1,0 @@
-save-data:
-  fulfillments: "$.message.order.fulfillments[*]"
-  cancellation: "$.message.order.cancellation"
-  items: "$.message.order.items[*]"
-  quote: "$.message.order.quote"
-  payment: "$.message.order.payment"
