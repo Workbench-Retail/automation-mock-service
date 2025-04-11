@@ -114,7 +114,7 @@ export const onStatusGenerator = async (
                 },
                 {
                   code: "value",
-                  value: "325.00",
+                  value: "300.00",
                 },
                 {
                   code: "transaction_id",

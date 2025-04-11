@@ -230,7 +230,7 @@ export const confirmGenerator = (
       list: [
         {
           code: "return_to_origin",
-          value: inputs?.returnToOrigin || "ONDC:LOG10" ? "no" : "yes",
+          value: inputs?.returnToOrigin || "yes",
         },
       ],
     },
@@ -278,6 +278,7 @@ export const confirmGenerator = (
   ];
 
   let allTags = tags;
+  console.log("rto", inputs?.returnToOrigin);
 
   if (sessionData.rate_basis) {
     const preTags = removeTagsByCodes(
