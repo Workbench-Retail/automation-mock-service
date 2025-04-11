@@ -8,4 +8,19 @@ codes:
     action_id: on_search
     action: on_search
     default: on_search/default.yaml
+    message_id: false
+  - code: 102
+    action_id: search_1
+    action: search
+    default: search/search_1/default.yaml
+    message_id: true
+  - code: 103
+    action_id: on_search_1
+    action: on_search
+    default: on_search/on_search_1/default.yaml
+    message_id: false
+  - code: 104
+    action_id: on_search_2
+    action: on_search
+    default: on_search/on_search_2/default.yaml
     message_id: true
