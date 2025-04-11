@@ -51,6 +51,7 @@ export interface SessionData {
   fulfillment?: any;
   on_init_items?: any[];
   retail_category?: string;
+  collection_amount: string;
 }
 
 export type BecknContext = {

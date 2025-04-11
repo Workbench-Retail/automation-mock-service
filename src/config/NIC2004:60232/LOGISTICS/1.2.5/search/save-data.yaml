@@ -15,3 +15,4 @@ save-data:
   is_cod: $.message.intent.fulfillment.tags[?(@.code == "linked_order")].list[?(@.code == "cod_order")].value
   rate_basis: $.message.intent.fulfillment.tags[?(@.code=="fulfill_request")].list[?(@.code=="rate_basis")].value
   retail_category: $.message.intent.fulfillment.tags[?(@.code=="linked_order")].list[?(@.code=="category")].value
+  collection_amount: $.message.intent.fulfillment.tags[?(@.code=="linked_order")].list[?(@.code=="collection_amount")].value

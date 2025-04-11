@@ -118,7 +118,7 @@ codes:
     action_id: on_update_1_LOGISTICS
     action: on_update
     default: on_update/on_update_1/default.yaml
-    message_id: false
+    message_id: true
   - code: 121
     action_id: on_status_8_LOGISTICS
     action: on_status

@@ -90,14 +90,14 @@ export const onStatusGenerator = async (
           return fulfillemt;
         });
       break;
-      case "At-delivery":
-        existingPayload.message.order.state = "In-progress";
-        existingPayload.message.order.fulfillments =
-          existingPayload.message.order.fulfillments.map((fulfillemt: any) => {
-            fulfillemt.state.descriptor.code = sessionData.stateCode;
-            return fulfillemt;
-          });
-        break;
+    case "At-delivery":
+      existingPayload.message.order.state = "In-progress";
+      existingPayload.message.order.fulfillments =
+        existingPayload.message.order.fulfillments.map((fulfillemt: any) => {
+          fulfillemt.state.descriptor.code = sessionData.stateCode;
+          return fulfillemt;
+        });
+      break;
     case "Order-delivered":
       existingPayload.message.order.state = "Completed";
       existingPayload.message.order.fulfillments =
@@ -114,11 +114,11 @@ export const onStatusGenerator = async (
                 },
                 {
                   code: "value",
-                  value: "300.00",
+                  value: sessionData?.collection_amount || "300.00",
                 },
                 {
                   code: "transaction_id",
-                  value: "3937",
+                  value: "39371234_ondc",
                 },
                 {
                   code: "timestamp",

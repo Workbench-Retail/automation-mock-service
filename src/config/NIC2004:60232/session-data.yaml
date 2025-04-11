@@ -43,3 +43,4 @@ session_data:
   fulfillment: {}
   on_init_items: []
   retail_category: null
+  collection_amount: null

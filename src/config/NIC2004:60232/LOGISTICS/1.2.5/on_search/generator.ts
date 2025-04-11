@@ -1,3 +1,4 @@
+import { removeTagsByCodes } from "../../../../../utils/generic-utils";
 import { SessionData, Input } from "../../../session-types";
 
 const TatMapping: any = {
@@ -139,6 +140,10 @@ export async function onSearch1Generator(
     existingPayload.message.catalog["bpp/providers"][0].fulfillments.map(
       (fulfillment: any) => {
         if (fulfillment.type === "Delivery") {
+          if (sessionData?.domain === "ONDC:LOG11") {
+            removeTagsByCodes(fulfillment.tags, ["distance"]);
+            if (fulfillment.tags.length < 1) delete fulfillment.tags;
+          }
           if (isFulfillRequest) {
             fulfillment.tags = [
               ...fulfillment.tags,
