@@ -10,8 +10,8 @@ export const confirmGenerator = (
   existingPayload.message.order.id = uuidv4();
 
   existingPayload.message.order.provider.id = sessionData.provider_id;
-  existingPayload.message.order.provider.locations[0].id =
-    sessionData.location_id;
+  // existingPayload.message.order.provider.locations[0].id =
+  //   sessionData.location_id;
 
   if (sessionData?.billing) {
     existingPayload.message.order.billing = sessionData.billing;
@@ -22,7 +22,7 @@ export const confirmGenerator = (
   let time: any = null;
 
   sessionData?.on_search_items?.forEach((item: any) => {
-    console.log("::::::::::::", item.id, existingPayload.message.order.items[0].id, item)
+    // console.log("::::::::::::", item.id, existingPayload.message.order.items[0].id, item)
     if (item.id === existingPayload.message.order.items[0].id) {
       time = item.time;
     }
@@ -31,7 +31,7 @@ export const confirmGenerator = (
   existingPayload.message.order.items = existingPayload.message.order.items.map(
     (item: any) => {
       item.time = time;
-      return item
+      return item;
     }
   );
 
@@ -82,7 +82,7 @@ export const confirmGenerator = (
         },
         {
           code: "address",
-          value: "shop_name,building_name,locality,city,state,pincode",
+          value: "13, Main building, Siri Fort, New Delhi, Delhi, 110049",
         },
       ],
     },
@@ -92,7 +92,7 @@ export const confirmGenerator = (
         ...(sessionData?.is_cod === "yes"
           ? [
               { code: "cod_order", value: "yes" },
-              { code: "collection_amount", value: "325.00" },
+              { code: "collection_amount", value: "300.00" },
             ]
           : []),
         {
@@ -131,10 +131,14 @@ export const confirmGenerator = (
           code: "height",
           value: "1.0",
         },
-        {
-          code: "shipment_type",
-          value: "box",
-        },
+        ...(sessionData?.domain === "ONDC:LOG11"
+          ? [
+              {
+                code: "shipment_type",
+                value: "box",
+              },
+            ]
+          : []),
       ],
     },
     {
@@ -142,7 +146,7 @@ export const confirmGenerator = (
       list: [
         {
           code: "category",
-          value: inputs?.retailCategory,
+          value: sessionData?.retail_category || "Grocery",
         },
         {
           code: "name",
@@ -175,7 +179,7 @@ export const confirmGenerator = (
       list: [
         {
           code: "category",
-          value: inputs?.retailCategory,
+          value: sessionData?.retail_category || "Grocery",
         },
         {
           code: "name",
@@ -218,7 +222,7 @@ export const confirmGenerator = (
       list: [
         {
           code: "return_to_origin",
-          value: "yes",
+          value: inputs?.returnToOrigin || "ONDC:LOG10" ? "no" : "yes",
         },
       ],
     },

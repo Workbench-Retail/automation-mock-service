@@ -59,6 +59,7 @@ export const onConfirmGenerator = (
       transaction_id: "txn1234",
       amount: existingPayload.message.order.quote.price.value,
     };
+    existingPayload.message.order.payment.status === 'PAID';
     existingPayload.message.order.payment.tags = [
       {
         code: "wallet_balance",

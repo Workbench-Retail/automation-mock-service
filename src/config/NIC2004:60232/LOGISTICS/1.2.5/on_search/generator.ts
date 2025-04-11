@@ -205,7 +205,7 @@ export async function onSearch1Generator(
   if (sessionData?.is_cod === "yes") {
     existingPayload.message.catalog["bpp/providers"][0].items.push({
       id: "C1",
-      parent_item_id: "..",
+      parent_item_id: "",
       category_id: sessionData?.category_id,
       fulfillment_id: "1",
       descriptor: {
@@ -215,7 +215,7 @@ export async function onSearch1Generator(
       },
       price: {
         currency: "INR",
-        value: "19.18",
+        value: "11.00",
       },
       tags: [
         {

@@ -14,8 +14,8 @@ export const onInitGenerator = (
   sessionData: SessionData
 ) => {
   existingPayload.message.order.provider.id = sessionData.provider_id;
-  existingPayload.message.order.provider.locations[0].id =
-    sessionData.location_id;
+  // existingPayload.message.order.provider.locations[0].id =
+  //   sessionData.location_id;
 
   const tempItems = sessionData.items;
 

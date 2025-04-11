@@ -100,6 +100,11 @@ export async function Generator(
         ...sessionData,
         stateCode: "Agent-assigned",
       });
+      case "on_status_12_LOGISTICS":
+        return await onStatusGenerator(existingPayload, {
+          ...sessionData,
+          stateCode: "At-delivery",
+        });
     case "on_track_LOGISTICS":
       return await onTrackGenerator(existingPayload, sessionData);
     case "on_cancel_LOGISTICS":

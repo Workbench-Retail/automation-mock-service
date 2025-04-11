@@ -17,6 +17,7 @@ export const onTrackGenerator = async (
       },
       updated_at: contextTimestamp,
     };
+    delete existingPayload.message.tracking.url;
   } else {
     delete existingPayload.message.tracking.location;
   }

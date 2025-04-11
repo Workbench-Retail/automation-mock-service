@@ -90,6 +90,14 @@ export const onStatusGenerator = async (
           return fulfillemt;
         });
       break;
+      case "At-delivery":
+        existingPayload.message.order.state = "In-progress";
+        existingPayload.message.order.fulfillments =
+          existingPayload.message.order.fulfillments.map((fulfillemt: any) => {
+            fulfillemt.state.descriptor.code = sessionData.stateCode;
+            return fulfillemt;
+          });
+        break;
     case "Order-delivered":
       existingPayload.message.order.state = "Completed";
       existingPayload.message.order.fulfillments =

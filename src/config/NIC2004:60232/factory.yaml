@@ -139,3 +139,8 @@ codes:
     action: on_status
     default: on_status/default.yaml
     message_id: true
+  - code: 125
+    action_id: on_status_12_LOGISTICS
+    action: on_status
+    default: on_status/default.yaml
+    message_id: true

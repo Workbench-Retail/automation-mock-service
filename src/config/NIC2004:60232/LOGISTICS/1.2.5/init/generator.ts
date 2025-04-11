@@ -20,8 +20,8 @@ export const initGenerator = async (
   sessionData: SessionData
 ) => {
   existingPayload.message.order.provider.id = sessionData.provider_id;
-  existingPayload.message.order.provider.locations[0].id =
-    sessionData.location_id;
+  // existingPayload.message.order.provider.locations[0].id =
+  //   sessionData.location_id;
 
   sessionData?.on_search_items?.forEach((item: any) => {
     if (item.fulfillment_id === sessionData.on_search_fulfillment.id) {

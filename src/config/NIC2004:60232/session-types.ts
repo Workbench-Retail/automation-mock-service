@@ -50,6 +50,7 @@ export interface SessionData {
   rate_basis?: string;
   fulfillment?: any;
   on_init_items?: any[];
+  retail_category?: string;
 }
 
 export type BecknContext = {
@@ -87,4 +88,5 @@ export interface Input {
   feature_discovery?: string[];
   fulfillRequest?: string;
   retailCategory?: string;
+  returnToOrigin?:string;
 }

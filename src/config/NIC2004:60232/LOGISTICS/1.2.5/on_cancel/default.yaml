@@ -40,16 +40,6 @@ message:
           price:
             currency: INR
             value: "9.00"
-        - "@ondc/org/item_id": I2
-          "@ondc/org/title_type": rto
-          price:
-            currency: INR
-            value: "20.0"
-        - "@ondc/org/item_id": I2
-          "@ondc/org/title_type": tax
-          price:
-            currency: INR
-            value: "3.60"
     fulfillments:
       - id: "1"
         type: Delivery

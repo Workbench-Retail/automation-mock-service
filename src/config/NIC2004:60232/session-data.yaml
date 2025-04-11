@@ -42,3 +42,4 @@ session_data:
   rate_basis: null
   fulfillment: {}
   on_init_items: []
+  retail_category: null

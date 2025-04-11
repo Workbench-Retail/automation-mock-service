@@ -38,7 +38,7 @@ message:
             - code: cod_order
               value: "yes"
             - code: collection_amount
-              value: "325.00"
+              value: "300.00"
             - code: currency
               value: INR
             - code: declared_value
