@@ -83,7 +83,7 @@ export const TatMapping: any = {
     code: "P3D",
     day: 2,
     pickupTime: "P1D",
-    orderPrepTime: "PT1D",
+    orderPrepTime: "P1D",
   },
   "Instant Delivery": {
     code: "PT10M",

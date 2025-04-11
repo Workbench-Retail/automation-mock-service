@@ -44,7 +44,7 @@ export const onUpdateGenerator = (
             },
             {
               code: "url",
-              value: "public link to pdf",
+              value: "https://shipping_label.com/pdf/url",
             },
           ],
         });

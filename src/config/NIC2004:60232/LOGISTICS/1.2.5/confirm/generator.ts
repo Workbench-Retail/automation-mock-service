@@ -84,6 +84,14 @@ export const confirmGenerator = (
           code: "address",
           value: "13, Main building, Siri Fort, New Delhi, Delhi, 110049",
         },
+        ...(sessionData.domain === "ONDC:LOG11"
+          ? [
+              {
+                code: "tax_id",
+                value: "29GSTIN1234K2Z2",
+              },
+            ]
+          : []),
       ],
     },
     {
@@ -341,7 +349,7 @@ export const confirmGenerator = (
   ) {
     existingPayload.message.order.payment["@ondc/org/settlement_details"] = [
       {
-        settlement_counterparty: "lsp",
+        settlement_counterparty: "lbnp",
         settlement_type: "upi",
         beneficiary_name: "xxxxx",
         upi_address: "gft@oksbi",

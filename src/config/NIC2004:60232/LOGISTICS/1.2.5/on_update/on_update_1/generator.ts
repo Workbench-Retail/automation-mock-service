@@ -29,7 +29,7 @@ export const onUpdate1Generator = (
   if (sessionData.domain === "ONDC:LOG11") {
     existingPayload.message.order.fulfillments =
       existingPayload.message.order.fulfillments.map((fulfillment: any) => {
-        fulfillment["@ondc/org/awb_no"] = "1227262193237777";
+        fulfillment["@ondc/org/awb_no"] = "12272621932377";
 
         const expiryDate = getTimestampFromDuration(
           existingPayload.context.timestamp,
@@ -47,7 +47,7 @@ export const onUpdate1Generator = (
             },
             {
               code: "url",
-              value: "public link to pdf",
+              value: "https://shipping_label.com/pdf/url",
             },
           ],
         });

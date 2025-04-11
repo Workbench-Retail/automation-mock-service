@@ -105,7 +105,7 @@ export const onInitGenerator = (
   ) {
     existingPayload.message.order.payment["@ondc/org/settlement_details"] = [
       {
-        settlement_counterparty: "lbnp",
+        settlement_counterparty: "lsp",
         settlement_type: "upi",
         beneficiary_name: "xxxxx",
         upi_address: "gft@oksbi",

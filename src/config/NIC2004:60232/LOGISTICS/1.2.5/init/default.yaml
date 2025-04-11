@@ -67,7 +67,7 @@ message:
       "@ondc/org/settlement_basis": invoicing
       "@ondc/org/settlement_window": P15D
       "@ondc/org/settlement_details":
-        - settlement_counterparty: lbnp
+        - settlement_counterparty: lsp
           settlement_type: upi
           beneficiary_name: xxxxx
           upi_address: gft@oksbi

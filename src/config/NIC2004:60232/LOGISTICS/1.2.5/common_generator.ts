@@ -41,16 +41,16 @@ export const populateFulfillmentUpdate = (
               start: existingPayload.context.timestamp,
               end: getTimestampFromDuration(
                 existingPayload.context.timestamp,
-                sessionData?.tat || "P1D"
+                fulfillment?.start?.time?.duration || "P4H"
               ),
             },
           };
 
           fulfillment.end.time = {
             range: {
-              start: existingPayload.context.timestamp,
+              start: fulfillment?.start?.time?.range?.end,
               end: getTimestampFromDuration(
-                existingPayload.context.timestamp,
+                fulfillment?.start?.time?.range?.end,
                 sessionData?.tat || "P1D"
               ),
             },

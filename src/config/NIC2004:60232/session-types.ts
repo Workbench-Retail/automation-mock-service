@@ -88,5 +88,5 @@ export interface Input {
   feature_discovery?: string[];
   fulfillRequest?: string;
   retailCategory?: string;
-  returnToOrigin?:string;
+  returnToOrigin?: string;
 }
