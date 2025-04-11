@@ -92,3 +92,12 @@ export const TatMapping: any = {
     orderPrepTime: "PT2M",
   },
 };
+
+export const calculateQuotePrice = (breakup: any) => {
+  let totalPrice = 0;
+  breakup.forEach((item: any) => {
+    totalPrice += parseFloat(item.price.value) || 0;
+  });
+
+  return totalPrice.toFixed(2); // returns a string with 2 decimal places
+};

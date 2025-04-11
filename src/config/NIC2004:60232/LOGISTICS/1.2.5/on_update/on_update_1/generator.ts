@@ -1,5 +1,8 @@
 import { populateFulfillmentUpdate } from "../../common_generator";
-import { getTimestampFromDuration } from "../../../../../../utils/generic-utils";
+import {
+  calculateQuotePrice,
+  getTimestampFromDuration,
+} from "../../../../../../utils/generic-utils";
 import { SessionData } from "../../../../session-types";
 
 interface Tag {
@@ -166,7 +169,10 @@ export const onUpdate1Generator = (
     },
   ];
 
-  existingPayload.message.order.quote.price.value = "70.00";
+  existingPayload.message.order.quote.price = {
+    currency: "INR",
+    value: calculateQuotePrice(existingPayload.message.order.quote.breakup),
+  };
 
   if (sessionData.linked_order) {
     existingPayload.message.order["@ondc/org/linked_order"] =

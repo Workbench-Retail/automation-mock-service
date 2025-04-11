@@ -8,8 +8,7 @@ message:
         id: "127"
     provider:
       id: P1
-      locations:
-        - id: L1
+
     items:
       - id: I1
         fulfillment_id: "1"

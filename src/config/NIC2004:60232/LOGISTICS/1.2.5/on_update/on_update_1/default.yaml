@@ -4,8 +4,7 @@ message:
     state: In-progress
     provider:
       id: P1
-      locations:
-        - id: L1
+
     items:
       - id: I1
         fulfillment_id: "1"

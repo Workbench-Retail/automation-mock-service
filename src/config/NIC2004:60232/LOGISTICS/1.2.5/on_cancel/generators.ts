@@ -1,4 +1,7 @@
-import { removeTagsByCodes } from "../../../../../utils/generic-utils";
+import {
+  calculateQuotePrice,
+  removeTagsByCodes,
+} from "../../../../../utils/generic-utils";
 import { SessionData } from "../../../session-types";
 
 export const onCancelGenerator = (
@@ -81,7 +84,7 @@ export const onCancelGenerator = (
             list: [
               {
                 code: "retry_count",
-                value: "3",
+                value: sessionData?.domain === "ONDC:LOG10" ? "1" : "3",
               },
               {
                 code: "rto_id",
@@ -147,7 +150,7 @@ export const onCancelGenerator = (
         "@ondc/org/title_type": "rto",
         price: {
           currency: "INR",
-          value: "80.0",
+          value: sessionData?.domain === "ONDC:LOG10" ? "0.00" : "80.0",
         },
       },
       {
@@ -155,7 +158,7 @@ export const onCancelGenerator = (
         "@ondc/org/title_type": "tax",
         price: {
           currency: "INR",
-          value: "8.50",
+          value: sessionData?.domain === "ONDC:LOG10" ? "0.00" : "8.50",
         },
       },
       ...(areDiffTagsPresent
@@ -182,8 +185,13 @@ export const onCancelGenerator = (
 
     existingPayload.message.order.quote.price = {
       currency: "INR",
-      value: areDiffTagsPresent ? "150.50" : "147.50",
+      value: calculateQuotePrice(existingPayload.message.order.quote.breakup),
     };
+
+    // existingPayload.message.order.quote.price = {
+    //   currency: "INR",
+    //   value: areDiffTagsPresent ? "150.50" : "147.50",
+    // };
   }
 
   if (sessionData.payment) {
@@ -195,11 +203,12 @@ export const onCancelGenerator = (
       sessionData.linked_order;
   }
 
-  if(sessionData?.confirm_create_at_timestamp) {
-    existingPayload.message.order.created_at = sessionData?.confirm_create_at_timestamp
+  if (sessionData?.confirm_create_at_timestamp) {
+    existingPayload.message.order.created_at =
+      sessionData?.confirm_create_at_timestamp;
   }
 
-  existingPayload.message.order.updated_at = existingPayload.context.timestamp
+  existingPayload.message.order.updated_at = existingPayload.context.timestamp;
 
   return existingPayload;
 };
