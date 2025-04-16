@@ -1,7 +1,7 @@
 import { SessionData } from "../session-types";
 import { createMockResponseMETRO201 } from "./2.0.1/generation-pipline";
 import { createMockResponseMETRO200 } from "./2.0.0/generation-pipline";
-import { ApiServiceCache, RedisService } from "ondc-automation-cache-lib";
+import { RedisService } from "ondc-automation-cache-lib";
 import { SessionCache } from "../../../types/api-session-cache";
 import { createMockReponseBUS200 } from "../BUS/2.0.0/generation-pipline";
 import { createBuyerUrl, createSellerUrl } from "../../../utils/request-utils";

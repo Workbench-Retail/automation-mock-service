@@ -3,7 +3,7 @@ import logger from "../utils/logger";
 
 import { ApiRequest } from "../routes/manual";
 import { performL2Validations } from "../generated/L2-validations";
-import { loadSessionData } from "../services/data-services";
+import { loadMockSessionData } from "../services/data-services";
 
 export async function l2Validation(
 	req: ApiRequest,
@@ -11,7 +11,9 @@ export async function l2Validation(
 	next: NextFunction
 ) {
 	try {
-		const sessionData = await loadSessionData(req.body.context.transaction_id);
+		const sessionData = await loadMockSessionData(
+			req.body.context.transaction_id
+		);
 		const errors = performL2Validations(
 			req.params.action,
 			req.body,
