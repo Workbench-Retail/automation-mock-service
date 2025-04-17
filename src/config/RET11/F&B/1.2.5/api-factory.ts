@@ -16,7 +16,7 @@ export async function Generator(
     case "on_search":
       return await onSearchGenerator(existingPayload, sessionData);
     case "search_1":
-      return await search1Generator(existingPayload, sessionData);
+      return await search1Generator(existingPayload, sessionData, inputs);
     case "on_search_1":
       return await onSearch1Generator(existingPayload, sessionData);
     case "on_search_2":

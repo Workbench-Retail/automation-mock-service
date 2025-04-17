@@ -32,4 +32,6 @@ export type BecknContext = {
   city?: string;
 };
 
-export interface Input {}
+export interface Input {
+  search_mode?: string;
+}
