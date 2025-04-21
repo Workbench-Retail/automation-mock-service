@@ -82,7 +82,7 @@ export const confirmGenerator = (
         },
         {
           code: "address",
-          value: `KHB Towers, 14, Koramangala, Bengaluru, Karnataka, ${
+          value: `My store name 1, My building name 1, My street name 1, my city 1, my state 1, ${
             sessionData?.start_area_code || "560001"
           }`,
         },
@@ -404,11 +404,11 @@ export const confirmGenerator = (
         name: "Seller1",
       },
       address: {
-        name: "KHB Towers",
-        building: "14",
-        locality: "Koramangala",
-        city: "Bengaluru",
-        state: "Karnataka",
+        name: "My store name 1",
+        building: "My building name 1",
+        locality: "My street name 1",
+        city: "my city 1",
+        state: "my state 1",
         area_code: sessionData?.start_area_code || "560001",
       },
     },
