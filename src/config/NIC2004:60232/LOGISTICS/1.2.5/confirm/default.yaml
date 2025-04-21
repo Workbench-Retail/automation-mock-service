@@ -183,31 +183,41 @@ message:
       items:
         - category_id: Grocery
           descriptor:
-            name: Atta
+            name: Item1
           quantity:
             count: 2
             measure:
               unit: kilogram
-              value: 0.5
+              value: 1.0
           price:
             currency: INR
-            value: "150.00"
+            value: "70.00"
+        - category_id: Grocery
+          descriptor:
+            name: Item2
+          quantity:
+            count: 1
+            measure:
+              unit: kilogram
+              value: 1.0
+          price:
+            currency: INR
+            value: "160.00"
       provider:
         descriptor:
-          name: Aadishwar Store
+          name: Seller1
         address:
           name: KHB Towers
-          building: Building or House No
+          building: '14'
           locality: Koramangala
           city: Bengaluru
-          street: 6th Block
           state: Karnataka
           area_code: "560070"
       order:
         id: O1
         weight:
           unit: kilogram
-          value: 1
+          value: 3
         dimensions:
           length:
             unit: centimeter

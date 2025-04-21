@@ -82,7 +82,9 @@ export const confirmGenerator = (
         },
         {
           code: "address",
-          value: "13, Main building, Siri Fort, New Delhi, Delhi, 110049",
+          value: `KHB Towers, 14, Koramangala, Bengaluru, Karnataka, ${
+            sessionData?.start_area_code || "560001"
+          }`,
         },
         ...(sessionData.domain === "ONDC:LOG11"
           ? [
@@ -191,7 +193,7 @@ export const confirmGenerator = (
         },
         {
           code: "name",
-          value: "item2",
+          value: "Item2",
         },
         {
           code: "currency",
@@ -360,5 +362,79 @@ export const confirmGenerator = (
     ];
   }
 
+  existingPayload.message.order.payment["@ondc/org/linked_order"] = {
+    "@ondc/org/linked_order": {
+      items: [
+        {
+          category_id: sessionData?.retail_category || "Grocery",
+          descriptor: {
+            name: "Item1",
+          },
+          quantity: {
+            count: 2,
+            measure: {
+              unit: "kilogram",
+              value: 1,
+            },
+          },
+          price: {
+            currency: "INR",
+            value: "70.00",
+          },
+        },
+        {
+          category_id: sessionData?.retail_category || "Grocery",
+          descriptor: {
+            name: "Item2",
+          },
+          quantity: {
+            count: 1,
+            measure: {
+              unit: "kilogram",
+              value: 1,
+            },
+          },
+          price: {
+            currency: "INR",
+            value: "160.00",
+          },
+        },
+      ],
+      provider: {
+        descriptor: {
+          name: "Seller1",
+        },
+        address: {
+          name: "KHB Towers",
+          building: "14",
+          locality: "Koramangala",
+          city: "Bengaluru",
+          state: "Karnataka",
+          area_code: sessionData?.start_area_code || "560001",
+        },
+      },
+      order: {
+        id: "O1",
+        weight: {
+          unit: "kilogram",
+          value: 3,
+        },
+        dimensions: {
+          length: {
+            unit: "centimeter",
+            value: 1,
+          },
+          breadth: {
+            unit: "centimeter",
+            value: 1,
+          },
+          height: {
+            unit: "centimeter",
+            value: 1,
+          },
+        },
+      },
+    },
+  };
   return existingPayload;
 };

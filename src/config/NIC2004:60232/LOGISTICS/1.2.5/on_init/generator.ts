@@ -81,16 +81,17 @@ export const onInitGenerator = (
 
   existingPayload.message.order.fulfillments =
     existingPayload.message.order.fulfillments.map((fulfullment: any) => {
-      fulfullment.tags.push({
-        code: "rider_check",
-        list: [
-          {
-            code: "inline_check_for_rider",
-            value: "yes",
-          },
-        ],
-      });
-
+      if (sessionData.category_id === "Immediate Delivery") {
+        fulfullment.tags.push({
+          code: "rider_check",
+          list: [
+            {
+              code: "inline_check_for_rider",
+              value: "yes",
+            },
+          ],
+        });
+      }
       return fulfullment;
     });
 

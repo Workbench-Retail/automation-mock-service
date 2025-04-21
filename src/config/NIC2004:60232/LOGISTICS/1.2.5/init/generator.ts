@@ -171,7 +171,7 @@ export const initGenerator = async (
         },
         {
           code: "name",
-          value: "Seller",
+          value: "Seller1",
         },
       ],
     });
