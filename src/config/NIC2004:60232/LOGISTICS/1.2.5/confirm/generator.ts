@@ -362,76 +362,74 @@ export const confirmGenerator = (
     ];
   }
 
-  existingPayload.message.order.payment["@ondc/org/linked_order"] = {
-    "@ondc/org/linked_order": {
-      items: [
-        {
-          category_id: sessionData?.retail_category || "Grocery",
-          descriptor: {
-            name: "Item1",
-          },
-          quantity: {
-            count: 2,
-            measure: {
-              unit: "kilogram",
-              value: 1,
-            },
-          },
-          price: {
-            currency: "INR",
-            value: "70.00",
-          },
-        },
-        {
-          category_id: sessionData?.retail_category || "Grocery",
-          descriptor: {
-            name: "Item2",
-          },
-          quantity: {
-            count: 1,
-            measure: {
-              unit: "kilogram",
-              value: 1,
-            },
-          },
-          price: {
-            currency: "INR",
-            value: "160.00",
-          },
-        },
-      ],
-      provider: {
+  existingPayload.message.order["@ondc/org/linked_order"] = {
+    items: [
+      {
+        category_id: sessionData?.retail_category || "Grocery",
         descriptor: {
-          name: "Seller1",
+          name: "Item1",
         },
-        address: {
-          name: "KHB Towers",
-          building: "14",
-          locality: "Koramangala",
-          city: "Bengaluru",
-          state: "Karnataka",
-          area_code: sessionData?.start_area_code || "560001",
+        quantity: {
+          count: 2,
+          measure: {
+            unit: "kilogram",
+            value: 1,
+          },
+        },
+        price: {
+          currency: "INR",
+          value: "70.00",
         },
       },
-      order: {
-        id: "O1",
-        weight: {
-          unit: "kilogram",
-          value: 3,
+      {
+        category_id: sessionData?.retail_category || "Grocery",
+        descriptor: {
+          name: "Item2",
         },
-        dimensions: {
-          length: {
-            unit: "centimeter",
+        quantity: {
+          count: 1,
+          measure: {
+            unit: "kilogram",
             value: 1,
           },
-          breadth: {
-            unit: "centimeter",
-            value: 1,
-          },
-          height: {
-            unit: "centimeter",
-            value: 1,
-          },
+        },
+        price: {
+          currency: "INR",
+          value: "160.00",
+        },
+      },
+    ],
+    provider: {
+      descriptor: {
+        name: "Seller1",
+      },
+      address: {
+        name: "KHB Towers",
+        building: "14",
+        locality: "Koramangala",
+        city: "Bengaluru",
+        state: "Karnataka",
+        area_code: sessionData?.start_area_code || "560001",
+      },
+    },
+    order: {
+      id: "O1",
+      weight: {
+        unit: "kilogram",
+        value: 3,
+      },
+      dimensions: {
+        length: {
+          unit: "centimeter",
+          value: 1,
+        },
+        breadth: {
+          unit: "centimeter",
+          value: 1,
+        },
+        height: {
+          unit: "centimeter",
+          value: 1,
         },
       },
     },
