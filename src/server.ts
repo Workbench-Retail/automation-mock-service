@@ -7,6 +7,7 @@ import triggerRouter from "./routes/trigger";
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./swagger/swagger.config";
 import { setAckResponse, setBadRequestNack } from "./utils/ackUtils";
+import flowRouter from "./routes/flow-routes";
 
 const createServer = (): Application => {
 	const app = express();
@@ -34,9 +35,16 @@ const createServer = (): Application => {
 	//@ts-ignore
 	app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
+	app.get("/api-docs.json", (_req, res) => {
+		res.setHeader("Content-Type", "application/json");
+		res.send(swaggerSpec);
+	});
+
 	app.use(`${base}/manual`, manualRouter);
 	//   app.use("/mock", defaultRouter);
 	app.use(`${base}/trigger`, triggerRouter);
+
+	app.use(`${base}/flows`, flowRouter);
 
 	// Health Check
 	app.get(`${base}/health`, (req: Request, res: Response) => {

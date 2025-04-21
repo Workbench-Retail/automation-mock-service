@@ -44,7 +44,12 @@ export async function getFlowInfo(transactionId: string, sessionId: string) {
 		);
 	}
 
-	const flow = await fetchFlow(sessionData.domain, sessionData.version, flowId);
+	const flow = await fetchFlow(
+		sessionData.domain,
+		sessionData.version,
+		flowId,
+		sessionData.usecaseId
+	);
 	return {
 		transactionData,
 		sessionData,

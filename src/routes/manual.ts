@@ -21,6 +21,7 @@ export interface ApiRequest extends Request {
 	transactionData?: TransactionCache;
 	transactionId?: string;
 	subscriberUrl?: string;
+	flowId?: string;
 }
 
 manualRouter.post(

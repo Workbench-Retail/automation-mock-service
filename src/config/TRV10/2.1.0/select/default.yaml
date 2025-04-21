@@ -1,0 +1,6 @@
+message:
+  order:
+    items:
+      - id: I1 # Reference to the selected item from search results
+    provider:
+      id: P1 # Mobility service provider ID

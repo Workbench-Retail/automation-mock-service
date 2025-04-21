@@ -23,7 +23,7 @@ export interface Domain {
 export interface Flow {
 	id: string;
 	title?: string;
-	description: string;
+	description?: string;
 	sequence: SequenceStep[];
 }
 
@@ -31,7 +31,7 @@ export interface SequenceStep {
 	key: string;
 	type: string;
 	unsolicited: boolean;
-	description: string;
+	description?: string;
 	pair: string | null;
 	owner: "BAP" | "BPP";
 	stackable?: boolean;

@@ -1,11 +1,118 @@
-import { Router, Request, NextFunction } from "express";
+import { Router, Request, Response, NextFunction } from "express";
 import { getFlowInfo } from "../services/flow-data-services";
 import { getFlowCompleteStatus } from "../services/flow-mapping-service";
 import logger from "../utils/logger";
 import { ApiRequest } from "./manual";
 import { ActUponFlow } from "../controllers/flowController";
+import { fetchFlow } from "../utils/flow-utils/main";
+import { SessionCacheService } from "../services/cache-services";
+import { v4 as uuidv4 } from "uuid";
 
 const flowRouter = Router();
+
+/**
+ * @swagger
+ * /flow/new:
+ *   post:
+ *     summary: Start a new flow
+ *     description: Initializes a new flow with the provided session_id and flow_id.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - flow_id
+ *               - session_id
+ *             properties:
+ *               transaction_id:
+ *                 type: string
+ *                 example: "station_based_flow"
+ *               session_id:
+ *                 type: string
+ *                 example: "sess_abcdef"
+ *               json_path_changes:
+ *                 type: object
+ *                 additionalProperties: true
+ *                 description: |
+ *                   Optional key-value map of JSONPath expressions and replacement values.
+ *                   Example: { "$.order.amount": 500, "$.user.name": "Alice" }
+ *                 example:
+ *                   $.order.amount: 500
+ *                   $.user.name: "Alice"
+ *     responses:
+ *       200:
+ *         description: Successfully proceeded with flow
+ *       204:
+ *         description: Input is required for the next step
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "User input is required"
+ *                 input:
+ *                   $ref: '#/components/schemas/FormFieldConfigType'
+ *       400:
+ *         description: transaction_id or session_id not found in request body
+ *       500:
+ *         description: Internal server error
+ */
+flowRouter.post(
+	"/new",
+	async (req: ApiRequest, res: Response, next: NextFunction) => {
+		try {
+			logger.info("New flow request received");
+			const transactionId = uuidv4();
+			const sessionId = req.body.session_id;
+			const flowId = req.body.flow_id;
+			if (!transactionId || !sessionId || !flowId) {
+				logger.error(
+					"transaction_id, session_id or flow_id not found in request body"
+				);
+				res
+					.status(400)
+					.send(
+						"transaction_id, session_id or flow_id not found in request body"
+					);
+				return;
+			}
+			const sessionData = await new SessionCacheService().loadSessionThatExists(
+				sessionId
+			);
+			const flow = await fetchFlow(
+				sessionData.domain,
+				sessionData.version,
+				flowId,
+				sessionData.usecaseId
+			);
+
+			req.flow = flow;
+			req.transactionId = transactionId;
+			req.subscriberUrl = sessionData.subscriberUrl;
+			req.transactionData = {
+				latestAction: "",
+				latestTimestamp: "",
+				type: "manual",
+				subscriberType: sessionData.npType,
+				flowId: flowId,
+				sessionId: sessionId,
+				messageIds: [],
+				apiList: [],
+			};
+			logger.info(`preparation for new flow completed for transactionId: ${transactionId} sessionId: ${sessionId}
+			flowId: ${flowId}`);
+			next();
+		} catch (err) {
+			logger.error("Error in new flow request", err);
+			res.status(500).send("Error in new flow request");
+		}
+	},
+	ActUponFlow
+);
 
 /**
  * @swagger
@@ -59,17 +166,21 @@ const flowRouter = Router();
  *         description: Internal server error
  */
 flowRouter.post(
-	"/flow/proceed",
-	async (req: ApiRequest, res, next: NextFunction) => {
+	"/proceed",
+	async (req: ApiRequest, res: Response, next: NextFunction) => {
 		try {
 			const transactionId = req.body.transaction_id;
 			const sessionId = req.body.session_id;
 			if (!transactionId || !sessionId) {
+				logger.error("transaction_id or session_id not found in request body");
 				res
 					.status(400)
 					.send("transaction_id or session_id not found in request body");
 				return;
 			}
+			logger.info(
+				`proceeding flow for transactionId: ${transactionId} sessionId: ${sessionId}`
+			);
 			const { transactionData, sessionData, flow } = await getFlowInfo(
 				transactionId,
 				sessionId
@@ -79,7 +190,10 @@ flowRouter.post(
 			req.subscriberUrl = sessionData.subscriberUrl;
 			req.transactionId = transactionId;
 			next();
-		} catch (err) {}
+		} catch (err) {
+			logger.error("Error in proceeding flow", err);
+			res.status(500).send("Error in proceeding flow");
+		}
 	},
 	ActUponFlow
 );
@@ -137,7 +251,7 @@ flowRouter.post(
  *       500:
  *         description: Error in fetching flow status
  */
-flowRouter.get("/flow/current-status", async (req, res) => {
+flowRouter.get("/current-status", async (req: ApiRequest, res: Response) => {
 	try {
 		const transactionId = req.query.transaction_id as string;
 		const sessionId = req.query.session_id as string;
@@ -147,6 +261,9 @@ flowRouter.get("/flow/current-status", async (req, res) => {
 				.send("transaction_id or session_id not found in query data");
 			return;
 		}
+		logger.info(
+			`Fetching flow status for transactionId: ${transactionId} sessionId: ${sessionId}`
+		);
 		const { transactionData, flow } = await getFlowInfo(
 			transactionId,
 			sessionId
@@ -158,3 +275,5 @@ flowRouter.get("/flow/current-status", async (req, res) => {
 		res.status(500).send("Error in fetching flow status");
 	}
 });
+
+export default flowRouter;

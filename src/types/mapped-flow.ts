@@ -13,8 +13,9 @@ export interface ReducedApiData {
 
 export type ReducedApiList = ReducedApiData[];
 
-export interface flowMap {
+export interface FlowMap {
 	sequence: MappedStep[];
+	missedSteps: MappedStep[];
 }
 export interface MappedStep {
 	status:
@@ -28,4 +29,10 @@ export interface MappedStep {
 	actionType: string;
 	input?: FormConfigType;
 	payloads?: ReducedApiData;
+	index: number;
+	description?: string;
+	unsolicited: boolean;
+	pairActionId: string | null;
+	expect?: boolean;
+	missedStep?: boolean;
 }

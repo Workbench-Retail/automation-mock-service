@@ -1,0 +1,41 @@
+message:
+  intent:
+    category:
+      descriptor:
+        code: ON_DEMAND_TRIP
+    tags:
+      - descriptor:
+          name: BAP Terms of Engagement
+          code: BAP_TERMS
+        display: false
+        list:
+          - descriptor:
+              code: BUYER_FINDER_FEES_PERCENTAGE
+            value: '1'
+          - descriptor:
+              code: DELAY_INTEREST
+            value: '5'
+          - descriptor:
+              code: STATIC_TERMS
+            value: 'https://example-test-bap.com/static-terms.txt'
+    fulfillment:
+      stops:
+        - location:
+            gps: '13.008935, 77.644408'
+          type: START
+          instructions:
+            short_desc: short description of the location
+            long_desc: long description of the location
+          id: '1'
+        - location:
+            gps: '12.981224, 77.615816'
+          type: INTERMEDIATE_STOP
+          id: '2'
+          parent_stop_id: '1'
+        - location:
+            gps: '12.971186, 77.586812'
+          type: END
+          id: '3'
+          parent_stop_id: '2'
+    payment:
+      collected_by: BPP

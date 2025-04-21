@@ -4,7 +4,7 @@ import { loadMockSessionData } from "../services/data-services";
 import logger from "../utils/logger";
 import { updateAllJsonPaths } from "../utils/json-editor-utils/jsonPathEditor";
 import { delay } from "../utils/generic-utils";
-import { createMockResponse } from "../config/TRV11/METRO/version-factory";
+import { createMockResponse } from "../config/TRV10/version-factory";
 
 export async function generateMockResponseMiddleware(
 	req: TriggerRequest,
