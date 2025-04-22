@@ -6,7 +6,7 @@ const TatMapping: any = {
   "Same Day Delivery": { code: "PT4H", day: 0, pickupTime: "PT1H" },
   "Next Day Delivery": { code: "P1D", day: 1, pickupTime: "PT4H" },
   "Standard Delivery": { code: "P2D", day: 2, pickupTime: "PT12H" },
-  "Express Delivery": { code: "P3D", day: 2, pickupTime: "P1D" },
+  "Express Delivery": { code: "P3D", day: 3, pickupTime: "P1D" },
   "Instant Delivery": { code: "PT10M", day: 0, pickupTime: "PT2M" },
 };
 
