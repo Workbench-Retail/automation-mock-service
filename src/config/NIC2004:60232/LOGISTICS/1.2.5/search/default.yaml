@@ -58,7 +58,7 @@ message:
     "@ondc/org/payload_details":
       weight:
         unit: kilogram
-        value: 1
+        value: 3
       dimensions:
         length:
           unit: centimeter
