@@ -4,7 +4,7 @@ import { loadMockSessionData } from "../services/data-services";
 import logger from "../utils/logger";
 import { updateAllJsonPaths } from "../utils/json-editor-utils/jsonPathEditor";
 import { delay } from "../utils/generic-utils";
-import { createMockResponse } from "../config/TRV10/version-factory";
+import { generateMockResponse } from "../config/mock-config";
 
 export async function generateMockResponseMiddleware(
 	req: TriggerRequest,
@@ -32,8 +32,7 @@ export async function generateMockResponseMiddleware(
 			txn,
 			req.queryData.subscriber_url
 		);
-		console.log("query data is", req.queryData);
-		const mockResponse = await createMockResponse(
+		const mockResponse = await generateMockResponse(
 			req.queryData.session_id ?? "",
 			sessionData,
 			req.queryData?.action_id

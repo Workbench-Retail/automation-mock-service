@@ -1,5 +1,4 @@
 import { Router, Request } from "express";
-import { l2Validation } from "../controllers/validationControllers";
 import { saveDataMiddleware } from "../controllers/dataControllers";
 import { setAckResponse } from "../utils/ackUtils";
 import { Flow } from "../types/flow-types";
@@ -22,11 +21,12 @@ export interface ApiRequest extends Request {
 	transactionId?: string;
 	subscriberUrl?: string;
 	flowId?: string;
+	apiSessionCache?: SessionCache;
 }
 
 manualRouter.post(
 	"/:action",
-	l2Validation,
+	// l2Validation,
 	saveDataMiddleware,
 	setFlowAndTransactionId,
 	ActUponFlow,

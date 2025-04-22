@@ -56,6 +56,7 @@ export function getFlowCompleteStatus(
 					pairActionId: null,
 					description: "action miss match from flow",
 					missedStep: true,
+					payloads: targetApiData,
 				});
 			}
 		} else {
@@ -68,15 +69,19 @@ export function getFlowCompleteStatus(
 				index: -1,
 				unsolicited: false,
 				pairActionId: null,
+				payloads: apiList[i],
 				description: "action beyond flow",
 				missedStep: true,
 			});
 		}
 	}
+	i = mappedFlow.sequence.length;
 	for (i; i < flowSequence.length; i++) {
 		if (
 			i === 0 ||
-			(i === apiList.length &&
+			(i !== 0 &&
+				i === apiList.length &&
+				mappedFlow.sequence[i - 1].payloads &&
 				mappedFlow.sequence[i - 1].payloads?.subStatus === "SUCCESS")
 		) {
 			const item = flowSequence[i];
@@ -101,6 +106,13 @@ export function getFlowCompleteStatus(
 						status: "INPUT-REQUIRED",
 					});
 				} else {
+					if (item.unsolicited) {
+						mappedFlow.sequence.push({
+							...base,
+							status: "INPUT-REQUIRED",
+							input: [],
+						});
+					}
 					mappedFlow.sequence.push({
 						...base,
 						status: "RESPONDING",

@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import logger from "../utils/logger";
 
 import { ApiRequest } from "../routes/manual";
-import { performL2Validations } from "../generated/L2-validations";
+import { performL2Validations } from "../config/mock-config/generated/L2-validations";
 import { loadMockSessionData } from "../services/data-services";
 
 export async function l2Validation(

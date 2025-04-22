@@ -41,7 +41,6 @@ export async function fetchFlow(
 				usecase: usecaseId,
 			},
 		});
-		console.log("config", config.data);
 		return config.data.data;
 	} catch (error) {
 		logger.error(

@@ -1,6 +1,6 @@
-import { getActionData } from "../config/TRV10/getActionConfig";
-import { actionSelectionCodeTests } from "../generated/action-selector";
-import { defaultSelectionCodeTests } from "../generated/default-selector";
+import { getActionData } from "../config/mock-config";
+import { actionSelectionCodeTests } from "../config/mock-config/generated/action-selector";
+import { defaultSelectionCodeTests } from "../config/mock-config/generated/default-selector";
 import logger from "../utils/logger";
 import { loadMockSessionData } from "./data-services";
 
