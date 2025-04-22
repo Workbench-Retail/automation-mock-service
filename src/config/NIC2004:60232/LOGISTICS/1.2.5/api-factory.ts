@@ -112,7 +112,7 @@ export async function Generator(
     case "status_LOGISTICS":
       return await statusGenerator(existingPayload, sessionData);
     case "search_1_LOGISITCS":
-      return await search1Generator(existingPayload, sessionData);
+      return await search1Generator(existingPayload, sessionData, inputs);
     case "on_update_1_LOGISTICS":
       return await onUpdate1Generator(existingPayload, sessionData);
     default:
