@@ -54,7 +54,7 @@ export interface SessionData {
   collection_amount: string;
   feature_surge_fee: string;
   feature_cancellation_terms: string;
-  cancellation_terms: any[];
+  cancellation_terms: any
 }
 
 export type BecknContext = {
