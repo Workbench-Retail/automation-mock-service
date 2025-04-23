@@ -35,10 +35,10 @@ export const onStatusGenerator = async (
     case "Order-picked-up":
       existingPayload.message.order.state = "In-progress";
       existingPayload.message.order.fulfillments =
-        existingPayload.message.order.fulfillments.map((fulfillemt: any) => {
-          fulfillemt.state.descriptor.code = sessionData.stateCode;
-          fulfillemt.start.time = {
-            ...fulfillemt.start.time,
+        existingPayload.message.order.fulfillments.map((fulfillment: any) => {
+          fulfillment.state.descriptor.code = sessionData.stateCode;
+          fulfillment.start.time = {
+            ...fulfillment.start.time,
             timestamp: existingPayload.context?.timestamp,
           };
           const p2pList = [
@@ -67,45 +67,45 @@ export const onStatusGenerator = async (
             },
           ];
 
-          fulfillemt.tags.push({
+          fulfillment.tags.push({
             code: "tracking",
             list: sessionData?.domain === "ONDC:LOG10" ? p2pList : p2h2pList,
           });
-          return fulfillemt;
+          return fulfillment;
         });
       break;
     case "Out-for-delivery":
       existingPayload.message.order.state = "In-progress";
       existingPayload.message.order.fulfillments =
-        existingPayload.message.order.fulfillments.map((fulfillemt: any) => {
-          fulfillemt.state.descriptor.code = sessionData.stateCode;
-          return fulfillemt;
+        existingPayload.message.order.fulfillments.map((fulfillment: any) => {
+          fulfillment.state.descriptor.code = sessionData.stateCode;
+          return fulfillment;
         });
       break;
     case "At-pickup":
       existingPayload.message.order.state = "In-progress";
       existingPayload.message.order.fulfillments =
-        existingPayload.message.order.fulfillments.map((fulfillemt: any) => {
-          fulfillemt.state.descriptor.code = sessionData.stateCode;
-          return fulfillemt;
+        existingPayload.message.order.fulfillments.map((fulfillment: any) => {
+          fulfillment.state.descriptor.code = sessionData.stateCode;
+          return fulfillment;
         });
       break;
     case "At-delivery":
       existingPayload.message.order.state = "In-progress";
       existingPayload.message.order.fulfillments =
-        existingPayload.message.order.fulfillments.map((fulfillemt: any) => {
-          fulfillemt.state.descriptor.code = sessionData.stateCode;
-          return fulfillemt;
+        existingPayload.message.order.fulfillments.map((fulfillment: any) => {
+          fulfillment.state.descriptor.code = sessionData.stateCode;
+          return fulfillment;
         });
       break;
     case "Order-delivered":
       existingPayload.message.order.state = "Completed";
       existingPayload.message.order.fulfillments =
-        existingPayload.message.order.fulfillments.map((fulfillemt: any) => {
-          fulfillemt.state.descriptor.code = sessionData.stateCode;
-          fulfillemt.end.time.timestamp = existingPayload.context.timestamp;
+        existingPayload.message.order.fulfillments.map((fulfillment: any) => {
+          fulfillment.state.descriptor.code = sessionData.stateCode;
+          fulfillment.end.time.timestamp = existingPayload.context.timestamp;
           if (sessionData?.is_cod === "yes") {
-            fulfillemt.tags.push({
+            fulfillment.tags.push({
               code: "cod_collection_detail",
               list: [
                 {
@@ -127,7 +127,7 @@ export const onStatusGenerator = async (
               ],
             });
           }
-          return fulfillemt;
+          return fulfillment;
         });
       break;
     case "RTO-Delivered":
@@ -162,31 +162,31 @@ export const onStatusGenerator = async (
       break;
     case "At-destination-hub":
       existingPayload.message.order.fulfillments =
-        existingPayload.message.order.fulfillments.map((fulfillemt: any) => {
-          fulfillemt.state.descriptor.code = sessionData.stateCode;
-          return fulfillemt;
+        existingPayload.message.order.fulfillments.map((fulfillment: any) => {
+          fulfillment.state.descriptor.code = sessionData.stateCode;
+          return fulfillment;
         });
       break;
     case "In-transit":
       existingPayload.message.order.fulfillments =
-        existingPayload.message.order.fulfillments.map((fulfillemt: any) => {
-          fulfillemt.state.descriptor.code = sessionData.stateCode;
-          return fulfillemt;
+        existingPayload.message.order.fulfillments.map((fulfillment: any) => {
+          fulfillment.state.descriptor.code = sessionData.stateCode;
+          return fulfillment;
         });
       break;
     case "Pickup-rescheduled":
       existingPayload.message.order.fulfillments =
-        existingPayload.message.order.fulfillments.map((fulfillemt: any) => {
-          fulfillemt.state.descriptor.code = sessionData.stateCode;
-          fulfillemt.start.time.range = {
+        existingPayload.message.order.fulfillments.map((fulfillment: any) => {
+          fulfillment.state.descriptor.code = sessionData.stateCode;
+          fulfillment.start.time.range = {
             start: getFutureDateInMinutes(10),
             end: getFutureDateInMinutes(30),
           };
-          fulfillemt.end.time.range = {
+          fulfillment.end.time.range = {
             start: getFutureDateInMinutes(120),
             end: getFutureDateInMinutes(150),
           };
-          fulfillemt.tags.push({
+          fulfillment.tags.push({
             code: "fulfillment_delay",
             list: [
               {
@@ -207,25 +207,25 @@ export const onStatusGenerator = async (
               },
             ],
           });
-          return fulfillemt;
+          return fulfillment;
         });
       break;
     case "Out-for-pickup":
       existingPayload.message.order.fulfillments =
-        existingPayload.message.order.fulfillments.map((fulfillemt: any) => {
-          fulfillemt.state.descriptor.code = sessionData.stateCode;
-          return fulfillemt;
+        existingPayload.message.order.fulfillments.map((fulfillment: any) => {
+          fulfillment.state.descriptor.code = sessionData.stateCode;
+          return fulfillment;
         });
       break;
     case "Delivery-rescheduled":
       existingPayload.message.order.fulfillments =
-        existingPayload.message.order.fulfillments.map((fulfillemt: any) => {
-          fulfillemt.state.descriptor.code = sessionData.stateCode;
-          fulfillemt.end.time.range = {
+        existingPayload.message.order.fulfillments.map((fulfillment: any) => {
+          fulfillment.state.descriptor.code = sessionData.stateCode;
+          fulfillment.end.time.range = {
             start: getFutureDateInMinutes(30),
             end: getFutureDateInMinutes(50),
           };
-          fulfillemt.tags.push({
+          fulfillment.tags.push({
             code: "fulfillment_delay",
             list: [
               {
@@ -246,15 +246,22 @@ export const onStatusGenerator = async (
               },
             ],
           });
-          return fulfillemt;
+          return fulfillment;
         });
       break;
     case "Agent-assigned":
       existingPayload.message.order.fulfillments =
-        existingPayload.message.order.fulfillments.map((fulfillemt: any) => {
-          fulfillemt.state.descriptor.code = sessionData.stateCode;
-          fulfillemt.tags = [
-            ...removeTagsByCodes(fulfillemt.tags, [
+        existingPayload.message.order.fulfillments.map((fulfillment: any) => {
+          fulfillment.state.descriptor.code = sessionData.stateCode;
+          fulfillment.agent = {
+            name: "person_name",
+            phone: "9886098860",
+          };
+          fulfillment.vehicle = {
+            registration: "3LVJ945",
+          };
+          fulfillment.tags = [
+            ...removeTagsByCodes(fulfillment.tags, [
               "weather_check",
               "rto_action",
               "state",
@@ -298,7 +305,7 @@ export const onStatusGenerator = async (
                 ]
               : []),
           ];
-          return fulfillemt;
+          return fulfillment;
         });
       break;
     default:
@@ -313,7 +320,8 @@ export const onStatusGenerator = async (
 
   existingPayload.message.order.quote = sessionData.quote;
   if (sessionData.cancellation_terms) {
-    existingPayload.message.order.cancellation_terms = sessionData.cancellation_terms;
+    existingPayload.message.order.cancellation_terms =
+      sessionData.cancellation_terms;
   }
 
   if (sessionData.payment) {

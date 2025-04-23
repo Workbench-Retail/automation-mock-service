@@ -24,14 +24,7 @@ export const populateFulfillmentUpdate = (
 
       if (isReadyToShip) {
         if (!sessionData?.rate_basis) {
-          fulfillment.state.descriptor.code = "Agent-assigned";
-          fulfillment.agent = {
-            name: "person_name",
-            phone: "9886098860",
-          };
-          fulfillment.vehicle = {
-            registration: "3LVJ945",
-          };
+          fulfillment.state.descriptor.code = "Searching-for-agent";
         }
 
         if (!fulfillment.start?.time?.range) {
@@ -87,15 +80,8 @@ export const populateFulfillmentConfim = (
       if (isReadyToShip) {
         fulfillment.state = {
           descriptor: {
-            code: "Agent-assigned",
+            code: "Pending",
           },
-        };
-        fulfillment.agent = {
-          name: "person_name",
-          phone: "9886098860",
-        };
-        fulfillment.vehicle = {
-          registration: "3LVJ945",
         };
 
         if (!existingPayload.message.order.fulfillments[0].start?.time?.range) {
