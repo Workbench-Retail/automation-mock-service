@@ -24,3 +24,33 @@ codes:
     action: on_search
     default: on_search/on_search_2/default.yaml
     message_id: true
+  - code: 105
+    action_id: select
+    action: select
+    default: select/default.yaml
+    message_id: true
+  - code: 106
+    action_id: on_select
+    action: on_select
+    default: on_select/default.yaml
+    message_id: true
+  - code: 107
+    action_id: init
+    action: init
+    default: init/default.yaml
+    message_id: true
+  - code: 108
+    action_id: on_init
+    action: on_init
+    default: on_init/default.yaml
+    message_id: true
+  - code: 109
+    action_id: confirm
+    action: confirm
+    default: confirm/default.yaml
+    message_id: true
+  - code: 110
+    action_id: on_confirm
+    action: on_confirm
+    default: on_confirm/default.yaml
+    message_id: true

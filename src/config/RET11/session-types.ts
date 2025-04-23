@@ -14,6 +14,20 @@ export interface SessionData {
   error_code?: string;
   error_message?: string;
   domain?: string;
+
+  // order phase
+  fulfillments: any[];
+  selected_items: any[];
+  selected_item_id: string;
+  quote: any;
+  items: any[];
+  billing: Record<string, any>;
+  payment: any[];
+  end: any[];
+  bnp_features: any[];
+  item_availability_enabled?: boolean;
+  item_timing?: any;
+  customizations?: any;
 }
 
 export type BecknContext = {
