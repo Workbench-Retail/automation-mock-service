@@ -5,6 +5,7 @@ import { ApiServiceCache, RedisService } from "ondc-automation-cache-lib";
 import { SessionCache } from "../../../types/api-session-cache";
 import { createMockReponseBUS200 } from "../BUS/2.0.0/generation-pipline";
 import { createBuyerUrl, createSellerUrl } from "../../../utils/request-utils";
+import { createMockResponseBUS201 } from "../BUS/2.0.1/generation-pipline";
 
 export async function createMockResponse(
 	session_id: string,
@@ -18,8 +19,8 @@ export async function createMockResponse(
 	const data = JSON.parse(api_session) as SessionCache;
 	console.log("data is", data);
 	const { version, usecaseId } = data;
-	console.log(version, usecaseId);
-
+	// let version = "2.0.1"
+	// let usecaseId = "BUS"
 	let payload: any = {};
 
 	if (usecaseId === "METRO") {
@@ -31,6 +32,8 @@ export async function createMockResponse(
 	} else if (usecaseId === "BUS") {
 		if (version === "2.0.0") {
 			payload = await createMockReponseBUS200(action_id, sessionData);
+		} else if (version === "2.0.1"){
+			payload = await createMockResponseBUS201(action_id,sessionData)
 		}
 	}
 

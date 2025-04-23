@@ -238,12 +238,12 @@ export function createFullfillment(cityCode: string) {
     for (const full of fake) {
         if (full.id === "F1") {
             full.stops.forEach((stop: any) => {
-                stop.location.descriptor.code = `MOCK_STATION_${cityCode}_${index}`;
+                stop.location.descriptor.code = `MOCK_STATION_${index}`;
                 index++;
             });
         } else if (full.id === "F2") {
             full.stops.forEach((stop: any) => {
-                stop.location.descriptor.code = `MOCK_STATION_${cityCode}_${maxIndex}`;
+                stop.location.descriptor.code = `MOCK_STATION_${maxIndex}`;
                 maxIndex--;
             });
         }

@@ -459,7 +459,7 @@ message:
                       code: ROUTE_NAME
                     value: Yellow Line
         payments:
-          - collected_by: BPP
+          - collected_by: BAP
             tags:
               - descriptor:
                   code: BUYER_FINDER_FEES

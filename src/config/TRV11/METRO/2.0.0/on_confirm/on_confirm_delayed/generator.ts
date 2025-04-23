@@ -107,9 +107,11 @@ export async function onConfirmDelayedGenerator(existingPayload: any,sessionData
 	existingPayload.message.order.quote = sessionData.quote
 	}
 	existingPayload.message.order.id = order_id;
-  existingPayload = updateOrderTimestamps(existingPayload)
   const delay_duration = isoDurationToSeconds(sessionData.ttl) + 2
   console.log("the delay duration is", delay_duration)
   await delay(delay_duration*1000);
+  const now = new Date().toISOString();
+  existingPayload.message.order.created_at = sessionData.created_at
+  existingPayload.message.order.updated_at = now
   return existingPayload;
 }

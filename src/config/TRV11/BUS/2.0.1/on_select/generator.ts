@@ -1,19 +1,20 @@
 import { SessionData } from "../../../session-types";
 
 const createQuoteFromItems = (items: any): any => {
-	let totalPrice = 0; // Initialize total price
+	let totalPrice = 0;
+	const currency = items[0]?.price.currency || "INR";
 
 	const breakup = items.map((item: any) => {
 		const itemTotalPrice =
-			Number(item.price.value) * item.quantity.selected.count; // Calculate item total price
-		totalPrice += itemTotalPrice; // Add to total price
+			Number(item.price.value) * item.quantity.selected.count;
+		totalPrice += itemTotalPrice;
 
 		return {
 			title: "BASE_FARE",
 			item: {
 				id: item.id,
 				price: {
-					currency: item.price.currency,
+					currency,
 					value: item.price.value,
 				},
 				quantity: {
@@ -23,16 +24,34 @@ const createQuoteFromItems = (items: any): any => {
 				},
 			},
 			price: {
-				currency: item.price.currency,
+				currency,
 				value: itemTotalPrice.toFixed(2),
 			},
 		};
 	});
 
+	// Add OFFER and TOLL to breakup
+	breakup.push(
+		{
+			title: "OFFER",
+			price: {
+				currency,
+				value: "0",
+			},
+		},
+		{
+			title: "TOLL",
+			price: {
+				currency,
+				value: "0",
+			},
+		}
+	);
+
 	return {
 		price: {
-			value: totalPrice.toFixed(2), // Total price as a string with two decimal places
-			currency: items[0]?.price.currency || "INR", // Use currency from the first item or default to "INR"
+			value: totalPrice.toFixed(2),
+			currency,
 		},
 		breakup,
 	};
@@ -40,17 +59,16 @@ const createQuoteFromItems = (items: any): any => {
 
 function createAndAppendFulfillments(items: any[], fulfillments: any[]): void {
 	items.forEach((item) => {
+
 		// item.fulfillment_ids =
 		item.fulfillment_ids.forEach((parentFulfillmentId: string) => {
 			// Get the parent fulfillment object from the fulfillments array
 			const parentFulfillment = fulfillments.find(
 				(f) => f.id === parentFulfillmentId
 			);
-
 			if (parentFulfillment) {
 				// Get the quantity based on the selected count
 				const quantity = item.quantity.selected.count;
-
 				for (let i = 0; i < quantity; i++) {
 					// Create new fulfillment object
 					const newFulfillment = {
@@ -88,12 +106,9 @@ function getUniqueFulfillmentIdsAndFilterFulfillments(
 	items: any[],
 	fulfillments: any[]
 ): any[] {
-	fulfillments = [fulfillments];
-	// Ensure fulfillments is an array, fallback to an empty array if it's not
 	if (!Array.isArray(fulfillments)) {
-		throw new Error("Expected 'fulfillments' to be an array.");
+		fulfillments = fulfillments ? [fulfillments] : [];
 	}
-
 	// Step 1: Get all unique fulfillment IDs from the items
 	const fulfillmentIds = items
 		.flatMap((item) => item.fulfillment_ids) // Flatten the fulfillment_ids arrays
@@ -122,7 +137,7 @@ export async function onSelectGenerator(
 	existingPayload: any,
 	sessionData: SessionData
 ) {
-	console.log("session data before the on_select call is ",sessionData)
+	console.log(JSON.stringify(sessionData))
 	let items = filterItemsBySelectedIds(
 		sessionData.items,
 		sessionData.selected_item_ids
@@ -144,12 +159,12 @@ export async function onSelectGenerator(
 				count: ids_with_quantities["items"][item.id] ?? 0, // Default to 0 if not in the mapping
 			},
 		},
-	}));
+	})).filter((item) => item.quantity.selected.count > 0);
 	items = updatedItems;
-	// createAndAppendFulfillments(updatedItems, fulfillments);
+	createAndAppendFulfillments(updatedItems, fulfillments);
 	const quote = createQuoteFromItems(updatedItems);
 	existingPayload.message.order.items = items;
-	existingPayload.message.order.fulfillments = sessionData.fulfillments; //testing for pramaan
+	existingPayload.message.order.fulfillments = fulfillments; 
 	existingPayload.message.order.fulfillments.forEach((fulfillment: any) => {
 		if (fulfillment.type === "ROUTE") {
 			fulfillment.type = "TRIP";

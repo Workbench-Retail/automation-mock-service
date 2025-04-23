@@ -12,7 +12,7 @@ export interface ApiRequest extends Request {
 	};
 }
 
-manualRouter.post("/:action", l2Validation, saveDataMiddleware, (req, res) => {
+manualRouter.post("/:action",l2Validation ,saveDataMiddleware, (req, res) => {
 	res.status(200).send(setAckResponse(true));
 });
 
