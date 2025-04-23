@@ -1,2 +1,2 @@
 save-data:
-  payments: "$.message.order.payments"
+  payments: "$.message.order.payments[*]"

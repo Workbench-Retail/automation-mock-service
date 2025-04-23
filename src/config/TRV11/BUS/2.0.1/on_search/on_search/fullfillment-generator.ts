@@ -473,7 +473,7 @@ const exampleFullfillment = {
 					parent_stop_id: "32",
 				},
 				{
-					type: "TRANSIT_STOP",
+					type: "INTERMEDIATE_STOP",
 					instructions: {
 						name: "Stop 34",
 						short_desc: "Change for Rapid Metro",
@@ -531,7 +531,7 @@ const exampleFullfillment = {
 				},
 			],
 			vehicle: {
-				category: "METRO",
+				category: "BUS",
 			},
 			tags: [
 				{
@@ -545,12 +545,6 @@ const exampleFullfillment = {
 							},
 							value: "242",
 						},
-						{
-							descriptor: {
-								code: "ROUTE_NAME",
-							},
-							value: "Yellow Line",
-						},
 					],
 				},
 			],
@@ -563,7 +557,7 @@ export function createFullfillment(cityCode: string) {
 	let index = 1;
 	for (const full of fake) {
 		full.stops.forEach((stop: any) => {
-			stop.location.descriptor.code = `MOCK_STATION_${cityCode}_${index}`;
+			stop.location.descriptor.code = `MOCK_STATION_${index}`;
 			index++;
 		});
 	}

@@ -30,12 +30,13 @@ export interface SessionData {
 	error_code: string | undefined;
 	error_message: string | undefined;
 	ref_id: string | undefined;
-	ttl: string | undefined;
+	ttl: string;
 	usecaseId : string | undefined;
 	collected_by: string
 	price: string
 	payment_id: string
 	created_at: string
+	update_fulfillment: any[]
 }
 
 export type BecknContext = {

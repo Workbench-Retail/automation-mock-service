@@ -1,11 +1,11 @@
 message:
-  update_target: order.billing
+  update_target: order.fulfillments
   order:
     id: O1
-    billing:
-      name: John Doe
-      email: john_doe@example.com
-      phone: +91-9897867564
-
-
-
+    fulfillments:
+      - id: F5
+        vehicle:
+          registration: GL90
+      - id: F6
+        vehicle:
+          registration: GL90

@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import logger from "../utils/logger";
-import { getMockResponseMetaData } from "../services/mock-services";
+// import { getMockResponseMetaData } from "../services/mock-services";
 import { saveData } from "../services/data-services";
 import { ApiRequest } from "../routes/manual";
 
@@ -18,7 +18,8 @@ export async function saveDataMiddleware(
 	try {
 		const action = req.params.action;
 		const body = req.body;
-		await saveData(action, body, req.l2Error);
+		const subscriber_url = action.includes("on_")?body.context.bpp_uri : body.context.bap_uri
+		await saveData(action, body,subscriber_url, req.l2Error);
 		next();
 	} catch (err) {
 		logger.error("Error in saveDataMiddleware", err);

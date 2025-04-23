@@ -17,6 +17,8 @@ import { onSearch2Generator } from "./on_search/on_search2/generator";
 import { onStatusCompleteGenerator } from "./on_status/on_status_complete/generator";
 import { statusTechCancelGenerator } from "./status/status_tech_cancel/generator";
 import { onStatusActiveGenerator } from "./on_status/on_status_active/generator";
+import { cancelGenerator } from "./cancel/cancel_tech/generator";
+import { onCancelGenerator } from "./on_cancel/on_cancel/generator";
 
 export async function Generator(
 	action_id: string,
@@ -64,6 +66,10 @@ export async function Generator(
 			return await onCancelSoftGenerator(existingPayload, sessionData);
 		case "on_cancel_hard_METRO_200":
 			return await onCancelHardGenerator(existingPayload, sessionData);
+		case "cancel_tech_METRO_200":
+			return await cancelGenerator(existingPayload,sessionData)
+		case "on_cancel_METRO_200":
+			return await onCancelGenerator(existingPayload,sessionData)
 		default:
 			throw new Error(`Invalid request type ${action_id}`);
 	}

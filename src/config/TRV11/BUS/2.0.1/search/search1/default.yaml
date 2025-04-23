@@ -13,7 +13,7 @@ message:
       vehicle:
         category: BUS
     payment:
-      collected_by: BAP
+      collected_by: BPP
       tags:
         - descriptor:
             code: BUYER_FINDER_FEES
@@ -21,7 +21,7 @@ message:
           list:
             - descriptor:
                 code: BUYER_FINDER_FEES_PERCENTAGE
-              value: '1'
+              value: '3'
         - descriptor:
             code: SETTLEMENT_TERMS
           display: false

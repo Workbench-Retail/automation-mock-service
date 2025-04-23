@@ -76,23 +76,28 @@ function applyCancellation(quote: Quote, cancellationCharges: number): Quote {
       breakup: [...quote.breakup, ...refundBreakups, cancellationBreakup],
     };
   }
-export async function onUpdateAcceptedGenerator(existingPayload: any,sessionData: any){
-  if (sessionData.updated_payments.length > 0) {
-		existingPayload.message.order.payments = sessionData.updated_payments;
-	  }
-	
-	if (sessionData.items.length > 0) {
-	existingPayload.message.order.items = sessionData.items;
-	}
 
-	if (sessionData.fulfillments.length > 0) {
-	existingPayload.message.order.fulfillments = sessionData.fulfillments;
-	}
-	if (sessionData.order_id) {
-	existingPayload.message.order_id = sessionData.order_id;
-	}
-	if(sessionData.quote != null){
-	existingPayload.message.order.quote = applyCancellation(sessionData.quote,15)
-	}
+
+  export async function onCancelTechGenerator(existingPayload: any,sessionData: any){
+    if (sessionData.updated_payments.length > 0) {
+      existingPayload.message.order.payments = sessionData.updated_payments;
+      }
+    
+    if (sessionData.items.length > 0) {
+    existingPayload.message.order.items = sessionData.items;
+    }
+  
+    if (sessionData.fulfillments.length > 0) {
+    existingPayload.message.order.fulfillments = sessionData.fulfillments;
+    }
+    if (sessionData.order_id) {
+    existingPayload.message.order.id = sessionData.order_id;
+    }
+    if(sessionData.quote != null){
+    existingPayload.message.order.quote = applyCancellation(sessionData.quote,15)
+    }
+    const now = new Date().toISOString();
+    existingPayload.message.order.created_at = sessionData.created_at
+    existingPayload.message.order.updated_at = now
     return existingPayload;
 }

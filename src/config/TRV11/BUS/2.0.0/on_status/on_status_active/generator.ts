@@ -18,6 +18,12 @@ export async function onStatusActiveGenerator(existingPayload: any,sessionData: 
     if(sessionData.quote != null){
     existingPayload.message.order.quote = sessionData.quote
     }
+    if(sessionData.order_id != null){
+      existingPayload.message.order.id = sessionData.order_id
+    }
     existingPayload.message.order.status = "ACTIVE"
+    const now = new Date().toISOString();
+    existingPayload.message.order.created_at = sessionData.created_at
+    existingPayload.message.order.updated_at = now
     return existingPayload;
 }

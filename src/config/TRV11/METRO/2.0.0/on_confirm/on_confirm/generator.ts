@@ -96,6 +96,8 @@ export async function onConfirmGenerator(
 	existingPayload.message.order.quote = sessionData.quote
 	}
 	existingPayload.message.order.id = order_id;
-	existingPayload = updateOrderTimestamps(existingPayload)
+	const now = new Date().toISOString();
+    existingPayload.message.order.created_at = now
+    existingPayload.message.order.updated_at = now
 	return existingPayload;
 }

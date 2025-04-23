@@ -1,41 +1,60 @@
 import { SessionData } from "../../../session-types";
 
 const createQuoteFromItems = (items: any): any => {
-    let totalPrice = 0; // Initialize total price
+	let totalPrice = 0;
+	const currency = items[0]?.price.currency || "INR";
 
-    const breakup = items.map((item: any) => {
-        const itemTotalPrice =
-            Number(item.price.value) * item.quantity.selected.count; // Calculate item total price
-        totalPrice += itemTotalPrice; // Add to total price
+	const breakup = items.map((item: any) => {
+		const itemTotalPrice =
+			Number(item.price.value) * item.quantity.selected.count;
+		totalPrice += itemTotalPrice;
 
-        return {
-            title: "BASE_FARE",
-            item: {
-                id: item.id,
-                price: {
-                    currency: item.price.currency,
-                    value: item.price.value,
-                },
-                quantity: {
-                    selected: {
-                        count: item.quantity.selected.count,
-                    },
-                },
-            },
-            price: {
-                currency: item.price.currency,
-                value: itemTotalPrice.toFixed(2),
-            },
-        };
-    });
+		return {
+			title: "BASE_FARE",
+			item: {
+				id: item.id,
+				price: {
+					currency,
+					value: item.price.value,
+				},
+				quantity: {
+					selected: {
+						count: item.quantity.selected.count,
+					},
+				},
+			},
+			price: {
+				currency,
+				value: itemTotalPrice.toFixed(2),
+			},
+		};
+	});
 
-    return {
-        price: {
-            value: totalPrice.toFixed(2), // Total price as a string with two decimal places
-            currency: items[0]?.price.currency || "INR", // Use currency from the first item or default to "INR"
-        },
-        breakup,
-    };
+	// Add OFFER and TOLL to breakup
+	breakup.push(
+		{
+			title: "OFFER",
+			price: {
+				currency,
+				value: "0",
+			},
+		},
+		{
+			title: "TOLL",
+			price: {
+				currency,
+				value: "0",
+			},
+		}
+	);
+
+	return {
+		price: {
+			value: totalPrice.toFixed(2),
+			currency,
+		},
+		breakup,
+	};
 };
 
 function createAndAppendFulfillments(items: any[], fulfillments: any[]): void {

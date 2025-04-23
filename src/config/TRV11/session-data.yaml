@@ -35,3 +35,4 @@ session_data:
   price: null
   payment_id: null
   created_at: null
+  update_fulfillment: []
