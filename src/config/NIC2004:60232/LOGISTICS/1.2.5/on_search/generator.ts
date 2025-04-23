@@ -249,7 +249,7 @@ export async function onSearch1Generator(
       },
     ];
   }
-  if (inputs?.feature_discovery?.includes("01A")) {
+  if (inputs?.feature_discovery?.includes("017")) {
     existingPayload.message.catalog["bpp/providers"][0].items.push({
       id: "I3",
       parent_item_id: "",

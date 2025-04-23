@@ -1,5 +1,6 @@
 import { populateFulfillmentConfim } from "../common_generator";
 import { SessionData } from "../../../session-types";
+import { calculateQuotePrice } from "../../../../../utils/generic-utils";
 
 export const onConfirmGenerator = (
   existingPayload: any,
@@ -26,7 +27,8 @@ export const onConfirmGenerator = (
   existingPayload = populateFulfillmentConfim(existingPayload, sessionData);
 
   if (sessionData.cancellation_terms) {
-    existingPayload.message.order.cancellation_terms = sessionData.cancellation_terms;
+    existingPayload.message.order.cancellation_terms =
+      sessionData.cancellation_terms;
   }
   existingPayload.message.order.fulfillments =
     existingPayload.message.order.fulfillments.map((fulfillmet: any) => {
@@ -68,6 +70,10 @@ export const onConfirmGenerator = (
         },
       }
     );
+    existingPayload.message.order.quote.price = {
+      currency: "INR",
+      value: calculateQuotePrice(existingPayload.message.order.quote.breakup),
+    };
   }
 
   if (sessionData.payment) {
