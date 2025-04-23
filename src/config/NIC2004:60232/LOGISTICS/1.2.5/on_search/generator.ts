@@ -193,21 +193,28 @@ export async function onSearch1Generator(
       }
     );
 
-  if (sessionData?.is_cod === "yes") {
+  if (
+    sessionData?.is_cod === "yes" ||
+    inputs?.feature_discovery?.includes("017")
+  ) {
     const items = existingPayload.message.catalog["bpp/providers"][0].items;
-    items.forEach((item: { tags: { code: string; list: { code: string; value: string; }[]; }[]; }) => {
-      item.tags = [
-        {
-          code: "type",
-          list: [
-            {
-              code: "type",
-              value: "base",
-            },
-          ],
-        },
-      ];
-    });
+    items.forEach(
+      (item: {
+        tags: { code: string; list: { code: string; value: string }[] }[];
+      }) => {
+        item.tags = [
+          {
+            code: "type",
+            list: [
+              {
+                code: "type",
+                value: "base",
+              },
+            ],
+          },
+        ];
+      }
+    );
   }
   if (sessionData?.is_cod === "yes") {
     existingPayload.message.catalog["bpp/providers"][0].items.push({
@@ -276,18 +283,6 @@ export async function onSearch1Generator(
         },
       ],
     });
-
-    existingPayload.message.catalog["bpp/providers"][0].tags = [
-      {
-        code: "special_req",
-        list: [
-          {
-            code: "cod_order",
-            value: "yes",
-          },
-        ],
-      },
-    ];
   }
   if (inputs?.feature_discovery) {
     let codesArray = inputs.feature_discovery;

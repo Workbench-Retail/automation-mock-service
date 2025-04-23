@@ -28,6 +28,7 @@ export const initGenerator = async (
       let isBaseItem = false;
       let isCodTagPresent = false;
       let isRiderTagPresent = false;
+      let isSurgeTagPresent = false;
 
       if (item?.tags?.length) {
         item.tags[0].list.forEach((val: any) => {
@@ -36,6 +37,9 @@ export const initGenerator = async (
           }
           if (val.value === "cod") {
             isCodTagPresent = true;
+          }
+          if (val.value === "surge") {
+            isSurgeTagPresent = true;
           }
           if (val.value === "rider" || val.value === "order") {
             isRiderTagPresent = true;
@@ -47,7 +51,7 @@ export const initGenerator = async (
       // !rate_basis && !base > select with tag
       //
 
-      if (!isCodTagPresent && !isRiderTagPresent) {
+      if (!isCodTagPresent && !isRiderTagPresent && !isSurgeTagPresent) {
         existingPayload.message.order.items[0] = {
           id: item.id,
           fulfillment_id: sessionData?.rate_basis
