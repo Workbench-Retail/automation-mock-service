@@ -312,6 +312,9 @@ export const onStatusGenerator = async (
   existingPayload.message.order.updated_at = existingPayload.context.timestamp;
 
   existingPayload.message.order.quote = sessionData.quote;
+  if (sessionData.cancellation_terms) {
+    existingPayload.message.order.cancellation_terms = sessionData.cancellation_terms;
+  }
 
   if (sessionData.payment) {
     existingPayload.message.order.payment = sessionData.payment;

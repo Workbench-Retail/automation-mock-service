@@ -44,3 +44,6 @@ session_data:
   on_init_items: []
   retail_category: null
   collection_amount: null
+  feature_surge_fee: null
+  feature_cancellation_terms: null
+  cancellation_terms: []

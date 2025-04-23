@@ -56,6 +56,10 @@ export const confirmGenerator = (
     existingPayload.message.order.fulfillments = sessionData.fulfillments;
   }
 
+  if (sessionData.cancellation_terms) {
+    existingPayload.message.order.cancellation_terms =
+      sessionData.cancellation_terms;
+  }
   existingPayload.message.order.fulfillments[0].start.time = {
     duration: sessionData.on_search_fulfillment.start.time.duration,
   };

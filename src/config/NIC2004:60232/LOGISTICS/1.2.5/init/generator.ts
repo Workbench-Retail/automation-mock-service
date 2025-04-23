@@ -31,7 +31,7 @@ export const initGenerator = async (
 
       if (item?.tags?.length) {
         item.tags[0].list.forEach((val: any) => {
-          if (val.value === "base") {
+          if (val.value === "base" && item?.parent_item_id === "") {
             isBaseItem = true;
           }
           if (val.value === "cod") {

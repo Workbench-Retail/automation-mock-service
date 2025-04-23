@@ -194,19 +194,21 @@ export async function onSearch1Generator(
     );
 
   if (sessionData?.is_cod === "yes") {
-    existingPayload.message.catalog["bpp/providers"][0].items[0].tags = [
-      {
-        code: "type",
-        list: [
-          {
-            code: "type",
-            value: "base",
-          },
-        ],
-      },
-    ];
+    const items = existingPayload.message.catalog["bpp/providers"][0].items;
+    items.forEach((item: { tags: { code: string; list: { code: string; value: string; }[]; }[]; }) => {
+      item.tags = [
+        {
+          code: "type",
+          list: [
+            {
+              code: "type",
+              value: "base",
+            },
+          ],
+        },
+      ];
+    });
   }
-
   if (sessionData?.is_cod === "yes") {
     existingPayload.message.catalog["bpp/providers"][0].items.push({
       id: "C1",
@@ -247,7 +249,46 @@ export async function onSearch1Generator(
       },
     ];
   }
+  if (inputs?.feature_discovery?.includes("01A")) {
+    existingPayload.message.catalog["bpp/providers"][0].items.push({
+      id: "I3",
+      parent_item_id: "",
+      category_id: sessionData?.category_id,
+      fulfillment_id: "1",
+      descriptor: {
+        name: "Surge Fee",
+        short_desc: "Surge Fee",
+        long_desc: "Surge charges due to high demand",
+      },
+      price: {
+        currency: "INR",
+        value: "11.00",
+      },
+      tags: [
+        {
+          code: "type",
+          list: [
+            {
+              code: "type",
+              value: "surge",
+            },
+          ],
+        },
+      ],
+    });
 
+    existingPayload.message.catalog["bpp/providers"][0].tags = [
+      {
+        code: "special_req",
+        list: [
+          {
+            code: "cod_order",
+            value: "yes",
+          },
+        ],
+      },
+    ];
+  }
   if (inputs?.feature_discovery) {
     let codesArray = inputs.feature_discovery;
 

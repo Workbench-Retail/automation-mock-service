@@ -22,8 +22,12 @@ export const onConfirmGenerator = (
   if (sessionData?.fulfillments) {
     existingPayload.message.order.fulfillments = sessionData.fulfillments;
   }
+
   existingPayload = populateFulfillmentConfim(existingPayload, sessionData);
 
+  if (sessionData.cancellation_terms) {
+    existingPayload.message.order.cancellation_terms = sessionData.cancellation_terms;
+  }
   existingPayload.message.order.fulfillments =
     existingPayload.message.order.fulfillments.map((fulfillmet: any) => {
       fulfillmet.state = {
@@ -45,6 +49,26 @@ export const onConfirmGenerator = (
     });
 
   existingPayload.message.order.quote = sessionData.quote;
+  if (sessionData?.feature_surge_fee === "yes") {
+    existingPayload.message.order.quote.breakup.push(
+      {
+        "@ondc/org/item_id": "I3",
+        "@ondc/org/title_type": "surge",
+        price: {
+          currency: "INR",
+          value: "9.00",
+        },
+      },
+      {
+        "@ondc/org/item_id": "I3",
+        "@ondc/org/title_type": "tax",
+        price: {
+          currency: "INR",
+          value: "2.00",
+        },
+      }
+    );
+  }
 
   if (sessionData.payment) {
     existingPayload.message.order.payment = sessionData.payment;
@@ -59,7 +83,7 @@ export const onConfirmGenerator = (
       transaction_id: "txn1234",
       amount: existingPayload.message.order.quote.price.value,
     };
-    existingPayload.message.order.payment.status === 'PAID';
+    existingPayload.message.order.payment.status === "PAID";
     existingPayload.message.order.payment.tags = [
       {
         code: "wallet_balance",

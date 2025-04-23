@@ -197,7 +197,10 @@ export const onCancelGenerator = (
   if (sessionData.payment) {
     existingPayload.message.order.payment = sessionData.payment;
   }
-
+  if (sessionData.cancellation_terms) {
+    existingPayload.message.order.cancellation_terms =
+      sessionData.cancellation_terms;
+  }
   if (sessionData.linked_order) {
     existingPayload.message.order["@ondc/org/linked_order"] =
       sessionData.linked_order;

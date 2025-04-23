@@ -119,7 +119,9 @@ export const onUpdate1Generator = (
       },
     },
   ];
-
+  if (sessionData.cancellation_terms) {
+    existingPayload.message.order.cancellation_terms = sessionData.cancellation_terms;
+  }
   existingPayload.message.order.quote.price = {
     currency: "INR",
     value: calculateQuotePrice(existingPayload.message.order.quote.breakup),

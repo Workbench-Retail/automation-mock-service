@@ -4,3 +4,4 @@ save-data:
   quote: "$.message.order.quote"
   payment: "$.message.order.payment"
   on_init_items: "$.message.order.items[*]"
+  cancellation_terms: "$.message.order.cancellation_terms"

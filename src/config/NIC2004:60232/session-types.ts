@@ -52,6 +52,9 @@ export interface SessionData {
   on_init_items?: any[];
   retail_category?: string;
   collection_amount: string;
+  feature_surge_fee: string;
+  feature_cancellation_terms: string;
+  cancellation_terms: any[];
 }
 
 export type BecknContext = {

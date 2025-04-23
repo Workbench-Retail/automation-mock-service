@@ -66,6 +66,49 @@ export const onInitGenerator = (
     ttl: "PT15M",
   };
 
+  if (sessionData?.feature_cancellation_terms === "yes") {
+    existingPayload.message.order.cancellation_terms = [
+      {
+        fulfillment_state: {
+          descriptor: {
+            code: "Pending",
+            short_desc: sessionData?.domain === "ONDC:LOG10" ? "132" : "203",
+          },
+        },
+        cancellation_fee: {
+          percentage: "0.00",
+        },
+      },
+      {
+        fulfillment_state: {
+          descriptor: {
+            code: "Agent-assigned",
+            short_desc:
+              sessionData?.domain === "ONDC:LOG10"
+                ? "102,103,105"
+                : "201,202,203",
+          },
+        },
+        cancellation_fee: {
+          percentage: "100.00",
+        },
+      },
+      {
+        fulfillment_state: {
+          descriptor: {
+            code: "Order-picked-up",
+            short_desc:
+              sessionData?.domain === "ONDC:LOG10"
+                ? "125,126,127,128"
+                : "225,226,227,228",
+          },
+        },
+        cancellation_fee: {
+          percentage: "100.00",
+        },
+      },
+    ];
+  }
   existingPayload.message.order.quote.price = {
     currency: "INR",
     value: calculateQuotePrice(existingPayload.message.order.quote.breakup),
