@@ -1,6 +1,6 @@
-import payloadUtils from "../../../../../utils/payload-utils";
+import { SessionData } from "../../../session-types";
 
-function injectTicketFulfillments(payload: any, sessionData: any) {
+function injectTicketFulfillments(payload: any, sessionData: SessionData) {
     const ticketFulfillments =
       sessionData.fulfillments?.filter((f: any) => f?.type === "PASS") || [];
   

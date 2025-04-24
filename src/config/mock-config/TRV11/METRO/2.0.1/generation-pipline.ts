@@ -5,7 +5,8 @@ import path from "path";
 import { error } from "console";
 import { SessionData } from "../../session-types";
 import { Generator } from "../2.0.1/api-factory";
-import logger from "../../../../utils/logger";
+import logger from "../../../../../utils/logger";
+
 function yamlToJson(filePath: string): object {
   try {
     // Read the YAML file contents
@@ -88,7 +89,7 @@ export async function createMockResponseMETRO201(
     path.resolve(__dirname, `../../${api_details.default}`)
   );
   const payload: any = {
-    context: { ...context },
+    context: context,
     ...default_message,
   };
   if (sessionData.error_code && sessionData.error_message) {

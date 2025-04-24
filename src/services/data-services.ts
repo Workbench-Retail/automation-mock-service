@@ -10,44 +10,66 @@ import {
 	getSaveDataContent,
 	MockSessionData,
 } from "../config/mock-config";
+import { SessionData } from "../config/mock-config/TRV11/session-types";
 
 export function updateSessionData(
-	saveData: Record<string, string>,
+	saveData: Record<
+	  string,
+	  string | { path: string; mode?: "append" | "override" }
+	>,
 	payload: any,
-	sessionData: MockSessionData,
+	sessionData: SessionData,
 	errorData?: {
-		code: number;
-		message: string;
+	  code: number;
+	  message: string;
 	}
-) {
+  ) {
 	logger.info(`updating session`);
 	try {
-		for (const key in saveData) {
-			const jsonPath = saveData[key as keyof typeof saveData];
-			const result = jsonpath.query(payload, jsonPath);
-			logger.debug(`updating ${key} for path $${jsonPath}`);
-			if (
-				isArrayKey<MockSessionData>(
-					key as keyof typeof sessionData,
-					sessionData
-				)
-			) {
-				sessionData[key as keyof typeof sessionData] = result;
-			} else {
-				sessionData[key as keyof typeof sessionData] = result[0];
-			}
-		}
-		if (errorData) {
-			sessionData.error_code = errorData.code.toString();
-			sessionData.error_message = errorData.message;
+	  for (const key in saveData) {
+		const entry = saveData[key];
+		let jsonPath: string;
+		let mode: "append" | "override" = "override"; // default mode
+  
+		// Support legacy string format
+		if (typeof entry === "string") {
+		  jsonPath = entry;
 		} else {
-			sessionData.error_code = undefined;
-			sessionData.error_message = undefined;
+		  jsonPath = entry.path;
+		  mode = entry.mode ?? "override";
 		}
+  
+		const result = jsonpath.query(payload, jsonPath);
+		logger.debug(`updating ${key} for path ${jsonPath} with mode ${mode}`);
+  
+		if (mode === "append") {
+		  const existing = sessionData[key as keyof SessionData] || [];
+		  if (!Array.isArray(existing)) {
+			logger.warn(`Expected array for ${key}, found: ${typeof existing}`);
+			sessionData[key as keyof SessionData] = result;
+			continue;
+		  }
+		  sessionData[key as keyof SessionData] = existing.concat(result);
+		} else {
+		  if (isArrayKey<SessionData>(key as keyof SessionData, sessionData)) {
+			sessionData[key as keyof SessionData] = result;
+		  } else {
+			sessionData[key as keyof SessionData] = result[0];
+		  }
+		}
+	  }
+  
+	  if (errorData) {
+		sessionData.error_code = errorData.code.toString();
+		sessionData.error_message = errorData.message;
+	  } else {
+		sessionData.error_code = undefined;
+		sessionData.error_message = undefined;
+	  }
 	} catch (e) {
-		logger.error("Error in updating session data", e);
+	  logger.error("Error in updating session data", e);
 	}
-}
+  }
 function yamlToJson(filePath: string): object {
 	try {
 		const fileContents = fs.readFileSync(filePath, "utf8");
@@ -61,7 +83,7 @@ function yamlToJson(filePath: string): object {
 export async function saveData(
 	action: string,
 	payload: any,
-	subscriber_url?: string,
+	subscriber_url: string,
 	errorData?: {
 		code: number;
 		message: string;
@@ -69,7 +91,8 @@ export async function saveData(
 ) {
 	try {
 		const sessionData = await loadMockSessionData(
-			payload?.context.transaction_id
+			`MOCK_${payload?.context.transaction_id}::${subscriber_url}`,
+			subscriber_url
 		);
 		const saveData = getSaveDataContent(payload.context.version, action);
 		updateSessionData(saveData["save-data"], payload, sessionData, errorData);
@@ -85,9 +108,10 @@ export async function saveData(
 
 export async function loadMockSessionData(
 	transactionID: string,
-	subscriber_url?: string
+	subscriber_url: string
 ) {
-	const keyExists = await RedisService.keyExists(transactionID);
+	const key = `MOCK_${transactionID}::${subscriber_url}`
+	const keyExists = await RedisService.keyExists(key);
 	let sessionData: MockSessionData = {} as MockSessionData;
 	if (!keyExists) {
 		const raw = defaultSessionData;
@@ -100,7 +124,9 @@ export async function loadMockSessionData(
 		logger.info(`new session data is ${JSON.stringify(sessionData)}`);
 		return sessionData;
 	} else {
-		const rawData = await RedisService.getKey(transactionID);
+		const rawData = await RedisService.getKey(
+			`MOCK_${transactionID}::${subscriber_url}`
+		  );
 		logger.info(`loading session data for ${transactionID}`);
 		const sessionData = JSON.parse(rawData ?? "{}") as MockSessionData;
 		return sessionData;

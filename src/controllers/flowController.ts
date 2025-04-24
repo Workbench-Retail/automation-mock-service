@@ -214,19 +214,19 @@ export async function ActUponFlow(req: ApiRequest, res: Response) {
 			return;
 		}
 
-		const flowStatus = await getFlowStatusService(txId, subscriberUrl);
-		if (flowStatus.status === "SUSPENDED") {
-			logger.info("Flow is suspended, not proceeding");
-			res.status(200).send({ message: "Flow is suspended, not proceeding" });
-			return;
-		}
-		if (flowStatus.status === "WORKING") {
-			logger.info("Flow is already in progress, not proceeding");
-			res.status(200).send({
-				message: "a flow response is already in progress, wait and try again!",
-			});
-			return;
-		}
+		// const flowStatus = await getFlowStatusService(txId, subscriberUrl);
+		// if (flowStatus.status === "SUSPENDED") {
+		// 	logger.info("Flow is suspended, not proceeding");
+		// 	res.status(200).send({ message: "Flow is suspended, not proceeding" });
+		// 	return;
+		// }
+		// if (flowStatus.status === "WORKING") {
+		// 	logger.info("Flow is already in progress, not proceeding");
+		// 	res.status(200).send({
+		// 		message: "a flow response is already in progress, wait and try again!",
+		// 	});
+		// 	return;
+		// }
 		await setFlowStatusService(txId, subscriberUrl, "WORKING");
 		const latestMeta = getNextActionMetaData(txData, flow);
 		if (!latestMeta) {
