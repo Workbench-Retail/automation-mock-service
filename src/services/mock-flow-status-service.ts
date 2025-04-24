@@ -12,7 +12,9 @@ export function createFlowStatusCacheKey(
 	transactionId: string,
 	subscriberUrl: string
 ) {
-	return `FLOW_STATUS_${transactionId}::${subscriberUrl}`;
+	const key = `FLOW_STATUS_${transactionId}::${subscriberUrl}`;
+	console.log(key);
+	return key;
 }
 
 export async function getFlowStatusService(

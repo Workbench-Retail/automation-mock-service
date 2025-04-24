@@ -233,7 +233,6 @@ export async function ActUponFlow(req: ApiRequest, res: Response) {
 			});
 			return;
 		}
-		await setFlowStatusService(txId, subscriberUrl, "WORKING");
 		const latestMeta = getNextActionMetaData(txData, flow, flowStatus.status);
 		if (!latestMeta) {
 			logger.info("Mock response is not required");
@@ -273,6 +272,7 @@ export async function ActUponFlow(req: ApiRequest, res: Response) {
 			}
 
 			const action = latestMeta.actionType;
+			await setFlowStatusService(txId, subscriberUrl, "WORKING");
 			await sendToApiService(action, mockResponse, {
 				subscriber_url: subscriberUrl,
 				flow_id: flow.id,
