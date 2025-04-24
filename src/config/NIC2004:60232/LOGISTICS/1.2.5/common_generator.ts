@@ -24,7 +24,7 @@ export const populateFulfillmentUpdate = (
 
       if (isReadyToShip) {
         if (!sessionData?.rate_basis) {
-          fulfillment.state.descriptor.code = "Searching-for-agent";
+          fulfillment.state.descriptor.code = "Searching-for-Agent";
         }
 
         if (!fulfillment.start?.time?.range) {
@@ -89,13 +89,13 @@ export const populateFulfillmentConfim = (
             start: existingPayload.context.timestamp,
             end: getTimestampFromDuration(
               existingPayload.context.timestamp,
-              sessionData?.tat || "P1D"
+              fulfillment?.start?.time?.duration || "P1D"
             ),
           };
 
           fulfillment.end.time = {
             range: {
-              start: existingPayload.context.timestamp,
+              start: fulfillment?.start?.time?.range?.end,
               end: getTimestampFromDuration(
                 existingPayload.context.timestamp,
                 sessionData?.tat || "P1D"
