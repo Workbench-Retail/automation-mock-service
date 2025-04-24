@@ -2,7 +2,7 @@ import { RedisService } from "ondc-automation-cache-lib";
 import logger from "../utils/logger";
 
 // key : FLOW_STATUS_{transaction_id}::{subscriber_url}::{flow_id}
-type MockStatusCode = "WORKING" | "AVAILABLE" | "SUSPENDED";
+export type MockStatusCode = "WORKING" | "AVAILABLE" | "SUSPENDED";
 type MockFlowStatusCache = {
 	// targetedAction: string;
 	status: MockStatusCode;
