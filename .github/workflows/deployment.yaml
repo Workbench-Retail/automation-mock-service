@@ -25,6 +25,7 @@ jobs:
 
           ssh -i ./key.pem ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} -T <<EOF
           REPO_DIR=~/ONDC-automation-framework/mock/automation-mock-service-${{ github.ref_name }}
+          REPO_DIR=~/ONDC-automation-framework/mock/automation-mock-service-${{ github.ref_name }}
           echo "Removing existing repository directory if exists"
           rm -rf \$REPO_DIR
           echo "Cloning repository from the relevant branch"
