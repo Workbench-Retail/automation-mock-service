@@ -70,7 +70,8 @@ export async function saveData(
 		const sessionData = await loadMockSessionData(
 			payload?.context.transaction_id
 		);
-		const saveData = getSaveDataContent(payload.context.version, action);
+		const saveData = getSaveDataContent(payload?.context?.version
+			|| payload?.context?.core_version, action);
 		updateSessionData(saveData["save-data"], payload, sessionData, errorData);
 		await RedisService.setKey(
 			payload?.context.transaction_id,
