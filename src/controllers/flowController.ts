@@ -187,12 +187,18 @@ export async function getFlowStatus(req: ApiRequest, res: Response) {
 		logger.info(
 			`Fetching flow status for transactionId: ${transactionId} sessionId: ${sessionId}`
 		);
-		const { transactionData, flow } = await getFlowInfo(
+		const { transactionData, sessionData, flow } = await getFlowInfo(
 			transactionId,
+
 			sessionId
 		);
-
-		res.status(200).send(getFlowCompleteStatus(transactionData, flow));
+		const flowStatus = await getFlowStatusService(
+			transactionId,
+			sessionData.subscriberUrl
+		);
+		res
+			.status(200)
+			.send(getFlowCompleteStatus(transactionData, flow, flowStatus.status));
 	} catch (err) {
 		logger.error("Error in fetching flow status", err);
 		res.status(500).send("Error in fetching flow status");
@@ -228,7 +234,7 @@ export async function ActUponFlow(req: ApiRequest, res: Response) {
 			return;
 		}
 		await setFlowStatusService(txId, subscriberUrl, "WORKING");
-		const latestMeta = getNextActionMetaData(txData, flow);
+		const latestMeta = getNextActionMetaData(txData, flow, flowStatus.status);
 		if (!latestMeta) {
 			logger.info("Mock response is not required");
 			res.status(200).send("Mock response is not required flow is complete");

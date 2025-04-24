@@ -1,12 +1,14 @@
 import { Flow } from "../types/flow-types";
 import { FlowMap, MappedStep, ReducedApiData } from "../types/mapped-flow";
 import { ApiData, TransactionCache } from "../types/transaction-cache";
+import { MockStatusCode } from "./mock-flow-status-service";
 
 export function getNextActionMetaData(
 	transactionData: TransactionCache,
-	flow: Flow
+	flow: Flow,
+	flowStatus: MockStatusCode
 ) {
-	const flowDetails = getFlowCompleteStatus(transactionData, flow);
+	const flowDetails = getFlowCompleteStatus(transactionData, flow, flowStatus);
 	const latestApi = flowDetails.sequence.find((s) =>
 		["LISTENING", "RESPONDING", "INPUT-REQUIRED"].includes(s.status)
 	);
@@ -15,7 +17,8 @@ export function getNextActionMetaData(
 
 export function getFlowCompleteStatus(
 	transactionData: TransactionCache,
-	flow: Flow
+	flow: Flow,
+	flowStatus: MockStatusCode
 ) {
 	const apiList = reduceApiDataList(transactionData.apiList).sort(
 		(a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
@@ -103,13 +106,15 @@ export function getFlowCompleteStatus(
 				if (item.input) {
 					mappedFlow.sequence.push({
 						...base,
-						status: "INPUT-REQUIRED",
+						status:
+							flowStatus === "AVAILABLE" ? "INPUT-REQUIRED" : "RESPONDING",
 					});
 				} else {
 					if (item.unsolicited) {
 						mappedFlow.sequence.push({
 							...base,
-							status: "INPUT-REQUIRED",
+							status:
+								flowStatus === "AVAILABLE" ? "INPUT-REQUIRED" : "RESPONDING",
 							input: [],
 						});
 					}
