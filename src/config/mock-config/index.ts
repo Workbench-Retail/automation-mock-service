@@ -8,46 +8,47 @@ import { SessionData as MockSessionData } from "./NIC2004:60232/session-types";
 export { MockSessionData };
 
 const actionConfig = yaml.load(
-	readFileSync(path.join(__dirname, "./NIC2004:60232/factory.yaml"), "utf8")
+  readFileSync(path.join(__dirname, "./NIC2004:60232/factory.yaml"), "utf8")
 ) as any;
 
 export const defaultSessionData = yaml.load(
-	readFileSync(path.join(__dirname, "./NIC2004:60232/session-data.yaml"), "utf8")
+  readFileSync(
+    path.join(__dirname, "./NIC2004:60232/session-data.yaml"),
+    "utf8"
+  )
 ) as { session_data: MockSessionData };
 
 export async function generateMockResponse(
-	session_id: string,
-	sessionData: any,
-	action_id: string,
-	input?: any
+  session_id: string,
+  sessionData: any,
+  action_id: string,
+  input?: any
 ) {
-	try {
-		return await createMockResponse(session_id, sessionData, action_id, input);
-	} catch (e) {
-		logger.error("Error in generating mock response", e);
-		throw e;
-	}
+  try {
+    return await createMockResponse(session_id, sessionData, action_id, input);
+  } catch (e) {
+    logger.error("Error in generating mock response", e);
+    throw e;
+  }
 }
 
 export function getActionData(code: number) {
-	const actionData = actionConfig.codes.find(
-		(action: any) => action.code === code
-	);
-	if (actionData) {
-		return actionData;
-	}
-	throw new Error(`Action code ${code} not found`);
+  const actionData = actionConfig.codes.find(
+    (action: any) => action.code === code
+  );
+  if (actionData) {
+    return actionData;
+  }
+  throw new Error(`Action code ${code} not found`);
 }
 
 export function getSaveDataContent(version: string, action: string) {
-	let actionFolderPath = path.resolve(
-		__dirname,
-		`./NIC2004:60232/LOGISTICS/${version}/${action}`
-	);
-	if (/\/update$/.test(actionFolderPath)) {
-		actionFolderPath += "_";
-	}
-	const saveDataFilePath = path.join(actionFolderPath, "save-data.yaml");
-	const fileContent = readFileSync(saveDataFilePath, "utf8");
-	return yaml.load(fileContent) as any;
+  let actionFolderPath = path.resolve(
+    __dirname,
+    `./NIC2004:60232/LOGISTICS/${version}/${action}`
+  );
+
+  const saveDataFilePath = path.join(actionFolderPath, "save-data.yaml");
+  const fileContent = readFileSync(saveDataFilePath, "utf8");
+  return yaml.load(fileContent) as any;
 }
