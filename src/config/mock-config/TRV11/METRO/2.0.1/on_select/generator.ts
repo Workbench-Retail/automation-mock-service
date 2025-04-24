@@ -40,13 +40,13 @@ const createQuoteFromItems = (items: any): any => {
 
 function createAndAppendFulfillments(items: any[], fulfillments: any[]): void {
 	items.forEach((item) => {
+
 		// item.fulfillment_ids =
 		item.fulfillment_ids.forEach((parentFulfillmentId: string) => {
 			// Get the parent fulfillment object from the fulfillments array
 			const parentFulfillment = fulfillments.find(
 				(f) => f.id === parentFulfillmentId
 			);
-
 			if (parentFulfillment) {
 				// Get the quantity based on the selected count
 				const quantity = item.quantity.selected.count;

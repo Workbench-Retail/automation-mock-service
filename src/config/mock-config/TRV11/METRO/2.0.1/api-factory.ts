@@ -22,6 +22,7 @@ import { statusTechCancelGenerator } from "./status/status_tech_cancel/generator
 import { onUpdateAcceptedGenerator } from "./on_update/on_update_accepted/generator";
 import { onStatusActiveGenerator } from "./on_status/on_status_active/generator";
 import { onStatusCancelGenerator } from "./on_status/on_status_cancelled/generator";
+import { cancelTechGenerator } from "./cancel/cancel_tech/generator";
 
 export async function Generator(
 	action_id: string,
@@ -77,6 +78,8 @@ export async function Generator(
 			return await onCancelInitGenerator(existingPayload, sessionData);
 		case "on_update_accepted_METRO_201":
 			return await onUpdateAcceptedGenerator(existingPayload,sessionData)
+		case "cancel_tech_METRO_201":
+			return await cancelTechGenerator(existingPayload,sessionData)
 		default:
 			throw new Error(`Invalid request type ${action_id}`);
 	}

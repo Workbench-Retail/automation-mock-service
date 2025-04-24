@@ -1,8 +1,8 @@
 
 
 export async function statusGenerator(existingPayload: any,sessionData: any){
-    if(sessionData.order_id){
-        existingPayload.message.order_id = sessionData.order_id
+    if(sessionData.transaction_id){
+        existingPayload.message.ref_id = sessionData.transaction_id
     }
     return existingPayload;
 }

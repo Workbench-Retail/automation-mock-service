@@ -1,6 +1,20 @@
 import { randomBytes } from "crypto";
 import { SessionData } from "../../../../session-types";
-
+function enhancePayments(payments:any) {
+	const additionalParams = {
+	  bank_code: "XXXXXXXX",
+	  bank_account_number: "xxxxxxxxxxxxxx",
+	  virtual_payment_address: "9988199772@okicic"
+	};
+  
+	return payments.map((payment:any) => ({
+	  ...payment,
+	  params: {
+		...payment.params,
+		...additionalParams
+	  }
+	}));
+  }
 function generateQrToken(): string {
 	return randomBytes(32).toString("base64");
 }
@@ -18,6 +32,9 @@ function updateFulfillmentsWithParentInfo(fulfillments: any[]): void {
 
 	fulfillments.forEach((fulfillment) => {
 		// Generate a random QR token
+		if(fulfillment.type === "TRIP"){
+			return
+		}
 		const qrToken = generateQrToken();
 
 		// Ensure stops array exists
@@ -73,15 +90,8 @@ export async function onConfirmGenerator(
 ) {
 	const randomId = Math.random().toString(36).substring(2, 15);
 	const order_id = randomId;
-	sessionData["updated_payments"][0]["params"]["bank_code"] = "XXXXXXXX";
-	sessionData["updated_payments"][0]["params"]["bank_account_number"] =
-		"xxxxxxxxxxxxxx";
-	const updated_payments = sessionData.updated_payments;
-	if (!Array.isArray(sessionData.updated_payments)) {
-		sessionData.updated_payments = [sessionData.updated_payments];
-	}
+	existingPayload.message.order.payments = enhancePayments(sessionData.updated_payments)
 	updateFulfillmentsWithParentInfo(sessionData.fulfillments);
-	existingPayload.message.order.payments = updated_payments;
 	
 	  // Check if items is a non-empty array
 	if (sessionData.items.length > 0) {
@@ -99,3 +109,4 @@ export async function onConfirmGenerator(
 	existingPayload = updateOrderTimestamps(existingPayload)
 	return existingPayload;
 }
+

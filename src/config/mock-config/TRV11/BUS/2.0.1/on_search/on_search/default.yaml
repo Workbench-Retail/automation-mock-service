@@ -166,25 +166,6 @@ message:
                   - descriptor:
                       code: RESTRICTION_PROOF
                     value: GOVERMENT_ID
-          - id: I7
-            descriptor:
-              name: Journey Pass
-              code: PASS
-              images:
-                - url: >-
-                    https://dtc.delhi.gov.in/sites/default/files/DTC/logo/dtc_logo_2.png
-                  size_type: xs
-            fulfillment_ids:
-              - F1
-              - F3
-            price:
-              currency: INR
-              value: '350'
-            quantity:
-              maximum:
-                count: 1
-              minimum:
-                count: 1
         fulfillments:
           - id: F1
             type: TRIP

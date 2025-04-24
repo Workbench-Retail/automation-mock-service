@@ -24,7 +24,6 @@
 // 		logger.error("Error in initAsyncMiddleware", err);
 // 	}
 // }
-
 // async function sendResponse(body: any) {
 // 	try {
 // 		// ! check l2 error here
