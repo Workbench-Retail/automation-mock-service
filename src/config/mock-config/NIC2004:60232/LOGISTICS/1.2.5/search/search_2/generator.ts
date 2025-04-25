@@ -2,11 +2,11 @@ import {
   getFutureDate,
   TatMapping,
 } from "../../../../../../../utils/generic-utils";
-import { Input } from "../../../../session-types";
+import { Input, SessionData } from "../../../../session-types";
 
 export async function search2Generator(
   existingPayload: any,
-  sessionData: any,
+  sessionData: SessionData,
   inputs: Input | undefined
 ) {
   existingPayload.message.intent.provider.time.schedule.holidays = [

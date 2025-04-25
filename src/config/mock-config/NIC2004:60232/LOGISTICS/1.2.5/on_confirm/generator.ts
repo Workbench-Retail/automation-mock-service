@@ -24,8 +24,6 @@ export const onConfirmGenerator = (
     existingPayload.message.order.fulfillments = sessionData.fulfillments;
   }
 
-  existingPayload = populateFulfillmentConfim(existingPayload, sessionData);
-
   if (sessionData.cancellation_terms) {
     existingPayload.message.order.cancellation_terms =
       sessionData.cancellation_terms;
@@ -49,7 +47,7 @@ export const onConfirmGenerator = (
 
       return fulfillmet;
     });
-
+  existingPayload = populateFulfillmentConfim(existingPayload, sessionData);
   existingPayload.message.order.quote = sessionData.quote;
   if (sessionData?.feature_surge_fee === "yes") {
     existingPayload.message.order.quote.breakup.push(

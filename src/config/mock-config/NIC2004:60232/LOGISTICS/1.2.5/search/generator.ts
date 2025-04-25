@@ -10,6 +10,8 @@ export async function searchGenerator(
   sessionData: SessionData,
   inputs: Input | undefined
 ) {
+  console.log("inside search generator");
+  
   existingPayload.message.intent.provider.time.schedule.holidays = [
     getFutureDate(10),
     getFutureDate(15),
@@ -49,6 +51,8 @@ export async function searchGenerator(
   }
 
   if (inputs?.category) {
+    console.log("inside prep time");
+    
     existingPayload.message.intent.provider.time.duration =
       TatMapping[inputs?.category].orderPrepTime;
   }

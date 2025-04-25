@@ -24,9 +24,16 @@ export async function Generator(
   inputs?: Record<string, string>
 ) {
   console.log("inside generator");
+
   switch (action_id) {
     case "search_LOGISTICS":
       return await searchGenerator(existingPayload, sessionData, inputs);
+    case "search_1_LOGISITCS":
+      return await search1Generator(existingPayload, sessionData, inputs);
+    case "search_2_LOGISITCS":
+      return await search2Generator(existingPayload, sessionData, inputs);
+    case "search_3_LOGISITCS":
+      return await search3Generator(existingPayload, sessionData, inputs);
     case "init_LOGISTICS":
       return await initGenerator(existingPayload, sessionData);
     case "confirm_LOGISTICS":
@@ -102,28 +109,22 @@ export async function Generator(
         ...sessionData,
         stateCode: "Agent-assigned",
       });
-      case "on_status_12_LOGISTICS":
-        return await onStatusGenerator(existingPayload, {
-          ...sessionData,
-          stateCode: "At-delivery",
-        });
-      case "on_status_13_LOGISTICS":
-        return await onStatusGenerator(existingPayload, {
-          ...sessionData,
-          stateCode: "Agent-assigned",
-        });
+    case "on_status_12_LOGISTICS":
+      return await onStatusGenerator(existingPayload, {
+        ...sessionData,
+        stateCode: "At-delivery",
+      });
+    case "on_status_13_LOGISTICS":
+      return await onStatusGenerator(existingPayload, {
+        ...sessionData,
+        stateCode: "Agent-assigned",
+      });
     case "on_track_LOGISTICS":
       return await onTrackGenerator(existingPayload, sessionData);
     case "on_cancel_LOGISTICS":
       return await onCancelGenerator(existingPayload, sessionData);
     case "status_LOGISTICS":
       return await statusGenerator(existingPayload, sessionData);
-    case "search_1_LOGISITCS":
-      return await search1Generator(existingPayload, sessionData, inputs);
-    case "search_2_LOGISITCS":
-      return await search2Generator(existingPayload, sessionData, inputs);
-    case "search_3_LOGISITCS":
-      return await search3Generator(existingPayload, sessionData, inputs);
     case "on_update_1_LOGISTICS":
       return await onUpdate1Generator(existingPayload, sessionData);
     default:

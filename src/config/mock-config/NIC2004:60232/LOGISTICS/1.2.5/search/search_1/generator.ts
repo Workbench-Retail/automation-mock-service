@@ -2,18 +2,21 @@ import {
   getFutureDate,
   TatMapping,
 } from "../../../../../../../utils/generic-utils";
-import { Input } from "../../../../session-types";
+import { Input, SessionData } from "../../../../session-types";
 
 export async function search1Generator(
   existingPayload: any,
-  sessionData: any,
+  sessionData: SessionData,
   inputs: Input | undefined
 ) {
+  console.log("inside search1 generator");
   existingPayload.message.intent.provider.time.schedule.holidays = [
     getFutureDate(10),
     getFutureDate(15),
   ];
   if (inputs?.category) {
+    console.log("inside prep time");
+    
     existingPayload.message.intent.provider.time.duration =
       TatMapping[inputs?.category].orderPrepTime;
   }
