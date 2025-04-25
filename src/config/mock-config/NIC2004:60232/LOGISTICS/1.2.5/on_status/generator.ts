@@ -155,6 +155,12 @@ export const onStatusGenerator = async (
             fulfillment.state.descriptor.code = fulfillmentState;
             fulfillment.end = {
               time: { timestamp: existingPayload.context.timestamp },
+              ...(sessionData?.rto_verification_code && {
+                instructions: {
+                  code: "5",
+                  short_desc: sessionData.rto_verification_code,
+                },
+              }),
             };
           }
           return fulfillment;

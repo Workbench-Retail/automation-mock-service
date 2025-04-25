@@ -10,3 +10,4 @@ save-data:
   quote: "$.message.order.quote"
   payment: "$.message.order.payment"
   linked_order: $.message.order["@ondc/org/linked_order"]
+  rto_verification_code: $.message.order.fulfillments[*].tags[?(@.code=="rto_verification")].list[?(@.code=="short_desc")].value
