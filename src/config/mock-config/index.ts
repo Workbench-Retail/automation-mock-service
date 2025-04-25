@@ -28,7 +28,7 @@ export async function generateMockResponse(
     return await createMockResponse(session_id, sessionData, action_id, input);
   } catch (e) {
     logger.error("Error in generating mock response", e);
-    throw e;
+    // throw e;
   }
 }
 

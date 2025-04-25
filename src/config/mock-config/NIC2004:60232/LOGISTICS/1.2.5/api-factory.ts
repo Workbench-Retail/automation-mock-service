@@ -30,9 +30,9 @@ export async function Generator(
       return await searchGenerator(existingPayload, sessionData, inputs);
     case "search_1_LOGISITCS":
       return await search1Generator(existingPayload, sessionData, inputs);
-    case "search_2_LOGISITCS":
+    case "search_2_LOGISTICS":
       return await search2Generator(existingPayload, sessionData, inputs);
-    case "search_3_LOGISITCS":
+    case "search_3_LOGISTICS":
       return await search3Generator(existingPayload, sessionData, inputs);
     case "init_LOGISTICS":
       return await initGenerator(existingPayload, sessionData);
