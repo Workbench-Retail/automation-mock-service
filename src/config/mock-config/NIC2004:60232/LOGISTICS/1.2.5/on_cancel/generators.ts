@@ -142,7 +142,7 @@ export const onCancelGenerator = (
     });
 
     existingPayload.message.order.items.push(rtoItem);
-
+    existingPayload.message.order.quote = sessionData.quote;
     existingPayload.message.order.quote.breakup = [
       ...existingPayload.message.order.quote.breakup,
       {
@@ -150,7 +150,7 @@ export const onCancelGenerator = (
         "@ondc/org/title_type": "rto",
         price: {
           currency: "INR",
-          value: sessionData?.domain === "ONDC:LOG10" ? "0.00" : "80.0",
+          value: sessionData?.rto_action === "no" ? "0.00" : "80.0",
         },
       },
       {
@@ -158,7 +158,7 @@ export const onCancelGenerator = (
         "@ondc/org/title_type": "tax",
         price: {
           currency: "INR",
-          value: sessionData?.domain === "ONDC:LOG10" ? "0.00" : "8.50",
+          value: sessionData?.rto_action === "no" ? "0.00" : "8.50",
         },
       },
       ...(areDiffTagsPresent

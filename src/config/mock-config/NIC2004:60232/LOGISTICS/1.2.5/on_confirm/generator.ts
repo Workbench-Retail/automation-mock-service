@@ -72,6 +72,34 @@ export const onConfirmGenerator = (
       currency: "INR",
       value: calculateQuotePrice(existingPayload.message.order.quote.breakup),
     };
+    existingPayload.message.order.items[0].tags = [
+      {
+        code: "type",
+        list: [
+          {
+            code: "type",
+            value: "base",
+          },
+        ],
+      },
+    ];
+    existingPayload.message.order.items.push({
+      id: "I3",
+      parent_item_id: "I1",
+      category_id: sessionData?.category_id,
+      fulfillment_id: "1",
+      tags: [
+        {
+          code: "type",
+          list: [
+            {
+              code: "type",
+              value: "surge",
+            },
+          ],
+        },
+      ],
+    });
   }
 
   if (sessionData.payment) {

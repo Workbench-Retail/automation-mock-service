@@ -47,4 +47,5 @@ session_data:
   feature_surge_fee: null
   feature_cancellation_terms: null
   cancellation_terms: []
+  rto_action: null
   rto_verification_code: null

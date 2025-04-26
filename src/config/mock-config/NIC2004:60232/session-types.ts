@@ -55,6 +55,7 @@ export interface SessionData {
   feature_surge_fee?: string;
   feature_cancellation_terms?: string;
   cancellation_terms?: any;
+  rto_action: string;
   rto_verification_code: string;
 }
 
@@ -94,4 +95,5 @@ export interface Input {
   fulfillRequest?: string;
   retailCategory?: string;
   returnToOrigin?: string;
+  default_feature?: string[];
 }

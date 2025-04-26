@@ -12,9 +12,6 @@ import { onStatusGenerator } from "./on_status/generator";
 import { onTrackGenerator } from "./on_track/generator";
 import { onCancelGenerator } from "./on_cancel/generators";
 import { statusGenerator } from "./status/generator";
-import { search1Generator } from "./search/search_1/generator";
-import { search2Generator } from "./search/search_2/generator";
-import { search3Generator } from "./search/search_3/generator";
 import { onUpdate1Generator } from "./on_update/on_update_1/generator";
 
 export async function Generator(
@@ -29,11 +26,11 @@ export async function Generator(
     case "search_LOGISTICS":
       return await searchGenerator(existingPayload, sessionData, inputs);
     case "search_1_LOGISITCS":
-      return await search1Generator(existingPayload, sessionData, inputs);
+      return await searchGenerator(existingPayload, sessionData, inputs);
     case "search_2_LOGISTICS":
-      return await search2Generator(existingPayload, sessionData, inputs);
+      return await searchGenerator(existingPayload, sessionData, inputs);
     case "search_3_LOGISTICS":
-      return await search3Generator(existingPayload, sessionData, inputs);
+      return await searchGenerator(existingPayload, sessionData, inputs);
     case "init_LOGISTICS":
       return await initGenerator(existingPayload, sessionData);
     case "confirm_LOGISTICS":

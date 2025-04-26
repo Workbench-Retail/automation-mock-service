@@ -231,15 +231,32 @@ export const confirmGenerator = (
         },
       ],
     },
-    {
-      code: "rto_action",
-      list: [
-        {
-          code: "return_to_origin",
-          value: inputs?.returnToOrigin || "yes",
-        },
-      ],
-    },
+    ...(sessionData?.domain === "ONDC:LOG10"
+      ? [
+          {
+            code: "rto_action",
+            list: [
+              {
+                code: "return_to_origin",
+                value: inputs?.returnToOrigin || "no",
+              },
+            ],
+          },
+        ]
+      : []),
+    ...(sessionData?.domain === "ONDC:LOG11"
+      ? [
+          {
+            code: "rto_action",
+            list: [
+              {
+                code: "return_to_origin",
+                value: inputs?.returnToOrigin || "yes",
+              },
+            ],
+          },
+        ]
+      : []),
     ...(sessionData?.is_cod === "yes"
       ? [
           {

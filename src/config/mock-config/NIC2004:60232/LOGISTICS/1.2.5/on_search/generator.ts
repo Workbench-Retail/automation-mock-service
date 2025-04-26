@@ -284,9 +284,21 @@ export async function onSearch1Generator(
       ],
     });
   }
-  if (inputs?.feature_discovery) {
-    let codesArray = inputs.feature_discovery;
+  console.log(inputs);
+  
+  if (inputs?.feature_discovery || inputs?.default_feature) {
+    let codesArray = inputs.feature_discovery || [];
+    console.log(inputs?.default_feature);
 
+    if (inputs?.default_feature) {
+      const defaults = Array.isArray(inputs.default_feature)
+        ? inputs.default_feature
+        : [inputs.default_feature]; // just in case it's not an array
+
+      codesArray = Array.from(new Set([...codesArray, ...defaults]));
+    }
+
+    console.log(codesArray);
     existingPayload.message.catalog.tags = [
       {
         code: "lsp_features",
