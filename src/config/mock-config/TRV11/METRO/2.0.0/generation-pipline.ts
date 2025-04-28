@@ -2,7 +2,6 @@ import { createContext } from "./create-context";
 import fs from "fs";
 import yaml from "js-yaml";
 import path from "path";
-import { error } from "console";
 import { SessionData } from "../../session-types";
 import { Generator } from "../2.0.0/api-factory";
 import logger from "../../../../../utils/logger";
@@ -23,7 +22,6 @@ function yamlToJson(filePath: string): object {
 		throw error;
 	}
 }
-
 function loadFactoryYaml(filePath: string): any {
 	try {
 		const fileContents = fs.readFileSync(filePath, "utf8");

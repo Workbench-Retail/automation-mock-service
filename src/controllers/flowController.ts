@@ -256,28 +256,33 @@ export async function ActUponFlow(req: ApiRequest, res: Response) {
 			latestMeta.status === "INPUT-REQUIRED"
 		) {
 			res.status(200).send("Mock service is now responding");
-			logger.info("Mock service is now responding");
-			const sessionData = await loadMockSessionData(txId, subscriberUrl);
-			let mockResponse = await generateMockResponse(
-				txData.sessionId as string,
-				sessionData,
-				latestMeta.actionId
-			);
-
-			if (req.body.json_path_changes) {
-				mockResponse = updateAllJsonPaths(
-					mockResponse,
-					req.body.json_path_changes
+			try {
+				logger.info("Mock service is now responding");
+				const sessionData = await loadMockSessionData(txId, subscriberUrl);
+				let mockResponse = await generateMockResponse(
+					txData.sessionId as string,
+					sessionData,
+					latestMeta.actionId
 				);
-			}
 
-			const action = latestMeta.actionType;
-			await setFlowStatusService(txId, subscriberUrl, "WORKING");
-			await sendToApiService(action, mockResponse, {
-				subscriber_url: subscriberUrl,
-				flow_id: flow.id,
-				session_id: txData.sessionId,
-			});
+				if (req.body.json_path_changes) {
+					mockResponse = updateAllJsonPaths(
+						mockResponse,
+						req.body.json_path_changes
+					);
+				}
+
+				const action = latestMeta.actionType;
+				await setFlowStatusService(txId, subscriberUrl, "WORKING");
+				await sendToApiService(action, mockResponse, {
+					subscriber_url: subscriberUrl,
+					flow_id: flow.id,
+					session_id: txData.sessionId,
+				});
+			} catch (e) {
+				logger.error("Error in sending mock response", e);
+				return;
+			}
 			return;
 		} else if (latestMeta.status === "LISTENING") {
 			let expecAdded = false;
@@ -300,6 +305,7 @@ export async function ActUponFlow(req: ApiRequest, res: Response) {
 		}
 		logger.info("No actionable state found in flow!");
 		res.status(200).send(setAckResponse(true));
+		return;
 	} catch (e) {
 		logger.error("Error in ActUponFlow", e);
 		await deleteFlowStatusService(txId, subscriberUrl);
