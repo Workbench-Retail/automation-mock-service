@@ -10,14 +10,26 @@ export async function searchGenerator(
   sessionData: SessionData,
   inputs: Input | undefined
 ) {
+  console.log("inside search generator");
+
   existingPayload.message.intent.provider.time.schedule.holidays = [
     getFutureDate(10),
     getFutureDate(15),
   ];
 
-  if (inputs?.feature_discovery?.length) {
-    let codesArray = inputs.feature_discovery;
+  if (inputs?.feature_discovery || inputs?.default_feature) {
+    let codesArray = inputs.feature_discovery || [];
+    console.log(inputs?.default_feature);
 
+    if (inputs?.default_feature) {
+      const defaults = Array.isArray(inputs.default_feature)
+        ? inputs.default_feature
+        : [inputs.default_feature]; // just in case it's not an array
+
+      codesArray = Array.from(new Set([...codesArray, ...defaults]));
+    }
+
+    console.log(codesArray);
     existingPayload.message.intent.tags = [
       {
         code: "lbnp_features",
@@ -49,6 +61,8 @@ export async function searchGenerator(
   }
 
   if (inputs?.category) {
+    console.log("inside prep time");
+
     existingPayload.message.intent.provider.time.duration =
       TatMapping[inputs?.category].orderPrepTime;
   }
@@ -103,7 +117,14 @@ export async function searchGenerator(
 
     existingPayload.message.intent.fulfillment.tags.push(tag);
   }
-
+  if (inputs?.feature_discovery?.includes("009")) {
+    existingPayload.message.intent.fulfillment.start.instructions = {
+      code: "5",
+    };
+    existingPayload.message.intent.fulfillment.end.instructions = {
+      code: "5",
+    };
+  }
   existingPayload.message.intent.fulfillment.tags =
     existingPayload.message.intent.fulfillment.tags.map((tag: any) => {
       if (tag.code === "linked_order") {

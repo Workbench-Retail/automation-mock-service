@@ -7,10 +7,10 @@ export async function updateGenerator(
 ) {
   existingPayload.message.order.id = sessionData.order_id;
 
-  existingPayload.message.order.items[0] = {
-    id: sessionData.items[0].id,
-    category_id: sessionData.items[0].category_id,
-  };
+  existingPayload.message.order.items = sessionData.items.map((item: { id: any; category_id: any; }) => ({
+    id: item.id,
+    category_id: item.category_id
+  }));
 
   if (sessionData?.fulfillments) {
     let agentDetails: any = {
@@ -49,30 +49,45 @@ export async function updateGenerator(
 
     existingPayload.message.order.fulfillments = sessionData?.fulfillments?.map(
       (fulfillment: any, index: number) => {
-        fulfillment.start = {
-          instructions: {
-            code: "2",
-            short_desc: "123123",
-            long_desc: "additional instructions for pickup",
-            additional_desc: {
-              content_type: "text/html",
-              url: "http://description.com",
+        // Update start instructions only if code is NOT "5"
+        const existingStartCode = fulfillment?.start?.instructions?.code;
+        if (existingStartCode !== "5") {
+          fulfillment.start = {
+            instructions: {
+              code: "2",
+              short_desc: "123123",
+              long_desc: "additional instructions for pickup",
+              additional_desc: {
+                content_type: "text/html",
+                url: "http://description.com",
+              },
             },
-          },
-        };
+          };
+        }
 
-        fulfillment.end = {
-          instructions: {
-            code: "2",
-            short_desc: "987657",
-            long_desc: "additional instructions for delivery",
-            additional_desc: {
-              content_type: "text/html",
-              url: "http://description.com",
+        // Update end instructions only if code is NOT "5"
+        const existingEndCode = fulfillment?.end?.instructions?.code;
+        if (existingEndCode !== "5") {
+          fulfillment.end = {
+            instructions: {
+              code: "2",
+              short_desc: "987657",
+              long_desc: "additional instructions for delivery",
+              additional_desc: {
+                content_type: "text/html",
+                url: "http://description.com",
+              },
             },
-          },
-        };
-       let preTags = removeTagsByCodes(fulfillment.tags, ["weather_check", "rto_action","cod_settlement_detail","state"]);
+          };
+        }
+
+        // Update tags
+        let preTags = removeTagsByCodes(fulfillment.tags, [
+          "weather_check",
+          "rto_action",
+          "cod_settlement_detail",
+          "state",
+        ]);
         preTags = [
           ...preTags,
           {
@@ -94,9 +109,9 @@ export async function updateGenerator(
           },
         ];
 
-       
         fulfillment.tags = preTags;
 
+        // Agent and vehicle assignment
         if (sessionData?.rate_basis) {
           if (index > agentDetails.count) {
             index = 0;

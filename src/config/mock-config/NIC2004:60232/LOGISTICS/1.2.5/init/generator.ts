@@ -133,6 +133,9 @@ export const initGenerator = async (
         phone: "9886098860",
         email: "abcd.efgh@gmail.com",
       },
+      ...(sessionData?.fulfillment?.start?.instructions && {
+        instructions: sessionData.fulfillment.start.instructions,
+      }),
     },
     end: {
       location: {
@@ -151,6 +154,9 @@ export const initGenerator = async (
         phone: "9123426789",
         email: "xyz.qweq@gmail.com",
       },
+      ...(sessionData?.fulfillment?.end?.instructions && {
+        instructions: sessionData.fulfillment.end.instructions,
+      }),
     },
     tags: removeTagsByCodes(sessionData?.on_search_fulfillment.tags, [
       "distance",

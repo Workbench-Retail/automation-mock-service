@@ -8,6 +8,7 @@ export const populateFulfillmentUpdate = (
   existingPayload.message.order.fulfillments =
     existingPayload.message.order.fulfillments.map((fulfillment: any) => {
       let isReadyToShip = false;
+      let isOrderReady = false;
 
       // NEED TO FIX
       sessionData.update_fulfillments.tags.forEach((tag: any) => {
@@ -16,6 +17,9 @@ export const populateFulfillmentUpdate = (
             if (item.code === "ready_to_ship" && item.value == "yes") {
               isReadyToShip = true;
             }
+            if (item.code === "order_ready" && item.value == "yes") {
+              isOrderReady = true;
+            }
           });
         }
       });
@@ -23,8 +27,10 @@ export const populateFulfillmentUpdate = (
       fulfillment.tracking = true;
 
       if (isReadyToShip) {
-        if (!sessionData?.rate_basis) {
+        if (!sessionData?.rate_basis && !isOrderReady) {
           fulfillment.state.descriptor.code = "Searching-for-Agent";
+        } else if (isOrderReady) {
+          fulfillment.state.descriptor.code = "At-pickup";
         }
 
         if (!fulfillment.start?.time?.range) {
@@ -80,8 +86,15 @@ export const populateFulfillmentConfim = (
       if (isReadyToShip) {
         fulfillment.state = {
           descriptor: {
-            code: "Pending",
+            code: "Agent-assigned",
           },
+        };
+        fulfillment.agent = {
+          name: "person_name",
+          phone: "9886098860",
+        };
+        fulfillment.vehicle = {
+          registration: "3LVJ945",
         };
 
         if (!existingPayload.message.order.fulfillments[0].start?.time?.range) {

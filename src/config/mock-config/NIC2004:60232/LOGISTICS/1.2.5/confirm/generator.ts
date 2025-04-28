@@ -231,15 +231,32 @@ export const confirmGenerator = (
         },
       ],
     },
-    {
-      code: "rto_action",
-      list: [
-        {
-          code: "return_to_origin",
-          value: inputs?.returnToOrigin || "yes",
-        },
-      ],
-    },
+    ...(sessionData?.domain === "ONDC:LOG10"
+      ? [
+          {
+            code: "rto_action",
+            list: [
+              {
+                code: "return_to_origin",
+                value: inputs?.returnToOrigin || "no",
+              },
+            ],
+          },
+        ]
+      : []),
+    ...(sessionData?.domain === "ONDC:LOG11"
+      ? [
+          {
+            code: "rto_action",
+            list: [
+              {
+                code: "return_to_origin",
+                value: inputs?.returnToOrigin || "yes",
+              },
+            ],
+          },
+        ]
+      : []),
     ...(sessionData?.is_cod === "yes"
       ? [
           {
@@ -284,7 +301,6 @@ export const confirmGenerator = (
   ];
 
   let allTags = tags;
-  console.log("rto", inputs?.returnToOrigin);
 
   if (sessionData.rate_basis) {
     const preTags = removeTagsByCodes(
@@ -314,27 +330,119 @@ export const confirmGenerator = (
     }
   });
 
-  if (isReadyToShip) {
-    existingPayload.message.order.fulfillments[0].start.instructions = {
-      code: "2",
-      short_desc: "123123",
-      long_desc: "additional instructions for pickup",
-      additional_desc: {
-        content_type: "text/html",
-        url: "http://description.com",
-      },
-    };
+  existingPayload.message.order.fulfillments =
+    existingPayload.message.order.fulfillments.map(
+      (fulfillment: {
+        start: { instructions: { code: any } };
+        end: { instructions: { code: any } };
+        tags: any;
+      }) => {
+        const startCode = fulfillment?.start?.instructions?.code;
+        const endCode = fulfillment?.end?.instructions?.code;
 
-    existingPayload.message.order.fulfillments[0].end.instructions = {
-      code: "2",
-      short_desc: "987657",
-      long_desc: "additional instructions for delivery",
-      additional_desc: {
-        content_type: "text/html",
-        url: "http://description.com",
-      },
-    };
-  }
+        console.log("Original start code:", startCode);
+        console.log("Original end code:", endCode);
+
+        const updatedStartInstructions =
+          startCode === "5"
+            ? {
+                code: "5",
+                short_desc: "9870", // static OTP for pickup
+                long_desc: "additional instructions for pickup",
+                additional_desc: {
+                  content_type: "text/html",
+                  url: "http://description.com",
+                },
+              }
+            : isReadyToShip
+            ? {
+                code: "2",
+                short_desc: "123123",
+                long_desc: "additional instructions for pickup",
+                additional_desc: {
+                  content_type: "text/html",
+                  url: "http://description.com",
+                },
+              }
+            : undefined;
+
+        const updatedEndInstructions =
+          endCode === "5"
+            ? {
+                code: "5",
+                short_desc: "6871", // static OTP for delivery
+                long_desc: "additional instructions for delivery",
+                additional_desc: {
+                  content_type: "text/html",
+                  url: "http://description.com",
+                },
+              }
+            : isReadyToShip
+            ? {
+                code: "2",
+                short_desc: "987657",
+                long_desc: "additional instructions for delivery",
+                additional_desc: {
+                  content_type: "text/html",
+                  url: "http://description.com",
+                },
+              }
+            : undefined;
+
+        console.log("Updated start instructions:", updatedStartInstructions);
+        console.log("Updated end instructions:", updatedEndInstructions);
+        const rtoTag = fulfillment.tags.find(
+          (tag: { code: string }) => tag.code === "rto_action"
+        );
+        const rtoAction = rtoTag?.list?.find(
+          (item: { code: string }) => item.code === "return_to_origin"
+        )?.value;
+        console.log("RTOaCTION", rtoAction);
+        console.log("endCode", endCode);
+        console.log("Condition:", endCode === "5" && rtoAction === "yes");
+        console.log(typeof endCode, endCode); // Should log: string 5
+        console.log(typeof rtoAction, rtoAction); // Should log: string yes
+
+        const additionaltags = [
+          ...fulfillment.tags,
+          ...(endCode === "5" && rtoAction === "yes"
+            ? [
+                {
+                  code: "rto_verification",
+                  list: [
+                    {
+                      code: "code",
+                      value: "5",
+                    },
+                    {
+                      code: "short_desc",
+                      value: "1841",
+                    },
+                  ],
+                },
+              ]
+            : []),
+        ];
+        const updatedFulfillment = {
+          ...fulfillment,
+          start: {
+            ...fulfillment.start,
+            instructions: updatedStartInstructions,
+          },
+          end: {
+            ...fulfillment.end,
+            instructions: updatedEndInstructions,
+          },
+          tags: additionaltags,
+        };
+
+        console.log("Updated fulfillment:", updatedFulfillment);
+
+        return updatedFulfillment;
+      }
+    );
+
+  console.log("All fulfillments updated successfully.");
 
   const tempQuote = sessionData.quote;
 

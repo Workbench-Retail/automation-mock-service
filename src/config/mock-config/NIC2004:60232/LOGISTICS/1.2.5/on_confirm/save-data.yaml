@@ -5,3 +5,4 @@ save-data:
   order_updated_at_timestamp: "$.message.order.updated_at"
   payment: "$.message.order.payment"
   quote: "$.message.order.quote"
+  items: "$.message.order.items[*]"

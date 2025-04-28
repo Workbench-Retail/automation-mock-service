@@ -47,6 +47,7 @@ function getDetailsByActionId(
       message_id: entry.message_id,
     };
   }
+  console.log(actionId);
   throw new Error("Invalid action id found!");
 }
 
