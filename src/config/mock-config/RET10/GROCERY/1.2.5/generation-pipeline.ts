@@ -63,7 +63,7 @@ export async function createMockResponseRET10_125(
 		bap_uri: sessionData?.bap_uri,
 		bpp_id: sessionData?.bpp_id,
 		bpp_uri: sessionData?.bpp_uri,
-		city: sessionData?.city_code ?? "std:011",
+		city: sessionData?.city ?? "std:011",
 		country: "IND",
 	};
 	let context = createContext(context_object);
@@ -87,5 +87,5 @@ export async function createMockResponseRET10_125(
 		logger.info(`L2 error found: ${JSON.stringify(error_message)}`);
 		return payload;
 	}
-	return await Generator(payload, actionID, sessionData);
+	return await Generator(actionID, payload, sessionData);
 }

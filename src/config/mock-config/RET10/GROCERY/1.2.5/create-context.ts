@@ -6,13 +6,14 @@ export function createContext(partialContext: Partial<BecknContext>) {
 		action: "search",
 		bap_id: "bap_id_not_set",
 		bap_uri: "bap_uri_not_set",
-		domain: "ONDC:LOG10",
+		domain: "ONDC:RET10",
 		city: "std:011",
 		country: "IND",
 		message_id: generateUuid(),
 		timestamp: new Date().toISOString(),
 		transaction_id: generateUuid(),
 		core_version: "1.2.5",
+		ttl: "PT30S",
 	};
 
 	return { ...newContext, ...partialContext };

@@ -1,21 +1,23 @@
 import { RedisService } from "ondc-automation-cache-lib";
-import { SessionData } from "./session-types";
+import { Input, SessionData } from "./session-types";
 import { createMockResponseRET10_125 } from "./GROCERY/1.2.5/generation-pipeline";
 import { createBuyerUrl, createSellerUrl } from "../../../utils/request-utils";
 
 export async function createMockResponse(
 	session_id: string,
 	sessionData: SessionData,
-	action_id: string
+	action_id: string,
+	input?: Input
 ) {
 	const api_session = (await RedisService.getKey(session_id)) ?? null;
 	if (!api_session) {
 		throw new Error("Session not found");
 	}
+	sessionData.user_inputs = input;
 	const data = JSON.parse(api_session);
 	const { version, usecaseId } = data;
 	let payload: any = {};
-
+	console.log("version", version, "usecaseId", usecaseId);
 	if (usecaseId === "GROCERY") {
 		if (version === "1.2.5") {
 			payload = await createMockResponseRET10_125(action_id, sessionData);

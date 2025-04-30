@@ -14,11 +14,16 @@ codes:
     action_id: search_inc
     action: search
     message_id: true
+  - code: 902
+    default: GROCERY/1.2.5/on_search/on_search_inc_disable/default.yaml
+    action_id: on_search_inc_disable
+    action: on_search
+    message_id: true
   - code: 103
     default: GROCERY/1.2.5/on_search/on_search_inc/default.yaml
     action_id: on_search_inc
     action: on_search
-    message_id: false
+    message_id: true
   - code: 104
     default: GROCERY/1.2.5/on_search/on_search_104/default.yaml
     action_id: on_search_104

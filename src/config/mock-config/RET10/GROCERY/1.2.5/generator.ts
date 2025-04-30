@@ -74,6 +74,7 @@ import { on_update_picked_172_generator } from "./on_update/on_update_picked_172
 import { on_update_return_delivered_173_generator } from "./on_update/on_update_return_delivered_173/generator";
 import { on_update_interim_liquidated_174_generator } from "./on_update/on_update_interim_liquidated_174/generator";
 import { on_update_liquidated_175_generator } from "./on_update/on_update_liquidated_175/generator";
+import { on_search_inc_disable_generator } from "./on_search/on_search_inc_disable/generator";
 
 export async function Generator(
 	action_id: string,
@@ -89,6 +90,8 @@ export async function Generator(
 			return search_inc_generator(existingPayload, sessionData);
 		case "on_search_inc":
 			return on_search_inc_generator(existingPayload, sessionData);
+		case "on_search_inc_disable":
+			return on_search_inc_disable_generator(existingPayload, sessionData);
 		case "on_search_104":
 			return on_search_104_generator(existingPayload, sessionData);
 		case "select":
@@ -275,5 +278,8 @@ export async function Generator(
 			);
 		case "on_update_liquidated_175":
 			return on_update_liquidated_175_generator(existingPayload, sessionData);
+		default:
+			console.log(action_id);
+			throw new Error("Invalid action id found! ");
 	}
 }

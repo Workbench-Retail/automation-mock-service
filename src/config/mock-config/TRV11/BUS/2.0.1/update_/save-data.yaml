@@ -1,2 +1,0 @@
-save-data:
-  update_fulfillment: "$.message.order.fulfillments[*]"

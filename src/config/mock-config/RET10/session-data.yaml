@@ -1,3 +1,5 @@
 session_data:
   transaction_id: null
   message_id: null
+  city: null
+  inc_mode: null
