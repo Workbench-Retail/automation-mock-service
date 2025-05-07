@@ -1,1 +1,2 @@
-save-data: {}
+save-data:
+  quote: $.message.order.quote

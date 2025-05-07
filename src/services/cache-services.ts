@@ -27,6 +27,7 @@ export class TransactionCacheService {
 		return JSON.parse(rawData) as TransactionCache;
 	};
 	createTransactionKey = (transactionId: string, subscriberUrl: string) => {
+		console.log(transactionId);
 		return `${transactionId.trim()}::${subscriberUrl.trim()}`;
 	};
 }

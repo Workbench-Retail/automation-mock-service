@@ -14,6 +14,16 @@ export type SessionData = {
 	order: any | undefined;
 	user_inputs: Input | undefined;
 	inc_mode: string | undefined;
+	selected_items: any | undefined;
+	selected_fulfillments: any | undefined;
+	provider: any | undefined;
+	fulfillments: any | undefined;
+	billing: any | undefined;
+	items: any | undefined;
+	quote: any | undefined;
+	order_id: string | undefined;
+	payment: any | undefined;
+	order_state: string | undefined;
 };
 
 export type BecknContext = {
