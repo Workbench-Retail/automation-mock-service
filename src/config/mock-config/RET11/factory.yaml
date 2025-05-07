@@ -33,7 +33,7 @@ codes:
     action_id: on_select
     action: on_select
     default: on_select/default.yaml
-    message_id: true
+    message_id: false
   - code: 107
     action_id: init
     action: init
