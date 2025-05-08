@@ -11,6 +11,7 @@ import { setAckResponse } from "../utils/ackUtils";
 import { getSafeActions } from "../services/mock-services";
 import { RedisService } from "ondc-automation-cache-lib";
 import { SessionCache } from "../types/api-session-cache";
+import otelTracing from "../middlewares/tracing";
 
 const triggerRouter = Router();
 
@@ -34,6 +35,12 @@ export interface BodyTriggerType {
 
 triggerRouter.post(
 	"/api-service/:action",
+	otelTracing(
+		'query.transaction_id',
+		'query.session_id',
+		'query.bap_id',
+		'query.bpp_id'
+	),
 	generateMockResponseMiddleware,
 	replaceJsonPaths,
 	async (req: TriggerRequest, res) => {
@@ -88,16 +95,13 @@ triggerRouter.post(
 	}
 );
 
-triggerRouter.get("/safe-actions", async (req, res) => {
-	logInfo
-	({
-		message: "Entering trigger / safe actions route",
-		meta: {
-			transaction_id: req.query.transaction_id,
-			subscriber_url: req.query.subscriber_url,
-		},
-		transaction_id: req.query.transaction_id as string,
-	});
+triggerRouter.get("/safe-actions",
+	otelTracing(
+		'query.transaction_id',
+		'query.session_id',
+		'query.bap_id',
+		'query.bpp_id'
+	), async (req, res) => {
 	const transaction_id = req.query.transaction_id as string;
 	const mockType = req.query.mock_type as string;
 	if (!transaction_id) {
