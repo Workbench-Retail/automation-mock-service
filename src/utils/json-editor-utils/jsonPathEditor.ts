@@ -1,5 +1,5 @@
 import jsonpath from "jsonpath";
-import logger from "../logger";
+import { logger } from "../logger";
 
 /**
  * Updates a JSON object at a specific JSONPath with a new value.

@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { TriggerRequest } from "../routes/trigger";
 import { loadMockSessionData } from "../services/data-services";
-import logger from "../utils/logger";
+import { logger } from "../utils/logger";
 import { updateAllJsonPaths } from "../utils/json-editor-utils/jsonPathEditor";
 import { delay } from "../utils/generic-utils";
 import { generateMockResponse } from "../config/mock-config";

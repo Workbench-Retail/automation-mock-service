@@ -1,5 +1,5 @@
 import axios from "axios";
-import logger from "./logger";
+import { logger } from "./logger";
 import { saveData } from "../services/data-services";
 import { error } from "console";
 function delay(ms: number): Promise<void> {

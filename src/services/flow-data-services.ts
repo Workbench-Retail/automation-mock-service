@@ -1,5 +1,5 @@
 import { fetchFlow } from "../utils/flow-utils/main";
-import logger from "../utils/logger";
+import { logger } from "../utils/logger";
 import { SessionCacheService, TransactionCacheService } from "./cache-services";
 
 export async function getFlowInfo(transactionId: string, sessionId: string) {
