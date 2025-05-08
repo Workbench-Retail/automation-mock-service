@@ -5,7 +5,7 @@ import {
 	replaceJsonPaths,
 } from "../controllers/generationController";
 
-import logger from "../utils/logger";
+import { logger } from "../utils/logger";
 import { sendToApiService } from "../utils/request-utils";
 import { setAckResponse } from "../utils/ackUtils";
 import { getSafeActions } from "../services/mock-services";

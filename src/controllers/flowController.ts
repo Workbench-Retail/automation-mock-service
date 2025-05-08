@@ -1,6 +1,6 @@
 import { ApiRequest } from "../routes/manual";
 import { NextFunction, Response } from "express";
-import logger from "../utils/logger";
+import { logError, logger, logInfo } from "../utils/logger";
 import {
 	SessionCacheService,
 	TransactionCacheService,
@@ -30,7 +30,12 @@ export async function setFlowAndTransactionId(
 	next: NextFunction
 ) {
 	try {
-		logger.info("Setting flow and transaction ID for incomming mock request");
+		// logger.info("Setting flow and transaction ID for incomming mock request");
+		logInfo({
+			message: "Entering setFlowAndTransactionId Middleware Function. Setting flow and transaction ID for incomming mock request",
+			meta: { action: req.params.action },
+			transaction_id: req.body.context.transaction_id,
+		});
 		const context = req.body.context;
 		const transactionId = context.transaction_id;
 		const subscriberUrl = computeSubscriber(context);
@@ -42,20 +47,30 @@ export async function setFlowAndTransactionId(
 		);
 		const flowId = transactionData?.flowId;
 		if (!flowId) {
-			logger.error(
-				"Flow ID not found for " +
-					transactionService.createTransactionKey(transactionId, subscriberUrl)
-			);
+			// logger.error(
+			// 	"Flow ID not found for " +
+			// 		transactionService.createTransactionKey(transactionId, subscriberUrl)
+			// );
+			logInfo({
+				message: `Exiting setFlowAndTransactionId Middleware Function. Flow ID not found for transactionId: ${transactionId} and subscriberUrl: ${subscriberUrl}`,
+				meta: { action: req.params.action },
+				transaction_id: req.body.context.transaction_id,
+			});
 			throw new Error(
 				"Flow ID not found for " +
 					transactionService.createTransactionKey(transactionId, subscriberUrl)
 			);
 		}
 		if (!transactionData || !transactionData.sessionId) {
-			logger.error(
-				"Transaction data not found for " +
-					transactionService.createTransactionKey(transactionId, subscriberUrl)
-			);
+			// logger.error(
+			// 	"Transaction data not found for " +
+			// 		transactionService.createTransactionKey(transactionId, subscriberUrl)
+			// );
+			logInfo({
+				message: `Exiting setFlowAndTransactionId Middleware Function. Transaction data not found for transactionId: ${transactionId} and subscriberUrl: ${subscriberUrl}`,
+				meta: { action: req.params.action },
+				transaction_id: req.body.context.transaction_id,
+			});
 			throw new Error(
 				"Transaction data not found for " +
 					transactionService.createTransactionKey(transactionId, subscriberUrl)
@@ -72,15 +87,26 @@ export async function setFlowAndTransactionId(
 		req.subscriberUrl = subscriberUrl;
 		req.transactionId = req.body.context.transaction_id;
 		req.apiSessionCache = sessionData;
-		logger.info(
-			`✅ Flow fetched successfully for ${transactionService.createTransactionKey(
-				transactionId,
-				subscriberUrl
-			)} ${flowId}`
-		);
+		// logger.info(
+		// 	`✅ Flow fetched successfully for ${transactionService.createTransactionKey(
+		// 		transactionId,
+		// 		subscriberUrl
+		// 	)} ${flowId}`
+		// );
+		logInfo({
+			message: `Exiting setFlowAndTransactionId Middleware Function. Flow fetched successfully for transactionId: ${transactionId} and subscriberUrl: ${subscriberUrl}`,
+			meta: { action: req.params.action, flowId },
+			transaction_id: req.body.context.transaction_id,
+		});	
 		next();
 	} catch (err: any) {
-		logger.error("Error in setFlowAndTransactionId", err);
+		// logger.error("Error in setFlowAndTransactionId", err);
+		logError({
+			message: `Error in setFlowAndTransactionId Middleware Function.`,
+			meta: { action: req.params.action },
+			transaction_id: req.body.context.transaction_id,
+			error: err,
+			});
 		res
 			.status(500)
 			.send("Error in " + err?.message || "setFlowAndTransactionId");
@@ -93,7 +119,11 @@ export async function startNewFLow(
 	next: NextFunction
 ) {
 	try {
-		logger.info("New flow request received");
+		// logger.info("New flow request received");
+		logInfo({
+			message: "Entering startNewFLow Middleware Function. New flow request received",
+			meta: { action: req.params.action },
+		});
 		const transactionId = uuidv4();
 		const sessionId = req.body.session_id;
 		const flowId = req.body.flow_id;
@@ -200,7 +230,17 @@ export async function ActUponFlow(req: ApiRequest, res: Response) {
 	const subscriberUrl = req.subscriberUrl;
 	const txId = req.transactionId;
 	try {
-		logger.info("Acting upon flow");
+		// logger.info("Acting upon flow");
+		logInfo({
+			message: "Entering ActUponFlow Function. Acting upon flow",
+			meta: { 
+				action: req.params.action,
+				transactionId: txId,
+				subscriberUrl: subscriberUrl,
+				transactionData : txData,
+			 },
+			transaction_id: txId,
+		});
 		const flow = req.flow;
 		if (!flow || !txData || !subscriberUrl || !txId) {
 			logger.error("Flow or Transaction data not found <INTERNAL-ERROR>");
