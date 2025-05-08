@@ -1,5 +1,5 @@
 import { readFileSync } from "fs";
-import logger from "../../utils/logger";
+import { logger, logInfo } from "../../utils/logger";
 
 import path from "path";
 import yaml from "js-yaml";
@@ -40,6 +40,10 @@ export function getActionData(code: number) {
 }
 
 export function getSaveDataContent(version: string, action: string) {
+  logInfo({
+    message: "Entering getSaveDataContent Function.",
+    meta: { version, action },
+  });
   let actionFolderPath = path.resolve(
     __dirname,
     `./TRV11/METRO/${version}/${action}`
@@ -50,6 +54,10 @@ export function getSaveDataContent(version: string, action: string) {
   const saveDataFilePath = path.join(actionFolderPath, "save-data.yaml");
   const fileContent = readFileSync(saveDataFilePath, "utf8");
   const cont = yaml.load(fileContent) as any;
-  console.log(cont);
+  // console.log(cont);
+  logInfo({
+    message: "Exiting getSaveDataContent Function.",
+    meta: { version, action, content: cont },
+  });
   return cont;
 }

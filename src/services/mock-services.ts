@@ -1,7 +1,7 @@
 import { getActionData } from "../config/mock-config";
 import { actionSelectionCodeTests } from "../config/mock-config/generated/action-selector";
 import { defaultSelectionCodeTests } from "../config/mock-config/generated/default-selector";
-import logger from "../utils/logger";
+import { logger, logInfo } from "../utils/logger";
 import { loadMockSessionData } from "./data-services";
 
 // export async function getMockResponseMetaData(action: string, body: any) {
@@ -27,6 +27,11 @@ export async function getSessionData(
 	transactionID: string,
 	subscriber_url: string
 ) {
+	logInfo({
+		message: "Inside getSessionData Function. Calling loadMockSessionData",
+		meta: { transactionID, subscriber_url },
+		transaction_id: transactionID,
+		});
 	return await loadMockSessionData(transactionID, subscriber_url);
 }
 
@@ -36,6 +41,12 @@ export async function getSafeActions(
 	mock_type?: string,
 	usecaseId?: string
 ) {
+	logInfo({
+		message: "Entering getSafeActions Function.",
+		meta: { transaction_id, subscriber_url, mock_type, usecaseId },
+		transaction_id: transaction_id,
+	});
+
 	const sessionData = await getSessionData(transaction_id, subscriber_url);
 	sessionData.mock_type = mock_type;
 	sessionData.usecaseId = usecaseId;
@@ -48,5 +59,11 @@ export async function getSafeActions(
 	const validCodes = actionsTests
 		.filter((test) => test.valid && test.code != 200)
 		.map((test) => test.code);
-	return validCodes.map((code) => getActionData(code));
+	const safeActions =  validCodes.map((code) => getActionData(code));
+	logInfo({
+		message: "Exiting getSafeActions Function.",
+		meta: { transaction_id, subscriber_url, safeActions },
+		transaction_id: transaction_id,
+		});
+	return safeActions;
 }

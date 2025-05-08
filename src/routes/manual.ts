@@ -9,6 +9,7 @@ import {
 } from "../controllers/flowController";
 import { SessionCache } from "../types/api-session-cache";
 import { l2Validation } from "../controllers/validationControllers";
+import { logInfo } from "../utils/logger";
 
 const manualRouter = Router();
 
@@ -32,7 +33,21 @@ manualRouter.post(
   setFlowAndTransactionId,
   ActUponFlow,
   (req, res) => {
+    logInfo({
+      message: "Entering Manual Route",
+      meta: {
+        action: req.params.action,
+      },
+      transaction_id: req.body.context.transaction_id,
+    });
     res.status(200).send(setAckResponse(true));
+    logInfo({
+      message: "Exiting Manual Route",
+      meta: {
+        action: req.params.action,
+      },
+      transaction_id: req.body.context.transaction_id,
+    });
   }
 );
 
