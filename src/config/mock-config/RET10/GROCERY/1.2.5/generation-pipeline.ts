@@ -2,9 +2,10 @@ import { SessionData } from "../../session-types";
 import fs from "fs";
 import yaml from "js-yaml";
 import path from "path";
+import { logger } from "../../../../../utils/logger";
 import { createContext } from "./create-context";
-import logger from "../../../../../utils/logger";
 import { Generator } from "./generator";
+
 function loadFactoryYaml(filePath: string): any {
 	try {
 		const fileContents = fs.readFileSync(filePath, "utf8");

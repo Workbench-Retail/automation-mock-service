@@ -1,5 +1,5 @@
 import { readFileSync } from "fs";
-import logger from "../../utils/logger";
+import { logger, logInfo } from "../../utils/logger";
 
 import path from "path";
 import yaml from "js-yaml";

@@ -1,5 +1,5 @@
 // import { NextFunction, Request, Response } from "express";
-// import logger from "../utils/logger";
+// import { logger } from "../utils/logger";
 // import { getMockResponseMetaData } from "../services/mock-services";
 // import { sendToApiService } from "../utils/request-utils";
 // import { ApiRequest } from "../routes/manual";
