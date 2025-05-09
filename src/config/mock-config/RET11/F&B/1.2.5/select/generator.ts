@@ -1,75 +1,93 @@
-import { SessionData } from "../../../session-types";
+import { SessionData, Input } from "../../../session-types";
+import { v4 as uuidv4 } from "uuid";
+
+type TagEntry = {
+  code: string;
+  value: string;
+};
+
+type Tag = {
+  code: string;
+  list: TagEntry[];
+};
+
+type Item = {
+  id: string;
+  tags?: Tag[];
+};
+
+function getParentIdValue(items: Item[], id: string): string | null {
+  const item = items.find((i) => i.id === id);
+  if (!item) return null;
+
+  const parentTag = item.tags?.find((tag) => tag.code === "parent");
+  if (!parentTag) return null;
+
+  const idEntry = parentTag.list.find((entry) => entry.code === "id");
+  return idEntry?.value || null;
+}
 
 export const selectGenerator = (
   existingPayload: any,
-  sessionData: SessionData
+  sessionData: SessionData,
+  inputs?: Input
 ) => {
-  const message = existingPayload.message;
-
-  // Replace or augment items
-  if (sessionData.items && sessionData.items.length > 0) {
-    message.order.items = sessionData.items;
-
-    // Add optional dynamic logic (e.g., ensure payment_ids if needed)
-    const paymentId = Math.random().toString(36).substring(2, 12);
-    message.order.items = message.order.items.map((item: any) => ({
-      ...item,
-      payment_ids: [paymentId],
-    }));
-  }
-
-   // Add customization tags if specified in session data
-   if (sessionData.customizations) {
-    message.order.items = message.order.items.map((item: any) => {
-      // Only process items that have customization type
-      const isCustomization = item.tags?.some((tag: any) => 
-        tag.code === "type" && tag.list?.some((t: any) => 
-          t.code === "type" && t.value === "customization"
-      ));
-      
-      if (isCustomization && sessionData.customizations[item.id]) {
-        return {
-          ...item,
-          descriptor: {
-            ...item.descriptor,
-            tags: [
-              ...(item.descriptor?.tags || []),
+  if (inputs?.items) {
+    let newItems: any = [];
+    inputs.items.forEach((item: any) => {
+      const parentItemId = uuidv4();
+      newItems.push({
+        id: item.id,
+        parent_item_id: parentItemId,
+        location_id: "L1",
+        quantity: { count: 1 },
+        tags: [
+          {
+            code: "type",
+            list: [
               {
-                code: "customization",
-                list: [
-                  {
-                    code: "input_text",
-                    value: sessionData.customizations[item.id]
-                  }
-                ]
-              }
-            ]
-          }
-        };
-      }
-      return item;
-    });
-  }
-  
-  // Replace fulfillments if present
-  if (sessionData.fulfillments && sessionData.fulfillments.length > 0) {
-    message.order.fulfillments = sessionData.fulfillments;
-  } else {
-    // Normalize default type to "DELIVERY" and apply sessionData.end if present
-    message.order.fulfillments = message.order.fulfillments?.map((f: any) => ({
-      ...f,
-      type: "DELIVERY",
-      ...(sessionData.end && { end: sessionData.end }),
-    }));
-  }
+                code: "type",
+                value: "item",
+              },
+            ],
+          },
+        ],
+      });
 
-  // Sanitize or override specific fields if needed
-  if (message.order.fulfillments) {
-    message.order.fulfillments.forEach((f: any) => {
-      if (f?.type && f.type.toLowerCase() !== "delivery") {
-        f.type = "DELIVERY";
-      }
+      item?.customisations.forEach((customisation: any) => {
+        newItems.push({
+          id: customisation,
+          parent_item_id: parentItemId,
+          location_id: "L1",
+          quantity: { count: 1 },
+          tags: [
+            {
+              code: "type",
+              list: [
+                {
+                  code: "type",
+                  value: "customization",
+                },
+              ],
+            },
+            {
+              code: "parent",
+              list: [
+                {
+                  code: "id",
+                  value: getParentIdValue(
+                    sessionData?.on_search_items || [],
+                    customisation
+                  ),
+                },
+              ],
+            },
+          ],
+        });
+      });
     });
+
+    existingPayload.message.order.items = newItems;
   }
 
   return existingPayload;

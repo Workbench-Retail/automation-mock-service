@@ -137,7 +137,6 @@ message:
             list:
               - code: "id"
                 value: "CG3"
-
     billing:
       name: "ONDC buyer"
       address:
@@ -153,7 +152,6 @@ message:
       phone: "9886098860"
       created_at: "2025-01-08T09:00:00.000Z"
       updated_at: "2025-01-08T09:00:00.000Z"
-
     fulfillments:
       - id: "F1"
         type: "Delivery"

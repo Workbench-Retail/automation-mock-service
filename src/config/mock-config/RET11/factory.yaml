@@ -43,7 +43,7 @@ codes:
     action_id: on_init
     action: on_init
     default: on_init/default.yaml
-    message_id: true
+    message_id: false
   - code: 109
     action_id: confirm
     action: confirm
@@ -53,4 +53,4 @@ codes:
     action_id: on_confirm
     action: on_confirm
     default: on_confirm/default.yaml
-    message_id: true
+    message_id: false

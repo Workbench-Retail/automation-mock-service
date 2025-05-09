@@ -1,7 +1,4 @@
 save-data:
-  items: "$.message.order.items[*]"
   fulfillments: "$.message.order.fulfillments[*]"
-  fulfillment_end_location: "$.message.order.fulfillments[*].end.location"
-  fulfillment_end_contact: "$.message.order.fulfillments[*].end.contact"
+  message_id: "$.context.message_id"
   billing: "$.message.order.billing"
-  billing_address: "$.message.order.billing.address"

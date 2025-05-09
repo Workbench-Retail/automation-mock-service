@@ -4,3 +4,11 @@ session_data:
   last_action: null
   mock_type: null
   domain: null
+  items: []
+  on_search_items: []
+  provider: {}
+  select_fulfillment: []
+  fulfillments: []
+  billing: {}
+  payment: {}
+  confirm_created_at_timestamp: null

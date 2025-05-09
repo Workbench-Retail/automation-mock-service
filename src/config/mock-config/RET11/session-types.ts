@@ -22,12 +22,16 @@ export interface SessionData {
   quote: any;
   items: any[];
   billing: Record<string, any>;
-  payment: any[];
+  payment: any;
   end: any[];
   bnp_features: any[];
   item_availability_enabled?: boolean;
   item_timing?: any;
   customizations?: any;
+  on_search_items?: any[];
+  provider?: any;
+  select_fulfillment?: any[];
+  confirm_created_at_timestamp?: string
 }
 
 export type BecknContext = {
@@ -48,4 +52,5 @@ export type BecknContext = {
 
 export interface Input {
   search_mode?: string;
+  items?: any;
 }

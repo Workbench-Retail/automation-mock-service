@@ -28,7 +28,7 @@ export async function Generator(
     case "on_search_2":
       return await onSearch2Generator(existingPayload, sessionData);
     case "select":
-      return await selectGenerator(existingPayload, sessionData);
+      return await selectGenerator(existingPayload, sessionData, inputs);
     case "on_select":
       return await onSelectGenerator(existingPayload, sessionData);
     case "init":
@@ -38,6 +38,20 @@ export async function Generator(
     case "confirm":
       return await confirmGenerator(existingPayload, sessionData);
     case "on_confirm":
+      return await onConfirmGenerator(existingPayload, sessionData);
+    case "on_status_pending":
+      return await onConfirmGenerator(existingPayload, sessionData);
+    case "on_status_packed":
+      return await onConfirmGenerator(existingPayload, sessionData);
+    case "on_status_agent_assigned":
+      return await onConfirmGenerator(existingPayload, sessionData);
+    case "on_status_at_pickup":
+      return await onConfirmGenerator(existingPayload, sessionData);
+    case "on_status_order_picked":
+      return await onConfirmGenerator(existingPayload, sessionData);
+    case "on_status_at_delivery":
+      return await onConfirmGenerator(existingPayload, sessionData);
+    case "on_status_order_delivered":
       return await onConfirmGenerator(existingPayload, sessionData);
     default:
       throw new Error(`Invalid request type ${action_id}`);
