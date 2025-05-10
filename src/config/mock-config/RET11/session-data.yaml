@@ -12,3 +12,5 @@ session_data:
   billing: {}
   payment: {}
   confirm_created_at_timestamp: null
+  order_id: null
+  stateCode: null

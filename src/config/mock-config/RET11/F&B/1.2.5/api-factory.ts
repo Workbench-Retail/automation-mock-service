@@ -9,6 +9,7 @@ import { initGenerator } from "./init/generator";
 import { onInitGenerator } from "./on_init/generator";
 import { confirmGenerator } from "./confirm/generator";
 import { onConfirmGenerator } from "./on_confirm/generator";
+import { onStatusGenerator } from "./on_status/generator";
 
 export async function Generator(
   action_id: string,
@@ -40,19 +41,40 @@ export async function Generator(
     case "on_confirm":
       return await onConfirmGenerator(existingPayload, sessionData);
     case "on_status_pending":
-      return await onConfirmGenerator(existingPayload, sessionData);
+      return await onStatusGenerator(existingPayload, {
+        ...sessionData,
+        stateCode: "Pending",
+      });
     case "on_status_packed":
-      return await onConfirmGenerator(existingPayload, sessionData);
+      return await onStatusGenerator(existingPayload, {
+        ...sessionData,
+        stateCode: "Packed",
+      });
     case "on_status_agent_assigned":
-      return await onConfirmGenerator(existingPayload, sessionData);
+      return await onStatusGenerator(existingPayload, {
+        ...sessionData,
+        stateCode: "Agent-assigned",
+      });
     case "on_status_at_pickup":
-      return await onConfirmGenerator(existingPayload, sessionData);
+      return await onStatusGenerator(existingPayload, {
+        ...sessionData,
+        stateCode: "At-pickup",
+      });
     case "on_status_order_picked":
-      return await onConfirmGenerator(existingPayload, sessionData);
+      return await onStatusGenerator(existingPayload, {
+        ...sessionData,
+        stateCode: "Order-pciked",
+      });
     case "on_status_at_delivery":
-      return await onConfirmGenerator(existingPayload, sessionData);
+      return await onStatusGenerator(existingPayload, {
+        ...sessionData,
+        stateCode: "At-delivery",
+      });
     case "on_status_order_delivered":
-      return await onConfirmGenerator(existingPayload, sessionData);
+      return await onStatusGenerator(existingPayload, {
+        ...sessionData,
+        stateCode: "Order-delivered",
+      });
     default:
       throw new Error(`Invalid request type ${action_id}`);
   }

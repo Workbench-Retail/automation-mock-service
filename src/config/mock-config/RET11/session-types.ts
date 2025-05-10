@@ -32,6 +32,8 @@ export interface SessionData {
   provider?: any;
   select_fulfillment?: any[];
   confirm_created_at_timestamp?: string
+  order_id?: string;
+  stateCode?: string;
 }
 
 export type BecknContext = {
