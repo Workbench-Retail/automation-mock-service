@@ -58,34 +58,39 @@ codes:
     action_id: on_status_pending
     action: on_status
     default: on_status/default.yaml
-    message_id: false
+    message_id: true
   - code: 112
     action_id: on_status_agent_assigned
     action: on_status
     default: on_status/default.yaml
-    message_id: false
+    message_id: true
   - code: 113
     action_id: on_status_at_pickup
     action: on_status
     default: on_status/default.yaml
-    message_id: false
+    message_id: true
   - code: 114
     action_id: on_status_order_picked
     action: on_status
     default: on_status/default.yaml
-    message_id: false
+    message_id: true
   - code: 115
     action_id: on_status_at_delivery
     action: on_status
     default: on_status/default.yaml
-    message_id: false
+    message_id: true
   - code: 116
     action_id: on_status_order_delivered
     action: on_status
     default: on_status/default.yaml
-    message_id: false
+    message_id: true
   - code: 117
     action_id: on_status_packed
     action: on_status
     default: on_status/default.yaml
+    message_id: true
+  - code: 118
+    action_id: on_select_oos
+    action: on_select
+    default: on_select/on_select_oos/default.yaml
     message_id: false

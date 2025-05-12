@@ -1,0 +1,52 @@
+message:
+  order:
+    provider:
+      id: P1
+      locations:
+        - id: L1
+    items:
+      - fulfillment_id: F1
+        id: I1
+    fulfillments:
+      - id: F1
+        type: Delivery
+        "@ondc/org/provider_name": LSP or Provider Name
+        tracking: false
+        "@ondc/org/category": Immediate Delivery
+        "@ondc/org/TAT": PT60M
+        state:
+          descriptor:
+            code: Serviceable
+    quote:
+      price:
+        currency: INR
+        value: "0.00"
+      breakup:
+        - "@ondc/org/item_id": I1
+          "@ondc/org/item_quantity":
+            count: 0
+          title: Atta
+          "@ondc/org/title_type": item
+          price:
+            currency: INR
+            value: "0.00"
+          item:
+            quantity:
+              available:
+                count: "0"
+              maximum:
+                count: "0"
+            price:
+              currency: INR
+              value: "170.00"
+        - "@ondc/org/item_id": F1
+          title: Delivery charges
+          "@ondc/org/title_type": delivery
+          price:
+            currency: INR
+            value: "0.00"
+      ttl: P1D
+error:
+  type: DOMAIN-ERROR
+  code: "40002"
+  message: M1

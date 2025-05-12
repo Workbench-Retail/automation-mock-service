@@ -34,6 +34,7 @@ export interface SessionData {
   confirm_created_at_timestamp?: string
   order_id?: string;
   stateCode?: string;
+  np_type?: string;
 }
 
 export type BecknContext = {
@@ -55,4 +56,5 @@ export type BecknContext = {
 export interface Input {
   search_mode?: string;
   items?: any;
+  npType?: string;
 }

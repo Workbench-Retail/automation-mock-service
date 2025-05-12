@@ -14,3 +14,4 @@ session_data:
   confirm_created_at_timestamp: null
   order_id: null
   stateCode: null
+  np_type: null

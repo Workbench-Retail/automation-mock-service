@@ -10,6 +10,7 @@ import { onInitGenerator } from "./on_init/generator";
 import { confirmGenerator } from "./confirm/generator";
 import { onConfirmGenerator } from "./on_confirm/generator";
 import { onStatusGenerator } from "./on_status/generator";
+import { onSelectOOSGenerator } from "./on_select/on_select_oos/generator";
 
 export async function Generator(
   action_id: string,
@@ -21,7 +22,7 @@ export async function Generator(
     case "search":
       return await searchGenerator(existingPayload, sessionData);
     case "on_search":
-      return await onSearchGenerator(existingPayload, sessionData);
+      return await onSearchGenerator(existingPayload, sessionData, inputs);
     case "search_1":
       return await search1Generator(existingPayload, sessionData, inputs);
     case "on_search_1":
@@ -32,6 +33,8 @@ export async function Generator(
       return await selectGenerator(existingPayload, sessionData, inputs);
     case "on_select":
       return await onSelectGenerator(existingPayload, sessionData);
+    case "on_select_oos":
+      return await onSelectOOSGenerator(existingPayload, sessionData);
     case "init":
       return await initGenerator(existingPayload, sessionData);
     case "on_init":
