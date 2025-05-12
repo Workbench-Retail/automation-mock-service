@@ -53,7 +53,7 @@ export const searchGenerator = (
   sessionData: SessionData
 ) => {
   existingPayload.message.intent.tags.push({
-    code: "bap_feature",
+    code: "bap_features",
     list: featureDiscoveryCode.map((code) => {
       return {
         code: code,
