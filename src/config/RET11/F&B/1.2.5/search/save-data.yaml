@@ -1,0 +1,7 @@
+save-data:
+  domain: "$.context.domain"
+  transaction_id: "$.context.transaction_id"
+  message_id: "$.context.message_id"
+  bap_id: "$.context.bap_id"
+  bap_uri: "$.context.bap_uri"
+  city_code: "$.context.city"
