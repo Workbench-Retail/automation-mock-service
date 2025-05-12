@@ -1,0 +1,17 @@
+session_data:
+  transaction_id: null
+  message_id: null
+  last_action: null
+  mock_type: null
+  domain: null
+  items: []
+  on_search_items: []
+  provider: {}
+  select_fulfillment: []
+  fulfillments: []
+  billing: {}
+  payment: {}
+  confirm_created_at_timestamp: null
+  order_id: null
+  stateCode: null
+  np_type: null

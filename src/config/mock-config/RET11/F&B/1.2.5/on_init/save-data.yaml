@@ -1,0 +1,2 @@
+save-data:
+  payment: "$.message.order.payment"

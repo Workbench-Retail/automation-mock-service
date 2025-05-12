@@ -83,7 +83,7 @@ export const TatMapping: any = {
     code: "P3D",
     day: 2,
     pickupTime: "P1D",
-    orderPrepTime: "PT1D",
+    orderPrepTime: "P1D",
   },
   "Instant Delivery": {
     code: "PT10M",
@@ -91,4 +91,13 @@ export const TatMapping: any = {
     pickupTime: "PT2M",
     orderPrepTime: "PT2M",
   },
+};
+
+export const calculateQuotePrice = (breakup: any) => {
+  let totalPrice = 0;
+  breakup.forEach((item: any) => {
+    totalPrice += parseFloat(item.price.value) || 0;
+  });
+
+  return totalPrice.toFixed(2); // returns a string with 2 decimal places
 };
