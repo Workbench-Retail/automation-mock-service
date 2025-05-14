@@ -205,6 +205,179 @@ message:
                     value: select
                   - code: seq
                     value: "3"
+
+          - id: "6"
+            parent_category_id: ""
+            descriptor:
+              name: Pizza
+              short_desc: Veg and Non-Veg pizza
+              long_desc: American and Italian Veg and Non-Veg Pizza
+              images:
+                - "https://snp.com/ondc/m005.png"
+            tags:
+              - code: type
+                list:
+                  - code: type
+                    value: custom_menu
+              - code: timing
+                list:
+                  - code: day_from
+                    value: "1"
+                  - code: day_to
+                    value: "5"
+                  - code: time_from
+                    value: "1800"
+                  - code: time_to
+                    value: "2200"
+              - code: display
+                list:
+                  - code: rank
+                    value: "3"
+          - id: CG11
+            descriptor:
+              name: Variant (1 option)
+            tags:
+              - code: type
+                list:
+                  - code: type
+                    value: custom_group
+              - code: config
+                list:
+                  - code: min
+                    value: "1"
+                  - code: max
+                    value: "1"
+                  - code: input
+                    value: select
+                  - code: seq
+                    value: "1"
+          - id: CG12
+            descriptor:
+              name: Choice of bread (1 option)
+            tags:
+              - code: type
+                list:
+                  - code: type
+                    value: custom_group
+              - code: config
+                list:
+                  - code: min
+                    value: "1"
+                  - code: max
+                    value: "1"
+                  - code: input
+                    value: select
+                  - code: seq
+                    value: "2"
+          - id: CG13
+            descriptor:
+              name: Choice of preparation
+            tags:
+              - code: type
+                list:
+                  - code: type
+                    value: custom_group
+              - code: config
+                list:
+                  - code: min
+                    value: "1"
+                  - code: max
+                    value: "1"
+                  - code: input
+                    value: select
+                  - code: seq
+                    value: "3"
+          - id: CG14
+            descriptor:
+              name: Choose Add Ons (up to 1 option)
+            tags:
+              - code: type
+                list:
+                  - code: type
+                    value: custom_group
+              - code: config
+                list:
+                  - code: min
+                    value: "0"
+                  - code: max
+                    value: "1"
+                  - code: input
+                    value: select
+                  - code: seq
+                    value: "4"
+          - id: CG15
+            descriptor:
+              name: Choose Add Ons (up to 1 option)
+            tags:
+              - code: type
+                list:
+                  - code: type
+                    value: custom_group
+              - code: config
+                list:
+                  - code: min
+                    value: "0"
+                  - code: max
+                    value: "1"
+                  - code: input
+                    value: select
+                  - code: seq
+                    value: "4"
+          - id: CG16
+            descriptor:
+              name: Choose Veggies (up to 1 option)
+            tags:
+              - code: type
+                list:
+                  - code: type
+                    value: custom_group
+              - code: config
+                list:
+                  - code: min
+                    value: "0"
+                  - code: max
+                    value: "1"
+                  - code: input
+                    value: select
+                  - code: seq
+                    value: "5"
+          - id: CG17
+            descriptor:
+              name: Choose Sauces (up to 1 option)
+            tags:
+              - code: type
+                list:
+                  - code: type
+                    value: custom_group
+              - code: config
+                list:
+                  - code: min
+                    value: "0"
+                  - code: max
+                    value: "1"
+                  - code: input
+                    value: select
+                  - code: seq
+                    value: "6"
+          - id: CG18
+            descriptor:
+              name: Choose Offers (up to 1 option)
+            tags:
+              - code: type
+                list:
+                  - code: type
+                    value: custom_group
+              - code: config
+                list:
+                  - code: min
+                    value: "0"
+                  - code: max
+                    value: "1"
+                  - code: input
+                    value: select
+                  - code: seq
+                    value: "7"
+
         items:
           - id: I1
             time:
