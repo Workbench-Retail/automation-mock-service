@@ -1,5 +1,6 @@
 import { SessionData, Input } from "../../../session-types";
 import { v4 as uuidv4 } from "uuid";
+import { stateCodes } from "../areaCodes";
 
 type TagEntry = {
   code: string;
@@ -32,9 +33,26 @@ export const selectGenerator = (
   sessionData: SessionData,
   inputs?: Input
 ) => {
+  if (inputs?.providerId) {
+    existingPayload.message.order.provider.id = inputs.providerId;
+  }
+
+  if (inputs?.locationId) {
+    existingPayload.message.order.provider.locations[0] = {
+      id: inputs.locationId,
+    };
+  }
+
   if (inputs?.items) {
     let newItems: any = [];
-    inputs.items.forEach((item: any) => {
+    let allItems = inputs.items;
+
+    // out of stock senario
+    if (inputs?.outOfStockitem) {
+      allItems = [...inputs.items, ...inputs.outOfStockitem];
+    }
+
+    allItems.forEach((item: any) => {
       const parentItemId = uuidv4();
       newItems.push({
         id: item.id,
@@ -88,6 +106,22 @@ export const selectGenerator = (
     });
 
     existingPayload.message.order.items = newItems;
+  }
+
+  if (inputs?.gps && inputs?.area_code) {
+    existingPayload.message.order.fulfillments[0] = {
+      end: {
+        location: {
+          gps: inputs.gps,
+          address: {
+            area_code: inputs.area_code,
+          },
+        },
+      },
+    };
+
+    existingPayload.context.city =
+      `std:${stateCodes[inputs?.area_code]}` || "std:011";
   }
 
   return existingPayload;

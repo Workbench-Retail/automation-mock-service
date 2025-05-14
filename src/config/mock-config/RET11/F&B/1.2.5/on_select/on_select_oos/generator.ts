@@ -1,8 +1,29 @@
-import { SessionData } from "../../../../session-types";
+import { SessionData, Input } from "../../../../session-types";
+
+type TagEntry = {
+  code: string;
+  value: string;
+};
+
+type Tag = {
+  code: string;
+  list: TagEntry[];
+};
+
+function getTagType(tags: Tag[]): string | undefined {
+  const typeTag = tags.find((tag) => tag.code === "type");
+
+  if (!typeTag) return undefined;
+
+  const typeEntry = typeTag.list.find((entry) => entry.code === "type");
+
+  return typeEntry?.value;
+}
 
 export const onSelectOOSGenerator = (
   existingPayload: any,
-  sessionData: SessionData
+  sessionData: SessionData,
+  inputs?: Input
 ) => {
   if (sessionData?.provider) {
     existingPayload.message.order.provider = sessionData.provider;
@@ -48,6 +69,25 @@ export const onSelectOOSGenerator = (
           currency: "INR",
           value: initialItemsData.price.value,
         },
+        tags: item.tags,
+      },
+    });
+
+    const type = getTagType(item.tags);
+    const taxPrice = type === "item" ? "12.00" : "0.00";
+
+    totalPrice += parseInt(taxPrice);
+
+    breakup.push({
+      "@ondc/org/item_id": item.id,
+      title: "Tax",
+      "@ondc/org/title_type": "tax",
+      price: {
+        currency: "INR",
+        value: taxPrice,
+      },
+      item: {
+        parent_item_id: item.parent_item_id,
         tags: item.tags,
       },
     });

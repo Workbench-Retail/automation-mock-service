@@ -1,6 +1,6 @@
-import { SessionData } from "../../../session-types";
+import { SessionData, Input } from "../../../session-types";
 
-export const onUpdateGenerator = (
+export const cancelGenerator = (
   existingPayload: any,
   sessionData: SessionData
 ) => {

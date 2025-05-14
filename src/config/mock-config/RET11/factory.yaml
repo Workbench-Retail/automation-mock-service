@@ -90,7 +90,42 @@ codes:
     default: on_status/default.yaml
     message_id: true
   - code: 118
+    action_id: select_oos
+    action: select
+    default: select/default.yaml
+    message_id: true
+  - code: 119
     action_id: on_select_oos
     action: on_select
     default: on_select/on_select_oos/default.yaml
+    message_id: false
+  - code: 120
+    action_id: cancel
+    action: cancel
+    default: cancel/default.yaml
+    message_id: true
+  - code: 121
+    action_id: on_cancel
+    action: on_cancel
+    default: on_cancel/default.yaml
+    message_id: false
+  - code: 120
+    action_id: cancel_force
+    action: cancel
+    default: cancel/cancel_force/default.yaml
+    message_id: true
+  - code: 121
+    action_id: on_select_multiple_fulfillment
+    action: on_select
+    default: on_select/on_select_multiple_fulfillment/default.yaml
+    message_id: false
+  - code: 122
+    action_id: track
+    action: track
+    default: track/default.yaml
+    message_id: true
+  - code: 123
+    action_id: on_track
+    action: on_track
+    default: on_track/default.yaml
     message_id: false

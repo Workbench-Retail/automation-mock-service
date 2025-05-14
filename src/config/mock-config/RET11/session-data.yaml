@@ -15,3 +15,4 @@ session_data:
   order_id: null
   stateCode: null
   np_type: null
+  cancellation_reason_id: null

@@ -1,4 +1,3 @@
-# /on_update (merchant cancels customized product DI1, qty 1)
 message:
   order:
     id: O1

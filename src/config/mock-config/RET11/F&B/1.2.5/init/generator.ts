@@ -1,8 +1,9 @@
-import { SessionData } from "../../../session-types";
+import { SessionData, Input } from "../../../session-types";
 
 export async function initGenerator(
   existingPayload: any,
-  sessionData: SessionData
+  sessionData: SessionData,
+  inputs?: Input
 ) {
   if (sessionData?.provider) {
     existingPayload.message.order.provider = sessionData.provider;
@@ -17,10 +18,26 @@ export async function initGenerator(
   existingPayload.message.order.billing.updated_at =
     existingPayload.context.timestamp;
 
+  console.log(
+    "wokring inputs",
+    inputs,
+    sessionData?.fulfillments?.find(
+      (fulfillment) =>
+        fulfillment.type === inputs?.fulfillmentType ||
+        fulfillment.type === "Delivery"
+    )
+  );
+
+  const selectedFulfillmentType = inputs?.fulfillmentType || "Delivery";
+
   if (sessionData.select_fulfillment) {
     existingPayload.message.order.fulfillments[0] = {
-      id: sessionData?.fulfillments[0].id,
-      type: sessionData.fulfillments[0].type,
+      id: sessionData?.fulfillments?.find(
+        (fulfillment) => fulfillment.type === selectedFulfillmentType
+      )?.id,
+      type: sessionData?.fulfillments?.find(
+        (fulfillment) => fulfillment.type === selectedFulfillmentType
+      )?.type,
       end: {
         location: {
           gps: sessionData?.select_fulfillment[0].end.location.gps,

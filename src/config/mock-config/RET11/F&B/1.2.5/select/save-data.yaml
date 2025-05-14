@@ -3,3 +3,4 @@ save-data:
   items: "$.message.order.items[*]"
   provider: "$.message.order.provider"
   select_fulfillment: "$.message.order.fulfillments[*]"
+  city_code: "$.context.city"

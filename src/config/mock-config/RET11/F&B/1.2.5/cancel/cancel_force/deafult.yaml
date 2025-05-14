@@ -1,0 +1,13 @@
+message:
+  order_id: O1
+  cancellation_reason_id: "002"
+  descriptor:
+    name: fulfillment
+    short_desc: F1
+    tags:
+      - code: params
+        list:
+          - code: force
+            value: "yes"
+          - code: ttl_response
+            value: PT1H

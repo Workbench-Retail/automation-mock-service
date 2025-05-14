@@ -136,7 +136,7 @@ message:
           - code: "parent"
             list:
               - code: "id"
-                value: "CG3" 
+                value: "CG3"
     billing:
       name: ONDC buyer
       address:
@@ -265,6 +265,37 @@ message:
           settlement_ifsc_code: XXXXXXXXX
           bank_name: xxxx
           branch_name: xxxx
+    cancellation_terms:
+      - fulfillment_state:
+          descriptor:
+            code: Pending
+            short_desc: "002"
+        cancellation_fee:
+          percentage: "0.00"
+      - fulfillment_state:
+          descriptor:
+            code: Packed
+            short_desc: "001,003"
+        cancellation_fee:
+          percentage: "100.00"
+      - fulfillment_state:
+          descriptor:
+            code: Order-picked-up
+            short_desc: "001,003"
+        cancellation_fee:
+          percentage: "100.00"
+      - fulfillment_state:
+          descriptor:
+            code: Out-for-delivery
+            short_desc: 009
+        cancellation_fee:
+          percentage: "100.00"
+      - fulfillment_state:
+          descriptor:
+            code: Out-for-delivery
+            short_desc: "010,011,012,013,014,015"
+        cancellation_fee:
+          percentage: "100.00"
     tags:
       - code: bpp_terms
         list:

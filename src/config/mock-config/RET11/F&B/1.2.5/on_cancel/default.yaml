@@ -1,8 +1,7 @@
-# /on_update (merchant cancels non-customized product I1, qty 1)
 message:
   order:
     id: O1
-    state: Accepted
+    state: Cancelled
     provider:
       id: P1
       locations:
@@ -11,11 +10,11 @@ message:
       - id: I1
         fulfillment_id: F1
         quantity:
-          count: 1
+          count: 0
       - id: I1
         fulfillment_id: C1
         quantity:
-          count: 1
+          count: 2
     billing:
       name: ONDC buyer
       address:
@@ -30,15 +29,19 @@ message:
       phone: "9886098860"
       created_at: "2025-01-08T09:00:00.000Z"
       updated_at: "2025-01-08T09:00:00.000Z"
+    cancellation:
+      cancelled_by: bnp.com
+      reason:
+        id: "006"
     fulfillments:
       - id: F1
         "@ondc/org/provider_name": LSP or Provider Name
+        state:
+          descriptor:
+            code: Cancelled
         type: Delivery
         tracking: true
         "@ondc/org/TAT": PT60M
-        state:
-          descriptor:
-            code: Pending
         start:
           location:
             id: L1
@@ -69,18 +72,25 @@ message:
           contact:
             phone: "9886098860"
             email: nobody@nomail.com
+        tags:
+          - code: cancel_request
+            list:
+              - code: reason_id
+                value: "006"
+              - code: initiated_by
+                value: bnp.com
+          - code: precancel_state
+            list:
+              - code: fulfillment_state
+                value: Order-picked-up
+              - code: updated_at
+                value: "2025-01-08T10:45:00.000Z"
       - id: C1
         type: Cancel
         state:
           descriptor:
             code: Cancelled
         tags:
-          - code: cancel_request
-            list:
-              - code: reason_id
-                value: "002"
-              - code: initiated_by
-                value: snp.com
           - code: quote_trail
             list:
               - code: type
@@ -90,30 +100,20 @@ message:
               - code: currency
                 value: INR
               - code: value
-                value: "-170.00"
-          - code: quote_trail
-            list:
-              - code: type
-                value: tax
-              - code: id
-                value: I1
-              - code: currency
-                value: INR
-              - code: value
-                value: "0.00"
+                value: "-340.00"
     quote:
       price:
         currency: INR
-        value: "254.00"
+        value: "84.00"
       breakup:
         - "@ondc/org/item_id": I1
           "@ondc/org/item_quantity":
-            count: 1
+            count: 0
           title: Atta
           "@ondc/org/title_type": item
           price:
             currency: INR
-            value: "170.00"
+            value: "0.00"
           item:
             price:
               currency: INR
@@ -148,21 +148,10 @@ message:
           price:
             currency: INR
             value: "0.00"
-        - "@ondc/org/item_id": I1
-          title: Discount
-          "@ondc/org/title_type": discount
-          price:
-            currency: INR
-            value: "-10.00"
-        - "@ondc/org/item_id": F1
-          title: Convenience Fee
-          "@ondc/org/title_type": misc
-          price:
-            currency: INR
-            value: "10.00"
       ttl: P1D
     payment:
       uri: "https://ondc.transaction.com/payment"
+      tl_method: http/get
       params:
         currency: INR
         transaction_id: "3937"
@@ -183,4 +172,4 @@ message:
           bank_name: xxxx
           branch_name: xxxx
     created_at: "2025-01-08T09:30:00.000Z"
-    updated_at: "2025-01-08T10:31:30.000Z"
+    updated_at: "2025-01-08T11:00:30.000Z"

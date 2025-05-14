@@ -11,6 +11,12 @@ import { confirmGenerator } from "./confirm/generator";
 import { onConfirmGenerator } from "./on_confirm/generator";
 import { onStatusGenerator } from "./on_status/generator";
 import { onSelectOOSGenerator } from "./on_select/on_select_oos/generator";
+import { cancelGenerator } from "./cancel/generator";
+import { onCancelGenerator } from "./on_cancel/generator";
+import { cancelForceGenerator } from "./cancel/cancel_force/generator";
+import { onSelectMultipleFulfillmentGenerator } from "./on_select/on_select_multiple_fulfillment/generator";
+import { trackGenerator } from "./track/generator";
+import { onTrackGenerator } from "./on_track/generator";
 
 export async function Generator(
   action_id: string,
@@ -33,10 +39,17 @@ export async function Generator(
       return await selectGenerator(existingPayload, sessionData, inputs);
     case "on_select":
       return await onSelectGenerator(existingPayload, sessionData);
+    case "select_oos":
+      return await selectGenerator(existingPayload, sessionData, inputs);
     case "on_select_oos":
-      return await onSelectOOSGenerator(existingPayload, sessionData);
+      return await onSelectOOSGenerator(existingPayload, sessionData, inputs);
+    case "on_select_multiple_fulfillment":
+      return await onSelectMultipleFulfillmentGenerator(
+        existingPayload,
+        sessionData
+      );
     case "init":
-      return await initGenerator(existingPayload, sessionData);
+      return await initGenerator(existingPayload, sessionData, inputs);
     case "on_init":
       return await onInitGenerator(existingPayload, sessionData);
     case "confirm":
@@ -66,7 +79,7 @@ export async function Generator(
     case "on_status_order_picked":
       return await onStatusGenerator(existingPayload, {
         ...sessionData,
-        stateCode: "Order-pciked",
+        stateCode: "Order-picked",
       });
     case "on_status_at_delivery":
       return await onStatusGenerator(existingPayload, {
@@ -78,6 +91,17 @@ export async function Generator(
         ...sessionData,
         stateCode: "Order-delivered",
       });
+    case "cancel":
+      return await cancelGenerator(existingPayload, sessionData);
+    case "cancel_force":
+      return await cancelForceGenerator(existingPayload, sessionData);
+    case "on_cancel":
+      return await onCancelGenerator(existingPayload, sessionData);
+    case "track":
+      return await trackGenerator(existingPayload, sessionData);
+    case "on_track":
+      return await onTrackGenerator(existingPayload, sessionData);
+
     default:
       throw new Error(`Invalid request type ${action_id}`);
   }

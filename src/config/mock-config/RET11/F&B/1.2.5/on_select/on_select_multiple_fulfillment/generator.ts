@@ -1,4 +1,4 @@
-import { SessionData } from "../../../session-types";
+import { SessionData } from "../../../../session-types";
 
 type TagEntry = {
   code: string;
@@ -20,7 +20,7 @@ function getTagType(tags: Tag[]): string | undefined {
   return typeEntry?.value;
 }
 
-export const onSelectGenerator = (
+export const onSelectMultipleFulfillmentGenerator = (
   existingPayload: any,
   sessionData: SessionData
 ) => {
@@ -118,11 +118,29 @@ export const onSelectGenerator = (
         value: "25.00",
       },
     },
+    {
+      "@ondc/org/item_id": "F2",
+      title: "Delivery charges",
+      "@ondc/org/title_type": "delivery",
+      price: {
+        currency: "INR",
+        value: "0.00",
+      },
+    },
+    {
+      "@ondc/org/item_id": "F2",
+      title: "Packing charges",
+      "@ondc/org/title_type": "packing",
+      price: {
+        currency: "INR",
+        value: "25.00",
+      },
+    },
   ];
 
   breakup = [...breakup, ...deliveryBreakup];
 
-  totalPrice += 75;
+  totalPrice += 100;
 
   existingPayload.message.order.quote.price = {
     currency: "INR",

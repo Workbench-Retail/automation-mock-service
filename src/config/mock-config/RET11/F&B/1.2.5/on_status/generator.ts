@@ -55,7 +55,7 @@ export const onStatusGenerator = (
       existingPayload.message.order.fulfillments[0].state.descriptor.code =
         sessionData.stateCode;
       break;
-    case "Order-pciked":
+    case "Order-picked":
       existingPayload.message.order.state = "In-progress";
       existingPayload.message.order.fulfillments[0].state.descriptor.code =
         sessionData.stateCode;

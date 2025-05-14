@@ -16,7 +16,7 @@ export interface SessionData {
   domain?: string;
 
   // order phase
-  fulfillments: any[];
+  fulfillments?: any[];
   selected_items: any[];
   selected_item_id: string;
   quote: any;
@@ -31,10 +31,11 @@ export interface SessionData {
   on_search_items?: any[];
   provider?: any;
   select_fulfillment?: any[];
-  confirm_created_at_timestamp?: string
+  confirm_created_at_timestamp?: string;
   order_id?: string;
   stateCode?: string;
   np_type?: string;
+  cancellation_reason_id?: string;
 }
 
 export type BecknContext = {
@@ -57,4 +58,10 @@ export interface Input {
   search_mode?: string;
   items?: any;
   npType?: string;
+  outOfStockitem?: any;
+  fulfillmentType?: string;
+  gps?: string;
+  area_code?: string;
+  providerId?: string;
+  locationId?: string;
 }
