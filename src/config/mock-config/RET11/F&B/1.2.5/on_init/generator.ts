@@ -66,10 +66,10 @@ export async function onInitGenerator(
         parent_item_id: item.parent_item_id,
         quantity: {
           available: {
-            count: initialItemsData.quantity.available,
+            count: initialItemsData.quantity.available.count,
           },
           maximum: {
-            count: initialItemsData.quantity.maximum,
+            count: initialItemsData.quantity.maximum.count,
           },
         },
         price: {

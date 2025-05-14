@@ -287,7 +287,7 @@ message:
       - fulfillment_state:
           descriptor:
             code: Out-for-delivery
-            short_desc: 009
+            short_desc: "009"
         cancellation_fee:
           percentage: "100.00"
       - fulfillment_state:

@@ -621,7 +621,7 @@ message:
       - fulfillment_state:
           descriptor:
             code: Out-for-delivery
-            short_desc: 009
+            short_desc: "009"
         cancellation_fee:
           percentage: "100.00"
       - fulfillment_state:
@@ -629,7 +629,7 @@ message:
             code: Out-for-delivery
             short_desc: "010,011,012,013,014,015"
         cancellation_fee:
-          percentage: "100.00"   
+          percentage: "100.00"
     tags:
       - code: "bpp_terms"
         list:
