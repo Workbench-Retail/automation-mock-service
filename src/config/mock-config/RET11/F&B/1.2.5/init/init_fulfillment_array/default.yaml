@@ -6,21 +6,20 @@ message:
         - id: "L1"
     items:
       - id: "I1"
-        parent_item_id: "DI1"
-        location_id: "L1"
+        fulfillment_id: "F1"
         quantity:
           count: 1
+        parent_item_id: "DI1"
         tags:
           - code: "type"
             list:
               - code: "type"
                 value: "item"
-
       - id: "C1"
-        parent_item_id: "DI1"
-        location_id: "L1"
+        fulfillment_id: "F1"
         quantity:
           count: 1
+        parent_item_id: "DI1"
         tags:
           - code: "type"
             list:
@@ -30,12 +29,11 @@ message:
             list:
               - code: "id"
                 value: "CG1"
-
       - id: "C7"
-        parent_item_id: "DI1"
-        location_id: "L1"
+        fulfillment_id: "F1"
         quantity:
           count: 1
+        parent_item_id: "DI1"
         tags:
           - code: "type"
             list:
@@ -45,12 +43,11 @@ message:
             list:
               - code: "id"
                 value: "CG2"
-
       - id: "C14"
-        parent_item_id: "DI1"
-        location_id: "L1"
+        fulfillment_id: "F1"
         quantity:
           count: 1
+        parent_item_id: "DI1"
         tags:
           - code: "type"
             list:
@@ -60,12 +57,11 @@ message:
             list:
               - code: "id"
                 value: "CG3"
-
       - id: "C16"
-        parent_item_id: "DI1"
-        location_id: "L1"
+        fulfillment_id: "F1"
         quantity:
           count: 1
+        parent_item_id: "DI1"
         tags:
           - code: "type"
             list:
@@ -75,23 +71,21 @@ message:
             list:
               - code: "id"
                 value: "CG3"
-
       - id: "I1"
-        parent_item_id: "DI2"
-        location_id: "L1"
+        fulfillment_id: "F1"
         quantity:
           count: 1
+        parent_item_id: "DI2"
         tags:
           - code: "type"
             list:
               - code: "type"
                 value: "item"
-
       - id: "C2"
-        parent_item_id: "DI2"
-        location_id: "L1"
+        fulfillment_id: "F1"
         quantity:
           count: 1
+        parent_item_id: "DI2"
         tags:
           - code: "type"
             list:
@@ -101,12 +95,11 @@ message:
             list:
               - code: "id"
                 value: "CG1"
-
       - id: "C7"
-        parent_item_id: "DI2"
-        location_id: "L1"
+        fulfillment_id: "F1"
         quantity:
           count: 1
+        parent_item_id: "DI2"
         tags:
           - code: "type"
             list:
@@ -116,12 +109,11 @@ message:
             list:
               - code: "id"
                 value: "CG2"
-
       - id: "C14"
-        parent_item_id: "DI2"
-        location_id: "L1"
+        fulfillment_id: "F1"
         quantity:
           count: 1
+        parent_item_id: "DI2"
         tags:
           - code: "type"
             list:
@@ -131,12 +123,11 @@ message:
             list:
               - code: "id"
                 value: "CG3"
-
       - id: "C15"
-        parent_item_id: "DI2"
-        location_id: "L1"
+        fulfillment_id: "F1"
         quantity:
           count: 1
+        parent_item_id: "DI2"
         tags:
           - code: "type"
             list:
@@ -146,10 +137,34 @@ message:
             list:
               - code: "id"
                 value: "CG3"
-
+    billing:
+      name: "ONDC buyer"
+      address:
+        name: "my house or door or floor #"
+        building: "my building name or house #"
+        locality: "my street name"
+        city: "Bengaluru"
+        state: "Karnataka"
+        country: "IND"
+        area_code: "560037"
+      tax_number: "XXXXXXXXXXXXXXX"
+      email: "nobody@nomail.com"
+      phone: "9886098860"
+      created_at: "2025-01-08T09:00:00.000Z"
+      updated_at: "2025-01-08T09:00:00.000Z"
     fulfillments:
-      - end:
+      - id: "F1"
+        type: "Delivery"
+        end:
           location:
             gps: "12.4535,77.9283"
             address:
-              area_code: "560001"
+              name: "my house or door or floor #"
+              building: "my building name or house #"
+              locality: "my street name"
+              city: "Bengaluru"
+              state: "Karnataka"
+              country: "IND"
+              area_code: "560037"
+          contact:
+            phone: "9886098860"

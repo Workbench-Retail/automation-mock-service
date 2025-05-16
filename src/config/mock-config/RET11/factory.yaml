@@ -129,3 +129,18 @@ codes:
     action: on_track
     default: on_track/default.yaml
     message_id: false
+  - code: 124
+    action_id: init_fulfillment_array
+    action: init
+    default: init/init_fulfillment_array/default.yaml
+    message_id: true
+  - code: 125
+    action_id: on_init_fulfillment_array
+    action: on_init
+    default: on_init/on_init_fulfillment_array/default.yaml
+    message_id: false
+  - code: 126
+    action_id: on_select_fulfillment_array
+    action: on_select
+    default: on_select/on_select_fulfillment_array/default.yaml
+    message_id: false

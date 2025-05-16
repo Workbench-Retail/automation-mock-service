@@ -17,6 +17,9 @@ import { cancelForceGenerator } from "./cancel/cancel_force/generator";
 import { onSelectMultipleFulfillmentGenerator } from "./on_select/on_select_multiple_fulfillment/generator";
 import { trackGenerator } from "./track/generator";
 import { onTrackGenerator } from "./on_track/generator";
+import { initFulfillmentArrayGenerator } from "./init/init_fulfillment_array/generator";
+import { onInitFulfillmentArrayGenerator } from "./on_init/on_init_fulfillment_array/generator";
+import { onSelectFulfillmentArrayGenerator } from "./on_select/on_select_fulfillment_array/generator";
 
 export async function Generator(
   action_id: string,
@@ -48,10 +51,22 @@ export async function Generator(
         existingPayload,
         sessionData
       );
+    case "on_select_fulfillment_array":
+      return await onSelectFulfillmentArrayGenerator(
+        existingPayload,
+        sessionData
+      );
     case "init":
       return await initGenerator(existingPayload, sessionData, inputs);
+    case "init_fulfillment_array":
+      return await initFulfillmentArrayGenerator(existingPayload, sessionData);
     case "on_init":
       return await onInitGenerator(existingPayload, sessionData);
+    case "on_init_fulfillment_array":
+      return await onInitFulfillmentArrayGenerator(
+        existingPayload,
+        sessionData
+      );
     case "confirm":
       return await confirmGenerator(existingPayload, sessionData);
     case "on_confirm":

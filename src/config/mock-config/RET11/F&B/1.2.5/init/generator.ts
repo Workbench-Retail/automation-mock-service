@@ -18,16 +18,6 @@ export async function initGenerator(
   existingPayload.message.order.billing.updated_at =
     existingPayload.context.timestamp;
 
-  console.log(
-    "wokring inputs",
-    inputs,
-    sessionData?.fulfillments?.find(
-      (fulfillment) =>
-        fulfillment.type === inputs?.fulfillmentType ||
-        fulfillment.type === "Delivery"
-    )
-  );
-
   const selectedFulfillmentType = inputs?.fulfillmentType || "Delivery";
 
   if (sessionData.select_fulfillment) {

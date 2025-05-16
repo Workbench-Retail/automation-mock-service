@@ -1,4 +1,0 @@
-save-data:
-  items: "$.message.order.items[*]"
-  fulfillments: "$.message.order.fulfillments[*]"
-  fulfillment_end_location: "$.message.order.fulfillments[*].end.location"

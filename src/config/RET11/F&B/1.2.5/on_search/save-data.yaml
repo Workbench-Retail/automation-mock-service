@@ -1,3 +1,0 @@
-save-data:
-  bpp_id: "$.context.bpp_id"
-  bpp_uri: "$.context.bpp_uri"
