@@ -124,5 +124,25 @@ export const selectGenerator = (
       `std:${stateCodes[inputs?.area_code]}` || "std:011";
   }
 
+  if (inputs?.options) {
+    if (inputs.options.includes("demandSignal")) {
+      existingPayload.message.order.tags = [
+        {
+          code: "bnp_demand_signal",
+          list: [
+            {
+              code: "source",
+              value: "digihaat.com",
+            },
+            {
+              code: "campaign",
+              value: "RD76_sale",
+            },
+          ],
+        },
+      ];
+    }
+  }
+
   return existingPayload;
 };

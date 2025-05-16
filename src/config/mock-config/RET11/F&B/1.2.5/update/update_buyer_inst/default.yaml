@@ -1,0 +1,14 @@
+message:
+  update_target: fulfillment
+  order:
+    id: O1
+    fulfillments:
+      - id: F1
+        end:
+          instructions:
+            long_desc: >-
+              additional instructions for delivery e.g. leave package outside
+              door
+            additional_desc:
+              content_type: text/html
+              url: url for additional info

@@ -36,6 +36,10 @@ export interface SessionData {
   stateCode?: string;
   np_type?: string;
   cancellation_reason_id?: string;
+  updated_address?: any;
+  updated_inst?: any;
+  order_state?: string;
+  deliveryAuth?: boolean;
 }
 
 export type BecknContext = {
@@ -64,4 +68,5 @@ export interface Input {
   area_code?: string;
   providerId?: string;
   locationId?: string;
+  options?: any;
 }

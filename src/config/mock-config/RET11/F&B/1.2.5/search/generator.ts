@@ -1,4 +1,6 @@
-import { SessionData } from "../../../session-types";
+import { SessionData, Input } from "../../../session-types";
+
+import { getFutureDate } from "../../../../../../utils/generic-utils";
 
 const featureDiscoveryCode = [
   "001",
@@ -50,7 +52,8 @@ const featureDiscoveryCode = [
 
 export const searchGenerator = (
   existingPayload: any,
-  sessionData: SessionData
+  sessionData: SessionData,
+  inputs?: Input
 ) => {
   existingPayload.message.intent.tags.push({
     code: "bap_features",
@@ -61,5 +64,58 @@ export const searchGenerator = (
       };
     }),
   });
+
+  if (inputs?.options) {
+    if (inputs.options.includes("promo")) {
+      existingPayload.message.intent.tags.push(
+        {
+          code: "bap_promos",
+          list: [
+            {
+              code: "category",
+              value: "Sweaters",
+            },
+            {
+              code: "from",
+              value: existingPayload.context.timestamp,
+            },
+            {
+              code: "to",
+              value: getFutureDate(5),
+            },
+          ],
+        },
+        {
+          code: "bap_promos",
+          list: [
+            {
+              code: "category",
+              value: "Tracker Devices",
+            },
+            {
+              code: "from",
+              value: existingPayload.context.timestamp,
+            },
+            {
+              code: "to",
+              value: getFutureDate(6),
+            },
+          ],
+        }
+      );
+    }
+
+    if (inputs.options.includes("demandSignal")) {
+      existingPayload.message.intent.tags.push({
+        code: "bnp_demand_signal",
+        list: [
+          {
+            code: "search_term",
+            value: '[{"sweater"},{"winter wear"},{"woollens"}]',
+          },
+        ],
+      });
+    }
+  }
   return existingPayload;
 };

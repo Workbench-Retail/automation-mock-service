@@ -144,3 +144,28 @@ codes:
     action: on_select
     default: on_select/on_select_fulfillment_array/default.yaml
     message_id: false
+  - code: 127
+    action_id: update_address
+    action: update
+    default: update/update_address/default.yaml
+    message_id: true
+  - code: 128
+    action_id: update_buyer_inst
+    action: update
+    default: update/update_buyer_inst/default.yaml
+    message_id: true
+  - code: 129
+    action_id: on_update_address
+    action: on_update
+    default: on_update/default.yaml
+    message_id: false
+  - code: 130
+    action_id: on_update_buyer_inst
+    action: on_update
+    default: on_update/default.yaml
+    message_id: false
+  - code: 131
+    action_id: on_update_delivery_auth
+    action: on_update
+    default: on_update/default.yaml
+    message_id: true

@@ -16,3 +16,6 @@ session_data:
   stateCode: null
   np_type: null
   cancellation_reason_id: null
+  updated_address: {}
+  updated_inst: {}
+  order_state: null

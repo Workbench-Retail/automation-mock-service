@@ -20,6 +20,9 @@ import { onTrackGenerator } from "./on_track/generator";
 import { initFulfillmentArrayGenerator } from "./init/init_fulfillment_array/generator";
 import { onInitFulfillmentArrayGenerator } from "./on_init/on_init_fulfillment_array/generator";
 import { onSelectFulfillmentArrayGenerator } from "./on_select/on_select_fulfillment_array/generator";
+import { updateAddressGenerator } from "./update/update_address/generator";
+import { updateBuyerInstGenerator } from "./update/update_buyer_inst/generator";
+import { onUpdateGenerator } from "./on_update/generator";
 
 export async function Generator(
   action_id: string,
@@ -29,7 +32,7 @@ export async function Generator(
 ) {
   switch (action_id) {
     case "search":
-      return await searchGenerator(existingPayload, sessionData);
+      return await searchGenerator(existingPayload, sessionData, inputs);
     case "on_search":
       return await onSearchGenerator(existingPayload, sessionData, inputs);
     case "search_1":
@@ -116,6 +119,19 @@ export async function Generator(
       return await trackGenerator(existingPayload, sessionData);
     case "on_track":
       return await onTrackGenerator(existingPayload, sessionData);
+    case "update_address":
+      return await updateAddressGenerator(existingPayload, sessionData);
+    case "update_buyer_inst":
+      return await updateBuyerInstGenerator(existingPayload, sessionData);
+    case "on_update_address":
+      return await onUpdateGenerator(existingPayload, sessionData);
+    case "on_update_buyer_inst":
+      return await onUpdateGenerator(existingPayload, sessionData);
+    case "on_update_delivery_auth":
+      return await onUpdateGenerator(existingPayload, {
+        ...sessionData,
+        deliveryAuth: true,
+      });
 
     default:
       throw new Error(`Invalid request type ${action_id}`);
