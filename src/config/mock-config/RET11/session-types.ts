@@ -69,4 +69,5 @@ export interface Input {
   providerId?: string;
   locationId?: string;
   options?: any;
+  selectedFulfillment?: string;
 }

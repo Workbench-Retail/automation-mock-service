@@ -70,6 +70,11 @@ export const onStatusGenerator = (
       existingPayload.message.order.fulfillments[0].state.descriptor.code =
         sessionData.stateCode;
       break;
+    case "Order-picked-self-delivery":
+      existingPayload.message.order.state = "Completed";
+      existingPayload.message.order.fulfillments[0].state.descriptor.code =
+        "Order-picked";
+      break;
   }
 
   return existingPayload;

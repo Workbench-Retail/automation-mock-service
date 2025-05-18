@@ -23,6 +23,7 @@ import { onSelectFulfillmentArrayGenerator } from "./on_select/on_select_fulfill
 import { updateAddressGenerator } from "./update/update_address/generator";
 import { updateBuyerInstGenerator } from "./update/update_buyer_inst/generator";
 import { onUpdateGenerator } from "./on_update/generator";
+import { initMultipleFulfillmentGenerator } from "./init/init_multiple_fulfillment/generator";
 
 export async function Generator(
   action_id: string,
@@ -61,6 +62,12 @@ export async function Generator(
       );
     case "init":
       return await initGenerator(existingPayload, sessionData, inputs);
+    case "init_multiple_fulfillment":
+      return await initMultipleFulfillmentGenerator(
+        existingPayload,
+        sessionData,
+        inputs
+      );
     case "init_fulfillment_array":
       return await initFulfillmentArrayGenerator(existingPayload, sessionData);
     case "on_init":
@@ -108,6 +115,11 @@ export async function Generator(
       return await onStatusGenerator(existingPayload, {
         ...sessionData,
         stateCode: "Order-delivered",
+      });
+    case "on_status_self_delivery_picked":
+      return await onStatusGenerator(existingPayload, {
+        ...sessionData,
+        stateCode: "Order-picked-self-delivery",
       });
     case "cancel":
       return await cancelGenerator(existingPayload, sessionData);

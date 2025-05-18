@@ -169,3 +169,13 @@ codes:
     action: on_update
     default: on_update/default.yaml
     message_id: true
+  - code: 132
+    action_id: init_multiple_fulfillment
+    action: init
+    default: init/init_multiple_fulfillment/default.yaml
+    message_id: true
+  - code: 133
+    action_id: on_status_self_delivery_picked
+    action: on_status
+    default: on_status/default.yaml
+    message_id: true

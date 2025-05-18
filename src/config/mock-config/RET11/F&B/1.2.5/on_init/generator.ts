@@ -102,7 +102,7 @@ export async function onInitGenerator(
 
   const deliveryBreakup = [
     {
-      "@ondc/org/item_id": "F1",
+      "@ondc/org/item_id": sessionData.fulfillments?.[0]?.id || "F1",
       title: "Delivery charges",
       "@ondc/org/title_type": "delivery",
       price: {
@@ -111,7 +111,7 @@ export async function onInitGenerator(
       },
     },
     {
-      "@ondc/org/item_id": "F1",
+      "@ondc/org/item_id": sessionData.fulfillments?.[0]?.id || "F1",
       title: "Packing charges",
       "@ondc/org/title_type": "packing",
       price: {
