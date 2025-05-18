@@ -70,4 +70,5 @@ export interface Input {
   locationId?: string;
   options?: any;
   selectedFulfillment?: string;
+  oosItem?: string;
 }

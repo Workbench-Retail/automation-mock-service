@@ -49,4 +49,4 @@ message:
 error:
   type: DOMAIN-ERROR
   code: "40002"
-  message: M1
+  message: Item out of stock

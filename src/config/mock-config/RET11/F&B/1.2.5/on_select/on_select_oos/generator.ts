@@ -29,11 +29,18 @@ export const onSelectOOSGenerator = (
     existingPayload.message.order.provider = sessionData.provider;
   }
 
-  if (sessionData?.items) {
-    existingPayload.message.order.items = sessionData.items;
+  if (sessionData?.items && sessionData?.select_fulfillment?.length) {
+    existingPayload.message.order.items = sessionData.items.map((item: any) => {
+      return {
+        ...item,
+        fulfillment_id: existingPayload.message.order.fulfillments?.find(
+          (fulfillment: any) => fulfillment.type === "Delivery"
+        )?.id,
+      };
+    });
   }
 
-  const breakup: any = [];
+  let breakup: any = [];
   let totalPrice = 0;
 
   sessionData.items.forEach((item: any) => {
@@ -44,30 +51,37 @@ export const onSelectOOSGenerator = (
     totalPrice += parseInt(initialItemsData.price.value);
 
     console.log("iinitalalsd", initialItemsData);
+
+    let isOOSItem = false;
+
+    if (inputs?.oosItem === item.id) {
+      isOOSItem = true;
+    }
+
     breakup.push({
       "@ondc/org/item_id": item.id,
       "@ondc/org/item_quantity": {
-        count: 0,
+        count: isOOSItem ? 0 : 1,
       },
       title: initialItemsData.descriptor.name,
       "@ondc/org/title_type": "item",
       price: {
         currency: "INR",
-        value: "0",
+        value: initialItemsData.price.value, /// ??????
       },
       item: {
         parent_item_id: item.parent_item_id,
         quantity: {
           available: {
-            count: 0,
+            count: isOOSItem ? "0" : initialItemsData.quantity.available.count,
           },
           maximum: {
-            count: 0,
+            count: isOOSItem ? "0" : initialItemsData.quantity.maximum.count,
           },
         },
         price: {
           currency: "INR",
-          value: initialItemsData.price.value,
+          value: initialItemsData.price.value, /// ?????????
         },
         tags: item.tags,
       },
@@ -76,22 +90,49 @@ export const onSelectOOSGenerator = (
     const type = getTagType(item.tags);
     const taxPrice = type === "item" ? "12.00" : "0.00";
 
-    totalPrice += parseInt(taxPrice);
+    if (!isOOSItem) {
+      totalPrice += parseInt(taxPrice);
 
-    breakup.push({
-      "@ondc/org/item_id": item.id,
-      title: "Tax",
-      "@ondc/org/title_type": "tax",
+      breakup.push({
+        "@ondc/org/item_id": item.id,
+        title: "Tax",
+        "@ondc/org/title_type": "tax",
+        price: {
+          currency: "INR",
+          value: taxPrice,
+        },
+        item: {
+          parent_item_id: item.parent_item_id,
+          tags: item.tags,
+        },
+      });
+    }
+  });
+
+  const deliveryBreakup = [
+    {
+      "@ondc/org/item_id": "F1",
+      title: "Delivery charges",
+      "@ondc/org/title_type": "delivery",
       price: {
         currency: "INR",
-        value: taxPrice,
+        value: "50.00",
       },
-      item: {
-        parent_item_id: item.parent_item_id,
-        tags: item.tags,
+    },
+    {
+      "@ondc/org/item_id": "F1",
+      title: "Packing charges",
+      "@ondc/org/title_type": "packing",
+      price: {
+        currency: "INR",
+        value: "25.00",
       },
-    });
-  });
+    },
+  ];
+
+  breakup = [...breakup, ...deliveryBreakup];
+
+  totalPrice += 75;
 
   existingPayload.message.order.quote.price = {
     currency: "INR",

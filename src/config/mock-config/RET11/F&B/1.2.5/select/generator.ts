@@ -47,11 +47,6 @@ export const selectGenerator = (
     let newItems: any = [];
     let allItems = inputs.items;
 
-    // out of stock senario
-    if (inputs?.outOfStockitem) {
-      allItems = [...inputs.items, ...inputs.outOfStockitem];
-    }
-
     allItems.forEach((item: any) => {
       const parentItemId = uuidv4();
       newItems.push({
