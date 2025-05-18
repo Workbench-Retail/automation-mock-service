@@ -46,6 +46,10 @@ export const onCancelGenerator = (
     });
   });
 
+  existingPayload.message.order.items = newItems;
+
+  const quoteTrailTags: any[] = [];
+
   if (sessionData.fulfillments) {
     existingPayload.message.order.fulfillments[0] = {
       ...sessionData.fulfillments[0],
@@ -69,15 +73,6 @@ export const onCancelGenerator = (
           ],
         },
         {
-          code: "igm_request",
-          list: [
-            {
-              code: "id",
-              value: "Issue1",
-            },
-          ],
-        },
-        {
           code: "precancel_state",
           list: [
             {
@@ -93,6 +88,35 @@ export const onCancelGenerator = (
       ],
     };
 
+    sessionData.quote.breakup.forEach((item: any) => {
+      if (
+        item["@ondc/org/title_type"] === "item" ||
+        item["@ondc/org/title_type"] === "tax"
+      ) {
+        quoteTrailTags.push({
+          code: "quote_trail",
+          list: [
+            {
+              code: "type",
+              value: item["@ondc/org/title_type"],
+            },
+            {
+              code: "id",
+              value: item["@ondc/org/item_id"],
+            },
+            {
+              code: "currency",
+              value: "INR",
+            },
+            {
+              code: "value",
+              value: `-${item.price.value}`,
+            },
+          ],
+        });
+      }
+    });
+
     existingPayload.message.order.fulfillments[1] = {
       id: "C1",
       type: "Cancel",
@@ -101,9 +125,7 @@ export const onCancelGenerator = (
           code: "Cancelled",
         },
       },
-      tags: [
-        // ????????
-      ],
+      tags: quoteTrailTags,
     };
   }
 
@@ -115,6 +137,11 @@ export const onCancelGenerator = (
           return {
             ...item,
             "@ondc/org/item_quantity": { count: 0 },
+            price: { currency: "INR", value: "0.00" },
+          };
+        } else if (item["@ondc/org/title_type"] === "tax") {
+          return {
+            ...item,
             price: { currency: "INR", value: "0.00" },
           };
         } else {
