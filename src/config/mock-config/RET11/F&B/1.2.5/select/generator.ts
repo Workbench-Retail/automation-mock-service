@@ -52,7 +52,7 @@ export const selectGenerator = (
       newItems.push({
         id: item.id,
         parent_item_id: parentItemId,
-        location_id: "L1",
+        location_id: inputs.locationId,
         quantity: { count: 1 },
         tags: [
           {
@@ -71,7 +71,7 @@ export const selectGenerator = (
         newItems.push({
           id: customisation,
           parent_item_id: parentItemId,
-          location_id: "L1",
+          location_id: inputs.locationId,
           quantity: { count: 1 },
           tags: [
             {

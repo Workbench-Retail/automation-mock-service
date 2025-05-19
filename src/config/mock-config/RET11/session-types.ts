@@ -71,4 +71,6 @@ export interface Input {
   options?: any;
   selectedFulfillment?: string;
   oosItem?: string;
+  returnItemId?: string;
+  returnReason?: string;
 }

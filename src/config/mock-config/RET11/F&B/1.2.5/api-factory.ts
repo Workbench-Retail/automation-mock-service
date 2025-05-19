@@ -24,6 +24,9 @@ import { updateAddressGenerator } from "./update/update_address/generator";
 import { updateBuyerInstGenerator } from "./update/update_buyer_inst/generator";
 import { onUpdateGenerator } from "./on_update/generator";
 import { initMultipleFulfillmentGenerator } from "./init/init_multiple_fulfillment/generator";
+import { updateSettlelmentGenerator } from "./update/update_settelment/generator";
+import { onUpdatePartCancelGenerator } from "./on_update/on_update_part_cancel/generator";
+import { updateReturnGenerator } from "./update/update_return/generator";
 
 export async function Generator(
   action_id: string,
@@ -135,6 +138,10 @@ export async function Generator(
       return await updateAddressGenerator(existingPayload, sessionData);
     case "update_buyer_inst":
       return await updateBuyerInstGenerator(existingPayload, sessionData);
+    case "update_settelment":
+      return await updateSettlelmentGenerator(existingPayload, sessionData);
+    case "update_return":
+      return await updateReturnGenerator(existingPayload, sessionData);
     case "on_update_address":
       return await onUpdateGenerator(existingPayload, sessionData);
     case "on_update_buyer_inst":
@@ -144,7 +151,8 @@ export async function Generator(
         ...sessionData,
         deliveryAuth: true,
       });
-
+    case "on_update_part_cancel":
+      return await onUpdatePartCancelGenerator(existingPayload, sessionData);
     default:
       throw new Error(`Invalid request type ${action_id}`);
   }

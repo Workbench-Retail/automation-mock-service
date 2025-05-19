@@ -179,3 +179,18 @@ codes:
     action: on_status
     default: on_status/default.yaml
     message_id: true
+  - code: 134
+    action_id: update_settelment
+    action: update
+    default: update/update_settelment/default.yaml
+    message_id: true
+  - code: 135
+    action_id: on_update_part_cancel
+    action: on_update
+    default: on_update/on_update_part_cancel/default.yaml
+    message_id: true
+  - code: 136
+    action_id: update_return
+    action: update
+    default: update/update_return/default.yaml
+    message_id: true
