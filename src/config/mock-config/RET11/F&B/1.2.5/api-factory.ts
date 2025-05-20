@@ -27,6 +27,7 @@ import { initMultipleFulfillmentGenerator } from "./init/init_multiple_fulfillme
 import { updateSettlelmentGenerator } from "./update/update_settelment/generator";
 import { onUpdatePartCancelGenerator } from "./on_update/on_update_part_cancel/generator";
 import { updateReturnGenerator } from "./update/update_return/generator";
+import { onUpdateReturnGenerator } from "./on_update/on_update_return/generator";
 
 export async function Generator(
   action_id: string,
@@ -138,10 +139,21 @@ export async function Generator(
       return await updateAddressGenerator(existingPayload, sessionData);
     case "update_buyer_inst":
       return await updateBuyerInstGenerator(existingPayload, sessionData);
-    case "update_settelment":
-      return await updateSettlelmentGenerator(existingPayload, sessionData);
+    case "update_settelment_cancel":
+      return await updateSettlelmentGenerator(
+        existingPayload,
+        sessionData,
+        action_id
+      );
+    case "update_settelment_return":
+      return await updateSettlelmentGenerator(
+        existingPayload,
+        sessionData,
+        action_id
+      );
+
     case "update_return":
-      return await updateReturnGenerator(existingPayload, sessionData);
+      return await updateReturnGenerator(existingPayload, sessionData, inputs);
     case "on_update_address":
       return await onUpdateGenerator(existingPayload, sessionData);
     case "on_update_buyer_inst":
@@ -153,6 +165,18 @@ export async function Generator(
       });
     case "on_update_part_cancel":
       return await onUpdatePartCancelGenerator(existingPayload, sessionData);
+    case "on_update_return_intermin":
+      return await onUpdateReturnGenerator(
+        existingPayload,
+        sessionData,
+        action_id
+      );
+    case "on_update_return_final":
+      return await onUpdateReturnGenerator(
+        existingPayload,
+        sessionData,
+        action_id
+      );
     default:
       throw new Error(`Invalid request type ${action_id}`);
   }

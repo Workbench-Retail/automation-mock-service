@@ -19,3 +19,6 @@ session_data:
   updated_address: {}
   updated_inst: {}
   order_state: null
+  update_return_fulfillments: []
+  return_item_id: null
+  return_item_count: null

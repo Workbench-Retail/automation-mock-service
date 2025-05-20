@@ -2,3 +2,6 @@ save-data:
   message_id: "$.context.message_id"
   updated_address: "$.message.order.fulfillments[*].end.location"
   updated_inst: "$.message.order.fulfillments[*].end.instructions"
+  update_return_fulfillments: "$.message.order.fulfillments[*]"
+  return_item_id: '$.message.order.fulfillments[*].tags[*].list[?(@.code=="item_id")].value'
+  return_item_count: '$.message.order.fulfillments[*].tags[*].list[?(@.code=="item_quantity")].value'

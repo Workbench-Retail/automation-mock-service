@@ -40,6 +40,9 @@ export interface SessionData {
   updated_inst?: any;
   order_state?: string;
   deliveryAuth?: boolean;
+  update_return_fulfillments?: any[];
+  return_item_id?: string;
+  return_item_count?: string;
 }
 
 export type BecknContext = {

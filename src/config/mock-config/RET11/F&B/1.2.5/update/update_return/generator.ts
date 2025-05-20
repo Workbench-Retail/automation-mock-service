@@ -9,6 +9,20 @@ export const updateReturnGenerator = (
     existingPayload.message.order.id = sessionData.order_id;
   }
 
+  console.log("inputs?.returnItemId", inputs?.returnItemId);
+  console.log(
+    "::::::: ",
+    sessionData.items.find((item) => item.id === inputs?.returnItemId)
+  );
+
+  let parentItemId = "";
+
+  sessionData.items.forEach((item) => {
+    if (item.id === inputs?.returnItemId) {
+      parentItemId = item.parent_item_id;
+    }
+  });
+
   existingPayload.message.order.fulfillments = [
     {
       type: "Return",

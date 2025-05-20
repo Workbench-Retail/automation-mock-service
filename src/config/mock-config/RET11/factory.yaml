@@ -180,7 +180,7 @@ codes:
     default: on_status/default.yaml
     message_id: true
   - code: 134
-    action_id: update_settelment
+    action_id: update_settelment_cancel
     action: update
     default: update/update_settelment/default.yaml
     message_id: true
@@ -193,4 +193,19 @@ codes:
     action_id: update_return
     action: update
     default: update/update_return/default.yaml
+    message_id: true
+  - code: 137
+    action_id: on_update_return_intermin
+    action: on_update
+    default: on_update/on_update_return/default.yaml
+    message_id: true
+  - code: 138
+    action_id: on_update_return_final
+    action: on_update
+    default: on_update/on_update_return/default.yaml
+    message_id: true
+  - code: 139
+    action_id: update_settelment_return
+    action: update
+    default: update/update_settelment/default.yaml
     message_id: true
