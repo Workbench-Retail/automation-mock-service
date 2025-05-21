@@ -28,6 +28,8 @@ import { updateSettlelmentGenerator } from "./update/update_settelment/generator
 import { onUpdatePartCancelGenerator } from "./on_update/on_update_part_cancel/generator";
 import { updateReturnGenerator } from "./update/update_return/generator";
 import { onUpdateReturnGenerator } from "./on_update/on_update_return/generator";
+import { updateBuyerDeliveryGenerator } from "./update/update_buyer_delivery/generator";
+import { onUpdateBuyerDeliveryGenerator } from "./on_update/on_update_buyer_delivery/generator";
 
 export async function Generator(
   action_id: string,
@@ -151,7 +153,18 @@ export async function Generator(
         sessionData,
         action_id
       );
-
+    case "update_buyer_delivery_intermin":
+      return await updateBuyerDeliveryGenerator(
+        existingPayload,
+        sessionData,
+        action_id
+      );
+    case "update_buyer_delivery_final":
+      return await updateBuyerDeliveryGenerator(
+        existingPayload,
+        sessionData,
+        action_id
+      );
     case "update_return":
       return await updateReturnGenerator(existingPayload, sessionData, inputs);
     case "on_update_address":
@@ -165,6 +178,10 @@ export async function Generator(
       });
     case "on_update_part_cancel":
       return await onUpdatePartCancelGenerator(existingPayload, sessionData);
+    case "on_update_buyer_delivery_intermin":
+      return await onUpdateBuyerDeliveryGenerator(existingPayload, sessionData);
+    case "on_update_buyer_delivery_final":
+      return await onUpdateBuyerDeliveryGenerator(existingPayload, sessionData);
     case "on_update_return_intermin":
       return await onUpdateReturnGenerator(
         existingPayload,

@@ -28,16 +28,49 @@ export async function onInitGenerator(
     existingPayload.message.order.provider = sessionData.provider;
   }
 
+  let isBuyerDelivery = false;
+
+  existingPayload.message.order.fulfillments = sessionData.fulfillments?.map(
+    (fulfillment: any) => {
+      if (fulfillment.type === "Buyer-Delivery") {
+        isBuyerDelivery = true;
+        fulfillment.tags.push({
+          code: "rto_action",
+          list: [
+            {
+              code: "return_to_origin",
+              value: "yes",
+            },
+          ],
+        });
+      }
+
+      return fulfillment;
+    }
+  );
+
   if (sessionData?.items) {
-    existingPayload.message.order.items = sessionData.items;
+    if (!isBuyerDelivery) {
+      existingPayload.message.order.items = sessionData.items.map((item) => {
+        item.tags.push({
+          code: "rto_action",
+          list: [
+            {
+              code: "return_to_origin",
+              value: "yes",
+            },
+          ],
+        });
+
+        return item;
+      });
+    } else {
+      existingPayload.message.order.items = sessionData.items;
+    }
   }
 
   if (sessionData?.billing) {
     existingPayload.message.order.billing = sessionData.billing;
-  }
-
-  if (sessionData?.fulfillments) {
-    existingPayload.message.order.fulfillments = sessionData.fulfillments;
   }
 
   let breakup: any = [];

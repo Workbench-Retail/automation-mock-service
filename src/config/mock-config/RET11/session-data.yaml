@@ -22,3 +22,5 @@ session_data:
   update_return_fulfillments: []
   return_item_id: null
   return_item_count: null
+  buyer_delivery_start_time: null
+  buyer_delivery_order_status: null

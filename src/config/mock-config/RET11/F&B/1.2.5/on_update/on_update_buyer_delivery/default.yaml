@@ -1,61 +1,169 @@
 message:
   order:
+    id: "O1"
+    state: "Created"
     provider:
-      id: "P1"
+      id: P1
       locations:
-        - id: "L1"
+        - id: L1
     items:
-      - id: "I1"
-        fulfillment_id: "F1"
-        parent_item_id: "DI1"
+      - id: I1
+        fulfillment_id: F1
+        quantity:
+          count: 1
+        parent_item_id: DI1
         tags:
-          - code: "type"
+          - code: type
             list:
-              - code: "type"
-                value: "item"
+              - code: type
+                value: item
+      - id: C1
+        fulfillment_id: F1
+        quantity:
+          count: 1
+        parent_item_id: DI1
+        tags:
+          - code: type
+            list:
+              - code: type
+                value: customization
+          - code: parent
+            list:
+              - code: id
+                value: CG1
+      - id: C7
+        fulfillment_id: F1
+        quantity:
+          count: 1
+        parent_item_id: DI1
+        tags:
+          - code: type
+            list:
+              - code: type
+                value: customization
+          - code: parent
+            list:
+              - code: id
+                value: CG2
+      - id: C14
+        fulfillment_id: F1
+        quantity:
+          count: 1
+        parent_item_id: DI1
+        tags:
+          - code: type
+            list:
+              - code: type
+                value: customization
+          - code: parent
+            list:
+              - code: id
+                value: CG3
+      - id: C16
+        fulfillment_id: F1
+        quantity:
+          count: 1
+        parent_item_id: DI1
+        tags:
+          - code: type
+            list:
+              - code: type
+                value: customization
+          - code: parent
+            list:
+              - code: id
+                value: CG3
+      - id: I1
+        fulfillment_id: F1
+        quantity:
+          count: 1
+        parent_item_id: DI2
+        tags:
+          - code: type
+            list:
+              - code: type
+                value: item
+      - id: C2
+        fulfillment_id: F1
+        quantity:
+          count: 1
+        parent_item_id: DI2
+        tags:
+          - code: type
+            list:
+              - code: type
+                value: customization
+          - code: parent
+            list:
+              - code: id
+                value: CG1
+      - id: C7
+        fulfillment_id: F1
+        quantity:
+          count: 1
+        parent_item_id: DI2
+        tags:
+          - code: type
+            list:
+              - code: type
+                value: customization
+          - code: parent
+            list:
+              - code: id
+                value: CG2
+    billing:
+      name: "ONDC buyer"
+      address:
+        name: "my house or door or floor #"
+        building: "my building name or house #"
+        locality: "my street name"
+        city: "Bengaluru"
+        state: "Karnataka"
+        country: "IND"
+        area_code: "560037"
+      email: "nobody@nomail.com"
+      phone: "9886098860"
+      created_at: "2025-01-08T09:00:00.000Z"
+      updated_at: "2025-01-08T09:00:00.000Z"
     fulfillments:
       - id: "F1"
+        "@ondc/org/provider_name": "LSP or Provider Name"
+        state:
+          descriptor:
+            code: "Pending"
         type: "Delivery"
-        "@ondc/org/provider_name": "LSP Provider"
-        tracking: false
-        "@ondc/org/category": "Immediate Delivery"
+        tracking: true
         "@ondc/org/TAT": "PT60M"
-        state:
-          descriptor:
-            code: "Serviceable"
-      - id: F2
-        type: Self-Pickup
-        "@ondc/org/provider_name": ""
-        tracking: false
-        "@ondc/org/category": Takeaway
-        "@ondc/org/TAT": PT15M
-        state:
-          descriptor:
-            code: Serviceable
-      - id: F3
-        type: Buyer-Delivery
-        '@ondc/org/provider_name': ''
-        tracking: false
-        '@ondc/org/category': ''
-        '@ondc/org/TAT': PT15M
-        state:
-          descriptor:
-            code: Serviceable
-        tags:
-          - code: order_details
-            list:
-              - code: weight_unit
-                value: kilogram
-              - code: weight_value
-                value: '3.0'
-              - code: dim_unit
-                value: centimeter
-              - code: length
-                value: '1.0'
-              - code: breadth
-                value: '1.0'
-              - code: height
-                value: '1.0'
+        start:
+          location:
+            id: "L1"
+            descriptor:
+              name: "ABC Store"
+            gps: "12.9563,77.6368"
+            address:
+              locality: "Jayanagar"
+              city: "Bengaluru"
+              area_code: "560076"
+              state: "KA"
+          contact:
+            phone: "9886098860"
+            email: "nobody@nomail.com"
+        end:
+          location:
+            gps: "12.4535,77.9283"
+            address:
+              name: "my house or door or floor #"
+              building: "my building name or house #"
+              locality: "my street name"
+              city: "Bengaluru"
+              state: "Karnataka"
+              country: "IND"
+              area_code: "560037"
+          person:
+            name: "name_of_person"
+          contact:
+            phone: "9886098860"
+            email: "nobody@nomail.com"
     quote:
       price:
         currency: "INR"
@@ -71,11 +179,6 @@ message:
             value: "269.00"
           item:
             parent_item_id: "DI1"
-            quantity:
-              available:
-                count: "99"
-              maximum:
-                count: "99"
             price:
               currency: "INR"
               value: "269.00"
@@ -94,11 +197,6 @@ message:
             value: "0.00"
           item:
             parent_item_id: "DI1"
-            quantity:
-              available:
-                count: "99"
-              maximum:
-                count: "99"
             price:
               currency: "INR"
               value: "0.00"
@@ -121,11 +219,6 @@ message:
             value: "450.00"
           item:
             parent_item_id: "DI1"
-            quantity:
-              available:
-                count: "99"
-              maximum:
-                count: "99"
             price:
               currency: "INR"
               value: "450.00"
@@ -148,11 +241,6 @@ message:
             value: "80.00"
           item:
             parent_item_id: "DI1"
-            quantity:
-              available:
-                count: "99"
-              maximum:
-                count: "99"
             price:
               currency: "INR"
               value: "80.00"
@@ -175,11 +263,6 @@ message:
             value: "95.00"
           item:
             parent_item_id: "DI1"
-            quantity:
-              available:
-                count: "99"
-              maximum:
-                count: "99"
             price:
               currency: "INR"
               value: "95.00"
@@ -202,11 +285,6 @@ message:
             value: "269.00"
           item:
             parent_item_id: "DI2"
-            quantity:
-              available:
-                count: "99"
-              maximum:
-                count: "99"
             price:
               currency: "INR"
               value: "269.00"
@@ -225,11 +303,6 @@ message:
             value: "0.00"
           item:
             parent_item_id: "DI2"
-            quantity:
-              available:
-                count: "99"
-              maximum:
-                count: "99"
             price:
               currency: "INR"
               value: "0.00"
@@ -252,11 +325,6 @@ message:
             value: "450.00"
           item:
             parent_item_id: "DI2"
-            quantity:
-              available:
-                count: "99"
-              maximum:
-                count: "99"
             price:
               currency: "INR"
               value: "450.00"
@@ -279,11 +347,6 @@ message:
             value: "80.00"
           item:
             parent_item_id: "DI2"
-            quantity:
-              available:
-                count: "99"
-              maximum:
-                count: "99"
             price:
               currency: "INR"
               value: "80.00"
@@ -306,11 +369,6 @@ message:
             value: "80.00"
           item:
             parent_item_id: "DI2"
-            quantity:
-              available:
-                count: "99"
-              maximum:
-                count: "99"
             price:
               currency: "INR"
               value: "80.00"
@@ -516,3 +574,78 @@ message:
             currency: "INR"
             value: "10.00"
       ttl: "PT1H"
+    payment:
+      uri: "https://ondc.transaction.com/payment"
+      tl_method: "http/get"
+      params:
+        currency: "INR"
+        transaction_id: "3937"
+        amount: "1955.65"
+      status: "PAID"
+      type: "ON-ORDER"
+      collected_by: "BAP"
+      "@ondc/org/buyer_app_finder_fee_type": "percent"
+      "@ondc/org/buyer_app_finder_fee_amount": "3.54"
+      "@ondc/org/settlement_basis": "delivery"
+      "@ondc/org/settlement_window": "P1D"
+      "@ondc/org/withholding_amount": "10.00"
+      "@ondc/org/settlement_details":
+        - settlement_counterparty: "seller-app"
+          settlement_phase: "sale-amount"
+          beneficiary_name: "xxxxx"
+          settlement_type: "upi"
+          upi_address: "gft@oksbi"
+          settlement_bank_account_no: "XXXXXXXXXX"
+          settlement_ifsc_code: "XXXXXXXXX"
+          bank_name: "xxxx"
+          branch_name: "xxxx"
+    cancellation_terms:
+      - fulfillment_state:
+          descriptor:
+            code: Pending
+            short_desc: "002"
+        cancellation_fee:
+          percentage: "0.00"
+      - fulfillment_state:
+          descriptor:
+            code: Packed
+            short_desc: "001,003"
+        cancellation_fee:
+          percentage: "100.00"
+      - fulfillment_state:
+          descriptor:
+            code: Order-picked-up
+            short_desc: "001,003"
+        cancellation_fee:
+          percentage: "100.00"
+      - fulfillment_state:
+          descriptor:
+            code: Out-for-delivery
+            short_desc: "009"
+        cancellation_fee:
+          percentage: "100.00"
+      - fulfillment_state:
+          descriptor:
+            code: Out-for-delivery
+            short_desc: "010,011,012,013,014,015"
+        cancellation_fee:
+          percentage: "100.00"
+    tags:
+      - code: "bpp_terms"
+        list:
+          - code: "np_type"
+            value: "ISN"
+          - code: "tax_number"
+            value: "gst_number_of_sellerNP"
+          - code: "provider_tax_number"
+            value: "PAN_number_of_provider"
+          - code: "accept_bap_terms"
+            value: "Y"
+      - code: "bap_terms"
+        list:
+          - code: "static_terms"
+            value: "https://github.com/ONDC-Official/protocol-network-extension/discussions/79"
+          - code: "tax_number"
+            value: "gst_number_of_buyerNP"
+    created_at: "2025-01-08T09:30:00.000Z"
+    updated_at: "2025-01-08T09:31:30.000Z"

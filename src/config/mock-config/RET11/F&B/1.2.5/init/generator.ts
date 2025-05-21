@@ -9,10 +9,6 @@ export async function initGenerator(
     existingPayload.message.order.provider = sessionData.provider;
   }
 
-  if (sessionData?.items) {
-    existingPayload.message.order.items = sessionData.items;
-  }
-
   existingPayload.message.order.billing.created_at =
     existingPayload.context.timestamp;
   existingPayload.message.order.billing.updated_at =
@@ -20,24 +16,36 @@ export async function initGenerator(
 
   const selectedFulfillmentType = inputs?.fulfillmentType || "Delivery";
 
+  const selectedFulfillment = sessionData?.fulfillments?.find(
+    (fulfillment) => fulfillment.type === selectedFulfillmentType
+  );
+
+  if (sessionData?.items) {
+    existingPayload.message.order.items = sessionData.items.map((item) => {
+      item.fulfillment_id = selectedFulfillment.id;
+      return item;
+    });
+  }
+
   if (sessionData.select_fulfillment) {
-    existingPayload.message.order.fulfillments[0] = {
-      id: sessionData?.fulfillments?.find(
-        (fulfillment) => fulfillment.type === selectedFulfillmentType
-      )?.id,
-      type: sessionData?.fulfillments?.find(
-        (fulfillment) => fulfillment.type === selectedFulfillmentType
-      )?.type,
-      end: {
-        location: {
-          gps: sessionData?.select_fulfillment[0].end.location.gps,
-          address: existingPayload.message.order.billing.address,
+    existingPayload.message.order.fulfillments = [
+      {
+        id: selectedFulfillment?.id,
+        type: selectedFulfillment?.type,
+        end: {
+          location: {
+            gps: sessionData?.select_fulfillment[0].end.location.gps,
+            address: existingPayload.message.order.billing.address,
+          },
+          contact: {
+            phone: "9886098860",
+          },
         },
-        contact: {
-          phone: "9886098860",
-        },
+        ...(selectedFulfillment?.tags
+          ? { tags: selectedFulfillment.tags }
+          : {}),
       },
-    };
+    ];
   }
 
   return existingPayload;

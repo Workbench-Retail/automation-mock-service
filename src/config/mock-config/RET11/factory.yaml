@@ -209,3 +209,23 @@ codes:
     action: update
     default: update/update_settelment/default.yaml
     message_id: true
+  - code: 140
+    action_id: update_buyer_delivery_intermin
+    action: update
+    default: update/update_buyer_delivery/default.yaml
+    message_id: true
+  - code: 141
+    action_id: update_buyer_delivery_final
+    action: update
+    default: update/update_buyer_delivery/default.yaml
+    message_id: true
+  - code: 142
+    action_id: on_update_buyer_delivery_intermin
+    action: on_update
+    default: on_update/on_update_buyer_delivery/default.yaml
+    message_id: false
+  - code: 143
+    action_id: on_update_buyer_delivery_final
+    action: on_update
+    default: on_update/on_update_buyer_delivery/default.yaml
+    message_id: false
