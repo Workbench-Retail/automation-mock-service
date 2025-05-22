@@ -8,8 +8,8 @@ order:
       type: Delivery
       "@ondc/org/provider_name": LSP or Provider Name
       tracking: true
-      "@ondc/org/category": Immediate Delivery
-      "@ondc/org/TAT": PT2H
+      "@ondc/org/category": Standard Delivery
+      "@ondc/org/TAT": P2D
       state:
         descriptor:
           code: Serviceable
@@ -35,13 +35,13 @@ order:
           price:
             currency: INR
             value: "100.00"
-      - "@ondc/org/item_id": I1
+      - "@ondc/org/item_id": F1
         title: Delivery charges
         "@ondc/org/title_type": delivery
         price:
           currency: INR
           value: "00.00"
-      - "@ondc/org/item_id": I1
+      - "@ondc/org/item_id": F1
         title: Convenience Fee
         "@ondc/org/title_type": misc
         price:

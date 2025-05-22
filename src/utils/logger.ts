@@ -79,12 +79,10 @@
 
 // export default logger;
 
-
 import winston from "winston";
 import chalk from "chalk";
 import LokiTransport from "winston-loki";
 import { LogParams } from "../types/log-params";
-
 
 const { combine, timestamp, printf, errors } = winston.format;
 
@@ -106,18 +104,25 @@ const messageColors: Record<string, chalk.Chalk> = {
 };
 
 // Custom log format
-const logFormat = printf(({ level, message, timestamp, stack, transaction_id , ...meta}) => {
-	const levelColor = levelColors[level] || levelColors.default; // Colorize level
-	const messageColor = messageColors[level] || messageColors.default; // Colorize message
+const logFormat = printf(
+	({ level, message, timestamp, stack, transaction_id, ...meta }) => {
+		const levelColor = levelColors[level] || levelColors.default; // Colorize level
+		const messageColor = messageColors[level] || messageColors.default; // Colorize message
 
-	const coloredLevel = levelColor(`[${level.toUpperCase()}]`); // Apply color to log level
-	const coloredTimestamp = chalk.dim(timestamp); // Dim timestamp
-	const coloredMessage = messageColor(message); // Apply message-specific color
-	const coloredStack = stack ? chalk.dim(stack) : ""; // Dim stack trace if present
-	const coloredtransaction_id = transaction_id ? chalk.yellow(`[${transaction_id}] `) : ""; // Yellow for transaction ID
-	const coloredMeta = meta && Object.keys(meta).length > 0 ? chalk.gray(JSON.stringify(meta)) : "";
-	return `${coloredTimestamp} ${coloredtransaction_id}${coloredLevel}: ${coloredMessage} ${coloredStack} ${coloredMeta}`;
-});
+		const coloredLevel = levelColor(`[${level.toUpperCase()}]`); // Apply color to log level
+		const coloredTimestamp = chalk.dim(timestamp); // Dim timestamp
+		const coloredMessage = messageColor(message); // Apply message-specific color
+		const coloredStack = stack ? chalk.dim(stack) : ""; // Dim stack trace if present
+		const coloredtransaction_id = transaction_id
+			? chalk.yellow(`[${transaction_id}] `)
+			: ""; // Yellow for transaction ID
+		const coloredMeta =
+			meta && Object.keys(meta).length > 0
+				? chalk.gray(JSON.stringify(meta))
+				: "";
+		return `${coloredTimestamp} ${coloredtransaction_id}${coloredLevel}: ${coloredMessage} ${coloredStack} ${coloredMeta}`;
+	}
+);
 
 // Determine log level based on environment
 const logLevel = process.env.NODE_ENV === "production" ? "info" : "debug";
@@ -147,24 +152,26 @@ const logger = winston.createLogger({
 	],
 });
 
-
-
 // Logging functions
 const logInfo = ({ message, transaction_id, meta }: LogParams): void => {
-	logger.info(message, { transaction_id, ...meta });
-  };
-  
-  const logDebug = ({ message, transaction_id, meta }: LogParams): void => {
-	logger.debug(message, { transaction_id, ...meta });
-  };
-  
-  const logError = ({ message, transaction_id, error, meta }: LogParams): void => {
+	logger.info(message, { transaction_id }); //...meta
+};
+
+const logDebug = ({ message, transaction_id, meta }: LogParams): void => {
+	logger.debug(message, { transaction_id }); //...meta
+};
+
+const logError = ({
+	message,
+	transaction_id,
+	error,
+	meta,
+}: LogParams): void => {
 	if (error instanceof Error) {
-	  logger.error(message, { transaction_id, stack: error.stack, ...meta });
+		logger.error(message, { transaction_id, stack: error.stack }); //...meta }
 	} else {
-	  logger.error(message, { transaction_id, ...meta });
+		logger.error(message, { transaction_id, ...meta });
 	}
-  };
-  
+};
 
 export { logger, logInfo, logDebug, logError };

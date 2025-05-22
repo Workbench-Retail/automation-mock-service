@@ -30,7 +30,7 @@ function getDetailsByActionId(
 			message_id: entry.message_id,
 		};
 	}
-	throw new Error("Invalid action id found!");
+	throw new Error("Invalid action id found! " + actionId);
 }
 function yamlToJson(filePath: string): object {
 	try {

@@ -24,6 +24,14 @@ export type SessionData = {
 	order_id: string | undefined;
 	payment: any | undefined;
 	order_state: string | undefined;
+	order_created_at: string | undefined;
+	on_select_fulfillments: any | undefined;
+	on_status_fulfillments: any | undefined;
+	tags: any | undefined;
+	bap_terms: any | undefined;
+	bpp_terms: any | undefined;
+	out_of_stock_item_ids: string[] | undefined;
+	cancellation_reason_id: string | undefined;
 };
 
 export type BecknContext = {

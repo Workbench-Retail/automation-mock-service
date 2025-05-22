@@ -59,31 +59,36 @@ codes:
     action_id: on_confirm
     action: on_confirm
     message_id: false
+  - code: 1101
+    default: GROCERY/1.2.5/on_status/on_status_accepted/default.yaml
+    action_id: on_status_accepted
+    action: on_status
+    message_id: true
   - code: 111
     default: GROCERY/1.2.5/on_status/on_status_packed/default.yaml
     action_id: on_status_packed
     action: on_status
-    message_id: false
+    message_id: true
   - code: 112
     default: GROCERY/1.2.5/on_status/on_status_agent_assigned/default.yaml
     action_id: on_status_agent_assigned
     action: on_status
-    message_id: false
+    message_id: true
   - code: 113
     default: GROCERY/1.2.5/on_status/on_status_picked/default.yaml
     action_id: on_status_picked
     action: on_status
-    message_id: false
+    message_id: true
   - code: 114
     default: GROCERY/1.2.5/on_status/on_status_out_for_delivery/default.yaml
     action_id: on_status_out_for_delivery
     action: on_status
-    message_id: false
+    message_id: true
   - code: 115
     default: GROCERY/1.2.5/on_status/on_status_order_delivered/default.yaml
     action_id: on_status_order_delivered
     action: on_status
-    message_id: false
+    message_id: true
   - code: 116
     default: GROCERY/1.2.5/track/track/default.yaml
     action_id: track
@@ -183,32 +188,32 @@ codes:
     default: GROCERY/1.2.5/on_status/on_status_pending/default.yaml
     action_id: on_status_pending
     action: on_status
-    message_id: false
+    message_id: true
   - code: 136
     default: GROCERY/1.2.5/on_status/on_status_packed_136/default.yaml
     action_id: on_status_packed_136
     action: on_status
-    message_id: false
+    message_id: true
   - code: 137
     default: GROCERY/1.2.5/on_status/on_status_picked_137/default.yaml
     action_id: on_status_picked_137
     action: on_status
-    message_id: false
+    message_id: true
   - code: 138
     default: GROCERY/1.2.5/on_status/on_status_out_for_delivery_138/default.yaml
     action_id: on_status_out_for_delivery_138
     action: on_status
-    message_id: false
+    message_id: true
   - code: 139
     default: GROCERY/1.2.5/on_cancel/on_cancel_rto/default.yaml
     action_id: on_cancel_rto
     action: on_cancel
     message_id: false
   - code: 140
-    default: GROCERY/1.2.5/on_status/on_status_rto_delivereddisposed/default.yaml
-    action_id: on_status_rto_delivereddisposed
+    default: GROCERY/1.2.5/on_status/on_status_rto_delivered/default.yaml
+    action_id: on_status_rto_delivered
     action: on_status
-    message_id: false
+    message_id: true
   - code: 141
     default: GROCERY/1.2.5/on_search/on_search_141/default.yaml
     action_id: on_search_141
@@ -250,60 +255,60 @@ codes:
     action: on_update
     message_id: false
   - code: 149
-    default: GROCERY/1.2.5/update/update_partial_cancel_settlement/default.yaml
-    action_id: update_partial_cancel_settlement
+    default: GROCERY/1.2.5/update/update_settlement_trail/default.yaml
+    action_id: update_settlement_trail
     action: update
     message_id: true
   - code: 150
     default: GROCERY/1.2.5/on_status/on_status_pending_150/default.yaml
     action_id: on_status_pending_150
     action: on_status
-    message_id: false
+    message_id: true
   - code: 151
     default: GROCERY/1.2.5/on_status/on_status_packed_151/default.yaml
     action_id: on_status_packed_151
     action: on_status
-    message_id: false
+    message_id: true
   - code: 152
     default: GROCERY/1.2.5/on_status/on_status_picked_152/default.yaml
     action_id: on_status_picked_152
     action: on_status
-    message_id: false
+    message_id: true
   - code: 153
     default: GROCERY/1.2.5/on_status/on_status_out_for_delivery_153/default.yaml
     action_id: on_status_out_for_delivery_153
     action: on_status
-    message_id: false
+    message_id: true
   - code: 154
     default: GROCERY/1.2.5/on_status/on_status_order_delivered_154/default.yaml
     action_id: on_status_order_delivered_154
     action: on_status
-    message_id: false
+    message_id: true
   - code: 155
     default: GROCERY/1.2.5/on_status/on_status_pending_155/default.yaml
     action_id: on_status_pending_155
     action: on_status
-    message_id: false
+    message_id: true
   - code: 156
     default: GROCERY/1.2.5/on_status/on_status_packed_156/default.yaml
     action_id: on_status_packed_156
     action: on_status
-    message_id: false
+    message_id: true
   - code: 157
     default: GROCERY/1.2.5/on_status/on_status_picked_157/default.yaml
     action_id: on_status_picked_157
     action: on_status
-    message_id: false
+    message_id: true
   - code: 158
     default: GROCERY/1.2.5/on_status/on_status_out_for_delivery_158/default.yaml
     action_id: on_status_out_for_delivery_158
     action: on_status
-    message_id: false
+    message_id: true
   - code: 159
     default: GROCERY/1.2.5/on_status/on_status_order_delivered_159/default.yaml
     action_id: on_status_order_delivered_159
     action: on_status
-    message_id: false
+    message_id: true
   - code: 160
     default: GROCERY/1.2.5/update/update_liquidated/default.yaml
     action_id: update_liquidated

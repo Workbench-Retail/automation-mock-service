@@ -1,4 +1,6 @@
 import { SessionData } from "../../../../session-types";
+import { getUpdatedBilling } from "../../api-objects/billing";
+import { createFulfillments } from "../../api-objects/fulfillments";
 import { SelectedItems } from "../../on_select/on_select/generator";
 
 export async function init_generator(
@@ -16,5 +18,15 @@ export async function init_generator(
 			location_id: "L1",
 		};
 	});
+	existingPayload.message.order.billing = getUpdatedBilling(
+		existingPayload.message.order.billing,
+		true
+	);
+	existingPayload.message.order.fulfillments = createFulfillments(
+		"init",
+		"init",
+		sessionData,
+		existingPayload.message.order.fulfillments
+	);
 	return existingPayload;
 }

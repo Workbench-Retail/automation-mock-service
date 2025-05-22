@@ -15,27 +15,27 @@ export async function saveDataMiddleware(
 ) {
 	try {
 		logInfo({
-				message: "Entering saveDataMiddleware",
-				meta: {action: req.params.action},
-				transaction_id: req.body.context.transaction_id,
-			});
+			message: "Entering saveDataMiddleware",
+			meta: { action: req.params.action },
+			transaction_id: req.body.context.transaction_id,
+		});
 		const action = req.params.action;
 		const body = req.body;
 		const subscriber_url = action.includes("on_")
 			? body.context.bpp_uri
 			: body.context.bap_uri;
-		await saveData(action, body, subscriber_url, req.l2Error);
+		await saveData(action, body, req.l2Error);
 		logInfo({
 			message: "Exiting saveDataMiddleware",
-			meta: {action: req.params.action},
+			meta: { action: req.params.action },
 			transaction_id: req.body.context.transaction_id,
-			});
+		});
 		next();
 	} catch (err) {
 		// logger.error("Error in saveDataMiddleware", err);
 		logError({
 			message: "Error in saveDataMiddleware",
-			meta: {action: req.params.action},
+			meta: { action: req.params.action },
 			transaction_id: req.body.context.transaction_id,
 			error: err,
 		});

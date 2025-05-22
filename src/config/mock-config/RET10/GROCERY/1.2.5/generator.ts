@@ -38,7 +38,7 @@ import { on_status_packed_136_generator } from "./on_status/on_status_packed_136
 import { on_status_picked_137_generator } from "./on_status/on_status_picked_137/generator";
 import { on_status_out_for_delivery_138_generator } from "./on_status/on_status_out_for_delivery_138/generator";
 import { on_cancel_rto_generator } from "./on_cancel/on_cancel_rto/generator";
-import { on_status_rto_delivereddisposed_generator } from "./on_status/on_status_rto_delivereddisposed/generator";
+import { on_status_rto_delivereddisposed_generator } from "./on_status/on_status_rto_delivered/generator";
 import { on_search_141_generator } from "./on_search/on_search_141/generator";
 import { select_142_generator } from "./select/select_142/generator";
 import { on_select_143_generator } from "./on_select/on_select_143/generator";
@@ -47,7 +47,7 @@ import { on_init_145_generator } from "./on_init/on_init_145/generator";
 import { confirm_146_generator } from "./confirm/confirm_146/generator";
 import { on_confirm_147_generator } from "./on_confirm/on_confirm_147/generator";
 import { on_update_part_cancel_generator } from "./on_update/on_update_part_cancel/generator";
-import { update_partial_cancel_settlement_generator } from "./update/update_partial_cancel_settlement/generator";
+import { update_partial_cancel_settlement_generator } from "./update/update_settlement_trail/generator";
 import { on_status_pending_150_generator } from "./on_status/on_status_pending_150/generator";
 import { on_status_packed_151_generator } from "./on_status/on_status_packed_151/generator";
 import { on_status_picked_152_generator } from "./on_status/on_status_picked_152/generator";
@@ -75,6 +75,7 @@ import { on_update_return_delivered_173_generator } from "./on_update/on_update_
 import { on_update_interim_liquidated_174_generator } from "./on_update/on_update_interim_liquidated_174/generator";
 import { on_update_liquidated_175_generator } from "./on_update/on_update_liquidated_175/generator";
 import { on_search_inc_disable_generator } from "./on_search/on_search_inc_disable/generator";
+import { on_status_accepted_generator } from "./on_status/on_status_accepted/generator";
 
 export async function Generator(
 	action_id: string,
@@ -188,7 +189,7 @@ export async function Generator(
 			return on_confirm_147_generator(existingPayload, sessionData);
 		case "on_update_part_cancel":
 			return on_update_part_cancel_generator(existingPayload, sessionData);
-		case "update_partial_cancel_settlement":
+		case "update_settlement_trail":
 			return update_partial_cancel_settlement_generator(
 				existingPayload,
 				sessionData
@@ -278,6 +279,8 @@ export async function Generator(
 			);
 		case "on_update_liquidated_175":
 			return on_update_liquidated_175_generator(existingPayload, sessionData);
+		case "on_status_accepted":
+			return on_status_accepted_generator(existingPayload, sessionData);
 		default:
 			console.log(action_id);
 			throw new Error("Invalid action id found! ");

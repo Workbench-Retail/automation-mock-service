@@ -13,3 +13,11 @@ session_data:
   order_id: null
   payment: null
   order_state: null
+  order_created_at: null
+  on_select_fulfillments: []
+  on_status_fulfillments: []
+  tags: []
+  bap_terms: null
+  bpp_terms: null
+  out_of_stock_item_ids: []
+  cancellation_reason_id: null

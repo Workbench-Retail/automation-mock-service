@@ -12,9 +12,10 @@ const actionConfig = yaml.load(
 	readFileSync(path.join(__dirname, "./RET10/factory.yaml"), "utf8")
 ) as any;
 
-export const defaultSessionData = yaml.load(
-	readFileSync(path.join(__dirname, "./RET10/session-data.yaml"), "utf8")
-) as { session_data: MockSessionData };
+export const defaultSessionData = () =>
+	yaml.load(
+		readFileSync(path.join(__dirname, "./RET10/session-data.yaml"), "utf8")
+	) as { session_data: MockSessionData };
 
 export async function generateMockResponse(
 	session_id: string,
@@ -23,7 +24,14 @@ export async function generateMockResponse(
 	input?: any
 ) {
 	try {
-		return await createMockResponse(session_id, sessionData, action_id, input);
+		const response = await createMockResponse(
+			session_id,
+			sessionData,
+			action_id,
+			input
+		);
+		response.context.timestamp = new Date().toISOString();
+		return response;
 	} catch (e) {
 		logger.error("Error in generating mock response", e);
 		throw e;

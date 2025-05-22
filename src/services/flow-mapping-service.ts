@@ -40,7 +40,7 @@ export function getFlowCompleteStatus(
 		meta: {
 			transactionData,
 			flowId: transactionData.flowId,
-			flowStatus,
+			flowStatus: "flowStatus",
 		},
 	});
 	const apiList = reduceApiDataList(transactionData.apiList).sort(

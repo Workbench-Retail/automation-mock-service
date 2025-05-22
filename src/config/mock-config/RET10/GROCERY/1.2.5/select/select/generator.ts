@@ -1,3 +1,4 @@
+import { logger } from "../../../../../../../utils/logger";
 import { SessionData } from "../../../../session-types";
 import { stateCodes } from "../state-codes";
 
@@ -17,7 +18,9 @@ export async function select_generator(
 	existingPayload: any,
 	sessionData: SessionData
 ) {
-	console.log(existingPayload);
+	console.log("***** Select Generator *****");
+	//@ts-ignore
+	sessionData.test = "hello";
 	const inputs = sessionData.user_inputs as SelectInputType;
 	if (!inputs) return existingPayload;
 	console.log("inputs", inputs);

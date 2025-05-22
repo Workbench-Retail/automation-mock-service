@@ -1,0 +1,55 @@
+{
+  "transaction_id": "24f57c08-c04d-4c50-b096-56b5b54a75d5",
+  "message_id": "0e7c4409-c054-4495-af3b-bf9d000f7984",
+  "city": "std:011",
+  "inc_mode": null,
+  "selected_items": [
+    {
+      "id": "I1",
+      "quantity": {
+        "count": 2
+      },
+      "location": "L1"
+    },
+    {
+      "id": "I2",
+      "quantity": {
+        "count": 49
+      },
+      "location": "L1"
+    }
+  ],
+  "selected_fulfillments": [
+    {
+      "end": {
+        "location": {
+          "gps": "12.1233,12.9992",
+          "address": {
+            "area_code": "110092"
+          }
+        }
+      }
+    }
+  ],
+  "items": [],
+  "provider": null,
+  "billing": null,
+  "fulfillments": [],
+  "quote": null,
+  "order_id": null,
+  "payment": null,
+  "order_state": null,
+  "order_created_at": null,
+  "on_select_fulfillments": [],
+  "on_status_fulfillments": [],
+  "tags": [],
+  "bap_terms": null,
+  "bpp_terms": null,
+  "out_of_stock_item_ids": [],
+  "cancellation_reason_id": null,
+  "bap_id": "dev-automation.ondc.org",
+  "bpp_id": "dev-automation.ondc.org",
+  "bap_uri": "https://dev-automation.ondc.org/buyer",
+  "bpp_uri": "https://dev-automation.ondc.org/seller",
+  "subscriber_url": "test-subscriber-url"
+}

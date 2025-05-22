@@ -1,4 +1,5 @@
 import { SessionData } from "../../../../session-types";
+import { createQuote } from "../../api-objects/breakup";
 import { RET10GROCERY125Catalog } from "../../on_search/on_search/catalog";
 
 export type SelectedItems = {
@@ -9,7 +10,7 @@ export type SelectedItems = {
 	location_id: string;
 }[];
 
-const breakupItem = {
+export const breakupItem = {
 	"@ondc/org/item_id": "I1",
 	"@ondc/org/item_quantity": {
 		count: 1,
@@ -36,7 +37,7 @@ const breakupItem = {
 	},
 };
 
-const breakup = [
+export const breakup = [
 	{
 		"@ondc/org/item_id": "I1",
 		title: "Delivery charges",
@@ -77,25 +78,16 @@ export async function on_select_generator(
 		return idMap.includes(i.id);
 	});
 	console.log("Catalog Items: ", catalogItems);
-	let totalPrice = 0;
-	const breakupObject = [];
-	for (const i of catalogItems) {
-		const quantity =
-			selectedItemsObj?.find((item) => item.id === i.id)?.quantity.count ?? 1;
-		const price = parseFloat(i.price.value) * quantity;
-		console.log("Price: ", price, i.price.value);
-		totalPrice += price;
-		const item = breakupItem;
-		breakupItem["@ondc/org/item_id"] = i.id;
-		breakupItem.title = i.descriptor.name;
-		breakupItem["@ondc/org/item_quantity"].count = quantity;
-		breakupItem.price.value = `${price.toFixed(2)}`;
-		breakupItem.item.price.value = i.price.value;
-		breakupObject.push(item);
-	}
-	breakupObject.push(breakup[0]);
-	breakupObject.push(breakup[1]);
-	existingPayload.message.order.quote.breakup = breakupObject;
-	existingPayload.message.order.quote.price.value = `${totalPrice.toFixed(2)}`;
+	const quote = createQuote(
+		selectedItemsObj.map((item) => {
+			return {
+				id: item.id,
+				count: item.quantity.count,
+			};
+		}),
+		sessionData,
+		existingPayload
+	);
+	existingPayload.message.order.quote = quote;
 	return existingPayload;
 }
