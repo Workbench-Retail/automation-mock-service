@@ -5,6 +5,7 @@ import { Flow } from "../../../types/flow-types";
 import { defaultSessionData, getSaveDataContent, MockSessionData } from "..";
 import { updateSessionData } from "../../../services/data-services";
 import { v4 as uuidv4 } from "uuid";
+import axios from "axios";
 
 export function loadFlowConfig() {
 	const filePath = path.resolve(__dirname, "./flow-config.yaml");
@@ -56,4 +57,13 @@ export function loadMockSessionDataUnit(action: string) {
 
 export function customConsoleLog(message: string, ...meta: any[]) {
 	console.log(`${message}`, ...meta, `\n`);
+}
+
+export async function testWithApiService(payload: any, action: string) {
+	const apiLayerUrl = `${process.env.API_SERVICE_LAYER}/${
+		payload.context.domain
+	}/${payload.context.version ?? payload.context.core_version}/test/${action}`;
+	const response = await axios.post(apiLayerUrl, payload);
+	console.log(response.data);
+	return response.data;
 }

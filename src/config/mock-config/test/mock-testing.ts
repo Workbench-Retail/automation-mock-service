@@ -7,6 +7,7 @@ import {
 	loadFlowConfig,
 	loadMockSessionDataUnit,
 	saveDataForUnit,
+	testWithApiService,
 } from "./utils";
 import path from "path";
 const inputsData = {
@@ -51,7 +52,6 @@ export async function testFlow() {
 		);
 		await testUnitApi(step.key, step.type, lastAction, flow.id);
 		lastAction = step.type;
-		break;
 	}
 }
 
@@ -71,12 +71,13 @@ export async function testUnitApi(
 		const changes = inputPathChanges[flowId][actionId];
 		mockResponse = updateAllJsonPaths(mockResponse, changes);
 	}
-	saveDataForUnit(lastAction, action, mockResponse);
+	await saveDataForUnit(lastAction, action, mockResponse);
 	const folderPath = path.resolve(__dirname, `./logs/${flowId}`);
 	const filePath = path.resolve(folderPath, `${action}.json`);
 	if (!existsSync(filePath)) {
 		mkdirSync(folderPath, { recursive: true });
 	}
+	// await testWithApiService(mockResponse, action);
 	writeFileSync(filePath, JSON.stringify(mockResponse, null, 2));
 	customConsoleLog(
 		`-- DONE -- saved mock response for action: ${action} in file: ${filePath}`

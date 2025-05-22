@@ -756,11 +756,6 @@ export type Fulfillment = {
 };
 export type Fulfillments = Fulfillment[];
 
-function safeAssign<T>(root: T, setter: (obj: NonNullable<T>) => void): void {
-	if (root) {
-		setter(root);
-	}
-}
 export function createFulfillments(
 	action: string,
 	actionId: string,
@@ -917,36 +912,39 @@ export function createFulfillments(
 			const time = new Date(new Date().getTime() + 10 * 1000 * 60);
 			const start_end = new Date(time.getTime() + 10 * 1000 * 60).toISOString();
 			finalFulfillments = fulfillments
-				.filter((f) => f.type == "Delivery")
+				// .filter((f) => f.type == "Delivery")
 				.map((f) => {
-					return {
-						...f,
-						start: {
-							...f.start,
-							time: {
-								range: {
-									start: time.toISOString(),
-									end: start_end,
+					if (f.type == "Delivery") {
+						return {
+							...f,
+							start: {
+								...f.start,
+								time: {
+									range: {
+										start: time.toISOString(),
+										end: start_end,
+									},
 								},
 							},
-						},
-						end: {
-							...f.end,
-							time: {
-								range: {
-									start: start_end,
-									end: new Date(
-										time.getTime() +
-											1000 * isoDurToSec(f["@ondc/org/TAT"] || "PT0H")
-									).toISOString(),
+							end: {
+								...f.end,
+								time: {
+									range: {
+										start: start_end,
+										end: new Date(
+											time.getTime() +
+												1000 * isoDurToSec(f["@ondc/org/TAT"] || "PT0H")
+										).toISOString(),
+									},
 								},
 							},
-						},
-						tags: tags.tags,
-					};
+							tags: tags.tags,
+						};
+					}
+					return f;
 				});
-			fulfillments = fulfillments.filter((f) => f.type != "Delivery");
-			finalFulfillments = { ...finalFulfillments, ...fulfillments };
+			// fulfillments = fulfillments.filter((f) => f.type != "Delivery");
+			// finalFulfillments = { ...finalFulfillments, ...fulfillments };
 		}
 		let state = "Pending";
 		switch (actionId) {
@@ -961,9 +959,8 @@ export function createFulfillments(
 				break;
 			case "on_status_picked":
 				state = "Order-picked-up";
-				finalFulfillments = finalFulfillments
-					.filter((f) => f.type == "Delivery")
-					.map((f) => {
+				finalFulfillments = finalFulfillments.map((f) => {
+					if (f.type === "Delivery") {
 						return {
 							...f,
 							start: {
@@ -974,16 +971,17 @@ export function createFulfillments(
 								},
 							},
 						};
-					});
+					}
+					return f; // leave other types unchanged
+				});
 				break;
 			case "on_status_out_for_delivery":
 				state = "Out-for-delivery";
 				break;
 			case "on_status_order_delivered":
 				state = "Order-delivered";
-				finalFulfillments = finalFulfillments
-					.filter((f) => f.type == "Delivery")
-					.map((f) => {
+				finalFulfillments = finalFulfillments.map((f) => {
+					if (f.type === "Delivery") {
 						return {
 							...f,
 							end: {
@@ -994,7 +992,9 @@ export function createFulfillments(
 								},
 							},
 						};
-					});
+					}
+					return f; // leave other types unchanged
+				});
 				break;
 			case "on_status_rto_delivered":
 				state = "Cancelled";
@@ -1002,14 +1002,17 @@ export function createFulfillments(
 				break;
 		}
 		finalFulfillments = finalFulfillments.map((f) => {
-			return {
-				...f,
-				state: {
-					descriptor: {
-						code: state,
+			if (f.type === "Delivery") {
+				return {
+					...f,
+					state: {
+						descriptor: {
+							code: state,
+						},
 					},
-				},
-			};
+				};
+			}
+			return f;
 		});
 		return finalFulfillments;
 	}

@@ -281,6 +281,11 @@ export async function Generator(
 			return on_update_liquidated_175_generator(existingPayload, sessionData);
 		case "on_status_accepted":
 			return on_status_accepted_generator(existingPayload, sessionData);
+		case "on_status_rto_delivered":
+			return on_status_rto_delivereddisposed_generator(
+				existingPayload,
+				sessionData
+			);
 		default:
 			console.log(action_id);
 			throw new Error("Invalid action id found! ");
