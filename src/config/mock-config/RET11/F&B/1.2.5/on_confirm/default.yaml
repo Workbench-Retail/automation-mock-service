@@ -620,13 +620,13 @@ message:
           percentage: "100.00"
       - fulfillment_state:
           descriptor:
-            code: Out-for-delivery
+            code: At-pickup
             short_desc: "009"
         cancellation_fee:
           percentage: "100.00"
       - fulfillment_state:
           descriptor:
-            code: Out-for-delivery
+            code: At-delivery
             short_desc: "010,011,012,013,014,015"
         cancellation_fee:
           percentage: "100.00"

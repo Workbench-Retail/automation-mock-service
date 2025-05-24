@@ -599,22 +599,5 @@ message:
           settlement_ifsc_code: "XXXXXXXXX"
           bank_name: "xxxx"
           branch_name: "xxxx"
-    tags:
-      - code: "bpp_terms"
-        list:
-          - code: "np_type"
-            value: "ISN"
-          - code: "tax_number"
-            value: "gst_number_of_sellerNP"
-          - code: "provider_tax_number"
-            value: "PAN_number_of_provider"
-          - code: "accept_bap_terms"
-            value: "Y"
-      - code: "bap_terms"
-        list:
-          - code: "static_terms"
-            value: "https://github.com/ONDC-Official/protocol-network-extension/discussions/79"
-          - code: "tax_number"
-            value: "gst_number_of_buyerNP"
     created_at: "2025-01-08T09:30:00.000Z"
     updated_at: "2025-01-08T09:31:30.000Z"

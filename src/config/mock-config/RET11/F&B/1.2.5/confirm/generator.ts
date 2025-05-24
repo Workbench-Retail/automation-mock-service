@@ -1,9 +1,12 @@
 import { SessionData } from "../../../session-types";
+import { v4 as uuidv4 } from "uuid";
 
 export const confirmGenerator = (
   existingPayload: any,
   sessionData: SessionData
 ) => {
+  existingPayload.message.order.id = uuidv4();
+
   if (sessionData.provider) {
     existingPayload.message.order.provider = sessionData.provider;
   }
@@ -21,7 +24,19 @@ export const confirmGenerator = (
   }
 
   if (sessionData.fulfillments) {
-    existingPayload.message.order.fulfillments = sessionData.fulfillments;
+    existingPayload.message.order.fulfillments = sessionData.fulfillments.map(
+      (fulfillment) => {
+        fulfillment.end.person = {
+          name: "person_name_1",
+        };
+        fulfillment.end.contact = {
+          email: "nobody@nomail.com",
+          phone: "9886098860",
+        };
+
+        return fulfillment
+      }
+    );
   }
 
   existingPayload.message.order.payment = {

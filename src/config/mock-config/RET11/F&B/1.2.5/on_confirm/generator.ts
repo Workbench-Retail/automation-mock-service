@@ -54,5 +54,8 @@ export const onConfirmGenerator = (
     };
   }
 
+  existingPayload.message.order.created_at = sessionData.confirm_created_at_timestamp
+  existingPayload.message.order.updated_at = existingPayload.context.timestamp
+
   return existingPayload;
 };

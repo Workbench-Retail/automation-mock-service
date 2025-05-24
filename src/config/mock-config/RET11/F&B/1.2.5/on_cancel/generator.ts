@@ -31,17 +31,17 @@ export const onCancelGenerator = (
 
   sessionData.items.forEach((item: any) => {
     newItems.push({
-      id: item.id,
+      ...item,
       fulfillment_id: item.fulfillment_id,
       quantity: {
         count: 0,
       },
     });
     newItems.push({
-      id: item.id,
+      ...item,
       fulfillment_id: "C1",
       quantity: {
-        count: 1,
+        count: item.quantity.count,
       },
     });
   });
@@ -89,10 +89,7 @@ export const onCancelGenerator = (
     };
 
     sessionData.quote.breakup.forEach((item: any) => {
-      if (
-        item["@ondc/org/title_type"] === "item" ||
-        item["@ondc/org/title_type"] === "tax"
-      ) {
+      if (parseInt(item.price.value) !== 0) {
         quoteTrailTags.push({
           code: "quote_trail",
           list: [

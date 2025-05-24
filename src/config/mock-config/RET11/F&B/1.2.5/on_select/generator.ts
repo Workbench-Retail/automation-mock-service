@@ -28,8 +28,11 @@ export const onSelectGenerator = (
     existingPayload.message.order.provider = sessionData.provider;
   }
 
+  const tempItems = JSON.parse(JSON.stringify(sessionData.items));
+
   if (sessionData?.items && sessionData?.select_fulfillment?.length) {
-    existingPayload.message.order.items = sessionData.items.map((item: any) => {
+    existingPayload.message.order.items = tempItems.map((item: any) => {
+      delete item.quantity;
       return {
         ...item,
         fulfillment_id: existingPayload.message.order.fulfillments?.find(
@@ -80,7 +83,7 @@ export const onSelectGenerator = (
     });
 
     const type = getTagType(item.tags);
-    const taxPrice = type === "item" ? "12.00" : "0.00";
+    const taxPrice = (parseInt(initialItemsData.price.value) * 0.05).toString();
 
     totalPrice += parseInt(taxPrice);
 

@@ -1,5 +1,4 @@
 import { SessionData, Input } from "../../../session-types";
-import { v4 as uuidv4 } from "uuid";
 import { stateCodes } from "../areaCodes";
 
 type TagEntry = {
@@ -47,8 +46,8 @@ export const selectGenerator = (
     let newItems: any = [];
     let allItems = inputs.items;
 
-    allItems.forEach((item: any) => {
-      const parentItemId = uuidv4();
+    allItems.forEach((item: any, index: number) => {
+      const parentItemId = `P${index}`;
       newItems.push({
         id: item.id,
         parent_item_id: parentItemId,

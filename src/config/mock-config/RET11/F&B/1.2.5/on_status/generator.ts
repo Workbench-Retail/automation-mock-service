@@ -32,8 +32,6 @@ export const onStatusGenerator = (
     existingPayload.message.order.fulfillments = sessionData.fulfillments;
   }
 
-  console.log("sessionData", sessionData.fulfillments);
-
   switch (sessionData?.stateCode) {
     case "Pending":
       existingPayload.message.order.state = "Accepted";
@@ -58,7 +56,7 @@ export const onStatusGenerator = (
     case "Order-picked":
       existingPayload.message.order.state = "In-progress";
       existingPayload.message.order.fulfillments[0].state.descriptor.code =
-        sessionData.stateCode;
+        "Order-picked-up";
       break;
     case "At-delivery":
       existingPayload.message.order.state = "In-progress";
@@ -76,6 +74,10 @@ export const onStatusGenerator = (
         "Order-picked";
       break;
   }
+
+  existingPayload.message.order.created_at =
+    sessionData.confirm_created_at_timestamp;
+  existingPayload.message.order.updated_at = existingPayload.context.timestamp;
 
   return existingPayload;
 };

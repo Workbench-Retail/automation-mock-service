@@ -243,7 +243,9 @@ message:
       - code: bpp_terms
         list:
           - code: tax_number
-            value: gst_number_of_sellerNP
+            value: 12ABCDE3456FGZH
+          - code: np_type
+            value: BAP
       - code: bap_terms
         list:
           - code: accept_bpp_terms
@@ -251,6 +253,6 @@ message:
           - code: static_terms
             value: https://github.com/ONDC-Official/NP-Static-Terms/buyerNP_BNP/1.0/tc.pdf
           - code: tax_number
-            value: gst_number_of_buyerNP
+            value: 12ABCDE3456FGZJ
     created_at: "2025-01-08T09:30:00.000Z"
     updated_at: "2025-01-08T09:30:00.000Z"
