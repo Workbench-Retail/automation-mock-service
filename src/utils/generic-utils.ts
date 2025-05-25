@@ -101,3 +101,270 @@ export const calculateQuotePrice = (breakup: any) => {
 
   return totalPrice.toFixed(2); // returns a string with 2 decimal places
 };
+
+export const generateQuoteTrail = (
+  breakup: any,
+  options: any,
+  parentItemId?: string
+) => {
+  const { fulfillmentState = "PRE", isRTO = false } = options;
+  const quoteTrailTags: any[] = [];
+
+  breakup.forEach((item: any) => {
+    if (
+      item["@ondc/org/title_type"] === "delivery" ||
+      item["@ondc/org/title_type"] === "packing"
+    ) {
+      if (fulfillmentState === "PRE") {
+        quoteTrailTags.push({
+          code: "quote_trail",
+          list: [
+            {
+              code: "type",
+              value: item["@ondc/org/title_type"],
+            },
+            {
+              code: "id",
+              value: item["@ondc/org/item_id"],
+            },
+            {
+              code: "currency",
+              value: "INR",
+            },
+            {
+              code: "value",
+              value: `-${item.price.value}`,
+            },
+          ],
+        });
+      }
+    } else if (
+      parseInt(item.price.value) !== 0 &&
+      (!parentItemId || item?.item?.parent_item_id === parentItemId)
+    ) {
+      quoteTrailTags.push({
+        code: "quote_trail",
+        list: [
+          {
+            code: "type",
+            value: item["@ondc/org/title_type"],
+          },
+          {
+            code: "id",
+            value: item["@ondc/org/item_id"],
+          },
+          {
+            code: "currency",
+            value: "INR",
+          },
+          {
+            code: "value",
+            value: `-${item.price.value}`,
+          },
+        ],
+      });
+    }
+  });
+
+  if (isRTO) {
+    quoteTrailTags.push({
+      code: "quote_trail",
+      list: [
+        {
+          code: "type",
+          value: "delivery",
+        },
+        {
+          code: "id",
+          value: "F1-RTO",
+        },
+        {
+          code: "currency",
+          value: "INR",
+        },
+        {
+          code: "value",
+          value: `50`,
+        },
+      ],
+    });
+  }
+
+  return quoteTrailTags;
+};
+
+export const buildRetailQuote = (
+  items: any,
+  initalItems: any,
+  fulfillments: any
+) => {
+  const quote: any = {};
+  let breakup: any = [];
+  let totalPrice = 0;
+
+  items.forEach((item: any) => {
+    const initialItemsData: any = initalItems?.find(
+      (on_search_item: any) => on_search_item.id === item.id
+    );
+
+    let isCancelFulfillment = false;
+    let isRTO = false;
+
+    fulfillments.forEach((fulfillment: any) => {
+      if (
+        fulfillment.id === item.fulfillment_id &&
+        fulfillment.type === "Cancel"
+      ) {
+        isCancelFulfillment = true;
+      } else if (fulfillment.type === "RTO") {
+        isRTO = true;
+      }
+    });
+
+    const itemPrice =
+      parseInt(initialItemsData.price.value) *
+      (isCancelFulfillment || isRTO ? 0 : item.quantity.count);
+
+    if (!isCancelFulfillment) {
+      totalPrice += itemPrice;
+    }
+
+    breakup.push({
+      "@ondc/org/item_id": item.id,
+      "@ondc/org/item_quantity": {
+        count: isCancelFulfillment || isRTO ? 0 : item.quantity.count,
+      },
+      title: initialItemsData.descriptor.name,
+      "@ondc/org/title_type": "item",
+      price: {
+        currency: "INR",
+        value: itemPrice.toString(),
+      },
+      item: {
+        parent_item_id: item.parent_item_id,
+        quantity: {
+          available: {
+            count: initialItemsData.quantity.available.count,
+          },
+          maximum: {
+            count: initialItemsData.quantity.maximum.count,
+          },
+        },
+        price: {
+          currency: "INR",
+          value: initialItemsData.price.value,
+        },
+        tags: item.tags,
+      },
+    });
+
+    const taxPrice = (itemPrice * 0.05).toFixed(2).toString();
+
+    totalPrice += parseInt(taxPrice);
+
+    breakup.push({
+      "@ondc/org/item_id": item.id,
+      title: "Tax",
+      "@ondc/org/title_type": "tax",
+      price: {
+        currency: "INR",
+        value: taxPrice,
+      },
+      item: {
+        parent_item_id: item.parent_item_id,
+        tags: item.tags,
+      },
+    });
+  });
+
+  let deliveryBreakup: any[] = [];
+
+  fulfillments.forEach((fulfillment: any) => {
+    if (fulfillment.type === "Delivery") {
+      totalPrice += 75;
+      deliveryBreakup = [
+        ...deliveryBreakup,
+        {
+          "@ondc/org/item_id": fulfillment.id,
+          title: "Delivery charges",
+          "@ondc/org/title_type": "delivery",
+          price: {
+            currency: "INR",
+            value: "50.00",
+          },
+        },
+        {
+          "@ondc/org/item_id": fulfillment.id,
+          title: "Packing charges",
+          "@ondc/org/title_type": "packing",
+          price: {
+            currency: "INR",
+            value: "25.00",
+          },
+        },
+      ];
+    } else if (fulfillment.type === "Buyer-Delivery") {
+      totalPrice += 85;
+      deliveryBreakup = [
+        ...deliveryBreakup,
+        {
+          "@ondc/org/item_id": fulfillment.id,
+          title: "Delivery charges",
+          "@ondc/org/title_type": "delivery",
+          price: {
+            currency: "INR",
+            value: "60.00",
+          },
+        },
+        {
+          "@ondc/org/item_id": fulfillment.id,
+          title: "Packing charges",
+          "@ondc/org/title_type": "packing",
+          price: {
+            currency: "INR",
+            value: "25.00",
+          },
+        },
+      ];
+    } else if (fulfillment.type === "Self-Pickup") {
+      totalPrice += 25;
+      deliveryBreakup = [
+        ...deliveryBreakup,
+        {
+          "@ondc/org/item_id": fulfillment.id,
+          title: "Packing charges",
+          "@ondc/org/title_type": "packing",
+          price: {
+            currency: "INR",
+            value: "25.00",
+          },
+        },
+      ];
+    } else if (fulfillment.type === "RTO") {
+      totalPrice += 55;
+      deliveryBreakup = [
+        ...deliveryBreakup,
+        {
+          "@ondc/org/item_id": fulfillment.id,
+          title: "Delivery charges",
+          "@ondc/org/title_type": "delivery",
+          price: {
+            currency: "INR",
+            value: "55.00",
+          },
+        },
+      ];
+    }
+  });
+
+  breakup = [...breakup, ...deliveryBreakup];
+
+  quote.price = {
+    currency: "INR",
+    value: totalPrice.toString(),
+  };
+
+  quote.breakup = breakup;
+
+  return quote;
+};

@@ -72,6 +72,16 @@ export const onStatusGenerator = (
       existingPayload.message.order.state = "Completed";
       existingPayload.message.order.fulfillments[0].state.descriptor.code =
         "Order-picked";
+    case "RTO-Disposed":
+      existingPayload.message.order.state = "Completed";
+      existingPayload.message.order.fulfillments =
+        existingPayload.message.order.fulfillments.map((fulfillment: any) => {
+          if (fulfillment.type === "RTO") {
+            fulfillment.state.descriptor.code = sessionData.stateCode;
+            return fulfillment;
+          }
+          return fulfillment;
+        });
       break;
   }
 

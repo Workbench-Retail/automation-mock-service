@@ -1,4 +1,5 @@
 import { SessionData, Input } from "../../../session-types";
+import { generateQuoteTrail } from "../../../../../../utils/generic-utils";
 
 export const onCancelGenerator = (
   existingPayload: any,
@@ -48,8 +49,6 @@ export const onCancelGenerator = (
 
   existingPayload.message.order.items = newItems;
 
-  const quoteTrailTags: any[] = [];
-
   if (sessionData.fulfillments) {
     existingPayload.message.order.fulfillments[0] = {
       ...sessionData.fulfillments[0],
@@ -88,32 +87,6 @@ export const onCancelGenerator = (
       ],
     };
 
-    sessionData.quote.breakup.forEach((item: any) => {
-      if (parseInt(item.price.value) !== 0) {
-        quoteTrailTags.push({
-          code: "quote_trail",
-          list: [
-            {
-              code: "type",
-              value: item["@ondc/org/title_type"],
-            },
-            {
-              code: "id",
-              value: item["@ondc/org/item_id"],
-            },
-            {
-              code: "currency",
-              value: "INR",
-            },
-            {
-              code: "value",
-              value: `-${item.price.value}`,
-            },
-          ],
-        });
-      }
-    });
-
     existingPayload.message.order.fulfillments[1] = {
       id: "C1",
       type: "Cancel",
@@ -122,7 +95,7 @@ export const onCancelGenerator = (
           code: "Cancelled",
         },
       },
-      tags: quoteTrailTags,
+      tags: generateQuoteTrail(sessionData.quote.breakup, {}),
     };
   }
 

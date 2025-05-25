@@ -30,6 +30,7 @@ import { updateReturnGenerator } from "./update/update_return/generator";
 import { onUpdateReturnGenerator } from "./on_update/on_update_return/generator";
 import { updateBuyerDeliveryGenerator } from "./update/update_buyer_delivery/generator";
 import { onUpdateBuyerDeliveryGenerator } from "./on_update/on_update_buyer_delivery/generator";
+import { onCancelRTOGenerator } from "./on_cancel/on_cancel_rto/generator";
 
 export async function Generator(
   action_id: string,
@@ -127,12 +128,19 @@ export async function Generator(
         ...sessionData,
         stateCode: "Order-picked-self-delivery",
       });
+    case "on_status_rto_disposed":
+      return await onStatusGenerator(existingPayload, {
+        ...sessionData,
+        stateCode: "RTO-Disposed",
+      });
     case "cancel":
       return await cancelGenerator(existingPayload, sessionData);
     case "cancel_force":
       return await cancelForceGenerator(existingPayload, sessionData);
     case "on_cancel":
       return await onCancelGenerator(existingPayload, sessionData);
+    case "on_cancel_rto":
+      return await onCancelRTOGenerator(existingPayload, sessionData);
     case "track":
       return await trackGenerator(existingPayload, sessionData);
     case "on_track":
@@ -148,6 +156,12 @@ export async function Generator(
         action_id
       );
     case "update_settelment_return":
+      return await updateSettlelmentGenerator(
+        existingPayload,
+        sessionData,
+        action_id
+      );
+    case "update_settelment_part_cancel":
       return await updateSettlelmentGenerator(
         existingPayload,
         sessionData,
@@ -177,7 +191,11 @@ export async function Generator(
         deliveryAuth: true,
       });
     case "on_update_part_cancel":
-      return await onUpdatePartCancelGenerator(existingPayload, sessionData);
+      return await onUpdatePartCancelGenerator(
+        existingPayload,
+        sessionData,
+        inputs
+      );
     case "on_update_buyer_delivery_intermin":
       return await onUpdateBuyerDeliveryGenerator(existingPayload, sessionData);
     case "on_update_buyer_delivery_final":

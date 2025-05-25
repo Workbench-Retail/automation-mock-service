@@ -45,6 +45,8 @@ export interface SessionData {
   return_item_count?: string;
   buyer_delivery_start_time?: string;
   buyer_delivery_order_status?: string;
+  on_confirm_quote?: any;
+  on_update_quote?: any;
 }
 
 export type BecknContext = {
@@ -78,4 +80,5 @@ export interface Input {
   oosItem?: string;
   returnItemId?: string;
   returnReason?: string;
+  partCancelItemId?: string;
 }

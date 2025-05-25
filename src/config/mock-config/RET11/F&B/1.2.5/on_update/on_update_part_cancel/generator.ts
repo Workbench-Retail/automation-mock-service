@@ -1,8 +1,94 @@
-import { SessionData } from "../../../../session-types";
+import { SessionData, Input } from "../../../../session-types";
+import { generateQuoteTrail } from "../../../../../../../utils/generic-utils";
+import { buildRetailQuote } from "../../../../../../../utils/generic-utils";
 
 export const onUpdatePartCancelGenerator = (
   existingPayload: any,
-  sessionData: SessionData
+  sessionData: SessionData,
+  inputs?: Input
 ) => {
+  if (sessionData.order_id) {
+    existingPayload.message.order.id = sessionData.order_id;
+  }
+
+  if (sessionData.order_state) {
+    existingPayload.message.order.state = sessionData.order_state;
+  }
+
+  if (sessionData.provider) {
+    existingPayload.message.order.provider = sessionData.provider;
+  }
+
+  let canceledParentItemId = "";
+
+  if (sessionData.items) {
+    canceledParentItemId = sessionData.items.find(
+      (item) => item.id === inputs?.partCancelItemId
+    )?.parent_item_id;
+
+    existingPayload.message.order.items = sessionData.items.map((item: any) => {
+      if (item.parent_item_id === canceledParentItemId) {
+        return {
+          ...item,
+          fulfillment_id: "C1",
+          parent_item_id: "DI1",
+        };
+      }
+
+      return item;
+    });
+  }
+
+  if (sessionData.billing) {
+    existingPayload.message.order.billing = sessionData.billing;
+  }
+
+  if (sessionData.payment) {
+    existingPayload.message.order.payment = sessionData.payment;
+  }
+
+  if (sessionData.fulfillments) {
+    existingPayload.message.order.fulfillments = [
+      ...sessionData.fulfillments,
+      {
+        id: "C1",
+        type: "Cancel",
+        state: {
+          descriptor: {
+            code: "Cancelled",
+          },
+        },
+        tags: [
+          {
+            code: "cancel_request",
+            list: [
+              {
+                code: "reason_id",
+                value: "002",
+              },
+              {
+                code: "initiated_by",
+                value: existingPayload.context.bpp_id,
+              },
+            ],
+          },
+          ...generateQuoteTrail(
+            sessionData.quote.breakup,
+            {},
+            canceledParentItemId
+          ),
+        ],
+      },
+    ];
+  }
+
+  if (sessionData.quote) {
+    existingPayload.message.order.quote = buildRetailQuote(
+      existingPayload.message.order.items,
+      sessionData.on_search_items,
+      existingPayload.message.order.fulfillments
+    );
+  }
+
   return existingPayload;
 };

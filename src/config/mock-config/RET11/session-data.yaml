@@ -24,3 +24,5 @@ session_data:
   return_item_count: null
   buyer_delivery_start_time: null
   buyer_delivery_order_status: null
+  on_confirm_quote: {}
+  on_update_quote: {}

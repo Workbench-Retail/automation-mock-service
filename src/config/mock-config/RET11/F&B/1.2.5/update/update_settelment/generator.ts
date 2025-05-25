@@ -39,11 +39,19 @@ export const updateSettlelmentGenerator = (
         ];
       }
     });
+  } else if (action_id === "update_settelment_part_cancel") {
+    refundAmount = (
+      parseInt(sessionData?.on_confirm_quote?.price?.value) -
+      parseInt(sessionData?.on_update_quote?.price?.value)
+    ).toString();
   }
 
   existingPayload.message.order.payment[
     "@ondc/org/settlement_details"
   ][0].settlement_amount = refundAmount;
+  existingPayload.message.order.payment[
+    "@ondc/org/settlement_details"
+  ][0].settlement_timestamp = existingPayload.context.timestamp;
 
   return existingPayload;
 };

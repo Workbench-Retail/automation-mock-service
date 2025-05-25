@@ -4,6 +4,10 @@ export const onConfirmGenerator = (
   existingPayload: any,
   sessionData: SessionData
 ) => {
+  if (sessionData.order_id) {
+    existingPayload.message.order.id = sessionData.order_id;
+  }
+
   if (sessionData.provider) {
     existingPayload.message.order.provider = sessionData.provider;
   }
@@ -54,8 +58,9 @@ export const onConfirmGenerator = (
     };
   }
 
-  existingPayload.message.order.created_at = sessionData.confirm_created_at_timestamp
-  existingPayload.message.order.updated_at = existingPayload.context.timestamp
+  existingPayload.message.order.created_at =
+    sessionData.confirm_created_at_timestamp;
+  existingPayload.message.order.updated_at = existingPayload.context.timestamp;
 
   return existingPayload;
 };

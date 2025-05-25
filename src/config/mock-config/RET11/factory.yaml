@@ -229,3 +229,18 @@ codes:
     action: on_update
     default: on_update/on_update_buyer_delivery/default.yaml
     message_id: false
+  - code: 144
+    action_id: update_settelment_part_cancel
+    action: update
+    default: update/update_settelment/default.yaml
+    message_id: true
+  - code: 145
+    action_id: on_status_rto_disposed
+    action: on_status
+    default: on_status/default.yaml
+    message_id: true
+  - code: 146
+    action_id: on_cancel_rto
+    action: on_cancel
+    default: on_cancel/on_cancel_rto/default.yaml
+    message_id: true
