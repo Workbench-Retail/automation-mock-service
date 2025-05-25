@@ -138,6 +138,28 @@ export const generateQuoteTrail = (
           ],
         });
       }
+    } else if (item["@ondc/org/title_type"] === "offer") {
+      quoteTrailTags.push({
+        code: "quote_trail",
+        list: [
+          {
+            code: "type",
+            value: item["@ondc/org/title_type"],
+          },
+          {
+            code: "id",
+            value: item["@ondc/org/item_id"],
+          },
+          {
+            code: "currency",
+            value: "INR",
+          },
+          {
+            code: "value",
+            value: `${Math.abs(parseInt(item.price.value))}`,
+          },
+        ],
+      });
     } else if (
       parseInt(item.price.value) !== 0 &&
       (!parentItemId || item?.item?.parent_item_id === parentItemId)
@@ -196,11 +218,28 @@ export const generateQuoteTrail = (
 export const buildRetailQuote = (
   items: any,
   initalItems: any,
-  fulfillments: any
+  fulfillments: any,
+  offersData?: any
 ) => {
   const quote: any = {};
   let breakup: any = [];
   let totalPrice = 0;
+
+  function extractTags(tags: any) {
+    const result: any = {};
+
+    tags.forEach((tag: any) => {
+      const section = tag.code;
+      if (section === "qualifier" || section === "benefit") {
+        result[section] = {};
+        tag.list.forEach((item: any) => {
+          result[section][item.code] = item.value;
+        });
+      }
+    });
+
+    return result;
+  }
 
   items.forEach((item: any) => {
     const initialItemsData: any = initalItems?.find(
@@ -212,7 +251,7 @@ export const buildRetailQuote = (
 
     fulfillments.forEach((fulfillment: any) => {
       if (
-        fulfillment.id === item.fulfillment_id &&
+        fulfillment.id === item?.fulfillment_id &&
         fulfillment.type === "Cancel"
       ) {
         isCancelFulfillment = true;
@@ -355,6 +394,87 @@ export const buildRetailQuote = (
         },
       ];
     }
+  });
+
+  offersData?.offers?.forEach((offer: any) => {
+    offersData?.initalOffers?.forEach((initOffer: any) => {
+      if (initOffer.id === offer.id) {
+        const conditions = extractTags(initOffer.tags);
+
+        console.log(
+          "::::::::::::::::",
+          parseInt(conditions?.qualifier?.min_value) < totalPrice,
+          parseInt(conditions?.qualifier?.min_value),
+          totalPrice
+        );
+        if (parseInt(conditions?.qualifier?.min_value) > totalPrice) {
+          return;
+        }
+
+        const benifitType = conditions?.benefit?.value_type;
+
+        let price = "";
+
+        if (benifitType === "amount") {
+          price = conditions?.benefit?.value;
+
+          totalPrice -= parseInt(conditions?.benefit?.valu || "0");
+        }
+
+        if (benifitType === "percent") {
+          const percent =
+            Math.abs(parseFloat(conditions?.benefit?.value)) / 100;
+          const cap = Math.abs(parseFloat(conditions?.benefit?.value_cap));
+          const calculatedDiscount = totalPrice * percent;
+
+          const finalDiscount = Math.min(calculatedDiscount, cap);
+
+          totalPrice -= finalDiscount;
+
+          price = `-${finalDiscount.toFixed(2)}`;
+        }
+
+        breakup.push({
+          "@ondc/org/item_id": offer.id,
+          title: offer.id,
+          "@ondc/org/title_type": "offer",
+          price: {
+            currency: "INR",
+            value: price,
+          },
+          item: {
+            tags: [
+              {
+                code: "quote",
+                list: [
+                  {
+                    code: "type",
+                    value: "order",
+                  },
+                ],
+              },
+              {
+                code: "offer",
+                list: [
+                  {
+                    code: "type",
+                    value: "discount",
+                  },
+                  {
+                    code: "additive",
+                    value: "yes",
+                  },
+                  {
+                    code: "auto",
+                    value: "no",
+                  },
+                ],
+              },
+            ],
+          },
+        });
+      }
+    });
   });
 
   breakup = [...breakup, ...deliveryBreakup];

@@ -53,5 +53,9 @@ export async function initGenerator(
     ];
   }
 
+  if (sessionData?.offers) {
+    existingPayload.message.order.offers = sessionData?.offers;
+  }
+
   return existingPayload;
 }

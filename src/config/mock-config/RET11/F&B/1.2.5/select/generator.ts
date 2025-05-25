@@ -138,5 +138,13 @@ export const selectGenerator = (
     }
   }
 
+  if (inputs?.offerId) {
+    existingPayload.message.order.offers = [
+      {
+        id: inputs.offerId,
+      },
+    ];
+  }
+
   return existingPayload;
 };

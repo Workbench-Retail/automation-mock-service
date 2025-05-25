@@ -1,4 +1,5 @@
 import { SessionData, Input } from "../../../session-types";
+import { discount, buyXgetY } from "./offers";
 
 export const onSearchGenerator = (
   existingPayload: any,
@@ -21,6 +22,17 @@ export const onSearchGenerator = (
         ],
       },
     ];
+
+  if (inputs?.offers) {
+    console.log("inputs", inputs);
+    if (inputs?.offers === "Discount") {
+      existingPayload.message.catalog["bpp/providers"][0].offers = discount;
+    }
+
+    if (inputs.offers === "BuyXGetY") {
+      existingPayload.message.catalog["bpp/providers"][0].offers = buyXgetY;
+    }
+  }
 
   return existingPayload;
 };

@@ -26,3 +26,5 @@ session_data:
   buyer_delivery_order_status: null
   on_confirm_quote: {}
   on_update_quote: {}
+  on_search_offers: []
+  offers: []
