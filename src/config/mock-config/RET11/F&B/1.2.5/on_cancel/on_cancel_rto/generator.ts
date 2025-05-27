@@ -118,10 +118,14 @@ export const onCancelRTOGenerator = (
     },
     start: endFulfillment,
     end: startFulfillment,
-    tags: generateQuoteTrail(sessionData.quote.breakup, {
-      fulfillmentState: "POST",
-      isRTO: true,
-    }),
+    tags: generateQuoteTrail(
+      sessionData.quote.breakup,
+      existingPayload.message.order.items,
+      {
+        fulfillmentState: "POST",
+        isRTO: true,
+      }
+    ),
   });
 
   existingPayload.message.order.quote = buildRetailQuote(

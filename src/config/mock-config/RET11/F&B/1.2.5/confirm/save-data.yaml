@@ -1,5 +1,6 @@
 save-data:
   message_id: "$.context.message_id"
   payment: "$.message.order.payment"
-  confirm_created_at_timestamp: "$.messag.order.created_at"
+  confirm_created_at_timestamp: "$.message.order.created_at"
   order_id: "$.message.order.id"
+  # save fulfillment

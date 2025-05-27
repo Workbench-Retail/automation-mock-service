@@ -26,17 +26,26 @@ export const onUpdatePartCancelGenerator = (
       (item) => item.id === inputs?.partCancelItemId
     )?.parent_item_id;
 
-    existingPayload.message.order.items = sessionData.items.map((item: any) => {
+    const updatedItems: any[] = [];
+
+    sessionData.items.forEach((item: any) => {
       if (item.parent_item_id === canceledParentItemId) {
-        return {
+        updatedItems.push({
+          ...item,
+          quantity: {
+            count: 0,
+          },
+        });
+        updatedItems.push({
           ...item,
           fulfillment_id: "C1",
-          parent_item_id: "DI1",
-        };
+        });
+      } else {
+        updatedItems.push(item);
       }
-
-      return item;
     });
+
+    existingPayload.message.order.items = updatedItems;
   }
 
   if (sessionData.billing) {
@@ -74,7 +83,8 @@ export const onUpdatePartCancelGenerator = (
           },
           ...generateQuoteTrail(
             sessionData.quote.breakup,
-            {},
+            existingPayload.message.order.items,
+            { partCancel: true },
             canceledParentItemId
           ),
         ],

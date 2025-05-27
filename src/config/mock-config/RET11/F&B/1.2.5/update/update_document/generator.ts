@@ -1,11 +1,15 @@
-import { SessionData } from "../../../session-types";
+import { SessionData } from "../../../../session-types";
 
-export const onConfirmGenerator = (
+export const updateDocumentGenerator = (
   existingPayload: any,
   sessionData: SessionData
 ) => {
   if (sessionData.order_id) {
     existingPayload.message.order.id = sessionData.order_id;
+  }
+
+  if (sessionData.order_state) {
+    existingPayload.message.order.state = sessionData.order_state;
   }
 
   if (sessionData.provider) {
@@ -29,37 +33,15 @@ export const onConfirmGenerator = (
   }
 
   if (sessionData.fulfillments) {
-    existingPayload.message.order.fulfillments[0] = {
-      state: {
-        descriptor: {
-          code: "Pending",
-        },
-      },
-      "@ondc/org/provider_name": "LSP Provider",
-      start: {
-        location: {
-          id: "L1",
-          descriptor: {
-            name: "ABC Store",
-          },
-          gps: "77.2039,28.5705",
-          address: {
-            locality: "my store locality",
-            city: "my store city",
-            area_code:
-              sessionData?.select_fulfillment?.[0].end.location.address
-                .area_code,
-            state: "my store state",
-          },
-        },
-        contact: {
-          phone: "9886098860",
-          email: "nobody@nomail.com",
-        },
-      },
-      ...sessionData.fulfillments[0],
-    };
+    existingPayload.message.order.fulfillments = sessionData.fulfillments;
   }
+
+  existingPayload.message.order.documents = [
+    {
+      url: "https://invoice_url",
+      label: "Invoice",
+    },
+  ];
 
   existingPayload.message.order.created_at =
     sessionData.confirm_created_at_timestamp;

@@ -258,8 +258,7 @@ message:
       "@ondc/org/settlement_details":
         - settlement_counterparty: seller-app
           settlement_phase: sale-amount
-          settlement_type: upi
-          beneficiary_name: xxxxx
+          settlement_type: neft
           upi_address: gft@oksbi
           settlement_bank_account_no: XXXXXXXXXX
           settlement_ifsc_code: XXXXXXXXX

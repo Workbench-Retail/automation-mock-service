@@ -30,18 +30,18 @@ export const confirmGenerator = (
           name: "person_name_1",
         };
         fulfillment.end.contact = {
-          email: "nobody@nomail.com",
           phone: "9886098860",
         };
+        fulfillment["@ondc/org/TAT"] = "PT60M";
+        fulfillment.tracking = true;
 
-        return fulfillment
+        return fulfillment;
       }
     );
   }
 
   existingPayload.message.order.payment = {
     uri: "https://ondc.transaction.com/payment",
-    tl_method: "http/get",
     params: {
       currency: "INR",
       transaction_id: "3937",
@@ -55,6 +55,30 @@ export const confirmGenerator = (
     "@ondc/org/withholding_amount": "10.00",
     ...sessionData.payment,
   };
+
+  if (sessionData?.tags) {
+    existingPayload.message.order.tags = [
+      ...sessionData.tags,
+      {
+        code: "bap_terms",
+        list: [
+          {
+            code: "accept_bpp_terms",
+            value: "Y",
+          },
+          {
+            code: "static_terms",
+            value:
+              "https://github.com/ONDC-Official/NP-Static-Terms/buyerNP_BNP/1.0/tc.pdf",
+          },
+          {
+            code: "tax_number",
+            value: "12ABCDE3456FGZJ",
+          },
+        ],
+      },
+    ];
+  }
 
   existingPayload.message.order.created_at = existingPayload.context.timestamp;
   existingPayload.message.order.updated_at = existingPayload.context.timestamp;

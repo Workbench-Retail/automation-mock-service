@@ -1,2 +1,3 @@
 save-data:
   payment: "$.message.order.payment"
+  tags: "$.message.order.tags[*]"

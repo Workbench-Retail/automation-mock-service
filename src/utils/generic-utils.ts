@@ -104,18 +104,31 @@ export const calculateQuotePrice = (breakup: any) => {
 
 export const generateQuoteTrail = (
   breakup: any,
+  items: any,
   options: any,
   parentItemId?: string
 ) => {
-  const { fulfillmentState = "PRE", isRTO = false } = options;
+  const {
+    fulfillmentState = "PRE",
+    isRTO = false,
+    partCancel = false,
+  } = options;
   const quoteTrailTags: any[] = [];
+
+  function extractType(tags: any) {
+    const typeTag = tags.find((tag: any) => tag.code === "type");
+    if (!typeTag || !typeTag.list) return null;
+
+    const typeItem = typeTag.list.find((item: any) => item.code === "type");
+    return typeItem ? typeItem.value : null;
+  }
 
   breakup.forEach((item: any) => {
     if (
       item["@ondc/org/title_type"] === "delivery" ||
       item["@ondc/org/title_type"] === "packing"
     ) {
-      if (fulfillmentState === "PRE") {
+      if (fulfillmentState === "PRE" && !partCancel) {
         quoteTrailTags.push({
           code: "quote_trail",
           list: [
@@ -164,12 +177,28 @@ export const generateQuoteTrail = (
       parseInt(item.price.value) !== 0 &&
       (!parentItemId || item?.item?.parent_item_id === parentItemId)
     ) {
+      console.log("items:", items);
+      console.log("item{asdas", item["@ondc/org/item_id"]);
+
+      const tags = items.find(
+        (allItem: any) => allItem.id === item["@ondc/org/item_id"]
+      ).tags;
+      const subType = extractType(tags);
+
       quoteTrailTags.push({
         code: "quote_trail",
         list: [
           {
             code: "type",
             value: item["@ondc/org/title_type"],
+          },
+          {
+            code: "subtype",
+            value: subType,
+          },
+          {
+            code: "parent_item_id",
+            value: item.item.parent_item_id,
           },
           {
             code: "id",
@@ -188,29 +217,29 @@ export const generateQuoteTrail = (
     }
   });
 
-  if (isRTO) {
-    quoteTrailTags.push({
-      code: "quote_trail",
-      list: [
-        {
-          code: "type",
-          value: "delivery",
-        },
-        {
-          code: "id",
-          value: "F1-RTO",
-        },
-        {
-          code: "currency",
-          value: "INR",
-        },
-        {
-          code: "value",
-          value: `50`,
-        },
-      ],
-    });
-  }
+  // if (isRTO) {
+  //   quoteTrailTags.push({
+  //     code: "quote_trail",
+  //     list: [
+  //       {
+  //         code: "type",
+  //         value: "delivery",
+  //       },
+  //       {
+  //         code: "id",
+  //         value: "F1-RTO",
+  //       },
+  //       {
+  //         code: "currency",
+  //         value: "INR",
+  //       },
+  //       {
+  //         code: "value",
+  //         value: `50`,
+  //       },
+  //     ],
+  //   });
+  // }
 
   return quoteTrailTags;
 };
@@ -223,7 +252,7 @@ export const buildRetailQuote = (
 ) => {
   const quote: any = {};
   let breakup: any = [];
-  let totalPrice = 0;
+  let totalPrice = 0.0;
 
   function extractTags(tags: any) {
     const result: any = {};
@@ -299,7 +328,7 @@ export const buildRetailQuote = (
 
     const taxPrice = (itemPrice * 0.05).toFixed(2).toString();
 
-    totalPrice += parseInt(taxPrice);
+    totalPrice += parseFloat(taxPrice);
 
     breakup.push({
       "@ondc/org/item_id": item.id,
@@ -369,6 +398,15 @@ export const buildRetailQuote = (
       totalPrice += 25;
       deliveryBreakup = [
         ...deliveryBreakup,
+        {
+          "@ondc/org/item_id": fulfillment.id,
+          title: "Delivery charges",
+          "@ondc/org/title_type": "delivery",
+          price: {
+            currency: "INR",
+            value: "0.00",
+          },
+        },
         {
           "@ondc/org/item_id": fulfillment.id,
           title: "Packing charges",

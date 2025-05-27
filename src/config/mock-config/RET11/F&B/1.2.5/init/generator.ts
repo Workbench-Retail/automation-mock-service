@@ -9,6 +9,18 @@ export async function initGenerator(
     existingPayload.message.order.provider = sessionData.provider;
   }
 
+  existingPayload.message.order.billing.address = {
+    name: "my house or door or floor #",
+    building: "my building name or house #",
+    locality: "my street name",
+    city: "my city",
+    state: "my state",
+    country: "IND",
+    area_code:
+      sessionData?.select_fulfillment?.[0].end.location.address.area_code ||
+      "110125",
+  };
+
   existingPayload.message.order.billing.created_at =
     existingPayload.context.timestamp;
   existingPayload.message.order.billing.updated_at =
@@ -53,7 +65,7 @@ export async function initGenerator(
     ];
   }
 
-  if (sessionData?.offers) {
+  if (sessionData?.offers?.length) {
     existingPayload.message.order.offers = sessionData?.offers;
   }
 

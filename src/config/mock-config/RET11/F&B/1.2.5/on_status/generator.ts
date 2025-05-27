@@ -57,6 +57,12 @@ export const onStatusGenerator = (
       existingPayload.message.order.state = "In-progress";
       existingPayload.message.order.fulfillments[0].state.descriptor.code =
         "Order-picked-up";
+      existingPayload.message.order.documents = [
+        {
+          url: "https://invoice_url",
+          label: "Invoice",
+        },
+      ];
       break;
     case "At-delivery":
       existingPayload.message.order.state = "In-progress";
@@ -71,7 +77,7 @@ export const onStatusGenerator = (
     case "Order-picked-self-delivery":
       existingPayload.message.order.state = "Completed";
       existingPayload.message.order.fulfillments[0].state.descriptor.code =
-        "Order-picked";
+        "Order-picked-up";
     case "RTO-Disposed":
       existingPayload.message.order.state = "Completed";
       existingPayload.message.order.fulfillments =

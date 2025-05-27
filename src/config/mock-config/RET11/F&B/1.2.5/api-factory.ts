@@ -31,6 +31,8 @@ import { onUpdateReturnGenerator } from "./on_update/on_update_return/generator"
 import { updateBuyerDeliveryGenerator } from "./update/update_buyer_delivery/generator";
 import { onUpdateBuyerDeliveryGenerator } from "./on_update/on_update_buyer_delivery/generator";
 import { onCancelRTOGenerator } from "./on_cancel/on_cancel_rto/generator";
+import { onSearch3Generator } from "./on_search/on_search_3/generator";
+import { updateDocumentGenerator } from "./update/update_document/generator";
 
 export async function Generator(
   action_id: string,
@@ -49,6 +51,8 @@ export async function Generator(
       return await onSearch1Generator(existingPayload, sessionData);
     case "on_search_2":
       return await onSearch2Generator(existingPayload, sessionData);
+    case "on_search_3":
+      return await onSearch3Generator(existingPayload, sessionData);
     case "select":
       return await selectGenerator(existingPayload, sessionData, inputs);
     case "on_select":
@@ -179,6 +183,8 @@ export async function Generator(
         sessionData,
         action_id
       );
+    case "update_document":
+      return await updateDocumentGenerator(existingPayload, sessionData);
     case "update_return":
       return await updateReturnGenerator(existingPayload, sessionData, inputs);
     case "on_update_address":

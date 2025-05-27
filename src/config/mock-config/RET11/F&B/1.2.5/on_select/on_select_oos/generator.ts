@@ -29,10 +29,20 @@ export const onSelectOOSGenerator = (
     existingPayload.message.order.provider = sessionData.provider;
   }
 
+  let oosItmParentItemId = sessionData?.items?.find(
+    (item) => item.id === inputs?.oosItem
+  ).parent_item_id;
+
   if (sessionData?.items && sessionData?.select_fulfillment?.length) {
     existingPayload.message.order.items = sessionData.items.map((item: any) => {
       return {
         ...item,
+        quantity: {
+          count:
+            item.parent_item_id === oosItmParentItemId
+              ? 0
+              : item.quantity.count,
+        },
         fulfillment_id: existingPayload.message.order.fulfillments?.find(
           (fulfillment: any) => fulfillment.type === "Delivery"
         )?.id,
@@ -140,6 +150,20 @@ export const onSelectOOSGenerator = (
   };
 
   existingPayload.message.order.quote.breakup = breakup;
+
+  const errorMsg = [
+    {
+      dynamic_item_id: oosItmParentItemId,
+      item_id: inputs?.oosItem,
+      error: "400002",
+    },
+  ];
+
+  existingPayload.error = {
+    type: "DOMAIN-ERROR",
+    code: "40002",
+    message: JSON.stringify(errorMsg),
+  };
 
   return existingPayload;
 };

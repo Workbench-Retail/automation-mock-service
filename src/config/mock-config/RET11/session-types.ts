@@ -49,6 +49,7 @@ export interface SessionData {
   on_update_quote?: any;
   on_search_offers?: any[];
   offers?: any[];
+  tags?: any[];
 }
 
 export type BecknContext = {

@@ -52,7 +52,8 @@ export const updateReturnGenerator = (
             },
             {
               code: "images",
-              value: "url_for_image1,url_for_image2",
+              value:
+                "https://automation.ondc.org/image1,https://automation.ondc.org/image2",
             },
             {
               code: "ttl_approval",

@@ -58,15 +58,15 @@ message:
               range:
                 start: "1000"
                 end: "2000"
-            gps: "12.9675,77.7496"
+            gps: "77.2045,28.5697"
             address:
-              locality: Jayanagar
-              street: Jayanagar 4th Block
-              city: Bengaluru
-              area_code: "560076"
-              state: KA
+              locality: "my store locality"
+              street: "my store street"
+              city: "my store city"
+              area_code: "110088"
+              state: "my store state"
             circle:
-              gps: "12.9675,77.7496"
+              gps: "77.2045,28.5697"
               radius:
                 unit: km
                 value: "3"
@@ -97,7 +97,7 @@ message:
               - code: display
                 list:
                   - code: rank
-                    value: "3"
+                    value: "1"
           - id: CG1
             descriptor:
               name: Crust (any 1 option)

@@ -63,7 +63,7 @@ export const onCancelGenerator = (
           list: [
             {
               code: "reason_id",
-              value: sessionData?.cancellation_reason_id || "002",
+              value: "011",
             },
             {
               code: "initiated_by",
@@ -95,7 +95,11 @@ export const onCancelGenerator = (
           code: "Cancelled",
         },
       },
-      tags: generateQuoteTrail(sessionData.quote.breakup, {}),
+      tags: generateQuoteTrail(
+        sessionData.quote.breakup,
+        existingPayload.message.order.items,
+        {}
+      ),
     };
   }
 
@@ -109,7 +113,11 @@ export const onCancelGenerator = (
             "@ondc/org/item_quantity": { count: 0 },
             price: { currency: "INR", value: "0.00" },
           };
-        } else if (item["@ondc/org/title_type"] === "tax") {
+        } else if (
+          item["@ondc/org/title_type"] === "tax" ||
+          item["@ondc/org/title_type"] === "delivery" ||
+          item["@ondc/org/title_type"] === "packing"
+        ) {
           return {
             ...item,
             price: { currency: "INR", value: "0.00" },

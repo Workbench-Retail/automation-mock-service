@@ -49,17 +49,16 @@ export const onSelectMultipleFulfillmentGenerator = (
 
     totalPrice += parseInt(initialItemsData.price.value);
 
-    console.log("iinitalalsd", initialItemsData);
     breakup.push({
       "@ondc/org/item_id": item.id,
       "@ondc/org/item_quantity": {
         count: 1,
       },
       title: initialItemsData.descriptor.name,
-      "@ondc/org/title_type": "item", /// ??????
+      "@ondc/org/title_type": "item", 
       price: {
         currency: "INR",
-        value: initialItemsData.price.value, /// ??????
+        value: initialItemsData.price.value, 
       },
       item: {
         parent_item_id: item.parent_item_id,
