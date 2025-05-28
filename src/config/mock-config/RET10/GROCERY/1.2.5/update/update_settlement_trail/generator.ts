@@ -16,14 +16,29 @@ export async function update_partial_cancel_settlement_generator(
 ) {
 	existingPayload.message.order.id = sessionData.order_id;
 	const fulfillments = sessionData.fulfillments as Fulfillments;
+	existingPayload.message.order.fulfillments = [];
 	const cancelId =
-		fulfillments.filter((f) => f.type === "Cancel")[0].id ??
-		"CANCEL_FULFILLMENTS_ID_123";
-	existingPayload.message.fulfillments = [{ id: cancelId, type: "Cancel" }];
+		fulfillments.filter((f) => f.type === "Cancel")[0]?.id || undefined;
+	if (cancelId) {
+		existingPayload.message.order.fulfillments = [
+			{ id: cancelId, type: "Cancel" },
+		];
+	}
+	const returnId =
+		fulfillments.filter((f) => f.type === "Return")[0]?.id || undefined;
+	if (returnId) {
+		existingPayload.message.order.fulfillments.push({
+			id: returnId,
+			type: "Return",
+		});
+	}
+
 	const trail = jsonpath.query(
 		sessionData.fulfillments,
-		`$.tags[?(@.code=="quote_trail")]`
+		`$..tags[?(@.code=="quote_trail")]`
 	) as tags[];
+
+	console.log("trail", JSON.stringify(trail, null, 2));
 
 	const amounts = trail.flatMap((t) => {
 		return t.list
@@ -34,7 +49,7 @@ export async function update_partial_cancel_settlement_generator(
 	});
 	const totalAmount = amounts.reduce((acc, curr) => acc + curr, 0);
 
-	existingPayload.message.payment = {
+	existingPayload.message.order.payment = {
 		"@ondc/org/settlement_details": {
 			settlement_counterparty: "buyer",
 			settlement_phase: "refund",

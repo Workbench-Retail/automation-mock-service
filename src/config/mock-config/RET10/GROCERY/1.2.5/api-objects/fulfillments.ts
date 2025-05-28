@@ -785,20 +785,41 @@ export function createFulfillments(
 						city: "mock-city",
 						state: "mock-state",
 						country: "IND",
-						area_code: "400053",
+						area_code:
+							selected[0].end?.location?.address?.area_code || "400053",
 						locality: "mock-locality",
 						name: "mock-house-name",
 					},
 				},
 			},
 		};
-		const initFulfillments = onSelectFulfillments.map((f) => {
-			return {
-				id: f.id,
-				type: f.type,
+
+		let targetFulfillment: Fulfillment | undefined = {};
+		if (actionId == "init_buyer_delivery") {
+			targetFulfillment = onSelectFulfillments.find(
+				(f) => f.type === "Buyer-Delivery"
+			);
+		} else {
+			targetFulfillment = onSelectFulfillments.find(
+				(f) => f.type === "Delivery"
+			);
+		}
+
+		// const initFulfillments = onSelectFulfillments.map((f) => {
+		// 	return {
+		// 		id: f.id,
+		// 		type: f.type,
+		// 		end: defaultEnd.end,
+		// 	};
+		// });
+		const initFulfillments = [
+			{
+				id: targetFulfillment?.id || "F3",
+				type: targetFulfillment?.type || "Delivery",
 				end: defaultEnd.end,
-			};
-		});
+			},
+		];
+
 		return initFulfillments;
 	}
 	if (action === "on_init") {
@@ -836,43 +857,45 @@ export function createFulfillments(
 	}
 	if (action === "on_confirm") {
 		const fulfillments = sessionData.fulfillments as Fulfillments;
-		return onSelectFulfillments.map((f, index) => {
-			return {
-				id: f.id,
-				type: f.type,
-				tracking: f.tracking,
-				state: {
-					descriptor: {
-						code: "Pending",
-					},
-				},
-				"@ondc/org/TAT": f["@ondc/org/TAT"],
-				"@ondc/org/provider_name": `mock_provider_name_${index}`,
-				start: {
-					location: {
-						id: "L1",
+		return onSelectFulfillments
+			.filter((f) => f.id === fulfillments[0].id)
+			.map((f, index) => {
+				return {
+					id: f.id,
+					type: f.type,
+					tracking: f.tracking,
+					state: {
 						descriptor: {
-							name: "ABC Store",
-						},
-						gps: "19.129076,72.825803",
-						address: {
-							building: "my building name or house",
-							city: "Mumbai",
-							state: "Maharashtra",
-							country: "IND",
-							area_code: "400053",
-							locality: "my street name",
-							name: "my house or door or floor",
+							code: "Pending",
 						},
 					},
-					contact: {
-						phone: "9594663710",
-						email: "nobody@nomail.com",
+					"@ondc/org/TAT": f["@ondc/org/TAT"],
+					"@ondc/org/provider_name": `mock_provider_name_${index}`,
+					start: {
+						location: {
+							id: "L1",
+							descriptor: {
+								name: "ABC Store",
+							},
+							gps: "19.129076,72.825803",
+							address: {
+								building: "my building name or house",
+								city: "Mumbai",
+								state: "Maharashtra",
+								country: "IND",
+								area_code: "400053",
+								locality: "my street name",
+								name: "my house or door or floor",
+							},
+						},
+						contact: {
+							phone: "9594663710",
+							email: "nobody@nomail.com",
+						},
 					},
-				},
-				end: fulfillments.find((of) => of.id === f.id)?.end,
-			};
-		});
+					end: fulfillments.find((of) => of.id === f.id)?.end,
+				};
+			});
 	}
 	if (action === "on_status") {
 		console.log("######## createFulfillments on_status #########");
@@ -998,6 +1021,40 @@ export function createFulfillments(
 				break;
 			case "on_status_rto_delivered":
 				state = "Cancelled";
+			case "on_status_ready_to_ship":
+				state = "Packed";
+				finalFulfillments = finalFulfillments.map((f) => {
+					if (f.type === "Buyer-Delivery") {
+						const tags = f.tags || [];
+						return {
+							...f,
+							tags: [
+								...tags,
+								{
+									code: "state",
+									list: [
+										{
+											code: "ready_to_ship",
+											value: "yes",
+										},
+									],
+								},
+								{
+									code: "routing",
+									list: [
+										{
+											code: "type",
+											value: "P2P",
+										},
+									],
+								},
+							],
+						};
+					}
+					return f; // leave other types unchanged
+				});
+				break;
+
 			default:
 				break;
 		}

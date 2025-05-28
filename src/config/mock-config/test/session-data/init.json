@@ -1,6 +1,6 @@
 {
-  "transaction_id": "cd8e01d9-9ded-43c1-99df-6f872b16292a",
-  "message_id": "3a14f985-7a4e-483c-8343-3b542ee7b50b",
+  "transaction_id": "151ba3a1-5a8e-4a80-b424-3132c1ba24c3",
+  "message_id": "a3e19c91-751a-4d63-a481-73ef6e4eee10",
   "city": "std:011",
   "inc_mode": null,
   "selected_items": [
@@ -34,19 +34,17 @@
   "items": [
     {
       "id": "I1",
-      "fulfillment_id": "F1",
+      "fulfillment_id": "F32822",
       "quantity": {
         "count": 2
-      },
-      "location_id": "L1"
+      }
     },
     {
       "id": "I2",
-      "fulfillment_id": "F1",
+      "fulfillment_id": "F32822",
       "quantity": {
         "count": 49
-      },
-      "location_id": "L1"
+      }
     }
   ],
   "provider": {
@@ -59,24 +57,24 @@
   },
   "billing": {
     "address": {
-      "building": "my building name or house",
-      "city": "Mumbai",
-      "state": "Maharashtra",
+      "name": "Door no. or building name",
+      "building": "New_Building",
+      "locality": "6th Cross Road",
+      "city": "Bengaluru",
+      "state": "Karnataka",
       "country": "IND",
-      "area_code": "400053",
-      "locality": "my street name",
-      "name": "my house or door or floor"
+      "area_code": "560027"
     },
-    "phone": "9898989898",
-    "name": "ONDC buyer",
+    "phone": "9399788618",
+    "name": "John Doe",
     "email": "nobody@nomail.com",
-    "created_at": "2025-05-22T05:33:21.346Z",
-    "updated_at": "2025-05-22T05:33:21.346Z"
+    "created_at": "2025-05-28T10:27:21.726Z",
+    "updated_at": "2025-05-28T10:27:21.726Z"
   },
   "fulfillments": [
     {
-      "id": "F1",
-      "type": "Delivery",
+      "id": "F32822",
+      "type": "Buyer-Delivery",
       "end": {
         "contact": {
           "email": "nobody@nomail.com",
@@ -89,7 +87,7 @@
             "city": "mock-city",
             "state": "mock-state",
             "country": "IND",
-            "area_code": "400053",
+            "area_code": "110092",
             "locality": "mock-locality",
             "name": "mock-house-name"
           }
@@ -152,7 +150,7 @@
         }
       },
       {
-        "@ondc/org/item_id": "I1",
+        "@ondc/org/item_id": "F1",
         "title": "Delivery charges",
         "@ondc/org/title_type": "delivery",
         "price": {
@@ -161,7 +159,7 @@
         }
       },
       {
-        "@ondc/org/item_id": "I1",
+        "@ondc/org/item_id": "F1",
         "title": "Convenience Fee",
         "@ondc/org/title_type": "misc",
         "price": {
@@ -182,17 +180,71 @@
   "order_created_at": null,
   "on_select_fulfillments": [
     {
-      "id": "F1",
-      "type": "Delivery",
-      "@ondc/org/provider_name": "LSP or Provider Name",
-      "tracking": true,
-      "@ondc/org/category": "Standard Delivery",
+      "id": "F32822",
+      "type": "Buyer-Delivery",
+      "@ondc/org/provider_name": "",
+      "tracking": false,
+      "@ondc/org/category": "",
       "@ondc/org/TAT": "P2D",
       "state": {
         "descriptor": {
           "code": "Serviceable"
         }
-      }
+      },
+      "tags": [
+        {
+          "code": "weight",
+          "list": [
+            {
+              "code": "unit",
+              "value": "kilogram"
+            },
+            {
+              "code": "value",
+              "value": "1"
+            }
+          ]
+        },
+        {
+          "code": "length",
+          "list": [
+            {
+              "code": "unit",
+              "value": "centimeter"
+            },
+            {
+              "code": "value",
+              "value": "1"
+            }
+          ]
+        },
+        {
+          "code": "breadth",
+          "list": [
+            {
+              "code": "unit",
+              "value": "centimeter"
+            },
+            {
+              "code": "value",
+              "value": "1"
+            }
+          ]
+        },
+        {
+          "code": "height",
+          "list": [
+            {
+              "code": "unit",
+              "value": "centimeter"
+            },
+            {
+              "code": "value",
+              "value": "1"
+            }
+          ]
+        }
+      ]
     }
   ],
   "on_status_fulfillments": [],
@@ -201,6 +253,7 @@
   "bpp_terms": null,
   "out_of_stock_item_ids": [],
   "cancellation_reason_id": null,
+  "update_fulfillments": [],
   "bap_id": "dev-automation.ondc.org",
   "bpp_id": "dev-automation.ondc.org",
   "bap_uri": "https://dev-automation.ondc.org/buyer",

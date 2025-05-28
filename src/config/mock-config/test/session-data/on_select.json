@@ -1,6 +1,6 @@
 {
-  "transaction_id": "cd8e01d9-9ded-43c1-99df-6f872b16292a",
-  "message_id": "4af6dffe-cd7d-408e-8660-9044c9f828b7",
+  "transaction_id": "151ba3a1-5a8e-4a80-b424-3132c1ba24c3",
+  "message_id": "28b1b620-16a4-4414-981a-2173e250f8b0",
   "city": "std:011",
   "inc_mode": null,
   "selected_items": [
@@ -32,7 +32,14 @@
     }
   ],
   "items": [],
-  "provider": null,
+  "provider": {
+    "id": "P1",
+    "locations": [
+      {
+        "id": "L1"
+      }
+    ]
+  },
   "billing": null,
   "fulfillments": [],
   "quote": {
@@ -90,7 +97,7 @@
         }
       },
       {
-        "@ondc/org/item_id": "I1",
+        "@ondc/org/item_id": "F1",
         "title": "Delivery charges",
         "@ondc/org/title_type": "delivery",
         "price": {
@@ -99,7 +106,7 @@
         }
       },
       {
-        "@ondc/org/item_id": "I1",
+        "@ondc/org/item_id": "F1",
         "title": "Convenience Fee",
         "@ondc/org/title_type": "misc",
         "price": {
@@ -120,17 +127,71 @@
   "order_created_at": null,
   "on_select_fulfillments": [
     {
-      "id": "F1",
-      "type": "Delivery",
-      "@ondc/org/provider_name": "LSP or Provider Name",
-      "tracking": true,
-      "@ondc/org/category": "Standard Delivery",
+      "id": "F32822",
+      "type": "Buyer-Delivery",
+      "@ondc/org/provider_name": "",
+      "tracking": false,
+      "@ondc/org/category": "",
       "@ondc/org/TAT": "P2D",
       "state": {
         "descriptor": {
           "code": "Serviceable"
         }
-      }
+      },
+      "tags": [
+        {
+          "code": "weight",
+          "list": [
+            {
+              "code": "unit",
+              "value": "kilogram"
+            },
+            {
+              "code": "value",
+              "value": "1"
+            }
+          ]
+        },
+        {
+          "code": "length",
+          "list": [
+            {
+              "code": "unit",
+              "value": "centimeter"
+            },
+            {
+              "code": "value",
+              "value": "1"
+            }
+          ]
+        },
+        {
+          "code": "breadth",
+          "list": [
+            {
+              "code": "unit",
+              "value": "centimeter"
+            },
+            {
+              "code": "value",
+              "value": "1"
+            }
+          ]
+        },
+        {
+          "code": "height",
+          "list": [
+            {
+              "code": "unit",
+              "value": "centimeter"
+            },
+            {
+              "code": "value",
+              "value": "1"
+            }
+          ]
+        }
+      ]
     }
   ],
   "on_status_fulfillments": [],
@@ -139,6 +200,7 @@
   "bpp_terms": null,
   "out_of_stock_item_ids": [],
   "cancellation_reason_id": null,
+  "update_fulfillments": [],
   "bap_id": "dev-automation.ondc.org",
   "bpp_id": "dev-automation.ondc.org",
   "bap_uri": "https://dev-automation.ondc.org/buyer",

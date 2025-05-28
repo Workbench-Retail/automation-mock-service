@@ -389,3 +389,88 @@ codes:
     action_id: on_update_liquidated_175
     action: on_update
     message_id: false
+  - code: 176
+    default: GROCERY/1.2.5/update/update_return/default.yaml
+    action_id: update_return
+    action: update
+    message_id: true
+  - code: 177
+    default: GROCERY/1.2.5/on_update/on_update_return_init/default.yaml
+    action_id: on_update_return_init
+    action: on_update
+    message_id: false
+  - code: 178
+    action_id: on_update_return_approved
+    default: GROCERY/1.2.5/on_update/on_update_return_approved/default.yaml
+    action: on_update
+    message_id: true
+  - code: 179
+    action_id: on_update_return_picked
+    default: GROCERY/1.2.5/on_update/on_update_return_picked/default.yaml
+    message_id: true
+    action: on_update
+  - code: 180
+    action_id: on_search_inc_close
+    default: GROCERY/1.2.5/on_search/on_search_inc_close/default.yaml
+    action: on_search
+    message_id: true
+  - code: 181
+    action_id: on_search_inc_open
+    default: GROCERY/1.2.5/on_search/on_search_inc_open/default.yaml
+    action: on_search
+    message_id: true
+  - code: 182
+    action_id: init_cod
+    default: GROCERY/1.2.5/init/init_cod/default.yaml
+    action: init
+    message_id: true
+  - code: 183
+    action_id: on_init_cod
+    default: GROCERY/1.2.5/on_init/on_init_cod/default.yaml
+    action: on_init
+    message_id: false
+  - code: 184
+    action_id: confirm_cod
+    default: GROCERY/1.2.5/confirm/confirm_cod/default.yaml
+    action: confirm
+    message_id: true
+  - code: 185
+    action_id: on_confirm_cod
+    default: GROCERY/1.2.5/on_confirm/on_confirm_cod/default.yaml
+    action: on_confirm
+    message_id: false
+  - code: 186
+    action_id: on_status_order_delivered_cod
+    default: GROCERY/1.2.5/on_status/on_status_order_delivered_cod/default.yaml
+    action: on_status
+    message_id: true
+  - code: 187
+    action_id: on_select_buyer_delivery
+    default: GROCERY/1.2.5/on_select/on_select_buyer_delivery/default.yaml
+    action: on_select
+    message_id: false
+  - code: 188
+    action_id: init_buyer_delivery
+    default: GROCERY/1.2.5/init/init_buyer_delivery/default.yaml
+    action: init
+    message_id: true
+  - code: 189
+    action_id: on_init_buyer_delivery
+    default: GROCERY/1.2.5/on_init/on_init_buyer_delivery/default.yaml
+    action: on_init
+    message_id: false
+  - code: 190
+    action_id: on_status_ready_to_ship
+    default: GROCERY/1.2.5/on_status/on_status_ready_to_ship/default.yaml
+    action: on_status
+    message_id: true
+  - code: 191
+    action_id: update_picked_up
+    default: GROCERY/1.2.5/update/update_picked_up/default.yaml
+    action: update
+    message_id: true
+  - code: 192
+    action_id: update_delivered
+    default: GROCERY/1.2.5/update/update_delivered/default.yaml
+    action: update
+    message_id: true

@@ -21,3 +21,4 @@ session_data:
   bpp_terms: null
   out_of_stock_item_ids: []
   cancellation_reason_id: null
+  update_fulfillments: []

@@ -11,7 +11,27 @@ import {
 } from "./utils";
 import path from "path";
 const inputsData = {
-	RTO_And_Part_Cancellation_Flow: {
+	Buyer_Delivery_Flow: {
+		select: {
+			provider: "P1",
+			provider_location: ["L1"],
+			location_gps: "12.1233,12.9992",
+			location_pin_code: "110092",
+			items: [
+				{
+					itemId: "I1",
+					quantity: 2,
+					location: "L1",
+				},
+				{
+					itemId: "I2",
+					quantity: 49,
+					location: "L1",
+				},
+			],
+		},
+	},
+	Return_Flow: {
 		select: {
 			provider: "P1",
 			provider_location: ["L1"],
@@ -61,7 +81,7 @@ export async function testUnitApi(
 	lastAction: string,
 	flowId: string
 ) {
-	const sesData = loadMockSessionDataUnit(lastAction);
+	const sesData = loadMockSessionDataUnit(lastAction, flowId);
 	// @ts-ignore
 	sesData.user_inputs = inputsData[flowId][actionId];
 	let mockResponse = await createMockResponseRET10_125(actionId, sesData);
@@ -71,9 +91,9 @@ export async function testUnitApi(
 		const changes = inputPathChanges[flowId][actionId];
 		mockResponse = updateAllJsonPaths(mockResponse, changes);
 	}
-	await saveDataForUnit(lastAction, action, mockResponse);
+	await saveDataForUnit(lastAction, action, mockResponse, flowId);
 	const folderPath = path.resolve(__dirname, `./logs/${flowId}`);
-	const filePath = path.resolve(folderPath, `${action}.json`);
+	const filePath = path.resolve(folderPath, `${actionId}.json`);
 	if (!existsSync(filePath)) {
 		mkdirSync(folderPath, { recursive: true });
 	}
