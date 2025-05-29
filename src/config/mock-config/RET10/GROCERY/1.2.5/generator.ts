@@ -90,6 +90,9 @@ import { on_init_buyer_delivery_generator } from "./on_init/on_init_buyer_delive
 import { on_status_ready_to_ship_generator } from "./on_status/on_status_ready_to_ship/generator";
 import { update_picked_up_generator } from "./update/update_picked_up/generator";
 import { update_delivered_generator } from "./update/update_delivered/generator";
+import { on_select_multi_fulfillment_generator } from "./on_select/on_select_multi_fulfillment/generator";
+import { init_multi_fulfillment_generator } from "./init/init_multi_fulfillment/generator";
+import { on_init_multi_fulfillment_generator } from "./on_init/on_init_multi_fulfillment/generator";
 
 export async function Generator(
 	action_id: string,
@@ -331,6 +334,15 @@ export async function Generator(
 			return update_picked_up_generator(existingPayload, sessionData);
 		case "update_delivered":
 			return update_delivered_generator(existingPayload, sessionData);
+		case "on_select_multi_fulfillment":
+			return on_select_multi_fulfillment_generator(
+				existingPayload,
+				sessionData
+			);
+		case "init_multi_fulfillment":
+			return init_multi_fulfillment_generator(existingPayload, sessionData);
+		case "on_init_multi_fulfillment":
+			return on_init_multi_fulfillment_generator(existingPayload, sessionData);
 		default:
 			console.log(action_id);
 			throw new Error("Invalid action id found! ");

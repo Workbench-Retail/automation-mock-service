@@ -37,16 +37,16 @@ export async function update_picked_up_generator(
 							code: "timestamp",
 							value: new Date().toISOString(),
 						},
-						{
-							code: "start_time",
-							value: new Date().toISOString(),
-						},
-						{
-							code: "end_time",
-							value: new Date(
-								new Date().getTime() + seconds * 1000
-							).toISOString(),
-						},
+						// {
+						// 	code: "start_time",
+						// 	value: new Date().toISOString(),
+						// },
+						// {
+						// 	code: "end_time",
+						// 	value: new Date(
+						// 		new Date().getTime() + seconds * 1000
+						// 	).toISOString(),
+						// },
 					],
 				},
 				{

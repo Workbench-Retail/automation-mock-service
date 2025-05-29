@@ -11,7 +11,7 @@ import {
 } from "./utils";
 import path from "path";
 const inputsData = {
-	Buyer_Delivery_Flow: {
+	Multi_Option_Fulfillment_Flow: {
 		select: {
 			provider: "P1",
 			provider_location: ["L1"],

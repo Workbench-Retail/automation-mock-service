@@ -1,6 +1,7 @@
 import { Fulfillments } from "./GROCERY/1.2.5/api-objects/fulfillments";
 
 export type SessionData = {
+	protocol_session_id: string | undefined;
 	mock_type: string | undefined;
 	usecaseId: string | undefined;
 	subscriber_url: string | undefined;
@@ -35,6 +36,7 @@ export type SessionData = {
 	out_of_stock_item_ids: string[] | undefined;
 	cancellation_reason_id: string | undefined;
 	update_fulfillments: any | undefined;
+	on_select_items: any | undefined;
 };
 
 export type BecknContext = {

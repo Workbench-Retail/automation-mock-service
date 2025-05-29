@@ -474,3 +474,18 @@ codes:
     default: GROCERY/1.2.5/update/update_delivered/default.yaml
     action: update
     message_id: true
+  - code: 193
+    action_id: on_select_multi_fulfillment
+    default: GROCERY/1.2.5/on_select/on_select_multi_fulfillment/default.yaml
+    action: on_select
+    message_id: false
+  - code: 194
+    action_id: init_multi_fulfillment
+    default: GROCERY/1.2.5/init/init_multi_fulfillment/default.yaml
+    action: init
+    message_id: true
+  - code: 195
+    action_id: on_init_multi_fulfillment
+    default: GROCERY/1.2.5/on_init/on_init_multi_fulfillment/default.yaml
+    action: on_init
+    message_id: false

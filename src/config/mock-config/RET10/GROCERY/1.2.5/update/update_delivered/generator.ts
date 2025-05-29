@@ -11,10 +11,10 @@ export async function update_delivered_generator(
 		(f) => f.type === "Buyer-Delivery"
 	);
 
-	const start = jsonpath.query(
-		sessionData.update_fulfillments,
-		`$..tags[?(@.code=="update_fulfillment_time")].list[?(@.code=="start_time")].value`
-	);
+	// const start = jsonpath.query(
+	// 	sessionData.update_fulfillments,
+	// 	`$..tags[?(@.code=="update_fulfillment_time")].list[?(@.code=="start_time")].value`
+	// );
 	existingPayload.message.order.fulfillments = [
 		{
 			id: targetFulfillment?.id,
@@ -39,14 +39,14 @@ export async function update_delivered_generator(
 							code: "timestamp",
 							value: new Date().toISOString(),
 						},
-						{
-							code: "start_time",
-							value: start[0] || new Date().toISOString(),
-						},
-						{
-							code: "end_time",
-							value: new Date().toISOString(),
-						},
+						// {
+						// 	code: "start_time",
+						// 	value: start[0] || new Date().toISOString(),
+						// },
+						// {
+						// 	code: "end_time",
+						// 	value: new Date().toISOString(),
+						// },
 					],
 				},
 			],

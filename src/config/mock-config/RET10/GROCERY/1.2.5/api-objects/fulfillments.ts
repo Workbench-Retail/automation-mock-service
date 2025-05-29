@@ -858,7 +858,7 @@ export function createFulfillments(
 	if (action === "on_confirm") {
 		const fulfillments = sessionData.fulfillments as Fulfillments;
 		return onSelectFulfillments
-			.filter((f) => f.id === fulfillments[0].id)
+			.filter((f) => fulfillments.map((of) => of.id).includes(f.id))
 			.map((f, index) => {
 				return {
 					id: f.id,

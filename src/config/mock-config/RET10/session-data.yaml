@@ -22,3 +22,4 @@ session_data:
   out_of_stock_item_ids: []
   cancellation_reason_id: null
   update_fulfillments: []
+  on_select_items: []
