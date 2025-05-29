@@ -8,10 +8,10 @@ export async function sendToApiService(
 	queryData = {}
 ) {
 	try {
-		// const domain = process.env.DOMAIN;
-		const domain = body.context.domain
+		const domain = process.env.DOMAIN;
 		const version = body.context.version ?? body.context.core_version;
-		const url = `${process.env.API_SERVICE_LAYER}/${domain}/${version}/mock/${action}`;
+		const url = `${process.env.API_SERVICE_URL}/${domain}/${version}/mock/${action}`;
+		console.log(action, JSON.stringify(body.message, null, 2));
 		await saveData(action, body);
 		logger.debug(`Sending response to api service ${url} ${action}`);
 		await axios.post(url, body, {
@@ -25,9 +25,9 @@ export async function sendToApiService(
 }
 
 export function createSellerUrl(domain: string, version: string) {
-	return `${process.env.API_SERVICE_LAYER}/${domain}/${version}/seller`;
+	return `${process.env.API_SERVICE_URL}/${domain}/${version}/seller`;
 }
 
 export function createBuyerUrl(domain: string, version: string) {
-	return `${process.env.API_SERVICE_LAYER}/${domain}/${version}/buyer`;
+	return `${process.env.API_SERVICE_URL}/${domain}/${version}/buyer`;
 }
