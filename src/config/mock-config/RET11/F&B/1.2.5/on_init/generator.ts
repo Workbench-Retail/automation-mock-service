@@ -1,5 +1,6 @@
 import { buildRetailQuote } from "../../../../../../utils/generic-utils";
 import { SessionData } from "../../../session-types";
+import { on_search_items, on_search_offers } from "../data";
 
 type TagEntry = {
   code: string;
@@ -76,8 +77,12 @@ export async function onInitGenerator(
 
   existingPayload.message.order.quote = buildRetailQuote(
     existingPayload.message.order.items,
-    sessionData?.on_search_items,
-    existingPayload.message.order.fulfillments
+    on_search_items,
+    existingPayload.message.order.fulfillments,
+    {
+      offers: sessionData?.offers,
+      initalOffers: on_search_offers,
+    }
   );
 
   existingPayload.message.order.tags = [
@@ -94,7 +99,7 @@ export async function onInitGenerator(
         },
         {
           code: "np_type",
-          value: sessionData?.np_type,
+          value: "MSN",
         },
       ],
     },

@@ -33,6 +33,7 @@ import { onUpdateBuyerDeliveryGenerator } from "./on_update/on_update_buyer_deli
 import { onCancelRTOGenerator } from "./on_cancel/on_cancel_rto/generator";
 import { onSearch3Generator } from "./on_search/on_search_3/generator";
 import { updateDocumentGenerator } from "./update/update_document/generator";
+import { onSelectSlottedGenerator } from "./on_select/on_select_slotted/generator";
 
 export async function Generator(
   action_id: string,
@@ -71,6 +72,8 @@ export async function Generator(
         existingPayload,
         sessionData
       );
+    case "on_select_slotted":
+      return await onSelectSlottedGenerator(existingPayload, sessionData);
     case "init":
       return await initGenerator(existingPayload, sessionData, inputs);
     case "init_multiple_fulfillment":

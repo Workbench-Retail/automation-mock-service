@@ -1,5 +1,6 @@
 import { SessionData } from "../../../session-types";
 import { buildRetailQuote } from "../../../../../../utils/generic-utils";
+import { on_search_items, on_search_offers } from "../data";
 
 export const onSelectGenerator = (
   existingPayload: any,
@@ -25,11 +26,11 @@ export const onSelectGenerator = (
 
   existingPayload.message.order.quote = buildRetailQuote(
     sessionData.items,
-    sessionData?.on_search_items,
+    on_search_items,
     existingPayload.message.order.fulfillments,
     {
       offers: sessionData?.offers,
-      initalOffers: sessionData?.on_search_offers,
+      initalOffers: on_search_offers,
     }
   );
 

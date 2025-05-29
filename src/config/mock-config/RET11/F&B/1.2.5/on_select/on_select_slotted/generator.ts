@@ -2,7 +2,7 @@ import { buildRetailQuote } from "../../../../../../../utils/generic-utils";
 import { SessionData } from "../../../../session-types";
 import { on_search_items } from "../../data";
 
-export const onSelectMultipleFulfillmentGenerator = (
+export const onSelectSlottedGenerator = (
   existingPayload: any,
   sessionData: SessionData
 ) => {

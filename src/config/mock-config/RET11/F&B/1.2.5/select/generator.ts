@@ -1,5 +1,6 @@
 import { SessionData, Input } from "../../../session-types";
 import { stateCodes } from "../areaCodes";
+import { on_search_items } from "../data";
 
 type TagEntry = {
   code: string;
@@ -87,10 +88,8 @@ export const selectGenerator = (
               list: [
                 {
                   code: "id",
-                  value: getParentIdValue(
-                    sessionData?.on_search_items || [],
-                    customisation
-                  ),
+                  // TO-DO: get the vlaue in input itself
+                  value: getParentIdValue(on_search_items, customisation),
                 },
               ],
             },

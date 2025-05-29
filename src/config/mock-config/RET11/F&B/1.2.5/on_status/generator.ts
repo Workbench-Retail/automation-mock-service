@@ -52,6 +52,7 @@ export const onStatusGenerator = (
       existingPayload.message.order.state = "In-progress";
       existingPayload.message.order.fulfillments[0].state.descriptor.code =
         sessionData.stateCode;
+
       break;
     case "Order-picked":
       existingPayload.message.order.state = "In-progress";
@@ -63,6 +64,9 @@ export const onStatusGenerator = (
           label: "Invoice",
         },
       ];
+      existingPayload.message.order.fulfillments[0].start.time = {
+        timestamp: existingPayload.context.timestamp,
+      };
       break;
     case "At-delivery":
       existingPayload.message.order.state = "In-progress";
@@ -73,11 +77,18 @@ export const onStatusGenerator = (
       existingPayload.message.order.state = "Completed";
       existingPayload.message.order.fulfillments[0].state.descriptor.code =
         sessionData.stateCode;
+      existingPayload.message.order.fulfillments[0].end.time = {
+        timestamp: existingPayload.context.timestamp,
+      };
       break;
     case "Order-picked-self-delivery":
       existingPayload.message.order.state = "Completed";
       existingPayload.message.order.fulfillments[0].state.descriptor.code =
         "Order-picked-up";
+      existingPayload.message.order.fulfillments[0].end.time = {
+        timestamp: existingPayload.context.timestamp,
+      };
+      break;
     case "RTO-Disposed":
       existingPayload.message.order.state = "Completed";
       existingPayload.message.order.fulfillments =

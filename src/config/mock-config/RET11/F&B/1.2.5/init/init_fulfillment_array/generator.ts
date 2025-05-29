@@ -9,16 +9,18 @@ export async function initFulfillmentArrayGenerator(
     existingPayload.message.order.provider = sessionData.provider;
   }
 
-  if (sessionData?.items) {
-    existingPayload.message.order.items = sessionData.items.map((item: any) => {
-      const fulfillmentId = item.fulfillment_ids[0];
-      delete item.fulfillment_ids;
+  if (sessionData?.on_select_items) {
+    existingPayload.message.order.items = sessionData.on_select_items.map(
+      (item: any) => {
+        const fulfillmentId = item.fulfillment_ids[0];
+        delete item.fulfillment_ids;
 
-      return {
-        ...item,
-        fulfillment_id: fulfillmentId,
-      };
-    });
+        return {
+          ...item,
+          fulfillment_id: fulfillmentId,
+        };
+      }
+    );
   }
 
   existingPayload.message.order.billing.created_at =

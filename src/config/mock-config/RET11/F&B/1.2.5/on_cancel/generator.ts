@@ -1,5 +1,9 @@
 import { SessionData, Input } from "../../../session-types";
-import { generateQuoteTrail } from "../../../../../../utils/generic-utils";
+import {
+  buildRetailQuote,
+  generateQuoteTrail,
+} from "../../../../../../utils/generic-utils";
+import { on_search_items, on_search_offers } from "../data";
 
 export const onCancelGenerator = (
   existingPayload: any,
@@ -104,31 +108,43 @@ export const onCancelGenerator = (
   }
 
   if (sessionData.quote) {
-    let newTotalPrice = 0;
-    existingPayload.message.order.quote.breakup = sessionData.quote.breakup.map(
-      (item: any) => {
-        if (item["@ondc/org/title_type"] === "item") {
-          return {
-            ...item,
-            "@ondc/org/item_quantity": { count: 0 },
-            price: { currency: "INR", value: "0.00" },
-          };
-        } else if (
-          item["@ondc/org/title_type"] === "tax" ||
-          item["@ondc/org/title_type"] === "delivery" ||
-          item["@ondc/org/title_type"] === "packing"
-        ) {
-          return {
-            ...item,
-            price: { currency: "INR", value: "0.00" },
-          };
-        } else {
-          newTotalPrice += parseInt(item.price.value);
-          return item;
-        }
+    // let newTotalPrice = 0;
+    // existingPayload.message.order.quote.breakup = sessionData.quote.breakup.map(
+    //   (item: any) => {
+    //     if (item["@ondc/org/title_type"] === "item") {
+    //       return {
+    //         ...item,
+    //         "@ondc/org/item_quantity": { count: 0 },
+    //         price: { currency: "INR", value: "0.00" },
+    //       };
+    //     } else if (
+    //       item["@ondc/org/title_type"] === "tax" ||
+    //       item["@ondc/org/title_type"] === "delivery" ||
+    //       item["@ondc/org/title_type"] === "packing"
+    //     ) {
+    //       return {
+    //         ...item,
+    //         price: { currency: "INR", value: "0.00" },
+    //       };
+    //     } else {
+    //       newTotalPrice += parseInt(item.price.value);
+    //       return item;
+    //     }
+    //   }
+    // );
+    // existingPayload.message.order.quote.price.value = newTotalPrice.toString();
+
+    existingPayload.message.order.quote = buildRetailQuote(
+      existingPayload.message.order.items,
+      on_search_items,
+      existingPayload.message.order.fulfillments,
+      {
+        offers: sessionData?.offers,
+        initalOffers: on_search_offers,
+        fulfillmentState:
+          sessionData?.order_state === "Created" ? "PRE" : "POST",
       }
     );
-    existingPayload.message.order.quote.price.value = newTotalPrice.toString();
   }
 
   existingPayload.message.order.created_at = existingPayload.context.timestamp;

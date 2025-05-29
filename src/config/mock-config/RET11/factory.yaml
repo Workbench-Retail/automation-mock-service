@@ -254,3 +254,8 @@ codes:
     action: update
     default: update/update_document/default.yaml
     message_id: true
+  - code: 149
+    action_id: on_select_slotted
+    action: on_select
+    default: on_select/on_select_slotted/default.yaml
+    message_id: false

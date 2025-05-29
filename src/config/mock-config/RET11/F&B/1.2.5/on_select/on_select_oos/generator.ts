@@ -1,4 +1,5 @@
 import { SessionData, Input } from "../../../../session-types";
+import { on_search_items } from "../../data";
 
 type TagEntry = {
   code: string;
@@ -54,7 +55,7 @@ export const onSelectOOSGenerator = (
   let totalPrice = 0;
 
   sessionData.items.forEach((item: any) => {
-    const initialItemsData: any = sessionData?.on_search_items?.filter(
+    const initialItemsData: any = on_search_items?.filter(
       (on_search_item) => on_search_item.id === item.id
     )[0];
 

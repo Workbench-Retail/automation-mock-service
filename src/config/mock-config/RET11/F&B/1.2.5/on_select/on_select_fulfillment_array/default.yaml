@@ -35,15 +35,6 @@ message:
         state:
           descriptor:
             code: Serviceable
-      - id: F3
-        type: "Delivery"
-        "@ondc/org/provider_name": "LSP 3 Provider"
-        tracking: false
-        "@ondc/org/category": Takeaway
-        "@ondc/org/TAT": PT40M
-        state:
-          descriptor:
-            code: Serviceable
     quote:
       price:
         currency: "INR"

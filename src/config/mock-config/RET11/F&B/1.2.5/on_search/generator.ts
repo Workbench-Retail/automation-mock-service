@@ -6,30 +6,13 @@ export const onSearchGenerator = (
   sessionData: SessionData,
   inputs?: Input
 ) => {
-  if (inputs?.npType)
-    existingPayload.message.catalog["bpp/descriptor"].tags = [
-      {
-        code: "bpp_terms",
-        list: [
-          {
-            code: "np_type",
-            value: inputs.npType,
-          },
-          {
-            code: "accept_bap_terms",
-            value: "Y",
-          },
-        ],
-      },
-    ];
-
-  if (inputs?.offers) {
-    console.log("inputs", inputs);
-    if (inputs?.offers === "Discount") {
+  if (inputs?.offers?.length) {
+    console.log("inputs", inputs, inputs.offers.includes());
+    if (inputs.offers.includes("discount")) {
       existingPayload.message.catalog["bpp/providers"][0].offers = discount;
     }
 
-    if (inputs.offers === "BuyXGetY") {
+    if (inputs.offers.includes("buyXgetY")) {
       existingPayload.message.catalog["bpp/providers"][0].offers = buyXgetY;
     }
   }

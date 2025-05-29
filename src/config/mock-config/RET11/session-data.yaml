@@ -29,3 +29,4 @@ session_data:
   on_search_offers: []
   offers: []
   tags: []
+  on_select_items: []

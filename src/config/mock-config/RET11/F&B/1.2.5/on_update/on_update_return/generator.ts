@@ -1,4 +1,9 @@
-import { SessionData, Input } from "../../../../session-types";
+import { SessionData } from "../../../../session-types";
+import {
+  buildRetailQuote,
+  generateQuoteTrail,
+} from "../../../../../../../utils/generic-utils";
+import { on_search_items } from "../../data";
 
 export const onUpdateReturnGenerator = (
   existingPayload: any,
@@ -17,16 +22,39 @@ export const onUpdateReturnGenerator = (
     existingPayload.message.order.provider = sessionData.provider;
   }
 
+  let returnParentItemId = "";
+
   if (sessionData.items) {
-    existingPayload.message.order.items = sessionData.items;
+    const returnItemId =
+      sessionData?.update_return_fulfillments?.[0].tags[0]?.list.find(
+        (entry: any) => entry.code === "item_id"
+      )?.value;
+
+    returnParentItemId = sessionData.items.find(
+      (item) => item.id === returnItemId
+    ).parent_item_id;
+
+    const updatedItems: any[] = [];
+
+    sessionData.items.forEach((item) => {
+      if (item.parent_item_id === returnParentItemId) {
+        updatedItems.push({
+          ...item,
+          quantity: {
+            count: 0,
+          },
+          fulfillment_id:
+            sessionData.update_return_fulfillments?.[0].id || "R1",
+        });
+      }
+
+      updatedItems.push(item);
+    });
+    existingPayload.message.order.items = updatedItems;
   }
 
   if (sessionData.billing) {
     existingPayload.message.order.billing = sessionData.billing;
-  }
-
-  if (sessionData.quote) {
-    existingPayload.message.order.quote = sessionData.quote;
   }
 
   if (sessionData.payment) {
@@ -40,15 +68,26 @@ export const onUpdateReturnGenerator = (
       sessionData.update_return_fulfillments &&
       action_id === "on_update_return_intermin"
     ) {
+      const quoteTrailTag: any[] = generateQuoteTrail(
+        sessionData?.quote?.breakup,
+        existingPayload.message.order.items,
+        {
+          fulfillmentState: "POST",
+        }
+      );
+
       existingPayload.message.order.fulfillments.push({
-        id: "R1",
+        id: sessionData.update_return_fulfillments[0].id,
         type: "Return",
         state: {
           descriptor: {
             code: "Return_Initiated",
           },
         },
-        tags: sessionData.update_return_fulfillments[0].tags,
+        tags: [
+          ...sessionData.update_return_fulfillments[0].tags,
+          ...quoteTrailTag,
+        ],
       });
     }
 
@@ -56,41 +95,6 @@ export const onUpdateReturnGenerator = (
       sessionData.update_return_fulfillments &&
       action_id === "on_update_return_final"
     ) {
-      const quoteTrailTag: any[] = [];
-
-      sessionData.quote.breakup.forEach((item: any) => {
-        if (item["@ondc/org/item_id"] === sessionData.return_item_id) {
-          quoteTrailTag.push({
-            code: "quote_trail",
-            list: [
-              {
-                code: "type",
-                value: item["@ondc/org/title_type"],
-              },
-              {
-                code: "id",
-                value: sessionData.return_item_id,
-              },
-              {
-                code: "currency",
-                value: "INR",
-              },
-              {
-                code: "value",
-                value:
-                  item["@ondc/org/title_type"] !== "item"
-                    ? "-" + item.price.value
-                    : "-" +
-                      (
-                        parseInt(item.item.price.value) *
-                        parseInt(sessionData.return_item_count || "1")
-                      ).toString(),
-              },
-            ],
-          });
-        }
-      });
-
       existingPayload.message.order.fulfillments =
         existingPayload.message.order.fulfillments.map((fulfillment: any) => {
           if (fulfillment.type === "Return") {
@@ -102,16 +106,24 @@ export const onUpdateReturnGenerator = (
                   code: "Liquidated",
                 },
               },
-              tags: [
-                ...sessionData?.update_return_fulfillments?.[0]?.tags,
-                ...quoteTrailTag,
-              ],
+              tags: [...sessionData?.update_return_fulfillments?.[0]?.tags],
             };
           }
 
           return fulfillment;
         });
     }
+  }
+
+  if (sessionData.quote) {
+    existingPayload.message.order.quote = buildRetailQuote(
+      existingPayload.message.order.items,
+      on_search_items,
+      existingPayload.message.order.fulfillments,
+      {
+        returnParentItemId: returnParentItemId,
+      }
+    );
   }
 
   return existingPayload;

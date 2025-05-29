@@ -47,12 +47,16 @@ export async function initGenerator(
         end: {
           location: {
             gps: sessionData?.select_fulfillment[0].end.location.gps,
-            address: {
-              ...existingPayload.message.order.billing.address,
-              area_code:
-                sessionData?.select_fulfillment[0].end.location.address
-                  .area_code,
-            },
+            ...(selectedFulfillment.type === "Self-Pickup"
+              ? {}
+              : {
+                  address: {
+                    ...existingPayload.message.order.billing.address,
+                    area_code:
+                      sessionData?.select_fulfillment[0].end.location.address
+                        .area_code,
+                  },
+                }),
           },
           contact: {
             phone: "9886098860",

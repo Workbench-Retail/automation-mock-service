@@ -50,6 +50,7 @@ export interface SessionData {
   on_search_offers?: any[];
   offers?: any[];
   tags?: any[];
+  on_select_items?: any[];
 }
 
 export type BecknContext = {
@@ -71,7 +72,7 @@ export type BecknContext = {
 export interface Input {
   search_mode?: string;
   items?: any;
-  npType?: string;
+  // npType?: string;
   outOfStockitem?: any;
   fulfillmentType?: string;
   gps?: string;

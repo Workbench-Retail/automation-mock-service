@@ -3,6 +3,7 @@ import {
   generateQuoteTrail,
   buildRetailQuote,
 } from "../../../../../../../utils/generic-utils";
+import { on_search_items } from "../../data";
 
 export const onCancelRTOGenerator = (
   existingPayload: any,
@@ -130,7 +131,7 @@ export const onCancelRTOGenerator = (
 
   existingPayload.message.order.quote = buildRetailQuote(
     updatedItems,
-    sessionData.on_search_items,
+    on_search_items,
     existingPayload.message.order.fulfillments
   );
 

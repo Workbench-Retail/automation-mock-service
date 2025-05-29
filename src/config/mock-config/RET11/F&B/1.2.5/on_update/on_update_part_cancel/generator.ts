@@ -1,6 +1,9 @@
 import { SessionData, Input } from "../../../../session-types";
-import { generateQuoteTrail } from "../../../../../../../utils/generic-utils";
-import { buildRetailQuote } from "../../../../../../../utils/generic-utils";
+import {
+  generateQuoteTrail,
+  buildRetailQuote,
+} from "../../../../../../../utils/generic-utils";
+import { on_search_items } from "../../data";
 
 export const onUpdatePartCancelGenerator = (
   existingPayload: any,
@@ -95,7 +98,7 @@ export const onUpdatePartCancelGenerator = (
   if (sessionData.quote) {
     existingPayload.message.order.quote = buildRetailQuote(
       existingPayload.message.order.items,
-      sessionData.on_search_items,
+      on_search_items,
       existingPayload.message.order.fulfillments
     );
   }
