@@ -857,9 +857,11 @@ export function createFulfillments(
 	}
 	if (action === "on_confirm") {
 		const fulfillments = sessionData.fulfillments as Fulfillments;
-		return onSelectFulfillments
-			.filter((f) => fulfillments.map((of) => of.id).includes(f.id))
+		return fulfillments
+			.filter((f) => onSelectFulfillments.some((sf) => sf.id === f.id))
 			.map((f, index) => {
+				const selected = onSelectFulfillments.find((sf) => sf.id === f.id)!;
+
 				return {
 					id: f.id,
 					type: f.type,
@@ -869,7 +871,7 @@ export function createFulfillments(
 							code: "Pending",
 						},
 					},
-					"@ondc/org/TAT": f["@ondc/org/TAT"],
+					"@ondc/org/TAT": selected["@ondc/org/TAT"],
 					"@ondc/org/provider_name": `mock_provider_name_${index}`,
 					start: {
 						location: {
@@ -893,7 +895,7 @@ export function createFulfillments(
 							email: "nobody@nomail.com",
 						},
 					},
-					end: fulfillments.find((of) => of.id === f.id)?.end,
+					end: f.end,
 				};
 			});
 	}

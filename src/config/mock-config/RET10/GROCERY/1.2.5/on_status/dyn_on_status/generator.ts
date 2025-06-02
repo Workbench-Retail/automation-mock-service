@@ -1,5 +1,5 @@
 import { SessionData } from "../../../../session-types";
-import { Fulfillment, Fulfillments } from "../../api-objects/fulfillments";
+import { Fulfillments } from "../../api-objects/fulfillments";
 import { createGenericOnStatus } from "../on_status_packed/generator";
 
 const stateDict = {
@@ -27,7 +27,7 @@ export async function dyn_on_status_generator(
 			"Out-for-delivery",
 		].includes(f.state?.descriptor?.code ?? "");
 	});
-	console.log("HELLO Target fulfillment found:", target?.id);
+	console.log("Target fulfillment found:", target?.id);
 	if (!target) {
 		target = fulfillments.find((f) =>
 			["Pending"].includes(f.state?.descriptor?.code ?? "")

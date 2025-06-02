@@ -1,6 +1,6 @@
 {
-  "transaction_id": "95bbe857-addd-4ccc-9f1f-18d163e82e50",
-  "message_id": "7227bc7e-25c0-4a35-a7d3-708c78e714d9",
+  "transaction_id": "5051db68-0a66-433a-8361-964504c12a82",
+  "message_id": "88c5878e-2925-4093-a88e-bf19799c3d52",
   "city": "std:011",
   "inc_mode": null,
   "selected_items": [
@@ -44,7 +44,7 @@
       "quantity": {
         "count": 49
       },
-      "fulfillment_id": "F3"
+      "fulfillment_id": "F2"
     }
   ],
   "provider": {
@@ -68,8 +68,8 @@
     "phone": "9898989898",
     "name": "ONDC buyer",
     "email": "nobody@nomail.com",
-    "created_at": "2025-06-02T11:06:03.817Z",
-    "updated_at": "2025-06-02T11:06:03.817Z"
+    "created_at": "2025-06-02T11:32:08.436Z",
+    "updated_at": "2025-06-02T11:32:08.436Z"
   },
   "fulfillments": [
     {
@@ -128,7 +128,7 @@
       }
     },
     {
-      "id": "F3",
+      "id": "F2",
       "type": "Delivery",
       "tracking": true,
       "state": {
@@ -136,7 +136,7 @@
           "code": "Pending"
         }
       },
-      "@ondc/org/TAT": "P1D",
+      "@ondc/org/TAT": "PT2H",
       "@ondc/org/provider_name": "mock_provider_name_1",
       "start": {
         "location": {
@@ -183,7 +183,7 @@
       }
     }
   ],
-  "order_id": "753629",
+  "order_id": "871233",
   "payment": {
     "params": {
       "currency": "INR",
@@ -211,7 +211,7 @@
     ]
   },
   "order_state": "In-Progress",
-  "order_created_at": "2025-06-02T11:06:08.825Z",
+  "order_created_at": "2025-06-02T11:32:13.446Z",
   "on_select_fulfillments": [
     {
       "id": "F1",
@@ -288,8 +288,8 @@
         },
         "time": {
           "range": {
-            "start": "2025-06-02T11:16:08.834Z",
-            "end": "2025-06-02T11:26:08.834Z"
+            "start": "2025-06-02T11:42:13.453Z",
+            "end": "2025-06-02T11:52:13.453Z"
           }
         }
       },
@@ -315,8 +315,8 @@
         },
         "time": {
           "range": {
-            "start": "2025-06-02T11:26:08.834Z",
-            "end": "2025-06-02T12:16:08.834Z"
+            "start": "2025-06-02T11:52:13.453Z",
+            "end": "2025-06-02T12:42:13.453Z"
           }
         }
       },
@@ -350,7 +350,7 @@
       ]
     },
     {
-      "id": "F3",
+      "id": "F2",
       "type": "Delivery",
       "tracking": true,
       "state": {
@@ -358,7 +358,7 @@
           "code": "Pending"
         }
       },
-      "@ondc/org/TAT": "P1D",
+      "@ondc/org/TAT": "PT2H",
       "@ondc/org/provider_name": "mock_provider_name_1",
       "start": {
         "location": {
@@ -383,8 +383,8 @@
         },
         "time": {
           "range": {
-            "start": "2025-06-02T11:16:08.834Z",
-            "end": "2025-06-02T11:26:08.834Z"
+            "start": "2025-06-02T11:42:13.453Z",
+            "end": "2025-06-02T11:52:13.453Z"
           }
         }
       },
@@ -410,8 +410,8 @@
         },
         "time": {
           "range": {
-            "start": "2025-06-02T11:26:08.834Z",
-            "end": "2025-06-03T11:16:08.834Z"
+            "start": "2025-06-02T11:52:13.453Z",
+            "end": "2025-06-02T13:42:13.453Z"
           }
         }
       },
