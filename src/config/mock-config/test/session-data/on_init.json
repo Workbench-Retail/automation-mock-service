@@ -1,6 +1,6 @@
 {
-  "transaction_id": "533a2352-e5b8-40a6-8a85-66d73a58b2a4",
-  "message_id": "0119c0ef-6671-41c3-8345-7425e370623d",
+  "transaction_id": "95bbe857-addd-4ccc-9f1f-18d163e82e50",
+  "message_id": "02977d04-d392-457c-bca3-f835fd70ee8d",
   "city": "std:011",
   "inc_mode": null,
   "selected_items": [
@@ -68,8 +68,8 @@
     "phone": "9898989898",
     "name": "ONDC buyer",
     "email": "nobody@nomail.com",
-    "created_at": "2025-05-29T09:00:21.797Z",
-    "updated_at": "2025-05-29T09:00:21.797Z"
+    "created_at": "2025-06-02T11:06:03.817Z",
+    "updated_at": "2025-06-02T11:06:03.817Z"
   },
   "fulfillments": [
     {

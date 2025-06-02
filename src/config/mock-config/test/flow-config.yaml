@@ -56,35 +56,35 @@ flows:
         owner: BPP
         expect: false
         description: Status updates - order accepted
-      - key: on_status_packed
+      - key: dyn_on_status2
         type: on_status
         unsolicited: true
         pair: null
         owner: BPP
         expect: false
         description: Status updates - order packed
-      - key: on_status_agent_assigned
+      - key: dyn_on_status3
         type: on_status
         unsolicited: true
         pair: null
         owner: BPP
         expect: false
         description: Status updates - agent assigned
-      - key: on_status_picked
+      - key: dyn_on_status4
         type: on_status
         unsolicited: true
         pair: null
         owner: BPP
         expect: false
         description: Status updates - order picked up
-      - key: on_status_out_for_delivery
+      - key: dyn_on_status5
         type: on_status
         unsolicited: true
         pair: null
         owner: BPP
         expect: false
         description: Status updates - order out for delivery
-      - key: on_status_order_delivered
+      - key: dyn_on_status6
         type: on_status
         unsolicited: true
         pair: null

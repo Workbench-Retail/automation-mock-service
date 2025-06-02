@@ -489,3 +489,13 @@ codes:
     default: GROCERY/1.2.5/on_init/on_init_multi_fulfillment/default.yaml
     action: on_init
     message_id: false
+  - code: 196
+    action_id: dyn_on_status
+    default: GROCERY/1.2.5/on_status/dyn_on_status/default.yaml
+    action: on_status
+    message_id: true
+  - code: 197
+    action_id: confirm_multi_fulfillment
+    default: GROCERY/1.2.5/confirm/confirm_multi_fulfillment/default.yaml
+    action: confirm
+    message_id: true

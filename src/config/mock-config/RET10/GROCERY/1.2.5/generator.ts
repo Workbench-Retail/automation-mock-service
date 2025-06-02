@@ -93,12 +93,17 @@ import { update_delivered_generator } from "./update/update_delivered/generator"
 import { on_select_multi_fulfillment_generator } from "./on_select/on_select_multi_fulfillment/generator";
 import { init_multi_fulfillment_generator } from "./init/init_multi_fulfillment/generator";
 import { on_init_multi_fulfillment_generator } from "./on_init/on_init_multi_fulfillment/generator";
+import { dyn_on_status_generator } from "./on_status/dyn_on_status/generator";
+import { confirm_multi_fulfillment_generator } from "./confirm/confirm_multi_fulfillment/generator";
 
 export async function Generator(
 	action_id: string,
 	existingPayload: any,
 	sessionData: any
 ) {
+	if (action_id.includes("dyn_on_status")) {
+		return dyn_on_status_generator(existingPayload, sessionData);
+	}
 	switch (action_id) {
 		case "search":
 			return search_generator(existingPayload, sessionData);
@@ -343,6 +348,8 @@ export async function Generator(
 			return init_multi_fulfillment_generator(existingPayload, sessionData);
 		case "on_init_multi_fulfillment":
 			return on_init_multi_fulfillment_generator(existingPayload, sessionData);
+		case "confirm_multi_fulfillment":
+			return confirm_multi_fulfillment_generator(existingPayload, sessionData);
 		default:
 			console.log(action_id);
 			throw new Error("Invalid action id found! ");
