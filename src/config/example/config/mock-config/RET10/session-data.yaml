@@ -1,0 +1,15 @@
+session_data:
+  transaction_id: null
+  message_id: null
+  city: null
+  inc_mode: null
+  selected_items: []
+  selected_fulfillments: []
+  items: []
+  provider: null
+  billing: null
+  fulfillments: []
+  quote: null
+  order_id: null
+  payment: null
+  order_state: null
