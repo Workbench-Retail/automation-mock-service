@@ -233,7 +233,7 @@ message:
               - code: display
                 list:
                   - code: rank
-                    value: "3"
+                    value: "2"
           - id: CG11
             descriptor:
               name: Variant (1 option)
@@ -708,7 +708,7 @@ message:
                   - code: id
                     value: CG4
                   - code: default
-                    value: "yes"
+                    value: "no"
               - code: veg_nonveg
                 list:
                   - code: veg
@@ -980,7 +980,7 @@ message:
                       value: "718.00"
             category_id: F&B
             category_ids:
-              - "5:1"
+              - "6:1"
             fulfillment_id: F1
             location_id: L1
             related: false
@@ -1357,35 +1357,7 @@ message:
           - code: timing
             list:
               - code: type
-                value: Order
-              - code: location
-                value: L1
-              - code: day_from
-                value: "1"
-              - code: day_to
-                value: "7"
-              - code: time_from
-                value: "1000"
-              - code: time_to
-                value: "2000"
-          - code: timing
-            list:
-              - code: type
-                value: Self-Pickup
-              - code: location
-                value: L1
-              - code: day_from
-                value: "1"
-              - code: day_to
-                value: "7"
-              - code: time_from
-                value: "1000"
-              - code: time_to
-                value: "2000"
-          - code: timing
-            list:
-              - code: type
-                value: Delivery
+                value: All
               - code: location
                 value: L1
               - code: day_from

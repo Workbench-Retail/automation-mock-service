@@ -37,9 +37,16 @@ export function removeTagsByCodes(tags: any[], codesToRemove: string[]): Tag[] {
   return tags.filter((tag) => !codesToRemove.includes(tag.code));
 }
 
-export function getFutureDate(daysAhead: number): string {
+export function getFutureDate(
+  daysAhead: number,
+  inISO: boolean = false
+): string {
   const futureDate = new Date();
   futureDate.setDate(futureDate.getDate() + daysAhead);
+
+  if (inISO) {
+    return futureDate.toISOString();
+  }
 
   return futureDate.toISOString().split("T")[0];
 }
@@ -591,6 +598,7 @@ export const buildRetailQuote = (
   };
 
   quote.breakup = breakup;
+  quote.ttl = "P1D";
 
   return quote;
 };

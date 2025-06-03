@@ -73,7 +73,7 @@ export const searchGenerator = (
           list: [
             {
               code: "category",
-              value: "Sweaters",
+              value: "Indian Sweets",
             },
             {
               code: "from",
@@ -81,7 +81,7 @@ export const searchGenerator = (
             },
             {
               code: "to",
-              value: getFutureDate(5),
+              value: getFutureDate(5, true),
             },
           ],
         },
@@ -90,7 +90,7 @@ export const searchGenerator = (
           list: [
             {
               code: "category",
-              value: "Tracker Devices",
+              value: "Bakery, Cakes & Dairy",
             },
             {
               code: "from",
@@ -98,7 +98,7 @@ export const searchGenerator = (
             },
             {
               code: "to",
-              value: getFutureDate(6),
+              value: getFutureDate(6, true),
             },
           ],
         }
@@ -111,7 +111,7 @@ export const searchGenerator = (
         list: [
           {
             code: "search_term",
-            value: '[{"sweater"},{"winter wear"},{"woollens"}]',
+            value: '[{"cake"},{"pizza"},{"milk"}]',
           },
         ],
       });

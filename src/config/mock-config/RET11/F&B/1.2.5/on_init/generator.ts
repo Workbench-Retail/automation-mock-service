@@ -47,6 +47,12 @@ export async function onInitGenerator(
         });
       }
 
+      if (fulfillment.type === "Delivery") {
+        fulfillment.tracking = true;
+      } else {
+        fulfillment.tracking = false;
+      }
+
       return fulfillment;
     }
   );

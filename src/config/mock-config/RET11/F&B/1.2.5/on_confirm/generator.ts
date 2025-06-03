@@ -30,12 +30,14 @@ export const onConfirmGenerator = (
 
   if (sessionData.fulfillments) {
     existingPayload.message.order.fulfillments[0] = {
+      ...sessionData.fulfillments[0],
       state: {
         descriptor: {
           code: "Pending",
         },
       },
       "@ondc/org/provider_name": "LSP Provider",
+      tracking: sessionData.fulfillments[0].type === "Delivery" ? true : false,
       start: {
         location: {
           id: "L1",
@@ -57,7 +59,12 @@ export const onConfirmGenerator = (
           email: "nobody@nomail.com",
         },
       },
-      ...sessionData.fulfillments[0],
+      end: {
+        ...sessionData.fulfillments[0].end,
+        person: {
+          name: "name_of_person",
+        },
+      },
     };
   }
 

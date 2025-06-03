@@ -7,7 +7,7 @@ message:
       - code: bap_terms
         list:
           - code: static_terms
-            value: ""
+            value: "https://github.com/ONDC-Official/NP-Static-Terms/buyerNP_BNP/1.0/tc.pdf"
           - code: static_terms_new
             value: >-
               https://github.com/ONDC-Official/NP-Static-Terms/buyerNP_BNP/1.0/tc.pdf
