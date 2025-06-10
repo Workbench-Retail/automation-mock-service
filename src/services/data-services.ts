@@ -4,7 +4,7 @@ import yaml from "js-yaml";
 import { RedisService } from "ondc-automation-cache-lib";
 import jsonpath from "jsonpath";
 
-import { SessionData } from "../config/TRV11/session-types";
+import { SessionData } from "../config/mock-config/RET12/session-types";
 import logger from "../utils/logger";
 import { isArrayKey } from "../types/type-utils";
 

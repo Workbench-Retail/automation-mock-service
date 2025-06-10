@@ -1,0 +1,7 @@
+save-data:
+  message_id: $.context.message_id
+  order_id: $.message.order.id
+  payment: $.message.order.payment
+  order_state: $.message.order.state
+  confirm_created_at_timestamp: $.message.order.created_at
+  fulfillments: $.message.order.fulfillments[*]
