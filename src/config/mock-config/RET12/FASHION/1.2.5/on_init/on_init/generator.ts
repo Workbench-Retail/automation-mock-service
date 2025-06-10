@@ -1,21 +1,23 @@
 import { SessionData } from "../../../../session-types";
+import { getUpdatedBilling } from "../../api-objects/billing";
+import { createFulfillments } from "../../api-objects/fulfillments";
 
 export async function on_init_generator(
-  existingPayload: any,
-  sessionData: SessionData
+	existingPayload: any,
+	sessionData: SessionData
 ) {
-  existingPayload.message.order.items = sessionData.items;
-  existingPayload.message.order.fulfillments = sessionData.fulfillments;
-  existingPayload.message.order.billing = sessionData.billing;
-  existingPayload.message.order.provider = sessionData.provider;
-  existingPayload.message.order.quote = sessionData.quote;
-  existingPayload.message.order.quote.breakup =
-    existingPayload.message.order.quote.breakup.map((brkItm: any) => {
-      const { quantity, ...rest } = brkItm.item || {};
-      return {
-        ...brkItm,
-        item: rest,
-      };
-    });
-  return existingPayload;
+	console.log("###### on init_generator ####");
+	existingPayload.message.order.items = sessionData.items;
+	existingPayload.message.order.fulfillments = createFulfillments(
+		"on_init",
+		"on_init",
+		sessionData,
+		existingPayload.message.order.fulfillments
+	);
+	existingPayload.message.order.billing = getUpdatedBilling(
+		sessionData.billing
+	);
+	existingPayload.message.order.provider = sessionData.provider;
+	existingPayload.message.order.quote = sessionData.quote;
+	return existingPayload;
 }
