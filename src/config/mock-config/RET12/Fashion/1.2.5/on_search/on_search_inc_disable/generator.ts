@@ -1,7 +1,7 @@
 import { SessionData } from "../../../../session-types";
 import { getTimestampFromDuration } from "../../../../../../../utils/generic-utils";
 
-export const onSearch1Generator = (
+export const onSearchIncDisableGenerator = (
   existingPayload: any,
   sessionData: SessionData
 ) => {

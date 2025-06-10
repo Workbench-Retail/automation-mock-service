@@ -3,7 +3,7 @@ import { BecknContext } from "../../session-types";
 export function createContext(partialContext: Partial<BecknContext>) {
   // const newContext
   const newContext: BecknContext = {
-    domain: partialContext.domain || "ONDC:LOG10",
+    domain: partialContext.domain || "ONDC:RET12",
     country: "IND",
     city: "std:011",
     action: "search",

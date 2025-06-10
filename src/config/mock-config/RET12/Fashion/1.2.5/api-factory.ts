@@ -1,8 +1,9 @@
 import { searchGenerator } from "./search/generator";
+import { searchIncGenerator } from "./search/search_inc/generator";
+import { searchIncStopGenerator } from "./search/search_inc_stop/generator";
 import { onSearchGenerator } from "./on_search/generator";
-import { search1Generator } from "./search/search_1/generator";
-import { onSearch1Generator } from "./on_search/on_search_1/generator";
-import { onSearch2Generator } from "./on_search/on_search_2/generator";
+import { onSearchIncGenerator } from "./on_search/on_search_inc/generator";
+import { onSearchIncDisableGenerator } from "./on_search/on_search_inc_disable/generator";
 import { selectGenerator } from "./select/generator";
 import { onSelectGenerator } from "./on_select/generator";
 import { initGenerator } from "./init/generator";
@@ -31,7 +32,6 @@ import { onUpdateReturnGenerator } from "./on_update/on_update_return/generator"
 import { updateBuyerDeliveryGenerator } from "./update/update_buyer_delivery/generator";
 import { onUpdateBuyerDeliveryGenerator } from "./on_update/on_update_buyer_delivery/generator";
 import { onCancelRTOGenerator } from "./on_cancel/on_cancel_rto/generator";
-import { onSearch3Generator } from "./on_search/on_search_3/generator";
 import { updateDocumentGenerator } from "./update/update_document/generator";
 import { onSelectSlottedGenerator } from "./on_select/on_select_slotted/generator";
 
@@ -44,16 +44,16 @@ export async function Generator(
   switch (action_id) {
     case "search":
       return await searchGenerator(existingPayload, sessionData, inputs);
+    case "search_inc":
+      return await searchIncGenerator(existingPayload, sessionData, inputs);
+    case "search_inc_stop":
+      return await searchIncStopGenerator(existingPayload, sessionData);
     case "on_search":
       return await onSearchGenerator(existingPayload, sessionData, inputs);
-    case "search_1":
-      return await search1Generator(existingPayload, sessionData, inputs);
-    case "on_search_1":
-      return await onSearch1Generator(existingPayload, sessionData);
-    case "on_search_2":
-      return await onSearch2Generator(existingPayload, sessionData);
-    case "on_search_3":
-      return await onSearch3Generator(existingPayload, sessionData);
+    case "on_search_inc":
+      return await onSearchIncGenerator(existingPayload, sessionData);
+    case "on_search_inc_disable":
+      return await onSearchIncDisableGenerator(existingPayload, sessionData);
     case "select":
       return await selectGenerator(existingPayload, sessionData, inputs);
     case "on_select":

@@ -1,18 +1,18 @@
 import { readFileSync } from "fs";
 import logger from "../../utils/logger";
-import { createMockResponse } from "./RET11/F&B/version-factory";
+import { createMockResponse } from "./RET12/Fashion/version-factory";
 import path from "path";
 import yaml from "js-yaml";
-import { SessionData as MockSessionData } from "./RET11/session-types";
+import { SessionData as MockSessionData } from "./RET12/session-types";
 
 export { MockSessionData };
 
 const actionConfig = yaml.load(
-  readFileSync(path.join(__dirname, "./RET11/factory.yaml"), "utf8")
+  readFileSync(path.join(__dirname, "./RET12/factory.yaml"), "utf8")
 ) as any;
 
 export const defaultSessionData = yaml.load(
-  readFileSync(path.join(__dirname, "./RET11/session-data.yaml"), "utf8")
+  readFileSync(path.join(__dirname, "./RET12/session-data.yaml"), "utf8")
 ) as { session_data: MockSessionData };
 
 export async function generateMockResponse(
@@ -42,7 +42,7 @@ export function getActionData(code: number) {
 export function getSaveDataContent(version: string, action: string) {
   let actionFolderPath = path.resolve(
     __dirname,
-    `./RET11/F&B/${version}/${action}`
+    `./RET12/Fashion/${version}/${action}`
   );
 
   const saveDataFilePath = path.join(actionFolderPath, "save-data.yaml");

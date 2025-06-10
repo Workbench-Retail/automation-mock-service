@@ -1,14 +1,9 @@
 import { SessionData } from "../../../../session-types";
 
-export const onSearch3Generator = (
+export const onSearchIncGenerator = (
   existingPayload: any,
   sessionData: SessionData
 ) => {
   existingPayload.context.city = "*";
-
-  existingPayload.message.catalog[
-    "bpp/providers"
-  ][0].locations[0].time.timestamp = existingPayload.context.timestamp;
-
   return existingPayload;
 };

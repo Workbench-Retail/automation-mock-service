@@ -1,9 +1,9 @@
 message:
   catalog:
     bpp/providers:
-      - id: P1
+      - id: 98ec8346-b8eb-42c2-9ecd-615c944ea91a
         locations:
-          - id: L1
+          - id: 672b37d163f0cee7ee2bc4c7
             time:
               label: close
               timestamp: "2025-01-08T10:20:00.000Z"

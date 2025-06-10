@@ -1,0 +1,17 @@
+message:
+  order:
+    items:
+    - id: cc7e2f62-efbe-4665-ad1d-9388781abade
+      quantity:
+        count: 2
+      location_id: 672b37d163f0cee7ee2bc4c7
+    provider:
+      id: 98ec8346-b8eb-42c2-9ecd-615c944ea91a
+      locations:
+      - id: 672b37d163f0cee7ee2bc4c7
+    fulfillments:
+    - end:
+        location:
+          gps: 28.679077,77.069714
+          address:
+            area_code: '110041'

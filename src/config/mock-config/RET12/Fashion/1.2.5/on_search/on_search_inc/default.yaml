@@ -1,0 +1,113 @@
+message:
+  catalog:
+    bpp/providers:
+      - id: 98ec8346-b8eb-42c2-9ecd-615c944ea91a
+        items:
+          - id: 9af97eec-25b4-4dad-9174-edf9cf0505d3
+            time:
+              label: enable
+              timestamp: '2025-01-14T04:31:07.681Z'
+            descriptor:
+              name: >-
+                Celestial Embrace (21.90 grams) - 22KT BIS 916 Hallmark yellow
+                Gold
+              symbol: >-
+                https://mock.com/95957e2f-bf52-4df2-8969-6828eba861f1/product_image/Screenshot
+                2024-12-30 at 6.15.44 PM.png
+              short_desc: >-
+                - Experience celestial beauty daily with this Solar Flare
+                Embrace ring, making every moment shine with a unique grace.
+
+                - Gold & KT: BIS 916 Hallmarked (22KT) | yellow Gold | 21.90
+                grams.
+
+                - Certification: 100% BIS Hallmarked with HUID for guaranteed
+                authenticity.
+
+                - Design: Feature an elegant ring with dynamic curves that
+                capture the essence of a solar flare, crafted to enhance your
+                hand with a bold yet refined touch.
+
+                - Price Advantage: Exclusive lightweight design with the lowest
+                making charges in the market
+              long_desc: >-
+                - Experience celestial beauty daily with this Solar Flare
+                Embrace ring, making every moment shine with a unique grace.
+
+                - Gold & KT: BIS 916 Hallmarked (22KT) | yellow Gold | 21.90
+                grams.
+
+                - Certification: 100% BIS Hallmarked with HUID for guaranteed
+                authenticity.
+
+                - Design: Feature an elegant ring with dynamic curves that
+                capture the essence of a solar flare, crafted to enhance your
+                hand with a bold yet refined touch.
+
+                - Price Advantage: Exclusive lightweight design with the lowest
+                making charges in the market.
+              images:
+                - >-
+                  https://mock.com/95957e2f-bf52-4df2-8969-6828eba861f1/product_image/Screenshot
+                  2024-12-30 at 6.15.44 PM.png
+                - >-
+                  https://mock.com/e9374549-4a42-491e-9201-cddadc3d7969/product_image/Screenshot
+                  2024-12-25 at 12.30.03 PM.png
+                - >-
+                  https://mock.com/50e6a0ef-fe03-40dd-a90c-ee728dabbd32/product_image/Screenshot
+                  2024-12-25 at 10.22.01 AM.png
+                - >-
+                  https://mock.com/f71e0034-605d-4c26-a66d-c91d1ace92db/product_image/Screenshot
+                  2024-12-31 at 10.42.17 AM.png
+              code: '4:7113'
+            quantity:
+              unitized:
+                measure:
+                  unit: unit
+                  value: '1'
+              available:
+                count: '99'
+              maximum:
+                count: '10'
+            price:
+              currency: INR
+              value: '1818.51'
+              maximum_value: '187218.51'
+            category_id: Rings
+            location_id: 672b37d163f0cee7ee2bc4c7
+            fulfillment_id: '1'
+            '@ondc/org/returnable': true
+            '@ondc/org/cancellable': true
+            '@ondc/org/available_on_cod': false
+            '@ondc/org/time_to_ship': P2D
+            '@ondc/org/seller_pickup_return': true
+            '@ondc/org/return_window': P7D
+            '@ondc/org/contact_details_consumer_care': 'Epic Store,mock@gmail.com,123456789'
+            '@ondc/org/statutory_reqs_packaged_commodities':
+              manufacturer_or_packer_name: Epic Store
+              manufacturer_or_packer_address: 'A-23, Nangloi Extension, New Delhi, Delhi, India - 110041'
+              common_or_generic_name_of_commodity: >-
+                Celestial Embrace (21.90 grams) - 22KT BIS 916 Hallmark yellow
+                Gold
+              month_year_of_manufacture_packing_import: NA
+            tags:
+              - code: origin
+                list:
+                  - code: country
+                    value: IND
+              - code: attribute
+                list:
+                  - code: gender
+                    value: female
+                  - code: colour
+                    value: '#FFD700'
+                  - code: size
+                    value: '5'
+                  - code: brand
+                    value: saad
+                  - code: colour_name
+                    value: aero blue
+                  - code: base_metal
+                    value: gold
+                  - code: plating
+                    value: gold

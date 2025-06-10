@@ -71,6 +71,7 @@ export type BecknContext = {
 
 export interface Input {
   search_mode?: string;
+  feature_discovery?: string[];
   items?: any;
   // npType?: string;
   outOfStockitem?: any;

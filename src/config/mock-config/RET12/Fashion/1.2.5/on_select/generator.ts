@@ -6,6 +6,10 @@ export const onSelectGenerator = (
   existingPayload: any,
   sessionData: SessionData
 ) => {
+  console.log("ON_SELECT")
+  console.log(existingPayload)
+  console.log(sessionData)
+
   if (sessionData?.provider) {
     existingPayload.message.order.provider = sessionData.provider;
   }
