@@ -53,6 +53,8 @@ order:
     status: PAID
     type: ON-ORDER
     collected_by: BAP
+    uri: "https://razorpay.com/"
+    "tl_method": "http/get"
     "@ondc/org/buyer_app_finder_fee_type": percent
     "@ondc/org/buyer_app_finder_fee_amount": "3.0"
     "@ondc/org/settlement_details":
@@ -60,10 +62,10 @@ order:
         settlement_phase: sale-amount
         settlement_type: neft
         beneficiary_name: xxxx
-        settlement_bank_account_no: xxxx
-        settlement_ifsc_code: xxxx
-        bank_name: xxxx
-        branch_name: xxxx
+        settlement_bank_account_no: XXXX
+        settlement_ifsc_code: XXXX
+        bank_name: XXXX
+        branch_name: XXXX
   quote:
     price:
       currency: INR
@@ -100,12 +102,12 @@ order:
         - code: np_type
           value: MSN
         - code: tax_number
-          value: gst_number_of_sellerNP
+          value: 37ABACA6712B1Z6
         - code: provider_tax_number
-          value: PAN_number_of_provider
+          value: USYDS6482D
     - code: bap_terms
       list:
         - code: tax_number
-          value: gst_number_of_buyerNP
+          value: 37BABCA6712B1Z6
   created_at: "2024-08-14T09:11:00.810Z"
   updated_at: "2024-08-14T09:11:00.810Z"

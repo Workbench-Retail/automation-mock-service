@@ -130,7 +130,7 @@ order:
         bank_name: xxxx
         branch_name: xxxx
   documents:
-    - url: dev-automation.ondc.org
+    - url: https://dev-automation.ondc.org
       label: Invoice
   created_at: "2024-08-14T09:11:00.810Z"
   updated_at: "2024-08-14T09:28:03.142Z"

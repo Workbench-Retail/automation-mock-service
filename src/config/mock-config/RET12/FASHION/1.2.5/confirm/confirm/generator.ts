@@ -8,9 +8,10 @@ export async function confirm_generator(
 	sessionData: SessionData
 ) {
 	const timeIso = new Date().toISOString();
+	
 	existingPayload.message.order.id = generateSixDigitCode();
-	existingPayload.message.order.created_at = timeIso;
-	existingPayload.message.order.updated_at = timeIso;
+	existingPayload.message.order.created_at = existingPayload.context.timestamp;
+	existingPayload.message.order.updated_at = existingPayload.context.timestamp;
 	existingPayload.message.order.quote = sessionData.quote;
 	existingPayload.message.order.billing = getUpdatedBilling(
 		sessionData.billing

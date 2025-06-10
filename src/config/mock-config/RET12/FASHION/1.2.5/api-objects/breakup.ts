@@ -117,6 +117,10 @@ export function createQuote(
 
   breakupObject.push(breakup[0]);
   breakupObject.push(breakup[1]);
+  totalPrice += parseFloat(breakup[0].price.value)
+  totalPrice += parseFloat(breakup[1].price.value)
+  console.log(`Total Price: ${totalPrice.toFixed(2)}`);
+  console.log(`Total Quantity: ${JSON.stringify(breakupObject)}`);
   return {
     breakup: breakupObject,
     price: {

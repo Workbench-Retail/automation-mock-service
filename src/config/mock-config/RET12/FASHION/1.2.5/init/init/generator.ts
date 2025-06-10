@@ -10,8 +10,12 @@ export async function init_generator(
 	existingPayload: any,
 	sessionData: SessionData
 ) {
+	console.log("SESSION DATA")
+	console.log(sessionData)
 	const items = sessionData.selected_items as SelectedItems;
 	const onSelectData = sessionData.on_select_fulfillments as Fulfillments;
+	console.log("ONSELECTDATA")
+	console.log(onSelectData)
 	const fId = onSelectData.find((f) => f.type === "Delivery")?.id || "F1";
 
 	existingPayload.message.order.items = items.map((item) => {

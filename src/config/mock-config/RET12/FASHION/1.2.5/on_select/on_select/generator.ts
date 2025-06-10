@@ -5,6 +5,7 @@ export type SelectedItems = {
   quantity: {
     count: number;
   };
+  fulfillment_id?: string;
   location_id: string;
 }[];
 
@@ -60,14 +61,18 @@ export async function on_select_generator(
 	existingPayload: any,
 	sessionData: SessionData
 ) {
+
+  existingPayload.message.order.provider = sessionData.provider;
 	const selectedItemsObj = sessionData.selected_items as SelectedItems;
 	existingPayload.message.order.items = selectedItemsObj.map((item) => {
 		return {
 			id: item.id,
-			fulfillment_id: "F1",
+			fulfillment_id: item.fulfillment_id || "F1",
 		};
 	});
-	const quote = createQuote(
+	
+  
+  const quote = createQuote(
 		selectedItemsObj.map((item) => {
 			return {
 				id: item.id,
