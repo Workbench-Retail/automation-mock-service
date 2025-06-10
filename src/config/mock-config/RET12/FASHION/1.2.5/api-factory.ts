@@ -18,6 +18,15 @@ import { on_status_picked_generator } from "./on_status/on_status_picked/generat
 import { on_status_out_for_delivery_generator } from "./on_status/on_status_out_for_delivery/generator";
 import { on_status_order_delivered_generator } from "./on_status/on_status_order_delivered/generator";
 
+import { select_out_of_stock_generator } from "./select/select_out_of_stock/generator";
+import { on_select_out_of_stock_generator } from "./on_select/on_select_out_of_stock/generator";
+
+import { cancel_generator } from "./cancel/cancel/generator";
+import { on_cancel_generator } from "./on_cancel/on_cancel/generator";
+
+import { on_cancel_rto_generator } from "./on_cancel/on_cancel_rto/generator";
+import { on_status_rto_delivereddisposed_generator } from "./on_status/on_status_rto_delivereddisposed/generator";
+
 export async function Generator(
   action_id: string,
   existingPayload: any,
@@ -58,6 +67,21 @@ export async function Generator(
       return on_status_out_for_delivery_generator(existingPayload, sessionData);
     case "on_status_order_delivered":
       return on_status_order_delivered_generator(existingPayload, sessionData);
+    case "select_out_of_stock":
+      return select_out_of_stock_generator(existingPayload, sessionData);
+    case "on_select_out_of_stock":
+      return on_select_out_of_stock_generator(existingPayload, sessionData);
+    case "cancel":
+      return cancel_generator(existingPayload, sessionData);
+    case "on_cancel":
+      return on_cancel_generator(existingPayload, sessionData);
+    case "on_cancel_rto":
+      return on_cancel_rto_generator(existingPayload, sessionData);
+    case "on_status_rto_delivereddisposed":
+      return on_status_rto_delivereddisposed_generator(
+        existingPayload,
+        sessionData
+      );
     default:
       console.log(action_id);
       throw new Error("Invalid action id found! ");

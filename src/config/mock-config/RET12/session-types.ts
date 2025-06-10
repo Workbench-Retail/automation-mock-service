@@ -28,6 +28,12 @@ export type SessionData = {
   city_code: string | undefined;
   shipment_method?: any;
   domain?: string;
+  out_of_stock_item_ids?: any;
+  on_status_fulfillments?: any;
+  on_select_fulfillments?: any;
+  bpp_terms?: any;
+  order_created_at?: any;
+  last_updated_at?: string;
 
   // order phase
   selected_item_id: string;

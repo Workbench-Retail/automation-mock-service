@@ -3,5 +3,6 @@ save-data:
   order_id: $.message.order.id
   payment: $.message.order.payment
   order_state: $.message.order.state
-  confirm_created_at_timestamp: $.message.order.created_at
+  order_created_at: $.message.order.created_at
+  bap_terms: $.message.order.tags[?(@.code == 'bap_terms')]
   fulfillments: $.message.order.fulfillments[*]
