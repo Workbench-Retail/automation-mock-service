@@ -39,9 +39,19 @@ codes:
     action_id: init
     action: init
     message_id: true
+  - code: 213
+    default: FASHION/1.2.5/init/init_cod/default.yaml
+    action_id: init_cod
+    action: init
+    message_id: true
   - code: 204
     default: FASHION/1.2.5/on_init/on_init/default.yaml
     action_id: on_init
+    action: on_init
+    message_id: false
+  - code: 214
+    default: FASHION/1.2.5/on_init/on_init_cod/default.yaml
+    action_id: on_init_cod
     action: on_init
     message_id: false
   - code: 205
@@ -49,9 +59,19 @@ codes:
     action_id: confirm
     action: confirm
     message_id: true
+  - code: 215
+    default: FASHION/1.2.5/confirm/confirm_cod/default.yaml
+    action_id: confirm_cod
+    action: confirm
+    message_id: true
   - code: 206
     default: FASHION/1.2.5/on_confirm/on_confirm/default.yaml
     action_id: on_confirm
+    action: on_confirm
+    message_id: false
+  - code: 216
+    default: FASHION/1.2.5/on_confirm/on_confirm_cod/default.yaml
+    action_id: on_confirm_cod
     action: on_confirm
     message_id: false
   - code: 207
@@ -82,6 +102,11 @@ codes:
   - code: 212
     default: FASHION/1.2.5/on_status/on_status_order_delivered/default.yaml
     action_id: on_status_order_delivered
+    action: on_status
+    message_id: true
+  - code: 222
+    default: FASHION/1.2.5/on_status/on_status_order_delivered_cod/default.yaml
+    action_id: on_status_order_delivered_cod
     action: on_status
     message_id: true
   - code: 302
