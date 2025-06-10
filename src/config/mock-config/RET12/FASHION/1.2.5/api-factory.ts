@@ -37,6 +37,12 @@ import { on_update_return_delivered_generator } from "./on_update/on_update_retu
 import { update_partial_cancel_settlement_generator } from "./update/update_partial_cancel_settlement/generator";
 import { update_reverse_qc_generator } from "./update/update_reverse_qc/generator";
 import { update_reverse_qc_settlement_generator } from "./update/update_reverse_qc_settlement/generator";
+
+import { init_cod_generator } from "./init/init_cod/generator";
+import { on_init_cod_generator } from "./on_init/on_init_cod/generator";
+import { confirm_cod_generator } from "./confirm/confirm_cod/generator";
+import { on_confirm_cod_generator } from "./on_confirm/on_confirm_cod/generator";
+import { on_status_order_delivered_cod_generator } from "./on_status/on_status_order_delivered_cod/generator";
 export async function Generator(
   action_id: string,
   existingPayload: any,
@@ -121,6 +127,19 @@ export async function Generator(
       return cancel_return_request_generator(existingPayload, sessionData);
     case "on_cancel_return_request":
       return on_cancel_return_request_generator(existingPayload, sessionData);
+    case "init_cod":
+      return init_cod_generator(existingPayload, sessionData);
+    case "on_init_cod":
+      return on_init_cod_generator(existingPayload, sessionData);
+    case "confirm_cod":
+      return confirm_cod_generator(existingPayload, sessionData);
+    case "on_confirm_cod":
+      return on_confirm_cod_generator(existingPayload, sessionData);
+    case "on_status_order_delivered_cod":
+      return on_status_order_delivered_cod_generator(
+        existingPayload,
+        sessionData
+      );
     default:
       console.log(action_id);
       throw new Error("Invalid action id found! ");
