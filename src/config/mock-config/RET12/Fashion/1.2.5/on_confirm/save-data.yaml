@@ -1,4 +1,0 @@
-save-data:
-  order_id: "$.message.order.id"
-  fulfillments: "$.message.order.fulfillments[*]"
-  on_confirm_quote: "$.message.order.quote"

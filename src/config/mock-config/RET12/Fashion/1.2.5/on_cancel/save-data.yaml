@@ -1,5 +1,0 @@
-save-data:
-  order_state: "$.message.order.state"
-  fulfillments: "$.message.order.fulfillments[*]"
-  quote: "$.message.order.quote"
-  items: "$.message.order.items[*]"

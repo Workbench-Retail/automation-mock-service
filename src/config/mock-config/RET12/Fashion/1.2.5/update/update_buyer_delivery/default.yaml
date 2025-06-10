@@ -1,6 +1,0 @@
-message:
-  update_target: fulfillment
-  order:
-    id: O1
-    fulfillments:
-      - id: F1

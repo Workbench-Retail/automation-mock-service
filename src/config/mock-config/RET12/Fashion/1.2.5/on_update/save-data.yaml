@@ -1,5 +1,0 @@
-save-data:
-  fulfillments: "$.message.order.fulfillments[*]"
-  on_update_quote: "$.message.order.quote"
-  items: "$.message.order.items[*]"
-  quote: "$.message.order.quote"
