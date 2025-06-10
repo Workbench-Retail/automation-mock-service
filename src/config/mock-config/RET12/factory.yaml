@@ -159,3 +159,43 @@ codes:
     action_id: on_update_return_delivered
     action: on_update
     message_id: false
+  - code: 170
+    default: FASHION/1.2.5/on_update/on_update_interim_reverse_qc/default.yaml
+    action_id: on_update_interim_reverse_qc
+    action: on_update
+    message_id: false
+  - code: 171
+    default: FASHION/1.2.5/on_update/on_update_approval/default.yaml
+    action_id: on_update_approval
+    action: on_update
+    message_id: false
+  - code: 172
+    default: FASHION/1.2.5/on_update/on_update_picked_172/default.yaml
+    action_id: on_update_picked_172
+    action: on_update
+    message_id: false
+  - code: 173
+    default: FASHION/1.2.5/on_update/on_update_return_delivered_173/default.yaml
+    action_id: on_update_return_delivered_173
+    action: on_update
+    message_id: false
+  - code: 174
+    default: FASHION/1.2.5/on_update/on_update_interim_liquidated_174/default.yaml
+    action_id: on_update_interim_liquidated_174
+    action: on_update
+    message_id: false
+  - code: 175
+    default: FASHION/1.2.5/on_update/on_update_liquidated_175/default.yaml
+    action_id: on_update_liquidated_175
+    action: on_update
+    message_id: false
+  - code: 176
+    default: FASHION/1.2.5/cancel/cancel_return_request/default.yaml
+    action_id: cancel_return_request
+    action: cancel
+    message_id: true
+  - code: 177
+    default: FASHION/1.2.5/on_cancel/on_cancel_return_request/default.yaml
+    action_id: on_cancel_return_request
+    action: on_cancel
+    message_id: false
