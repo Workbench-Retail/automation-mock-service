@@ -26,3 +26,11 @@ export const isoDurToSec = (duration: string) => {
 
 	return result;
 };
+
+export function getRandomItem(items: string[]): string | undefined {
+	if (items.length === 0) {
+		return undefined;
+	}
+	const randomIndex = Math.floor(Math.random() * items.length);
+	return items[randomIndex];
+}
