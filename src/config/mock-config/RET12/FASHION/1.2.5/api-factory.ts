@@ -27,6 +27,15 @@ import { on_cancel_generator } from "./on_cancel/on_cancel/generator";
 import { on_cancel_rto_generator } from "./on_cancel/on_cancel_rto/generator";
 import { on_status_rto_delivereddisposed_generator } from "./on_status/on_status_rto_delivereddisposed/generator";
 
+import { on_update_part_cancel_generator } from "./on_update/on_update_part_cancel/generator";
+import { on_update_interim_reverseQc_generator } from "./on_update/on_update_interim_reverseQc/generator";
+import { on_update_approved_generator } from "./on_update/on_update_return_approved/generator";
+import { on_update_picked_generator } from "./on_update/on_update_return_picked/generator";
+import { on_update_return_delivered_generator } from "./on_update/on_update_return_delivered/generator";
+
+import { update_partial_cancel_settlement_generator } from "./update/update_partial_cancel_settlement/generator";
+import { update_reverse_qc_generator } from "./update/update_reverse_qc/generator";
+import { update_reverse_qc_settlement_generator } from "./update/update_reverse_qc_settlement/generator";
 export async function Generator(
   action_id: string,
   existingPayload: any,
@@ -82,6 +91,32 @@ export async function Generator(
         existingPayload,
         sessionData
       );
+    case "on_update_part_cancel":
+      return on_update_part_cancel_generator(existingPayload, sessionData);
+    case "update_partial_cancel_settlement":
+      return update_partial_cancel_settlement_generator(
+        existingPayload,
+        sessionData
+      );
+    case "update_reverse_qc_generator":
+      return update_reverse_qc_generator(existingPayload, sessionData);
+    case "on_update_interim_reverseQc":
+      return on_update_interim_reverseQc_generator(
+        existingPayload,
+        sessionData
+      );
+    case "on_update_return_approved":
+      return on_update_approved_generator(existingPayload, sessionData);
+    case "on_update_return_picked":
+      return on_update_picked_generator(existingPayload, sessionData);
+    case "update_reverse_qc_settlement":
+      return update_reverse_qc_settlement_generator(
+        existingPayload,
+        sessionData
+      );
+    case "on_update_return_delivered":
+      return on_update_return_delivered_generator(existingPayload, sessionData);
+    case "on_update_return_approved":
     default:
       console.log(action_id);
       throw new Error("Invalid action id found! ");
