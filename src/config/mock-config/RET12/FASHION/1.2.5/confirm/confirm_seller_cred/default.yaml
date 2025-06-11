@@ -24,6 +24,11 @@ order:
     id: P1
     locations:
       - id: L1
+    creds:
+    - id: gi-12345678
+      descriptor:
+        code: Social Sector
+        short_desc: GI
   fulfillments:
     - "@ondc/org/TAT": P3D
       id: F1
@@ -47,8 +52,16 @@ order:
       type: Delivery
   payment:
     params:
-      currency: INR
       amount: "2756.75"
+      currency: INR
+      transaction_id: order_PjggJp7MccQmAa
+    status: PAID
+    type: ON-ORDER
+    collected_by: BAP
+    uri: "https://razorpay.com/"
+    "tl_method": "http/get"
+    "@ondc/org/buyer_app_finder_fee_type": percent
+    "@ondc/org/buyer_app_finder_fee_amount": "3.0"
     "@ondc/org/settlement_details":
       - settlement_counterparty: seller-app
         settlement_phase: sale-amount
@@ -58,14 +71,6 @@ order:
         settlement_ifsc_code: XXXX
         bank_name: XXXX
         branch_name: XXXX
-    type: ON-FULFILLMENT
-    status: NOT-PAID
-    collected_by: BPP
-    "@ondc/org/buyer_app_finder_fee_type": percent
-    "@ondc/org/buyer_app_finder_fee_amount": "3"
-    "@ondc/org/settlement_basis": delivery
-    "@ondc/org/settlement_window": P1D
-    "@ondc/org/withholding_amount": "10.00"
   quote:
     price:
       currency: INR

@@ -1,10 +1,15 @@
 order:
   id: O1
-  state: In-progress
+  state: Created
   provider:
     id: P1
     locations:
       - id: L1
+    creds:
+    - id: gi-12345678
+      descriptor:
+        code: Social Sector
+        short_desc: GI
   items:
     - id: I1
       quantity:
@@ -27,12 +32,12 @@ order:
   fulfillments:
     - id: F1
       "@ondc/org/provider_name": Seller Business
+      "@ondc/org/TAT": P3D
       state:
         descriptor:
-          code: Out-for-delivery
+          code: Pending
       type: Delivery
-      tracking: false
-      "@ondc/org/TAT": P3D
+      tracking: true
       start:
         location:
           id: L1
@@ -41,17 +46,12 @@ order:
           gps: 12.925810,77.583624
           address:
             building: my building name or house
+            country: IND
+            locality: my street name
             city: Bengaluru
             area_code: "560011"
-            country: IND
             state: Karnataka
-            locality: my street name
             name: my house or door or floor
-        time:
-          range:
-            start: "2024-08-14T09:27:36.706Z"
-            end: "2024-08-16T09:27:36.707Z"
-          timestamp: "2024-08-14T09:27:57.891Z"
         contact:
           phone: "9594663710"
           email: nobody@nomail.com
@@ -71,16 +71,6 @@ order:
             area_code: "560027"
             locality: my street name
             name: my house or door or floor
-        time:
-          range:
-            start: "2024-08-17T09:27:36.706Z"
-            end: "2024-08-19T09:27:36.707Z"
-        timestamp: "2024-08-14T09:28:19.960Z"
-      tags:
-        - code: routing
-          list:
-            - code: type
-              value: P2P
   quote:
     price:
       currency: INR
@@ -113,19 +103,14 @@ order:
     ttl: P1D
   payment:
     params:
-      currency: INR
-      transaction_id: "3937"
       amount: "2756.75"
-    type: ON-FULFILLMENT
+      currency: INR
+      transaction_id: order_Okj0iihMKJod0V
     status: PAID
-    collected_by: BPP
+    type: ON-ORDER
+    collected_by: BAP
     "@ondc/org/buyer_app_finder_fee_type": percent
-    "@ondc/org/buyer_app_finder_fee_amount": "3"
-    "@ondc/org/settlement_basis": delivery
-    "@ondc/org/settlement_window": P1D
-    "@ondc/org/withholding_amount": "10.00"
-    time:
-      timestamp: "2024-12-12T09:33:01.101Z"
+    "@ondc/org/buyer_app_finder_fee_amount": "3.0"
     "@ondc/org/settlement_details":
       - settlement_counterparty: seller-app
         settlement_phase: sale-amount
@@ -135,8 +120,18 @@ order:
         settlement_ifsc_code: xxxx
         bank_name: xxxx
         branch_name: xxxx
-  documents:
-    - url: https://invoice_url
-      label: Invoice
+  tags:
+    - code: bpp_terms
+      list:
+        - code: np_type
+          value: MSN
+        - code: tax_number
+          value: gst_number_of_sellerNP
+        - code: provider_tax_number
+          value: PAN_number_of_provider
+    - code: bap_terms
+      list:
+        - code: tax_number
+          value: gst_number_of_buyerNP
   created_at: "2024-08-14T09:11:00.810Z"
-  updated_at: "2024-08-14T09:28:25.171Z"
+  updated_at: "2024-08-14T09:11:01.239Z"
