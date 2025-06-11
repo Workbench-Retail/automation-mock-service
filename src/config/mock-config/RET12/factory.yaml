@@ -64,6 +64,11 @@ codes:
     action_id: confirm_cod
     action: confirm
     message_id: true
+  - code: 225
+    default: FASHION/1.2.5/confirm/confirm_seller_cred/default.yaml
+    action_id: confirm_seller_cred
+    action: confirm
+    message_id: true
   - code: 206
     default: FASHION/1.2.5/on_confirm/on_confirm/default.yaml
     action_id: on_confirm
@@ -72,6 +77,11 @@ codes:
   - code: 216
     default: FASHION/1.2.5/on_confirm/on_confirm_cod/default.yaml
     action_id: on_confirm_cod
+    action: on_confirm
+    message_id: false
+  - code: 226
+    default: FASHION/1.2.5/on_confirm/on_confirm_seller_cred/default.yaml
+    action_id: on_confirm_seller_cred
     action: on_confirm
     message_id: false
   - code: 207

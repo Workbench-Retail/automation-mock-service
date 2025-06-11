@@ -43,6 +43,8 @@ import { on_init_cod_generator } from "./on_init/on_init_cod/generator";
 import { confirm_cod_generator } from "./confirm/confirm_cod/generator";
 import { on_confirm_cod_generator } from "./on_confirm/on_confirm_cod/generator";
 import { on_status_order_delivered_cod_generator } from "./on_status/on_status_order_delivered_cod/generator";
+import { confirm_seller_cred_generator } from "./confirm/confirm_seller_cred/generator";
+import { on_confirm_seller_cred_generator } from "./on_confirm/on_confirm_seller_cred/generator";
 export async function Generator(
   action_id: string,
   existingPayload: any,
@@ -140,6 +142,10 @@ export async function Generator(
         existingPayload,
         sessionData
       );
+    case "confirm_seller_cred":
+      return confirm_seller_cred_generator(existingPayload, sessionData);
+    case "on_confirm_seller_cred":
+      return on_confirm_seller_cred_generator(existingPayload, sessionData);
     default:
       console.log(action_id);
       throw new Error("Invalid action id found! ");
