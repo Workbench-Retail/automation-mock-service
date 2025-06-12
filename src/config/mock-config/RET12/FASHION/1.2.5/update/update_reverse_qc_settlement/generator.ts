@@ -25,13 +25,6 @@ export async function update_reverse_qc_settlement_generator(
     ];
   }
 
-  if (returnId) {
-    existingPayload.message.order.fulfillments.push({
-      id: returnId,
-      type: "Return",
-    });
-  }
-
   const trail = jsonpath.query(
     sessionData.fulfillments,
     `$..tags[?(@.code=="quote_trail")]`
