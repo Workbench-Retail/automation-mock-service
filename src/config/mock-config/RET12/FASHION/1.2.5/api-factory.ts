@@ -17,6 +17,11 @@ import { on_status_agent_assigned_generator } from "./on_status/on_status_agent_
 import { on_status_picked_generator } from "./on_status/on_status_picked/generator";
 import { on_status_out_for_delivery_generator } from "./on_status/on_status_out_for_delivery/generator";
 import { on_status_order_delivered_generator } from "./on_status/on_status_order_delivered/generator";
+import { on_status_packed_rep_generator } from "./on_status/on_status_packed_rep/generator";
+import { on_status_picked_rep_generator } from "./on_status/on_status_picked_rep/generator";
+import { on_status_out_for_delivery_rep_generator } from "./on_status/on_status_out_for_delivery_rep/generator";
+import { on_status_order_delivered_rep_generator } from "./on_status/on_status_order_delivered_rep/generator";
+
 
 import { select_out_of_stock_generator } from "./select/select_out_of_stock/generator";
 import { on_select_out_of_stock_generator } from "./on_select/on_select_out_of_stock/generator";
@@ -77,14 +82,22 @@ export async function Generator(
       return on_status_pending_generator(existingPayload, sessionData);
     case "on_status_packed":
       return on_status_packed_generator(existingPayload, sessionData);
+    case "on_status_packed_rep":
+      return on_status_packed_rep_generator(existingPayload, sessionData);
     case "on_status_agent_assigned":
       return on_status_agent_assigned_generator(existingPayload, sessionData);
     case "on_status_picked":
       return on_status_picked_generator(existingPayload, sessionData);
+    case "on_status_picked_rep":
+      return on_status_picked_rep_generator(existingPayload, sessionData);
     case "on_status_out_for_delivery":
       return on_status_out_for_delivery_generator(existingPayload, sessionData);
+    case "on_status_out_for_delivery_rep":
+      return on_status_out_for_delivery_rep_generator(existingPayload, sessionData);
     case "on_status_order_delivered":
       return on_status_order_delivered_generator(existingPayload, sessionData);
+    case "on_status_order_delivered_rep":
+      return on_status_order_delivered_rep_generator(existingPayload, sessionData);
     case "select_out_of_stock":
       return select_out_of_stock_generator(existingPayload, sessionData);
     case "on_select_out_of_stock":
