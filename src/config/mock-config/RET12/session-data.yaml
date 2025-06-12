@@ -24,6 +24,7 @@ session_data:
   on_status_updated_at: null
   stateCode: null
   cancellation: null
+  cancellation_return_reason_id: null
   np_type: null
   out_of_stock_item_ids: []
   on_status_fulfillments: []
