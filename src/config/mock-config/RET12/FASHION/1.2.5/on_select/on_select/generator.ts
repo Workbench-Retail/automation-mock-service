@@ -58,33 +58,32 @@ const breakup = [
 ];
 
 export async function on_select_generator(
-	existingPayload: any,
-	sessionData: SessionData
+  existingPayload: any,
+  sessionData: SessionData
 ) {
-
+  console.log("sessionData", JSON.stringify(sessionData));
   existingPayload.message.order.provider = sessionData.provider;
-	const selectedItemsObj = sessionData.selected_items as SelectedItems;
-	existingPayload.message.order.items = selectedItemsObj.map((item) => {
-		return {
-			id: item.id,
-			fulfillment_id: item.fulfillment_id || "F1",
-		};
-	});
-	
-  
-  const quote = createQuote(
-		selectedItemsObj.map((item) => {
-			return {
-				id: item.id,
-				count: item.quantity.count,
-				fulfillment_id: "F1",
-			};
-		}),
-		sessionData,
-		existingPayload,
-		existingPayload.message.order.fulfillments
-	);
-	existingPayload.message.order.quote = quote;
-	return existingPayload;
-}
+  const selectedItemsObj = sessionData.selected_items as SelectedItems;
+  existingPayload.message.order.items = selectedItemsObj.map((item) => {
+    return {
+      id: item.id,
+      fulfillment_id: item.fulfillment_id || "F1",
+    };
+  });
 
+  const quote = createQuote(
+    selectedItemsObj.map((item) => {
+      return {
+        id: item.id,
+        count: item.quantity.count,
+        fulfillment_id: "F1",
+      };
+    }),
+    sessionData,
+    existingPayload,
+    existingPayload.message.order.fulfillments
+  );
+  existingPayload.message.order.quote = quote;
+  console.log("existingpayload", JSON.stringify(existingPayload));
+  return existingPayload;
+}

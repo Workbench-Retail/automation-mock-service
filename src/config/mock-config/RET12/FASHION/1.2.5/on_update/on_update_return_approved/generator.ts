@@ -60,5 +60,7 @@ export async function on_update_approved_generator(
 		}
 	);
 
+	existingPayload.message.order.fulfillments.push(deliveryFulfillment)
+
 	return existingPayload;
 }

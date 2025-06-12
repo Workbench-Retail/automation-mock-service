@@ -178,12 +178,12 @@ codes:
     default: FASHION/1.2.5/on_update/on_update_return_approved/default.yaml
     action_id: on_update_return_approved
     action: on_update
-    message_id: false
+    message_id: true
   - code: 167
-    default: FASHION/1.2.5/on_update/on_update_picked/default.yaml
+    default: FASHION/1.2.5/on_update/on_update_return_picked/default.yaml
     action_id: on_update_return_picked
     action: on_update
-    message_id: false
+    message_id: true
   - code: 168
     default: FASHION/1.2.5/update/update_reverse_qc_settlement/default.yaml
     action_id: update_reverse_qc_settlement

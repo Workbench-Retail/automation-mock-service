@@ -28,6 +28,7 @@ session_data:
   out_of_stock_item_ids: []
   on_status_fulfillments: []
   on_select_fulfillments: []
+  update_fulfillments: []
   bpp_terms: null
   bap_terms: null
   order_created_at: null

@@ -107,7 +107,7 @@ export async function Generator(
         existingPayload,
         sessionData
       );
-    case "update_reverse_qc_generator":
+    case "update_reverse_qc":
       return update_reverse_qc_generator(existingPayload, sessionData);
     case "on_update_interim_reverseQc":
       return on_update_interim_reverseQc_generator(

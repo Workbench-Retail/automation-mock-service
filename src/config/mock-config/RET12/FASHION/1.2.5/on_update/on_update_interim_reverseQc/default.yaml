@@ -76,28 +76,6 @@ order:
             start: "2024-08-11T12:39:03.396Z"
             end: "2024-08-13T12:39:03.396Z"
           timestamp: "2024-08-08T12:41:02.913Z"
-    - state:
-        descriptor:
-          code: Cancelled
-      type: Cancel
-      id: C1
-      tags:
-        - code: cancel_request
-          list:
-            - code: reason_id
-              value: "002"
-            - code: initiated_by
-              value: your id
-        - code: quote_trail
-          list:
-            - code: type
-              value: item
-            - code: id
-              value: I1
-            - code: currency
-              value: INR
-            - code: value
-              value: "-9040.00"
     - id: R1
       type: Return
       state:

@@ -1,6 +1,7 @@
 import { endianness } from "os";
 import { SessionData } from "../../../../session-types";
 import { Fulfillment } from "../../api-objects/fulfillments";
+import jsonpath from "jsonpath";
 
 export async function on_update_interim_reverseQc_generator(
   existingPayload: any,
@@ -15,14 +16,21 @@ export async function on_update_interim_reverseQc_generator(
   existingPayload.message.order.created_at = sessionData.order_created_at;
   existingPayload.message.order.updated_at = new Date().toISOString();
 
-  const deliveryFulfillment = existingPayload.message.order.fulfillments.find(
-    (f: Fulfillment) => f.type == "Delivery"
-  ) as Fulfillment;
+  const returnId = jsonpath.query(
+    sessionData.update_fulfillments[0],
+    `$..tags[*][?(@.code=="return_request")].list[?(@.code=="id")].value`
+  )[0];
 
-  existingPayload.message.order.fulfillments = sessionData.fulfillments.map(
+  const deliveryFulfillment = existingPayload.message.order.fulfillments.find(
+		(f: Fulfillment) => f.type == "Delivery"
+	) as Fulfillment;
+
+  console.log(returnId);
+  existingPayload.message.order.fulfillments = sessionData.update_fulfillments.map(
     (f: Fulfillment) => {
       if (f.type == "Return") {
         return {
+          id: returnId,
           ...f,
           state: {
             descriptor: {
@@ -35,6 +43,6 @@ export async function on_update_interim_reverseQc_generator(
       return f;
     }
   );
-
+  existingPayload.message.order.fulfillments.push(deliveryFulfillment);
   return existingPayload;
 }
