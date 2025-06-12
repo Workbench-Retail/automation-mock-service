@@ -234,3 +234,23 @@ codes:
     action_id: on_cancel_return_request
     action: on_cancel
     message_id: false
+  - code: 270
+    default: FASHION/1.2.5/on_status/on_status_picked_rep/default.yaml
+    action_id: on_status_picked_rep
+    action: on_status
+    message_id: true
+  - code: 207
+    default: FASHION/1.2.5/on_status/on_status_packed_rep/default.yaml
+    action_id: on_status_packed_rep
+    action: on_status
+    message_id: true
+  - code: 207
+    default: FASHION/1.2.5/on_status/on_status_out_for_delivery_rep/default.yaml
+    action_id: on_status_out_for_delivery_rep
+    action: on_status
+    message_id: true
+  - code: 207
+    default: FASHION/1.2.5/on_status/on_status_order_delivered_rep/default.yaml
+    action_id: on_status_order_delivered_rep
+    action: on_status
+    message_id: true
