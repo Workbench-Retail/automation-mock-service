@@ -42,7 +42,7 @@ export async function on_update_picked_generator(
 
   console.log("returnFulfillment", returnFulfillment)
   console.log("returnFulfillment", JSON.stringify(returnFulfillment))
-  
+
   if (!returnFulfillment) {
     throw new Error("No Return fulfillment found");
   }

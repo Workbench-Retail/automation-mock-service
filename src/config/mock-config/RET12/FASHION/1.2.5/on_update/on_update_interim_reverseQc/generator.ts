@@ -16,22 +16,28 @@ export async function on_update_interim_reverseQc_generator(
   existingPayload.message.order.created_at = sessionData.order_created_at;
   existingPayload.message.order.updated_at = new Date().toISOString();
 
-  const returnId = jsonpath.query(
-    sessionData.update_fulfillments[0],
-    `$..tags[*][?(@.code=="return_request")].list[?(@.code=="id")].value`
-  )[0];
+  console.log(
+    "sessionData.update_fulfillments",
+    JSON.stringify(sessionData.update_fulfillments)
+  );
+
+  const returnId = sessionData.update_fulfillments
+    ?.find((entry: any) => entry.type === "Return")
+    ?.tags?.find((tag: any) => tag.code === "return_request")
+    ?.list?.find((item: any) => item.code === "id")?.value;
+
 
   const deliveryFulfillment = existingPayload.message.order.fulfillments.find(
-		(f: Fulfillment) => f.type == "Delivery"
-	) as Fulfillment;
+    (f: Fulfillment) => f.type == "Delivery"
+  ) as Fulfillment;
 
-  console.log(returnId);
-  existingPayload.message.order.fulfillments = sessionData.update_fulfillments.map(
-    (f: Fulfillment) => {
+  console.log("returnId", returnId);
+  existingPayload.message.order.fulfillments =
+    sessionData.update_fulfillments.map((f: Fulfillment) => {
       if (f.type == "Return") {
         return {
-          id: returnId,
           ...f,
+          id: returnId,
           state: {
             descriptor: {
               code: "Return_Initiated",
@@ -40,9 +46,13 @@ export async function on_update_interim_reverseQc_generator(
           "@ondc/org/provider_name": "mock_lsp_provider",
         };
       }
-      return f;
-    }
+    });
+
+  console.log(
+    "existingPayload.message.order.fulfillments",
+    JSON.stringify(existingPayload.message.order.fulfillments)
   );
   existingPayload.message.order.fulfillments.push(deliveryFulfillment);
+
   return existingPayload;
 }
