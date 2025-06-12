@@ -5,3 +5,4 @@ save-data:
   order_created_at: $.message.order.created_at
   bap_terms: $.message.order.tags[?(@.code == 'bap_terms')]
   fulfillments: $.message.order.fulfillments[*]
+  payment: $.message.order.payment
