@@ -49,6 +49,7 @@ export type SessionData = {
   on_status_updated_at?: string;
   cancellation_reason_id?: string;
   cancellation?: any;
+  cancellation_return_reason_id?: string;
   stateCode?: string;
   update_fulfillments?: any
   np_type?: string;
