@@ -194,6 +194,11 @@ codes:
     action_id: on_update_return_delivered
     action: on_update
     message_id: false
+  - code: 169
+    default: FASHION/1.2.5/on_update/on_update_return_delivered/default.yaml
+    action_id: on_update_return_delivered_rep
+    action: on_update
+    message_id: true
   - code: 176
     default: FASHION/1.2.5/cancel/cancel_return_request/default.yaml
     action_id: cancel_return_request

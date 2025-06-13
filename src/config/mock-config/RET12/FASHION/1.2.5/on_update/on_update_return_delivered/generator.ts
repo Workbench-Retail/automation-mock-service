@@ -10,8 +10,8 @@ export async function on_update_return_delivered_generator(
   existingPayload.message.order.items = sessionData.items;
   existingPayload.message.order.billing = sessionData.billing;
 
+  existingPayload.message.order.payment = sessionData.payment;
   if (sessionData.update_payment) {
-	existingPayload.message.order.payment = sessionData.payment;
     existingPayload.message.order.payment["@ondc/org/settlement_details"].push(
       sessionData.update_payment[0][0]
     );
