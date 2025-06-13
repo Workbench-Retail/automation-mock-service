@@ -3,100 +3,150 @@ import { Quote } from "../../api-objects/breakup-type";
 import { Fulfillment, Fulfillments } from "../../api-objects/fulfillments";
 import jsonpath from "jsonpath";
 export async function on_update_picked_generator(
-	existingPayload: any,
-	sessionData: SessionData
+  existingPayload: any,
+  sessionData: SessionData
 ) {
-	existingPayload.message.order.id = sessionData.order_id;
-	existingPayload.message.order.provider = sessionData.provider;
-	existingPayload.message.order.items = sessionData.items;
-	existingPayload.message.order.billing = sessionData.billing;
-	existingPayload.message.order.payment = sessionData.payment;
-	existingPayload.message.order.created_at = sessionData.order_created_at;
-	existingPayload.message.order.updated_at = new Date().toISOString();
+  existingPayload.message.order.id = sessionData.order_id;
+  existingPayload.message.order.provider = sessionData.provider;
+  existingPayload.message.order.items = sessionData.items;
+  existingPayload.message.order.billing = sessionData.billing;
+  existingPayload.message.order.payment = sessionData.payment;
+  existingPayload.message.order.created_at = sessionData.order_created_at;
+  existingPayload.message.order.updated_at = new Date().toISOString();
 
-	const deliveryFulfillment = existingPayload.message.order.fulfillments.find(
-		(f: Fulfillment) => f.type == "Delivery"
-	) as Fulfillment;
+  const deliveryFulfillment = existingPayload.message.order.fulfillments.find(
+    (f: Fulfillment) => f.type == "Delivery"
+  ) as Fulfillment;
 
-	const itemCodes = jsonpath.query(
-		sessionData.fulfillments,
-		`$..tags[*][?(@.code=="return_request")].list[?(@.code=="item_id")].value`
-	);
-	console.log("itemCodes", itemCodes);
+  const returnItems: any = [];
 
-	const items: any[] = [];
-	const fulfillments = sessionData.fulfillments as Fulfillments;
-	const fulfillmentId = fulfillments.find(
-		(f: Fulfillment) => f.type == "Return"
-	)?.id;
+  sessionData.fulfillments.forEach((fulfillment: any) => {
+    if (fulfillment.tags && Array.isArray(fulfillment.tags)) {
+      fulfillment.tags.forEach((tag: any) => {
+        if (tag.code === "return_request" && Array.isArray(tag.list)) {
+          const item: any = {};
+          tag.list.forEach((entry: any) => {
+            if (entry.code === "item_id") {
+              item.item_id = entry.value;
+            }
+            if (entry.code === "item_quantity") {
+              item.item_quantity = entry.value;
+            }
+          });
+          if (item.item_id && item.item_quantity) {
+            returnItems.push(item);
+          }
+        }
+      });
+    }
+  });
 
-	console.log("fulfillmentId", fulfillmentId);
+  const items: any[] = sessionData.items;
+  const fulfillments = sessionData.fulfillments as Fulfillments;
+  const returnFulfillmentId = fulfillments.find(
+    (f: Fulfillment) => f.type == "Return"
+  )?.id;
 
-	sessionData.items.forEach((item: any) => {
-		if (itemCodes.includes(item.id)) {
-			items.push({
-				id: item.id,
-				quantity: {
-					count: item.quantity.count,
-				},
-				fulfillment_id: fulfillmentId,
-			});
-			item.quantity.count = 0;
-		}
-		items.push(item);
-	});
-	
-	existingPayload.message.order.items = items;
-	const quote = sessionData.quote as Quote;
-	const breakup = quote.breakup ?? [];
-	if (quote.price) {
-		quote.price.value = "0.00";
-	}
-	const quoteTrails = breakup
-		.map((item) => {
-			const price = parseFloat(item.price?.value || "0");
-			if (price === 0) return null;
-			if (item.price) {
-				item.price.value = "0.00";
-			}
-			if (item["@ondc/org/item_quantity"]) {
-				item["@ondc/org/item_quantity"].count = 0;
-			}
-			return {
-				code: "quote_trail",
-				list: [
-					{ code: "type", value: item["@ondc/org/title_type"] },
-					{ code: "id", value: item["@ondc/org/item_id"] },
-					{ code: "currency", value: "INR" },
-					{ code: "value", value: `${-1 * price}` },
-				],
-			};
-		})
-		.filter((x): x is NonNullable<typeof x> => x !== null);
-	existingPayload.message.order.fulfillments = sessionData.fulfillments.map(
-		(f: Fulfillment) => {
-			if (f.type == "Return") {
-				const tags = f?.tags as any[];
-				return {
-					...f,
-					state: {
-						descriptor: {
-							code: "Return_Picked",
-						},
-					},
-					start: {
-						location: deliveryFulfillment.end?.location,
-						time: {
-							...f.start?.time,
-							timeStamp: new Date().toISOString(),
-						},
-					},
-					tags: [...tags, ...quoteTrails],
-				};
-			}
-			return f;
-		}
-	);
-	existingPayload.message.order.quote = sessionData.quote;
-	return existingPayload;
+  console.log("returnFulfillmentId", returnFulfillmentId);
+
+  returnItems.forEach((retItem: any) => {
+    const item = items.find((i: any) => i.id === retItem.item_id);
+    if (item) {
+      item.quantity.count -= parseInt(retItem.item_quantity, 10);
+      if (item.quantity.count < 0) item.quantity.count = 0;
+    }
+  });
+
+  console.log("returnItems", returnItems);
+  const returnFulfillmentItems = returnItems.map((retItem: any) => ({
+    id: retItem.item_id,
+    fulfillment_id: returnFulfillmentId,
+    quantity: { count: parseInt(retItem.item_quantity, 10) },
+  }));
+
+  // Combine both
+  const updatedItems = [...items, ...returnFulfillmentItems];
+
+  console.log("updatedItems", updatedItems);
+
+  existingPayload.message.order.items = updatedItems;
+
+  const quote = sessionData.quote as Quote;
+  const breakup = quote.breakup ?? [];
+
+  const updatedBreakup = breakup.map((b: any) => {
+    const retItem = returnItems.find(
+      (r: any) => r.item_id === b["@ondc/org/item_id"]
+    );
+    if (retItem && b["@ondc/org/title_type"] === "item") {
+      const newCount =
+        b["@ondc/org/item_quantity"]?.count -
+        parseInt(retItem.item_quantity, 10);
+      const itemPrice = parseFloat(b.item.price.value);
+      const newValue = (newCount * itemPrice).toFixed(2);
+
+      return {
+        ...b,
+        "@ondc/org/item_quantity": { count: newCount },
+        price: { ...b.price, value: newValue },
+      };
+    }
+    return b;
+  });
+
+  const totalValue = updatedBreakup
+    .reduce((acc, b) => acc + parseFloat(b.price.value), 0)
+    .toFixed(2);
+
+  existingPayload.message.order.quote = {
+    breakup: updatedBreakup,
+    price: { currency: "INR", value: totalValue },
+    ttl: "P1D",
+  };
+
+  const quoteTrails = returnItems.map((r: any) => {
+    const orig: any = breakup.find(
+      (b: any) => b["@ondc/org/item_id"] === r.item_id
+    );
+    const itemPrice = parseFloat(orig?.item.price.value);
+    const value = (itemPrice * parseInt(r.item_quantity, 10)).toFixed(2);
+
+    return {
+      code: "quote_trail",
+      list: [
+        { code: "type", value: "item" },
+        { code: "id", value: r.item_id },
+        { code: "currency", value: "INR" },
+        { code: "value", value: `-${value}` },
+      ],
+    };
+  });
+
+  console.log("quoteTrails", quoteTrails);
+
+  existingPayload.message.order.fulfillments = sessionData.fulfillments.map(
+    (f: Fulfillment) => {
+      if (f.type == "Return") {
+        const tags = f?.tags as any[];
+        return {
+          ...f,
+          state: {
+            descriptor: {
+              code: "Return_Picked",
+            },
+          },
+          start: {
+            location: deliveryFulfillment.end?.location,
+            time: {
+              ...f.start?.time,
+              timeStamp: new Date().toISOString(),
+            },
+          },
+          tags: [...tags, ...quoteTrails],
+        };
+      }
+      return f;
+    }
+  );
+  return existingPayload;
 }

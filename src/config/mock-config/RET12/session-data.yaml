@@ -12,6 +12,7 @@ session_data:
   quote: null
   order_id: null
   payment: null
+  update_payment: null
   order_state: null
   last_action: null
   mock_type: null

@@ -23,6 +23,7 @@ export type SessionData = {
   quote: any | undefined;
   order_id: string | undefined;
   payment: any | undefined;
+  update_payment: any;
   order_state: string | undefined;
   last_action: string | undefined;
   city_code: string | undefined;
@@ -51,7 +52,7 @@ export type SessionData = {
   cancellation?: any;
   cancellation_return_reason_id?: string;
   stateCode?: string;
-  update_fulfillments?: any
+  update_fulfillments?: any;
   np_type?: string;
 };
 
