@@ -1,6 +1,6 @@
 order:
   id: O1
-  state: In-progress
+  state: Completed
   provider:
     id: P1
     locations:
