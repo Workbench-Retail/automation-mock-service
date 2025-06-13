@@ -36,7 +36,8 @@ export type SessionData = {
   order_created_at?: any;
   last_updated_at?: string;
   bap_terms?: any;
-  // order phase
+  // order 
+  replacementId?: string;
   selected_item_id: string;
   end: any[];
   bnp_features: any[];

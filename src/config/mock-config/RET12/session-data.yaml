@@ -13,6 +13,7 @@ session_data:
   order_id: null
   payment: null
   update_payment: null
+  replacementId: null
   order_state: null
   last_action: null
   mock_type: null
