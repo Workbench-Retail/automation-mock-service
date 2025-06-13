@@ -23,12 +23,15 @@ export async function on_update_picked_generator(
 		`$..tags[*][?(@.code=="return_request")].list[?(@.code=="item_id")].value`
 	);
 	console.log("itemCodes", itemCodes);
+
 	const items: any[] = [];
 	const fulfillments = sessionData.fulfillments as Fulfillments;
 	const fulfillmentId = fulfillments.find(
 		(f: Fulfillment) => f.type == "Return"
 	)?.id;
+
 	console.log("fulfillmentId", fulfillmentId);
+
 	sessionData.items.forEach((item: any) => {
 		if (itemCodes.includes(item.id)) {
 			items.push({
@@ -42,6 +45,7 @@ export async function on_update_picked_generator(
 		}
 		items.push(item);
 	});
+	
 	existingPayload.message.order.items = items;
 	const quote = sessionData.quote as Quote;
 	const breakup = quote.breakup ?? [];
