@@ -9,7 +9,7 @@ export type SelectedItems = {
   location_id: string;
 }[];
 
-const breakupItem = {
+export const breakupItem = {
   "@ondc/org/item_id": "I1",
   "@ondc/org/item_quantity": {
     count: 1,
@@ -36,7 +36,7 @@ const breakupItem = {
   },
 };
 
-const breakup = [
+export const breakup = [
   {
     "@ondc/org/item_id": "F1",
     title: "Delivery charges",

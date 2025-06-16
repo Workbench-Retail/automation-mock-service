@@ -5,5 +5,7 @@ export async function on_search_inc_disable_generator(
 	sessionData: SessionData
 ) {
 	existingPayload.context.city = "*"
+	let newExistingPayload = JSON.parse(JSON.stringify(existingPayload));
+	
 	return existingPayload;
 }
