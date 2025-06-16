@@ -55,6 +55,7 @@ export type SessionData = {
   stateCode?: string;
   update_fulfillments?: any;
   np_type?: string;
+  bap_features?: string[];
 };
 
 export type BecknContext = {

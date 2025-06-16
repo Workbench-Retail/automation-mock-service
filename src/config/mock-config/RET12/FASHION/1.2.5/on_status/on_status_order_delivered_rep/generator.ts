@@ -8,6 +8,7 @@ export async function on_status_order_delivered_rep_generator(
   const replacementId = sessionData.replacementId;
   generalPayload.message.order.fulfillments = sessionData.fulfillments;
   const fulfillments = generalPayload.message?.order?.fulfillments;
+  generalPayload.message.order.state = "Completed";
   if (Array.isArray(fulfillments)) {
     fulfillments.forEach((fulfillment: any) => {
       if (fulfillment.id === replacementId) {

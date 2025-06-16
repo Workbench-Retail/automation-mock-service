@@ -84,54 +84,6 @@ function createCancelReturnRequestFulfillments(
 				code: "Cancelled",
 			},
 		},
-		tags: createQuoteTrail(quote),
 	});
 	return fulfillments;
 }
-
-function createQuoteTrail(quote: Quote) {
-	const tags: any = [];
-	const breakup = quote.breakup || [];
-	for (const item of breakup) {
-		const priceStr = item.price?.value || "0.00";
-		const priceValue = parseFloat(priceStr);
-		if (item["@ondc/org/item_quantity"]) {
-			item["@ondc/org/item_quantity"].count = 0;
-		}
-		if (priceValue !== 0) {
-			const trail = JSON.parse(JSON.stringify(sampleQuoteTrail));
-			trail.list[0].value = item["@ondc/org/title_type"] || "misc";
-			trail.list[1].value = item["@ondc/org/item_id"] || "unknown";
-			trail.list[2].value = item.price?.currency || "INR";
-			trail.list[3].value = (-1 * priceValue).toFixed(2);
-			tags.push(trail);
-			if (item.price) {
-				item.price.value = "0.00";
-			}
-		}
-	}
-
-	return tags;
-}
-
-const sampleQuoteTrail = {
-	code: "quote_trail",
-	list: [
-		{
-			code: "type",
-			value: "misc",
-		},
-		{
-			code: "id",
-			value: "c4b2dd74-9ccd-4ec1-b8f8-58d36dd8ce33",
-		},
-		{
-			code: "currency",
-			value: "INR",
-		},
-		{
-			code: "value",
-			value: "-100.00",
-		},
-	],
-};
