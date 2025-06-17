@@ -8,6 +8,7 @@ export async function on_update_approved_generator(
 	existingPayload: any,
 	sessionData: SessionData
 ) {
+
 	existingPayload.message.order.id = sessionData.order_id;
 	existingPayload.message.order.provider = sessionData.provider;
 	existingPayload.message.order.items = sessionData.items;
@@ -60,6 +61,5 @@ export async function on_update_approved_generator(
 			return f;
 		}
 	);
-
 	return existingPayload;
 }

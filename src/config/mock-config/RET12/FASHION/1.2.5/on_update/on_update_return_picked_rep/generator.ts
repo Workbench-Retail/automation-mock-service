@@ -240,5 +240,6 @@ export async function on_update_picked_rep_generator(
     }
   );
   existingPayload.message.order.fulfillments.push(replacementFulfillment);
+  existingPayload.message.order.state = "Completed";
   return existingPayload;
 }
