@@ -13,6 +13,7 @@ export async function on_status_pending_generator(
     sessionData,
     generalPayload.message.order.fulfillments
   );
+  generalPayload.message.order.updated_at = existingPayload.context.timestamp;
 
   if (sessionData.update_payment) {
     generalPayload.message.order.payment = sessionData.payment;

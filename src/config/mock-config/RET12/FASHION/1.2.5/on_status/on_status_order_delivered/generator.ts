@@ -13,6 +13,8 @@ export async function on_status_order_delivered_generator(
     sessionData,
     generalPayload.message.order.fulfillments
   );
+  generalPayload.message.order.fulfillments[0].end.time.timestamp = existingPayload.context.timestamp;
+  generalPayload.message.order.updated_at = existingPayload.context.timestamp;
   generalPayload.message.order.state = "Completed";
   return generalPayload;
 }

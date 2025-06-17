@@ -174,7 +174,7 @@ export async function on_update_picked_rep_generator(
     );
     if (retItem && b["@ondc/org/title_type"] === "item") {
       const newCount =
-        b["@ondc/org/item_quantity"]?.count -
+        parseInt(b["@ondc/org/item_quantity"]?.count, 10) -
         parseInt(retItem.item_quantity, 10);
       const itemPrice = parseFloat(b.item.price.value);
       const newValue = (newCount * itemPrice).toFixed(2);
@@ -191,10 +191,9 @@ export async function on_update_picked_rep_generator(
   const totalValue = updatedBreakup
     .reduce((acc, b) => acc + parseFloat(b.price.value), 0)
     .toFixed(2);
-
   existingPayload.message.order.quote = {
     breakup: updatedBreakup,
-    price: { currency: "INR", value: totalValue },
+    price: { currency: "INR", value: `${totalValue}` },
     ttl: "P1D",
   };
 
