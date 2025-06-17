@@ -9,11 +9,6 @@ export function removeItemQuantitiesFromQuote(quote: any) {
         updatedItem.item = restItem;
       }
 
-      // Remove @ondc/org/item_quantity if present
-      if ("@ondc/org/item_quantity" in updatedItem) {
-        const { ["@ondc/org/item_quantity"]: _omit, ...rest } = updatedItem;
-        updatedItem = rest;
-      }
 
       return updatedItem;
     })

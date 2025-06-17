@@ -17,4 +17,5 @@ export async function on_status_picked_rep_generator(
       }
     });
   }
+  return generalPayload;
 }
