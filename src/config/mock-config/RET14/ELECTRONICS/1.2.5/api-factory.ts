@@ -22,10 +22,8 @@ import { select_out_of_stock_generator } from "./select/select_out_of_stock/gene
 import { on_select_out_of_stock_generator } from "./on_select/on_select_out_of_stock/generator";
 
 import { cancel_generator } from "./cancel/cancel/generator";
-import { cancel_return_request_generator } from "./cancel/cancel_return_request/generator";
 import { on_cancel_generator } from "./on_cancel/on_cancel/generator";
 import { on_cancel_rto_generator } from "./on_cancel/on_cancel_rto/generator";
-import { on_cancel_return_request_generator } from "./on_cancel/on_cancel_return_request/generator";
 import { on_status_rto_delivereddisposed_generator } from "./on_status/on_status_rto_delivereddisposed/generator";
 import { on_update_part_cancel_generator } from "./on_update/on_update_part_cancel/generator";
 
@@ -92,10 +90,6 @@ export async function Generator(
         existingPayload,
         sessionData
       );
-    case "cancel_return_request":
-      return cancel_return_request_generator(existingPayload, sessionData);
-    case "on_cancel_return_request":
-      return on_cancel_return_request_generator(existingPayload, sessionData);
     default:
       console.log(action_id);
       throw new Error("Invalid action id found! ");
