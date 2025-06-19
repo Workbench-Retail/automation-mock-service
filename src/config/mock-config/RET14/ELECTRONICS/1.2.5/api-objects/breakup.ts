@@ -1,5 +1,5 @@
 import { SessionData } from "../../../session-types";
-import { RET12FASHION125Catalog } from "../on_search/on_search/catalog";
+import { RET14ELECTRONICS125Catalog } from "../on_search/on_search/catalog";
 import { Fulfillments } from "./fulfillments";
 
 const breakupItem = {
@@ -62,7 +62,7 @@ export function createQuote(
   let totalQuantity = 0;
   let itemSet = new Set<string>();
   const breakupObject = [];
-  const catalogItems = RET12FASHION125Catalog.catalog[
+  const catalogItems = RET14ELECTRONICS125Catalog.catalog[
     "bpp/providers"
   ][0].items.filter((i: any) => {
     console.log("Catalog Item: ", i.id);
