@@ -977,6 +977,7 @@ export function createFulfillments(
                   timestamp: new Date().toISOString(),
                 },
               },
+              tags: tags.tags,
             };
           }
           return f;
@@ -984,6 +985,23 @@ export function createFulfillments(
         break;
       case "on_status_out_for_delivery":
         state = "Out-for-delivery";
+        finalFulfillments = finalFulfillments.map((f) => {
+          if (f.type === "Delivery") {
+            return {
+              ...f,
+              start: {
+                ...f.start,
+                time: {
+                  ...f.start?.time,
+                  timestamp: new Date().toISOString(),
+                }
+              },
+               tags: tags.tags,
+            };
+          }
+          return f;
+        });
+        console.log('Final Fulfillments: ', JSON.stringify(finalFulfillments));
         break;
       case "on_status_order_delivered":
         state = "Order-delivered";
@@ -998,6 +1016,7 @@ export function createFulfillments(
                   timestamp: new Date().toISOString(),
                 },
               },
+              tags: tags.tags,
             };
           }
           return f;

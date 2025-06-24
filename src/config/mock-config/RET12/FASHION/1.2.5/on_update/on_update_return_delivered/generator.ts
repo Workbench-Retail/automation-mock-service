@@ -15,7 +15,7 @@ export async function on_update_return_delivered_generator(
     existingPayload.message.order.payment["@ondc/org/settlement_details"].push(
       sessionData.update_payment[0][0]
     );
-    sessionData.update_payment = null;
+    sessionData.update_payment = null
   }
 
   existingPayload.message.order.created_at = sessionData.order_created_at;

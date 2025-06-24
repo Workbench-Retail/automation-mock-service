@@ -8,6 +8,7 @@ export async function on_status_packed_generator(
 	sessionData: SessionData
 ) {
 	const generalPayload = createGenericOnStatus(existingPayload, sessionData);
+	generalPayload.message.order.fulfillments
 	generalPayload.message.order.fulfillments = createFulfillments(
 		"on_status",
 		"on_status_packed",
