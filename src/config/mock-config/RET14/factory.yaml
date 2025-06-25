@@ -179,3 +179,38 @@ codes:
     action_id: on_cancel_return_request
     action: on_cancel
     message_id: false
+  - code: 178
+    default: ELECTRONICS/1.2.5/on_init/on_init_snp/default.yaml
+    action_id: on_init_snp
+    action: on_init
+    message_id: false
+  - code: 179
+    default: ELECTRONICS/1.2.5/on_init/on_init_snp_unsolicited/default.yaml
+    action_id: on_init_snp_unsolicited
+    action: on_init
+    message_id: true
+  - code: 180
+    default: ELECTRONICS/1.2.5/confirm/confirm_snp/default.yaml
+    action_id: confirm_snp
+    action: confirm
+    message_id: false
+  - code: 181
+    default: ELECTRONICS/1.2.5/init/init_fin/default.yaml
+    action_id: init_fin
+    action: on_init
+    message_id: false
+  - code: 181
+    default: ELECTRONICS/1.2.5/on_init/on_init_fin/default.yaml
+    action_id: on_init_fin
+    action: on_init
+    message_id: false
+  - code: 182
+    default: ELECTRONICS/1.2.5/confirm/confirm_fin/default.yaml
+    action_id: confirm_fin
+    action: confirm
+    message_id: false
+  - code: 183
+    default: ELECTRONICS/1.2.5/on_status/on_status_picked_fin/default.yaml
+    action_id: on_status_picked_fin
+    action: on_status
+    message_id: true

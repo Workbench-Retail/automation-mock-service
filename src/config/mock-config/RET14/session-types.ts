@@ -21,6 +21,7 @@ export type SessionData = {
   billing: any | undefined;
   items: any | undefined;
   quote: any | undefined;
+  order_tags: any;
   order_id: string | undefined;
   payment: any | undefined;
   update_payment: any;
@@ -36,7 +37,7 @@ export type SessionData = {
   order_created_at?: any;
   last_updated_at?: string;
   bap_terms?: any;
-  // order 
+  // order
   replacementId?: string;
   selected_item_id: string;
   end: any[];

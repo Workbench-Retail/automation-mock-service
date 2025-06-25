@@ -28,6 +28,7 @@ session_data:
   cancellation: null
   cancellation_return_reason_id: null
   np_type: null
+  order_tags: []
   out_of_stock_item_ids: []
   on_status_fulfillments: []
   on_select_fulfillments: []

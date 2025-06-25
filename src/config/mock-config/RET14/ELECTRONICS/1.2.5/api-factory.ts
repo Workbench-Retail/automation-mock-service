@@ -28,6 +28,14 @@ import { on_status_rto_delivereddisposed_generator } from "./on_status/on_status
 import { on_update_part_cancel_generator } from "./on_update/on_update_part_cancel/generator";
 
 import { update_partial_cancel_settlement_generator } from "./update/update_partial_cancel_settlement/generator";
+import { on_init_snp_generator } from "./on_init/on_init_snp/generator";
+import { on_init_snp_unsolicited_generator } from "./on_init/on_init_snp_unsolicited/generator";
+import { confirm_snp_generator } from "./confirm/confirm_snp/generator";
+import { on_init_fin_generator } from "./on_init/on_init_fin/generator";
+import { confirm_fin_generator } from "./confirm/confirm_fin/generator";
+import { on_status_picked_fin_generator } from "./on_status/on_status_picked_fin/generator";
+import { init_fin_generator } from "./init/init _fin/generator";
+
 export async function Generator(
   action_id: string,
   existingPayload: any,
@@ -90,6 +98,20 @@ export async function Generator(
         existingPayload,
         sessionData
       );
+    case "on_init_snp":
+      return on_init_snp_generator(existingPayload, sessionData);
+    case "on_init_snp_unsolicited":
+      return on_init_snp_unsolicited_generator(existingPayload, sessionData);
+    case "confirm_snp":
+      return confirm_snp_generator(existingPayload, sessionData);
+    case "init_fin":
+      return init_fin_generator(existingPayload, sessionData);
+    case "on_init_fin":
+      return on_init_fin_generator(existingPayload, sessionData);
+    case "confirm_fin":
+      return confirm_fin_generator(existingPayload, sessionData);
+    case "on_status_picked_fin":
+      return on_status_picked_fin_generator(existingPayload, sessionData);
     default:
       console.log(action_id);
       throw new Error("Invalid action id found! ");
