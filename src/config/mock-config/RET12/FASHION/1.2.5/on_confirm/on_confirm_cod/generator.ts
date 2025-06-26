@@ -29,5 +29,7 @@ export async function on_confirm_cod_generator(
 	if (bapTerms) {
 		bapTerms.list = sessionData.bap_terms.list;
 	}
+	existingPayload.message.order.updated_at = existingPayload.context.timestamp;
+	existingPayload.message.order.tags = sessionData.order_tags;
 	return existingPayload;
 }

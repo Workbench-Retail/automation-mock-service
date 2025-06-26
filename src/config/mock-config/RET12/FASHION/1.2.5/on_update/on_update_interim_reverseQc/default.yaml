@@ -35,13 +35,13 @@ order:
         descriptor:
           code: Order-delivered
       type: Delivery
-      tracking: false
+      tracking: true
       start:
         location:
           id: L1
           descriptor:
             name: Seller Business
-          gps: 12.92580970146639,77.58362409712942
+          gps: 19.129076,72.825803
           address:
             locality: Jayanagar
             city: Bengaluru
@@ -62,15 +62,15 @@ order:
           email: nobody@nomail.com
           phone: "9898989898"
         location:
-          gps: 12.966545,77.592074
+          gps: 18.951923,72.841267
           address:
-            name: my house or door or floor
-            building: my building name or house
+            name: mock-house-name
+            building: mock-building
             locality: my street name
-            city: Bengaluru
-            state: Karnataka
+            city: mock-city
+            state: mock-state
             country: IND
-            area_code: "560027"
+            area_code: "400001"
         time:
           range:
             start: "2024-08-11T12:39:03.396Z"

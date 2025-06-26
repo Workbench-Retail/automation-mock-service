@@ -10,14 +10,19 @@ export async function confirm_cod_generator(
 ) {
 	const timeIso = new Date().toISOString();
 	existingPayload.message.order.id = generateSixDigitCode();
-	existingPayload.message.order.created_at = timeIso;
-	existingPayload.message.order.updated_at = timeIso;
+	existingPayload.message.order.created_at = existingPayload.context.timestamp;
+	existingPayload.message.order.updated_at = existingPayload.context.timestamp;
 existingPayload.message.order.quote = removeItemQuantitiesFromQuote(sessionData.quote);
 	existingPayload.message.order.billing = getUpdatedBilling(
 		sessionData.billing
 	);
 	existingPayload.message.order.items = sessionData.items;
 	existingPayload.message.order.provider = sessionData.provider;
+	
+	existingPayload.message.order.payment = {
+		...existingPayload.message.order.payment,
+		...sessionData.payment,
+	}
 	existingPayload.message.order.payment.params.amount =
 		sessionData.quote?.price?.value;
 	existingPayload.message.order.fulfillments = createFulfillments(

@@ -39,5 +39,6 @@ export async function on_confirm_seller_cred_generator(
             type: "GI"
         }
     });
+    existingPayload.message.order.updated_at = existingPayload.context.timestamp;
     return existingPayload;
 }

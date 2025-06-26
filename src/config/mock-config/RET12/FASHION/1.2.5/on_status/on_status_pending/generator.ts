@@ -7,6 +7,7 @@ export async function on_status_pending_generator(
   existingPayload: any,
   sessionData: SessionData
 ) {
+  console.log("object 1", JSON.stringify(sessionData.items));
   const generalPayload = createGenericOnStatus(existingPayload, sessionData);
   generalPayload.message.order.fulfillments = createFulfillments(
     "on_status",

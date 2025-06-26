@@ -3,6 +3,7 @@ session_data:
   message_id: null
   city: null
   inc_mode: null
+  order_tags: []
   selected_items: []
   selected_fulfillments: []
   items: []

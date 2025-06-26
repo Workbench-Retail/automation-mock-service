@@ -12,6 +12,7 @@ export type SessionData = {
   error_code: string | undefined;
   error_message: string | undefined;
   order: any | undefined;
+  order_tags: any;
   user_inputs: Input | undefined;
   inc_mode: string | undefined;
   selected_items: any | undefined;

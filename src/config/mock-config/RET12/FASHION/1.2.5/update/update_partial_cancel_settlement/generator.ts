@@ -16,6 +16,9 @@ export async function update_partial_cancel_settlement_generator(
 ) {
 	existingPayload.message.order.id = sessionData.order_id;
 	const fulfillments = sessionData.fulfillments as Fulfillments;
+
+	console.log("object 2",  JSON.stringify(sessionData.items));
+
 	existingPayload.message.order.fulfillments = [];
 	const cancelId =
 		fulfillments.filter((f) => f.type === "Cancel")[0]?.id || undefined;
