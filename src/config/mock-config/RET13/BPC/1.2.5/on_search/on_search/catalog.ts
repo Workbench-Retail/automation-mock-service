@@ -112,20 +112,22 @@ export const RET13BPC125Catalog = {
             },
             parent_item_id: "V1",
             descriptor: {
-              name: "Butterfly Beautiful 12 Gold Necklace",
+              name: "AHA PHA BHA 32%",
+              code: "1:8809326333661",
               symbol: "https://sellerNP.com/images/i1.png",
-              short_desc:
-                "18KT Butterfly Beautiful 12 Gold Necklace Pendant with gold finishing",
-              long_desc:
-                "This is 18KT Butterfly Beautiful 12 Gold Necklace Pendant with gold finishing",
-              images: ["https://sellerNP.com/images/i1.png"],
-              code: "4:7113",
+              short_desc: "Weekend Exfoliating Facial",
+              long_desc: "A powerful peeling trio of 25% AHA, 5% PHA & 2% BHA that provides multi-level exfoliation, both on the surface & inside the pores, giving you a healthy, plump, and glowing skin.Fragrance free. Non-comedogenic 30ml",
+              images: [
+                "https://sellerNP.com/images/i1.png",
+                "https://sellerNP.com/images/i1.png",
+                "https://sellerNP.com/images/i1.png"
+              ]
             },
             quantity: {
               unitized: {
                 measure: {
-                  unit: "unit",
-                  value: "1",
+                  unit: "milileter",
+                  value: "30",
                 },
               },
               available: {
@@ -140,24 +142,22 @@ export const RET13BPC125Catalog = {
               value: "2260",
               maximum_value: "2260",
             },
-            category_id: "Necklaces",
-            location_id: "L1",
-            fulfillment_id: "F1",
+            category_id: "Skin Care - Face Cleansers",
             "@ondc/org/returnable": true,
             "@ondc/org/cancellable": true,
-            "@ondc/org/available_on_cod": false,
-            "@ondc/org/time_to_ship": "P2D",
-            "@ondc/org/seller_pickup_return": true,
             "@ondc/org/return_window": "P7D",
-            "@ondc/org/contact_details_consumer_care":
-              "Seller Business,test@gmail.com,9876543210",
+            "@ondc/org/seller_pickup_return": false,
+            "@ondc/org/time_to_ship": "PT5M",
+            "@ondc/org/available_on_cod": true,
+            "@ondc/org/contact_details_consumer_care": "Minimalist Customer Care,help@beminimalist.co,9772346555",
+            location_id: "L1",
+            fulfillment_id: "F1",
             "@ondc/org/statutory_reqs_packaged_commodities": {
               manufacturer_or_packer_name: "Seller Business",
               manufacturer_or_packer_address:
                 "Seller Building Address, Jayanagar, Bengaluru, Karnataka, India - 560011",
-              common_or_generic_name_of_commodity:
-                "Butterfly Beautiful 12 Gold Necklace",
-              month_year_of_manufacture_packing_import: "NA",
+              common_or_generic_name_of_commodity: "AHAs (Alpha Hydroxy Acids) and BHAs (Beta Hydroxy Acids) and PHA (Polyhydroxy Acid)",
+              month_year_of_manufacture_packing_import: "03/2024"
             },
             tags: [
               {
@@ -173,33 +173,9 @@ export const RET13BPC125Catalog = {
                 code: "attribute",
                 list: [
                   {
-                    code: "colour_name",
-                    value: "gold",
-                  },
-                  {
-                    code: "gender",
-                    value: "female",
-                  },
-                  {
-                    code: "colour",
-                    value: "#C0C0C0",
-                  },
-                  {
-                    code: "base_metal",
-                    value: "silver",
-                  },
-                  {
-                    code: "plating",
-                    value: "gold",
-                  },
-                  {
-                    code: "size",
-                    value: "5",
-                  },
-                  {
                     code: "brand",
-                    value: "jewellery brand",
-                  },
+                    value: "Minimalist"
+                  }
                 ],
               },
             ],
@@ -212,19 +188,18 @@ export const RET13BPC125Catalog = {
             },
             parent_item_id: "V1",
             descriptor: {
-              name: "Butterfly Necklace 2nd",
+              name: "Marula Oil 05% Moisturizer",
+              code: "1:8906128100436",
               symbol: "https://sellerNP.com/images/i1.png",
-              short_desc: "18KT Butterfly Necklace Pendant with gold finishing",
-              long_desc:
-                "This is 18KT Butterfly Necklace Pendant with gold finishing",
+              short_desc: "Deep & Intense Moisturization. Treats Dryness, Roughness and Flakiness",
+              long_desc: "An everyday moisturizing cream with 5% Marula Oil, paired with Vitamin F and Vitamin E to nourish, moisturize and improve skin softness. It's a heavy cream, suitable for dry/damaged to normal skin types.Fragrance free    Non-comedogenic     50g",
               images: ["https://sellerNP.com/images/i1.png"],
-              code: "4:7113",
             },
             quantity: {
               unitized: {
                 measure: {
-                  unit: "unit",
-                  value: "1",
+                  unit: "gram",
+                  value: "50",
                 },
               },
               available: {
@@ -239,23 +214,26 @@ export const RET13BPC125Catalog = {
               value: "2360",
               maximum_value: "2360",
             },
-            category_id: "Necklaces",
-            location_id: "L1",
-            fulfillment_id: "F1",
+
+            category_id: "Skin Care - Lotions, Moisturisers, and Creams",
             "@ondc/org/returnable": true,
             "@ondc/org/cancellable": true,
-            "@ondc/org/available_on_cod": false,
-            "@ondc/org/time_to_ship": "P2D",
-            "@ondc/org/seller_pickup_return": true,
             "@ondc/org/return_window": "P7D",
+            "@ondc/org/seller_pickup_return": false,
+            "@ondc/org/time_to_ship": "PT5M",
+            "@ondc/org/available_on_cod": true,
+
+
+            location_id: "L1",
+            fulfillment_id: "F1",
             "@ondc/org/contact_details_consumer_care":
               "Seller Business,test@gmail.com,9876543210",
             "@ondc/org/statutory_reqs_packaged_commodities": {
               manufacturer_or_packer_name: "Seller Business",
               manufacturer_or_packer_address:
                 "Seller Building Address, Jayanagar, Bengaluru, Karnataka, India - 560011",
-              common_or_generic_name_of_commodity: "Butterfly Necklace 2nd",
-              month_year_of_manufacture_packing_import: "NA",
+              common_or_generic_name_of_commodity: "Marula Oil",
+              month_year_of_manufacture_packing_import: "03/2024"
             },
             tags: [
               {
@@ -270,33 +248,10 @@ export const RET13BPC125Catalog = {
               {
                 code: "attribute",
                 list: [
-                  {
-                    code: "colour_name",
-                    value: "gold",
-                  },
-                  {
-                    code: "gender",
-                    value: "female",
-                  },
-                  {
-                    code: "colour",
-                    value: "#C0C0C0",
-                  },
-                  {
-                    code: "base_metal",
-                    value: "silver",
-                  },
-                  {
-                    code: "plating",
-                    value: "silver",
-                  },
-                  {
-                    code: "size",
-                    value: "5",
-                  },
+
                   {
                     code: "brand",
-                    value: "jewellery brand",
+                    value: "Minamilist",
                   },
                 ],
               },
@@ -305,13 +260,11 @@ export const RET13BPC125Catalog = {
           {
             id: "I3",
             descriptor: {
-              name: "Sleeping Rabbit Printed Oversized T-shirt for Men - black/S",
-              code: "4:61091000",
+              name: "Niacinamide 05%",
+              code: "1:8906128100108",
               symbol: "https://sellerNP.com/images/i1.png",
-              short_desc:
-                "Hey! How you doin? I'm your latest favorite Printed Oversized T-shirt. I have been made using cotton poly so you can feel at ease with my soft & stretchable nature. My bold prints on the back are sure to enhance your style and match your cool vibe. Breathability & moisture absorbency are two of my b",
-              long_desc:
-                "Hey! How you doin? I'm your latest favorite Printed Oversized T-shirt. I have been made using cotton poly so you can feel at ease with my soft & stretchable nature. My bold prints on the back are sure to enhance your style and match your cool vibe. Breathability & moisture absorbency are two of my best features, hence, you can rely on me to keep you feeling comfy & dry at all times. So when are we meeting",
+              short_desc: "Hydrates, Repairs & Soothes Skin",
+              long_desc: "A nourishing & hydrating daily serum that repairs damaged barrier & soothes sensitive skin. Ideal for people with dry, sensitive skin & those who find Niacinamide 10% a little strong.Fragrance free    Non-comedogenic 30ml",
               images: ["https://sellerNP.com/images/i1.png"],
             },
             price: {
@@ -319,15 +272,26 @@ export const RET13BPC125Catalog = {
               value: "499.00",
               maximum_value: "1199.00",
             },
-            category_id: "T Shirts",
-            fulfillment_id: "F1",
-            location_id: "L1",
+            "category_id": "Skin Care - Lotions, Moisturisers, and Creams",
+            "fulfillment_id": "1",
+            "location_id": "1",
+            "@ondc/org/returnable": true,
+            "@ondc/org/cancellable": true,
+            "@ondc/org/return_window": "P7D",
+            "@ondc/org/seller_pickup_return": false,
+            "@ondc/org/time_to_ship": "PT5M",
+            "@ondc/org/available_on_cod": true,
+            "@ondc/org/contact_details_consumer_care": "Minimalist Customer Care,support@gmail.com,2343453434",
+            "@ondc/org/statutory_reqs_packaged_commodities": {
+              "manufacturer_or_packer_name": "Minimalist",
+              "manufacturer_or_packer_address": "Seller Building Address, Jayanagar, Bengaluru, Karnataka, India - 560011",
+              "common_or_generic_name_of_commodity": "Niacinamide",
+              "month_year_of_manufacture_packing_import": "03/2024"
+            },
             time: {
               label: "enable",
               timestamp: "2024-08-12T10:27:48.913Z",
             },
-            related: true,
-            recommended: true,
             quantity: {
               available: {
                 count: "99",
@@ -342,22 +306,6 @@ export const RET13BPC125Catalog = {
                 },
               },
             },
-            "@ondc/org/returnable": true,
-            "@ondc/org/seller_pickup_return": false,
-            "@ondc/org/return_window": "P3D",
-            "@ondc/org/cancellable": true,
-            "@ondc/org/time_to_ship": "P1D",
-            "@ondc/org/available_on_cod": false,
-            "@ondc/org/contact_details_consumer_care":
-              "Dailywear Fashion,support@gmail.com,2343453434",
-            "@ondc/org/statutory_reqs_packaged_commodities": {
-              manufacturer_or_packer_name:
-                "Sleeping Rabbit Printed Oversized T-shirt for Men",
-              manufacturer_or_packer_address: "india",
-              common_or_generic_name_of_commodity:
-                "Sleeping Rabbit Printed Oversized T-shirt for Men",
-              month_year_of_manufacture_packing_import: "NA",
-            },
             tags: [
               {
                 code: "origin",
@@ -372,33 +320,8 @@ export const RET13BPC125Catalog = {
                 code: "attribute",
                 list: [
                   {
-                    code: "gender",
-                    value: "male",
-                  },
-                  {
-                    code: "colour",
-                    value: "#000000",
-                  },
-                  {
-                    code: "size",
-                    value: "S",
-                  },
-                  {
                     code: "brand",
-                    value: "beyoung",
-                  },
-                  {
-                    code: "size_chart",
-                    value:
-                      "https://bodyandsoul.mu/media/size_chart/menwebcom.jpg",
-                  },
-                  {
-                    code: "fabric",
-                    value: "cotton",
-                  },
-                  {
-                    code: "colour_name",
-                    value: "black",
+                    value: "Minimalist",
                   },
                 ],
               },
@@ -461,8 +384,8 @@ export const RET13BPC125Catalog = {
                 value: "L1",
               },
               {
-                category: "Necklaces",
-                value: "",
+                code: "category",
+                value: "Skin Care - Lotions, Moisturisers, and Creams"
               },
               {
                 code: "type",
@@ -487,7 +410,7 @@ export const RET13BPC125Catalog = {
               },
               {
                 code: "category",
-                value: "T Shirts",
+                value: "Skin Care - Face Cleansers"
               },
               {
                 code: "type",
@@ -520,7 +443,7 @@ export const RET13BPC125Catalog = {
               },
               {
                 code: "day_to",
-                value: "5",
+                value: "6",
               },
               {
                 code: "time_from",
