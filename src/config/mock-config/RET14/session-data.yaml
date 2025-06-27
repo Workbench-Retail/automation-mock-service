@@ -19,6 +19,7 @@ session_data:
   mock_type: null
   domain: null
   on_search_items: []
+  order_items: []
   select_fulfillment: []
   confirm_created_at_timestamp: null
   on_confirm_updated_at_timestamp: null

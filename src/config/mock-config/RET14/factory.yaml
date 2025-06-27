@@ -197,7 +197,7 @@ codes:
   - code: 181
     default: ELECTRONICS/1.2.5/init/init_fin/default.yaml
     action_id: init_fin
-    action: on_init
+    action: init
     message_id: false
   - code: 181
     default: ELECTRONICS/1.2.5/on_init/on_init_fin/default.yaml
@@ -210,7 +210,37 @@ codes:
     action: confirm
     message_id: false
   - code: 183
+    default: ELECTRONICS/1.2.5/on_confirm/on_confirm_fin/default.yaml
+    action_id: on_confirm_fin
+    action: on_confirm
+    message_id: false
+  - code: 184
+    default: ELECTRONICS/1.2.5/on_status/on_status_pending_fin/default.yaml
+    action_id: on_status_pending_fin
+    action: on_status
+    message_id: true
+  - code: 185
+    default: ELECTRONICS/1.2.5/on_status/on_status_packed_fin/default.yaml
+    action_id: on_status_packed_fin
+    action: on_status
+    message_id: true
+  - code: 186
+    default: ELECTRONICS/1.2.5/on_status/on_status_agent_assigned_fin/default.yaml
+    action_id: on_status_agent_assigned_fin
+    action: on_status
+    message_id: true
+  - code: 187
     default: ELECTRONICS/1.2.5/on_status/on_status_picked_fin/default.yaml
     action_id: on_status_picked_fin
+    action: on_status
+    message_id: true
+  - code: 188
+    default: ELECTRONICS/1.2.5/on_status/on_status_out_for_delivery_fin/default.yaml
+    action_id: on_status_out_for_delivery_fin
+    action: on_status
+    message_id: true
+  - code: 189
+    default: ELECTRONICS/1.2.5/on_status/on_status_order_delivered_fin/default.yaml
+    action_id: on_status_order_delivered_fin
     action: on_status
     message_id: true

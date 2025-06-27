@@ -33,8 +33,14 @@ import { on_init_snp_unsolicited_generator } from "./on_init/on_init_snp_unsolic
 import { confirm_snp_generator } from "./confirm/confirm_snp/generator";
 import { on_init_fin_generator } from "./on_init/on_init_fin/generator";
 import { confirm_fin_generator } from "./confirm/confirm_fin/generator";
+import { init_fin_generator } from "./init/init_fin/generator";
+import { on_status_pending_fin_generator } from "./on_status/on_status_pending_fin/generator";
+import { on_status_packed_fin_generator } from "./on_status/on_status_packed_fin/generator";
+import { on_status_agent_assigned_fin_generator } from "./on_status/on_status_agent_assigned_fin/generator";
 import { on_status_picked_fin_generator } from "./on_status/on_status_picked_fin/generator";
-import { init_fin_generator } from "./init/init _fin/generator";
+import { on_status_out_for_delivery_fin_generator } from "./on_status/on_status_out_for_delivery_fin/generator";
+import { on_status_order_delivered_fin_generator } from "./on_status/on_status_order_delivered_fin/generator";
+import { on_confirm_fin_generator } from "./on_confirm/on_confirm_fin/generator";
 
 export async function Generator(
   action_id: string,
@@ -110,8 +116,29 @@ export async function Generator(
       return on_init_fin_generator(existingPayload, sessionData);
     case "confirm_fin":
       return confirm_fin_generator(existingPayload, sessionData);
+    case "on_confirm_fin":
+      return on_confirm_fin_generator(existingPayload, sessionData);
+    case "on_status_pending_fin":
+      return on_status_pending_fin_generator(existingPayload, sessionData);
+    case "on_status_packed_fin":
+      return on_status_packed_fin_generator(existingPayload, sessionData);
+    case "on_status_agent_assigned_fin":
+      return on_status_agent_assigned_fin_generator(
+        existingPayload,
+        sessionData
+      );
     case "on_status_picked_fin":
       return on_status_picked_fin_generator(existingPayload, sessionData);
+    case "on_status_out_for_delivery_fin":
+      return on_status_out_for_delivery_fin_generator(
+        existingPayload,
+        sessionData
+      );
+    case "on_status_order_delivered_fin":
+      return on_status_order_delivered_fin_generator(
+        existingPayload,
+        sessionData
+      );
     default:
       console.log(action_id);
       throw new Error("Invalid action id found! ");

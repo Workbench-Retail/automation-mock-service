@@ -451,43 +451,6 @@ export const RET14ELECTRONICS125Catalog = {
             },
           },
         ],
-        creds: [
-          {
-            id: "gi-12345678",
-            descriptor: {
-              code: "Social Sector",
-              short_desc: "GI",
-            },
-            url: "https://abcd.cdn.com/images/badge-img",
-            tags: [
-              {
-                code: "verification",
-                list: [
-                  {
-                    code: "verify_url",
-                    value: "https://abcd.gi.com/verify?id=gi-12345678'",
-                  },
-                  {
-                    code: "verifier",
-                    value: "CSP-ABC",
-                  },
-                  {
-                    code: "issuer",
-                    value: "Example Authority",
-                  },
-                  {
-                    code: "valid_from",
-                    value: "2023-06-03T00:00:00:000Z",
-                  },
-                  {
-                    code: "valid_to",
-                    value: "2024-06-03T23:59:59:999Z",
-                  },
-                ],
-              },
-            ],
-          },
-        ],
         tags: [
           {
             code: "serviceability",
