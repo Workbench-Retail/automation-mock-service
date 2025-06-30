@@ -33,10 +33,17 @@ export async function on_cancel_generator(
 	existingPayload.message.order.cancellation = {
 		cancelled_by: existingPayload.context.bap_id,
 		reason: {
-			id: sessionData.cancellation_reason_id,
+			id: String(sessionData.cancellation_return_reason_id),
 		},
 	};
 	existingPayload.message.order.quote = sessionData.quote;
+	let totalPrice = 0;
+	existingPayload.message.order.quote.breakup.forEach((b : any) => {
+		totalPrice += parseInt(b?.price?.value)
+	})
+	totalPrice.toFixed(2);
+	
+	existingPayload.message.order.quote.price.value = String(totalPrice);
 	return existingPayload;
 }
 
@@ -61,7 +68,7 @@ function createCancelFulfillments(
 					list: [
 						{
 							code: "reason_id",
-							value: sessionData.cancellation_reason_id,
+							value: String(sessionData.cancellation_return_reason_id),
 						},
 						{
 							code: "initiated_by",
@@ -119,6 +126,7 @@ function createQuoteTrail(quote: Quote) {
 			}
 		}
 	}
+
 
 	return tags;
 }

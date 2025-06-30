@@ -4,3 +4,4 @@ save-data:
   payment: $.message.order.payment
   quote: $.message.order.quote
   order_tags: $.message.order.tags[*]
+  fulfillments: $.message.order.fulfillments[*]

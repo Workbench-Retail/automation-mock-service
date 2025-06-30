@@ -36,9 +36,9 @@ export async function on_select_out_of_stock_generator(
 
     // Set quantity and price to 0
     item["@ondc/org/item_quantity"] = { count: 0 };
-    item.price = { value: "0.00" };
-    item.item.price = { value: "0.00" };
+    item.price = { currency: "INR", value: "0.00" };
 
+    item.item.price = { currency: "INR", value: "0.00" };
     if (item.item?.quantity?.available) {
       item.item.quantity.available.count = "0";
     }
@@ -46,14 +46,12 @@ export async function on_select_out_of_stock_generator(
       item.item.quantity.maximum.count = "0";
     }
 
-    item["@ondc/org/title_type"] = "0";
     if (
       sessionData.out_of_stock_item_ids?.includes(i.id) ||
       i.id === randomOutOfStockItem
     ) {
       item.item.quantity.available.count = "0";
       item.item.quantity.maximum.count = "0";
-      item["@ondc/org/title_type"] = "0";
       out_of_stocks_item_ids.push({ item_id: i.id, error: "40002" });
     }
 

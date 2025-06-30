@@ -13,5 +13,8 @@ export async function on_status_out_for_delivery_generator(
 		sessionData,
 		generalPayload.message.order.fulfillments
 	);
+	generalPayload.message.order.fulfillments[0].start.time.timestamp = existingPayload.context.timestamp;
+
+	generalPayload.message.order.updated_at = existingPayload.context.timestamp;
 	return generalPayload;
 }

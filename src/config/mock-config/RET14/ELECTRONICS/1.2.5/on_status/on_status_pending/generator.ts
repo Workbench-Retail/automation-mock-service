@@ -21,6 +21,7 @@ export async function on_status_pending_generator(
     );
     sessionData.update_payment = null;
   }
+  generalPayload.message.order.updated_at = existingPayload.context.timestamp;
 
   return generalPayload;
 }
