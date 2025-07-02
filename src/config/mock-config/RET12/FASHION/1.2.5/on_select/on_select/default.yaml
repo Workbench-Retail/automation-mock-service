@@ -6,7 +6,7 @@ order:
   fulfillments:
     - id: F1
       type: Delivery
-      "@ondc/org/provider_name": LSP or Provider Name
+      "@ondc/org/provider_name": Seller Business
       tracking: true
       "@ondc/org/category": Standard Delivery
       "@ondc/org/TAT": P3D

@@ -26,7 +26,9 @@ export async function on_search_generator(
 	}
 
 	if (sessionData.bap_features?.includes("017")) {
-
+    const existingTimestamp = new Date(existingPayload.context.timestamp);
+    const newTimestamp = new Date(existingTimestamp.getTime() + 24 * 60 * 60 * 1000); 
+    const toTimestamp = newTimestamp.toISOString();
 		const creds = [
         {
           "id": randomUUID().toString(),
@@ -53,11 +55,11 @@ export async function on_search_generator(
                 },
                 {
                   "code": "valid_from",
-                  "value": "2023-06-03T00:00:00:000Z"
+                  "value": existingPayload.context.timestamp
                 },
                 {
                   "code": "valid_to",
-                  "value": "2024-06-03T23:59:59:999Z"
+                  "value": toTimestamp
                 }
               ]
             }

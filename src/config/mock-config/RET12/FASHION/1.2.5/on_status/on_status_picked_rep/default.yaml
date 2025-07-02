@@ -1,4 +1,3 @@
-
 order:
   provider:
     id: P1
@@ -26,16 +25,16 @@ order:
       city: Bengaluru
       state: Karnataka
       country: IND
-      area_code: '560027'
-    phone: '9898989898'
+      area_code: "560027"
+    phone: "9898989898"
     name: ONDC Buyer
     email: nobody@nomail.com
-    created_at: '2024-08-14T09:10:34.369Z'
-    updated_at: '2024-08-14T09:10:34.369Z'
+    created_at: "2024-08-14T09:10:34.369Z"
+    updated_at: "2024-08-14T09:10:34.369Z"
   fulfillments:
     - id: F1
-      '@ondc/org/provider_name': Seller Business
-      '@ondc/org/TAT': PT72H
+      "@ondc/org/provider_name": Seller Business
+      "@ondc/org/TAT": PT72H
       state:
         descriptor:
           code: Order-picked-up
@@ -45,26 +44,29 @@ order:
         location:
           id: L1
           descriptor:
-            name: Epic Store
-          gps: 28.679701,77.063873
+            name: Seller Business
+          gps: 12.925810,77.583624
           address:
-            locality: Nangloi Extension
-            city: New Delhi
-            area_code: '110041'
-            state: Delhi
+            building: my building name or house
+            city: Bengaluru
+            area_code: "560011"
+            country: IND
+            state: Karnataka
+            locality: my street name
+            name: my house or door or floor
         contact:
           email: test@gmail.com
-          phone: '9876543210'
+          phone: "9876543210"
         time:
           range:
-            start: '2025-01-28T16:21:50.523Z'
-            end: '2025-01-30T16:21:50.523Z'
-          timestamp: '2025-01-28T16:22:03.129Z'
+            start: "2025-01-28T16:21:50.523Z"
+            end: "2025-01-30T16:21:50.523Z"
+          timestamp: "2025-01-28T16:22:03.129Z"
       end:
         person:
           name: your-name
         contact:
-          phone: '9876543210'
+          phone: "9876543210"
         location:
           gps: 28.679077,77.069714
           address:
@@ -74,12 +76,12 @@ order:
             city: Bengaluru
             state: Karnataka
             country: IND
-            area_code: '560027'
+            area_code: "560027"
         time:
           range:
-            start: '2025-01-31T16:21:50.523Z'
-            end: '2025-02-02T16:21:50.523Z'
-          timestamp: '2025-01-28T16:22:19.740Z'
+            start: "2025-01-31T16:21:50.523Z"
+            end: "2025-02-02T16:21:50.523Z"
+          timestamp: "2025-01-28T16:22:19.740Z"
     - state:
         descriptor:
           code: Cancelled
@@ -89,7 +91,7 @@ order:
         - code: cancel_request
           list:
             - code: reason_id
-              value: '002'
+              value: "002"
             - code: initiated_by
               value: your-id
         - code: quote_trail
@@ -101,7 +103,7 @@ order:
             - code: currency
               value: INR
             - code: value
-              value: '-40829.48'
+              value: "-40829.48"
     - id: R1
       type: Return
       state:
@@ -115,21 +117,21 @@ order:
             - code: item_id
               value: I1
             - code: parent_item_id
-              value: ''
+              value: ""
             - code: item_quantity
-              value: '1'
+              value: "1"
             - code: reason_id
-              value: '001'
+              value: "001"
             - code: reason_desc
               value: detailed description for return
             - code: images
-              value: ''
+              value: ""
             - code: ttl_approval
               value: PT24H
             - code: ttl_reverseqc
               value: P3D
             - code: replace
-              value: 'yes'
+              value: "yes"
             - code: initiated_by
               value: yournp.com
         - code: replace_request
@@ -145,7 +147,7 @@ order:
             - code: currency
               value: INR
             - code: value
-              value: '-40829.48'
+              value: "-40829.48"
         - code: quote_trail
           list:
             - code: type
@@ -155,13 +157,13 @@ order:
             - code: currency
               value: INR
             - code: value
-              value: '582.63'
-      '@ondc/org/provider_name': Epic Store
+              value: "582.63"
+      "@ondc/org/provider_name": Seller Business
       start:
         person:
           name: your-name
         contact:
-          phone: '9876543210'
+          phone: "9876543210"
         location:
           gps: 28.679077,77.069714
           address:
@@ -171,30 +173,33 @@ order:
             city: Bengaluru
             state: Karnataka
             country: IND
-            area_code: '560027'
+            area_code: "560027"
           descriptor:
-            name: Epic Store
+            name: Seller Business
         time:
-          timestamp: '2025-01-28T16:23:18.210Z'
+          timestamp: "2025-01-28T16:23:18.210Z"
       end:
         location:
           id: L1
           descriptor:
             name: Seller Business
-          gps: 12.966545,77.592074
+          gps: 12.925810,77.583624
           address:
-            locality: Nangloi Extension
-            city: New Delhi
-            area_code: '110041'
-            state: Delhi
+            building: my building name or house
+            city: Bengaluru
+            area_code: "560011"
+            country: IND
+            state: Karnataka
+            locality: my street name
+            name: my house or door or floor
         contact:
           email: test@gmail.com
-          phone: '9876543210'
+          phone: "9876543210"
         time:
-          timestamp: '2025-01-28T16:23:35.028Z'
+          timestamp: "2025-01-28T16:23:35.028Z"
     - id: FR1
-      '@ondc/org/provider_name': ONDC Buyer
-      '@ondc/org/TAT': P3D
+      "@ondc/org/provider_name": Seller Business
+      "@ondc/org/TAT": P3D
       state:
         descriptor:
           code: Pending
@@ -204,26 +209,29 @@ order:
         location:
           id: L1
           descriptor:
-            name: Epic Store
-          gps: 28.679701,77.063873
+            name: Seller Business
+          gps: 12.925810,77.583624
           address:
-            locality: Nangloi Extension
-            city: New Delhi
-            area_code: '110041'
-            state: Delhi
+            building: my building name or house
+            city: Bengaluru
+            area_code: "560011"
+            country: IND
+            state: Karnataka
+            locality: my street name
+            name: my house or door or floor
         contact:
           email: test@gmail.com
-          phone: '9876543210'
+          phone: "9876543210"
         time:
           range:
-            start: '2025-01-28T17:21:50.523Z'
-            end: '2025-01-30T17:21:50.523Z'
-          timestamp: '2025-01-28T19:22:51.523Z'
+            start: "2025-01-28T17:21:50.523Z"
+            end: "2025-01-30T17:21:50.523Z"
+          timestamp: "2025-01-28T19:22:51.523Z"
       end:
         person:
           name: your-name
         contact:
-          phone: '9876543210'
+          phone: "9876543210"
         location:
           gps: 28.679077,77.069714
           address:
@@ -233,53 +241,53 @@ order:
             city: Bengaluru
             state: Karnataka
             country: IND
-            area_code: '560027'
+            area_code: "560027"
         time:
           range:
-            start: '2024-08-11T12:39:03.396Z'
-            end: '2024-08-13T12:39:03.396Z'
+            start: "2024-08-11T12:39:03.396Z"
+            end: "2024-08-13T12:39:03.396Z"
   quote:
     price:
       currency: INR
-      value: '582.63'
+      value: "582.63"
     breakup:
-      - '@ondc/org/item_id': I1
-        '@ondc/org/item_quantity':
+      - "@ondc/org/item_id": I1
+        "@ondc/org/item_quantity":
           count: 0
         title: Golden Ring by saad
-        '@ondc/org/title_type': item
+        "@ondc/org/title_type": item
         price:
           currency: INR
-          value: '0.00'
+          value: "0.00"
         item:
           price:
             currency: INR
-            value: '40829.48'
-      - '@ondc/org/item_id': F1
+            value: "40829.48"
+      - "@ondc/org/item_id": F1
         title: Delivery charges
-        '@ondc/org/title_type': delivery
+        "@ondc/org/title_type": delivery
         price:
           currency: INR
-          value: '0.00'
-      - '@ondc/org/item_id': R1
+          value: "0.00"
+      - "@ondc/org/item_id": R1
         title: Delivery charges
-        '@ondc/org/title_type': delivery
+        "@ondc/org/title_type": delivery
         price:
           currency: INR
-          value: '582.63'
+          value: "582.63"
     ttl: P1D
   payment:
     uri: https://razorpay.com/
     params:
-      amount: '81658.96'
+      amount: "81658.96"
       currency: INR
       transaction_id: order_PovTljcF6RLpBs
     status: PAID
     type: ON-ORDER
     collected_by: BAP
-    '@ondc/org/buyer_app_finder_fee_type': percent
-    '@ondc/org/buyer_app_finder_fee_amount': '3.0'
-    '@ondc/org/settlement_details':
+    "@ondc/org/buyer_app_finder_fee_type": percent
+    "@ondc/org/buyer_app_finder_fee_amount": "3.0"
+    "@ondc/org/settlement_details":
       - settlement_counterparty: seller-app
         settlement_phase: sale-amount
         settlement_type: neft
@@ -292,11 +300,11 @@ order:
       - settlement_counterparty: buyer
         settlement_phase: refund
         settlement_type: upi
-        settlement_amount: '40829.48'
-        settlement_timestamp: '2025-01-28T16:21:40.763Z'
+        settlement_amount: "40829.48"
+        settlement_timestamp: "2025-01-28T16:21:40.763Z"
   id: 2025-01-28-470338
-  created_at: '2025-01-28T16:17:08.546Z'
-  updated_at: '2025-01-28T19:22:51.523Z'
+  created_at: "2025-01-28T16:17:08.546Z"
+  updated_at: "2025-01-28T19:22:51.523Z"
   documents:
     - url: https://invoice_url
       label: Invoice

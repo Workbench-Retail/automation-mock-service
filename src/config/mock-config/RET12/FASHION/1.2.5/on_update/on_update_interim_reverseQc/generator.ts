@@ -43,7 +43,7 @@ export async function on_update_interim_reverseQc_generator(
               code: "Return_Initiated",
             },
           },
-          "@ondc/org/provider_name": "mock_lsp_provider",
+          "@ondc/org/provider_name": "Seller Business",
         };
       }
     });
