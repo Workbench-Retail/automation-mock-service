@@ -45,12 +45,15 @@ order:
           id: L1
           descriptor:
             name: Seller Business
-          gps: 28.679701,77.063873
+          gps: 12.925810,77.583624
           address:
-            locality: Nangloi Extension
-            city: New Delhi
-            area_code: "110041"
-            state: Delhi
+            building: my building name or house
+            city: Bengaluru
+            area_code: "560011"
+            country: IND
+            state: Karnataka
+            locality: my street name
+            name: my house or door or floor
         contact:
           email: test@gmail.com
           phone: "9876543210"
@@ -180,12 +183,15 @@ order:
           id: L1
           descriptor:
             name: Seller Business
-          gps: 12.966545,77.592074
+          gps: 12.925810,77.583624
           address:
-            locality: Nangloi Extension
-            city: New Delhi
-            area_code: "110041"
-            state: Delhi
+            building: my building name or house
+            city: Bengaluru
+            area_code: "560011"
+            country: IND
+            state: Karnataka
+            locality: my street name
+            name: my house or door or floor
         contact:
           email: test@gmail.com
           phone: "9876543210"
@@ -204,12 +210,15 @@ order:
           id: L1
           descriptor:
             name: Seller Business
-          gps: 28.679701,77.063873
+          gps: 12.925810,77.583624
           address:
-            locality: Nangloi Extension
-            city: New Delhi
-            area_code: "110041"
-            state: Delhi
+            building: my building name or house
+            city: Bengaluru
+            area_code: "560011"
+            country: IND
+            state: Karnataka
+            locality: my street name
+            name: my house or door or floor
         contact:
           email: test@gmail.com
           phone: "9876543210"
