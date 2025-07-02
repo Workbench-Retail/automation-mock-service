@@ -856,7 +856,7 @@ export function createFulfillments(
             },
           },
           "@ondc/org/TAT": selected["@ondc/org/TAT"],
-          "@ondc/org/provider_name": `mock_provider_name_${index}`,
+          "@ondc/org/provider_name": `Seller Business`,
           start: {
             location: {
               id: "L1",

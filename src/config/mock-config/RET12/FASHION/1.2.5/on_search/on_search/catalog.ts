@@ -65,7 +65,7 @@ export const RET12FASHION125Catalog = {
           },
         ],
         descriptor: {
-          name: "Store 1",
+          name: "Seller Business",
           symbol: "https://sellerNP.com/images/store1.png",
           short_desc: "Store 1",
           long_desc: "Store 1",
