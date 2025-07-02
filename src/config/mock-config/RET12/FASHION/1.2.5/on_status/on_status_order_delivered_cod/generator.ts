@@ -26,7 +26,8 @@ export async function on_status_order_delivered_cod_generator(
 		status: "PAID",
 
 	};
-
+	generalPayload.message.order.fulfillments[0].end.time.timestamp = existingPayload.context.timestamp;
+	generalPayload.message.order.updated_at = existingPayload.context.timestamp;
 	return generalPayload;
 }
 

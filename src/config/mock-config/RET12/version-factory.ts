@@ -20,6 +20,9 @@ export async function createMockResponse(
   console.log("version", version, "usecaseId", usecaseId);
   if (usecaseId === "FASHION") {
     if (version === "1.2.5") {
+      console.log('Acvtion ID:', action_id);
+      console.log('SessionData:');
+      console.dir(sessionData, { depth: null, colors: true });
       payload = await createMockResponseRET12_125(action_id, sessionData);
       console.log(
         'Payload created for action ID:',

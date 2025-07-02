@@ -37,6 +37,13 @@ export async function on_cancel_generator(
 		},
 	};
 	existingPayload.message.order.quote = sessionData.quote;
+	let totalPrice = 0;
+	existingPayload.message.order.quote.breakup.forEach((b : any) => {
+		totalPrice += parseInt(b?.price?.value)
+	})
+	totalPrice.toFixed(2);
+	
+	existingPayload.message.order.quote.price.value = String(totalPrice);
 	return existingPayload;
 }
 

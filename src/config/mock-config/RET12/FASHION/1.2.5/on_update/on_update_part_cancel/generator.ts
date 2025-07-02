@@ -76,7 +76,7 @@ export async function on_update_part_cancel_generator(
   sessionData.items.push(copyItem);
 
   // Update original item's quantity (reduce by 1)
-  cancelItem.quantity.count -= 1;
+  cancelItem.quantity.count = Math.max(cancelItem.quantity.count - 1, 0) ;
   existingPayload.message.order.items = sessionData.items;
 
   // Update cancelFulfillment tags
@@ -112,6 +112,6 @@ export async function on_update_part_cancel_generator(
     existingPayload,
     fulfillments
   );
-
+  existingPayload.message.order.updated_at = existingPayload.context.timestamp;
   return existingPayload;
 }

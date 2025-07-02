@@ -1,4 +1,5 @@
 
+import { queryObjects } from "v8";
 import { SessionData } from "../../../../session-types";
 import { getRandomItem } from "../../api-objects/utils";
 import { RET12FASHION125Catalog } from "../../on_search/on_search/catalog";
@@ -37,8 +38,8 @@ export async function on_select_out_of_stock_generator(
 
     // Set quantity and price to 0
     item["@ondc/org/item_quantity"] = { count: 0 };
-    item.price = { value: "0.00" };
-    item.item.price = { value: "0.00" };
+    item.price = { currency: "INR", value: "0.00" };
+    item.item.price = { currency: "INR", value: "0.00" };
 
     if (item.item?.quantity?.available) {
         item.item.quantity.available.count = "0";
@@ -47,14 +48,13 @@ export async function on_select_out_of_stock_generator(
         item.item.quantity.maximum.count = "0";
     }
 
-    item["@ondc/org/title_type"] = "0";
+
       if (
         sessionData.out_of_stock_item_ids?.includes(i.id) ||
         i.id === randomOutOfStockItem
     ) {
         item.item.quantity.available.count = "0";
         item.item.quantity.maximum.count = "0";
-        item["@ondc/org/title_type"] = "0";
         out_of_stocks_item_ids.push({item_id: i.id, error: "40002"});
     }
 
@@ -66,8 +66,9 @@ export async function on_select_out_of_stock_generator(
             code: "40002",
             message: JSON.stringify(out_of_stocks_item_ids),
   };
-
+  console.log('Breakup Object: 1213', JSON.stringify(breakupObject));
     existingPayload.message.order.quote.breakup = breakupObject;
     existingPayload.message.order.quote.price.value = `${totalPrice.toFixed(2)}`;
+
     return existingPayload;
 }

@@ -63,6 +63,7 @@ const rtoFulfillment = {
 					value: "839cb128-34bd-444d-9ffc-05903e62b35a",
 				},
 				{
+					
 					code: "currency",
 					value: "INR",
 				},
@@ -76,51 +77,55 @@ const rtoFulfillment = {
 };
 
 function createRtoFulfillment(
-	deliveryFulfillment: Fulfillment,
-	items: {
-		id: string;
-		count: number;
-		price: number;
-	}[],
-	quote: Quote
+  deliveryFulfillment: Fulfillment,
+  items: {
+    id: string;
+    count: number;
+    price: number;
+  }[],
+  quote: Quote
 ) {
-	const rtoClone = JSON.parse(JSON.stringify(rtoFulfillment)) as Fulfillment;
-	const breakup = quote.breakup ?? [];
-	if (quote.price) {
-		quote.price.value = "0.00";
-	}
-	rtoClone.tags = breakup
-		.map((item) => {
-			const price = parseFloat(item.price?.value || "0");
-			if (price === 0) return null;
-			if (item.price) {
-				item.price.value = "0.00";
-			}
-			if (item["@ondc/org/item_quantity"]) {
-				item["@ondc/org/item_quantity"].count = 0;
-			}
-			return {
-				code: "quote_trail",
-				list: [
-					{ code: "type", value: item["@ondc/org/title_type"] },
-					{ code: "id", value: item["@ondc/org/item_id"] },
-					{ code: "currency", value: "INR" },
-					{ code: "value", value: `${-1 * price}` },
-				],
-			};
-		})
-		.filter((x): x is NonNullable<typeof x> => x !== null);
-	delete deliveryFulfillment.end?.time;
-	rtoClone.start = {
-		...deliveryFulfillment.end,
-		time: {
-			timestamp: new Date().toISOString(),
-		},
-	};
-	rtoClone.end = {
-		...deliveryFulfillment.start,
-	};
-	return rtoClone;
+  const rtoClone = JSON.parse(JSON.stringify(rtoFulfillment)) as Fulfillment;
+
+  const clonedBreakup = quote.breakup?.map(item => ({
+    ...item,
+    price: item.price ? { ...item.price } : undefined,
+    ["@ondc/org/item_quantity"]: item["@ondc/org/item_quantity"]
+      ? { ...item["@ondc/org/item_quantity"] }
+      : undefined,
+  })) ?? [];
+
+  const tags = clonedBreakup
+    .map(item => {
+      const price = parseFloat(item.price?.value || "0");
+      if (price === 0) return null;
+
+      return {
+        code: "quote_trail",
+        list: [
+          { code: "type", value: item["@ondc/org/title_type"] },
+          { code: "id", value: item["@ondc/org/item_id"] },
+          { code: "currency", value: "INR" },
+          { code: "value", value: `${-1 * price}` },
+        ],
+      };
+    })
+    .filter((x): x is NonNullable<typeof x> => x !== null);
+
+  rtoClone.tags = tags;
+
+  rtoClone.start = {
+    ...deliveryFulfillment.end,
+    time: {
+      timestamp: new Date().toISOString(),
+    },
+  };
+
+  rtoClone.end = {
+    ...deliveryFulfillment.start,
+  };
+
+  return rtoClone;
 }
 
 export async function on_cancel_rto_generator(
@@ -140,7 +145,7 @@ export async function on_cancel_rto_generator(
 			const ob = {
 				id: item.id,
 				quantity: {
-					count: item.quantity.count,
+					count: item.quantity.count - 1,
 				},
 				fulfillment_id: rtoFulfillment.id,
 			};
@@ -154,6 +159,7 @@ export async function on_cancel_rto_generator(
 	});
 	console.log("mapRtoItems", mapRtoItems);
 	existingPayload.message.order.items = [...sessionData.items, ...mapRtoItems];
+	console.log('Real Items: ', JSON.stringify(sessionData.items));
 	const items: {
 		id: string;
 		count: number;
@@ -169,7 +175,9 @@ export async function on_cancel_rto_generator(
 			fulfillment_id: item.fulfillment_id,
 		};
 	});
-
+	console.log('OG Items: ', JSON.stringify(sessionData.items));
+	console.log('Items Alone: ', JSON.stringify(items));
+	
 	const savedFulfillments = sessionData.fulfillments as Fulfillments;
 	const deliveryFulfillment = savedFulfillments.find(
 		(f: any) => f.type === "Delivery"

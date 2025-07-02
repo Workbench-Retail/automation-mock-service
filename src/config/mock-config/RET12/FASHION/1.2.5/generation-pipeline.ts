@@ -61,6 +61,7 @@ export async function createMockResponseRET12_125(
     api_details = getDetailsByActionId("dyn_on_status", factoryData);
   }
   api_details = getDetailsByActionId(actionID, factoryData);
+  console.log('Apirjr Details:', api_details);
   const context_object = {
     action: api_details?.action,
     transaction_id: sessionData?.transaction_id,
@@ -72,6 +73,7 @@ export async function createMockResponseRET12_125(
     country: "IND",
   };
   let context = createContext(context_object);
+  console.log('ContextCreate  kfk:', context);
   if (!api_details.message_id) {
     context.message_id = sessionData.message_id as string;
   }

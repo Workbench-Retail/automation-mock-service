@@ -66,7 +66,7 @@ order:
           email: nobody@nomail.com
           phone: "9898989898"
         location:
-          gps: 12.966545,77.592074
+          gps: 19.129076,72.825803
           address:
             name: my house or door or floor
             building: my building name or house
