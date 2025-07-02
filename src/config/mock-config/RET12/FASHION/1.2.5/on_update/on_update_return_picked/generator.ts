@@ -12,7 +12,7 @@ export async function on_update_picked_generator(
   existingPayload.message.order.billing = sessionData.billing;
   existingPayload.message.order.payment = sessionData.payment;
   existingPayload.message.order.created_at = sessionData.order_created_at;
-  existingPayload.message.order.updated_at = new Date().toISOString();
+  existingPayload.message.order.updated_at = existingPayload.context.timestamp;
 
   const deliveryFulfillment = existingPayload.message.order.fulfillments.find(
     (f: Fulfillment) => f.type == "Delivery"
@@ -70,6 +70,7 @@ export async function on_update_picked_generator(
   console.log("updatedItems", updatedItems);
 
   existingPayload.message.order.items = updatedItems;
+  sessionData.items = existingPayload.message.order.items;
 
   const quote = sessionData.quote as Quote;
   const breakup = quote.breakup ?? [];
@@ -148,5 +149,6 @@ export async function on_update_picked_generator(
       return f;
     }
   );
+
   return existingPayload;
 }

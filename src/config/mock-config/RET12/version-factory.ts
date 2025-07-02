@@ -21,6 +21,12 @@ export async function createMockResponse(
   if (usecaseId === "FASHION") {
     if (version === "1.2.5") {
       payload = await createMockResponseRET12_125(action_id, sessionData);
+      console.log(
+        'Payload created for action ID:',
+        action_id,
+        'Payload:',
+        JSON.stringify(payload, null, 2)
+      );
     } else {
       throw new Error("version not found");
     }

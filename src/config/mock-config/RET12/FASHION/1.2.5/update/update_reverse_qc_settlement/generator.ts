@@ -24,6 +24,7 @@ export async function update_reverse_qc_settlement_generator(
       { id: returnId, type: "Return" },
     ];
   }
+  console.log('Items in qc settlement generator: ', JSON.stringify(sessionData.items));
 
   const trail = jsonpath.query(
     sessionData.fulfillments,
