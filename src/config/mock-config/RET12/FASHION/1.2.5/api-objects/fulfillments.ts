@@ -917,7 +917,10 @@ export function createFulfillments(
       ],
     };
     let finalFulfillments = sessionData.on_status_fulfillments as Fulfillments;
-    console.log("sessionData.on_status_fulfillments", JSON.stringify(finalFulfillments))
+    console.log(
+      "sessionData.on_status_fulfillments",
+      JSON.stringify(finalFulfillments)
+    );
     if (sessionData.on_status_fulfillments.length == 0) {
       const time = new Date(new Date().getTime() + 10 * 1000 * 60);
       const start_end = new Date(time.getTime() + 10 * 1000 * 60).toISOString();
@@ -986,16 +989,17 @@ export function createFulfillments(
         break;
       case "on_status_out_for_delivery":
         state = "Out-for-delivery";
+        console.log("finalFulfillments", JSON.stringify(finalFulfillments));
         finalFulfillments = finalFulfillments.map((f) => {
           if (f.type === "Delivery") {
             return {
               ...f,
-               tags: tags.tags,
+              tags: tags.tags,
             };
           }
           return f;
         });
-        console.log('Final Fulfillments: ', JSON.stringify(finalFulfillments));
+        console.log("Final Fulfillments: ", JSON.stringify(finalFulfillments));
         break;
       case "on_status_order_delivered":
         state = "Order-delivered";

@@ -16,7 +16,7 @@ export async function on_status_picked_generator(
   );
 
   console.log("generalPayload", JSON.stringify(generalPayload))
-
+  console.log("sessionData 2", JSON.stringify(sessionData))
   generalPayload.message.order.updated_at = existingPayload.context.timestamp;
   generalPayload.message.order.fulfillments[0].start.time.timestamp =  existingPayload.context.timestamp;
   return generalPayload;

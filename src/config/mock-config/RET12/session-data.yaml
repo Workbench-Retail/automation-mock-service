@@ -12,6 +12,7 @@ session_data:
   fulfillments: []
   quote: null
   order_id: null
+  tat: null
   payment: null
   update_payment: null
   replacementId: null
