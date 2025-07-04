@@ -234,7 +234,7 @@ export async function on_update_picked_rep_generator(
             location: deliveryFulfillment.end?.location,
             time: {
               ...f.start?.time,
-              timestamp: new Date().toISOString(),
+              timestamp: existingPayload.context.timestamp,
             },
           },
           tags: [...tags, replacementTag, ...quoteTrails],

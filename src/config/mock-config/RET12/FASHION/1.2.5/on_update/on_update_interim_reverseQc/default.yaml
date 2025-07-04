@@ -41,9 +41,9 @@ order:
           id: L1
           descriptor:
             name: Seller Business
-          gps: 19.129076,72.825803
+          gps: 12.925810,77.583624
           address:
-            locality: Jayanagar
+            locality: my street name
             city: Bengaluru
             area_code: "560011"
             state: Karnataka

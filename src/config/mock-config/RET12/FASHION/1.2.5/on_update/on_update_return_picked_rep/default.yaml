@@ -66,7 +66,7 @@ order:
           email: nobody@nomail.com
           phone: "9898989898"
         location:
-          gps: 19.129076,72.825803
+          gps: 12.925810,77.583624
           address:
             name: my house or door or floor
             building: my building name or house
@@ -74,7 +74,7 @@ order:
             city: Bengaluru
             state: Karnataka
             country: IND
-            area_code: "560027"
+            area_code: "560011"
         time:
           range:
             start: "2024-08-11T12:39:03.396Z"

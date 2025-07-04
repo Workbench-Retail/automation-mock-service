@@ -143,17 +143,17 @@ codes:
     default: FASHION/1.2.5/on_status/on_status_pending/default.yaml
     action_id: on_status_pending
     action: on_status
-    message_id: false
+    message_id: true
   - code: 139
     default: FASHION/1.2.5/on_cancel/on_cancel_rto/default.yaml
     action_id: on_cancel_rto
     action: on_cancel
-    message_id: false
+    message_id: true
   - code: 140
     default: FASHION/1.2.5/on_status/on_status_rto_delivereddisposed/default.yaml
     action_id: on_status_rto_delivereddisposed
     action: on_status
-    message_id: false
+    message_id: true
   - code: 148
     default: FASHION/1.2.5/on_update/on_update_part_cancel/default.yaml
     action_id: on_update_part_cancel

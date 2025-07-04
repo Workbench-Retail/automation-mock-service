@@ -29,7 +29,7 @@ export async function on_cancel_generator(
 	existingPayload.message.order.payment = sessionData.payment;
 	existingPayload.message.order.id = sessionData.order_id;
 	existingPayload.message.order.created_at = sessionData.order_created_at;
-	existingPayload.message.order.updated_at = new Date().toISOString();
+	existingPayload.message.order.updated_at = existingPayload.context.timestamp;
 	existingPayload.message.order.cancellation = {
 		cancelled_by: existingPayload.context.bap_id,
 		reason: {

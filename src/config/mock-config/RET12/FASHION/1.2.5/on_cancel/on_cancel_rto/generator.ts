@@ -121,6 +121,7 @@ function createRtoFulfillment(
     },
   };
 
+  delete deliveryFulfillment.start?.time
   rtoClone.end = {
     ...deliveryFulfillment.start,
   };
