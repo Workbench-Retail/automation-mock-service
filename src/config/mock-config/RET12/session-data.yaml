@@ -3,6 +3,7 @@ session_data:
   message_id: null
   city: null
   inc_mode: null
+  order_tags: []
   selected_items: []
   selected_fulfillments: []
   items: []
@@ -11,6 +12,7 @@ session_data:
   fulfillments: []
   quote: null
   order_id: null
+  tat: null
   payment: null
   update_payment: null
   replacementId: null

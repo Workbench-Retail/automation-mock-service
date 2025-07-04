@@ -13,10 +13,6 @@ order:
       fulfillment_id: C1
       quantity:
         count: 4
-    - id: I1
-      fulfillment_id: R1
-      quantity:
-        count: 1
   billing:
     address:
       name: my house or door or floor

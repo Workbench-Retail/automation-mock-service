@@ -7,11 +7,13 @@ export async function on_status_out_for_delivery_generator(
 	sessionData: SessionData
 ) {
 	const generalPayload = createGenericOnStatus(existingPayload, sessionData);
+	console.log("sessionData", JSON.stringify(sessionData))
 	generalPayload.message.order.fulfillments = createFulfillments(
 		"on_status",
 		"on_status_out_for_delivery",
 		sessionData,
 		generalPayload.message.order.fulfillments
 	);
+	generalPayload.message.order.updated_at = existingPayload.context.timestamp;
 	return generalPayload;
 }

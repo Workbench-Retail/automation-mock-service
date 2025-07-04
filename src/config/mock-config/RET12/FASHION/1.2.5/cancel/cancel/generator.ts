@@ -8,11 +8,10 @@ export async function cancel_generator(
   existingPayload: any,
   sessionData: SessionData
 ) {
-
   const inputs = sessionData.user_inputs as CancelInputType;
 
   const reasonId = inputs?.cancellation_reason_id ?? "001";
-
+  existingPayload.message.order_id = sessionData.order_id;
   existingPayload.message.cancellation_reason_id = reasonId;
 
   return existingPayload;

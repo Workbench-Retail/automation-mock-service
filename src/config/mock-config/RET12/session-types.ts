@@ -12,6 +12,8 @@ export type SessionData = {
   error_code: string | undefined;
   error_message: string | undefined;
   order: any | undefined;
+  order_tags: any;
+  tat: any;
   user_inputs: Input | undefined;
   inc_mode: string | undefined;
   selected_items: any | undefined;
@@ -36,7 +38,7 @@ export type SessionData = {
   order_created_at?: any;
   last_updated_at?: string;
   bap_terms?: any;
-  // order 
+  // order
   replacementId?: string;
   selected_item_id: string;
   end: any[];

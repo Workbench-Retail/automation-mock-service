@@ -13,7 +13,7 @@ export async function on_status_picked_rep_generator(
     fulfillments.forEach((fulfillment: any) => {
       if (fulfillment.id === replacementId) {
         fulfillment.state.descriptor.code = "Order-picked-up";
-        fulfillment.start.time = new Date().toISOString();
+        fulfillment.start.time = existingPayload.context.timestamp;
       }
     });
   }

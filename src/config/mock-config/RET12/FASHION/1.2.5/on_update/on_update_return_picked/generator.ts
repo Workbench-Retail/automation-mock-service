@@ -117,7 +117,7 @@ export async function on_update_picked_generator(
       list: [
         { code: "type", value: "item" },
         { code: "id", value: r.item_id },
-        { code: "currency", value: "INR" },
+        { code: "cuexistingPayload.context.timestamprrency", value: "INR" },
         { code: "value", value: `-${value}` },
       ],
     };
@@ -140,7 +140,7 @@ export async function on_update_picked_generator(
             location: deliveryFulfillment.end?.location,
             time: {
               ...f.start?.time,
-              timeStamp: new Date().toISOString(),
+              timestamp: existingPayload.context.timestamp,
             },
           },
           tags: [...tags, ...quoteTrails],

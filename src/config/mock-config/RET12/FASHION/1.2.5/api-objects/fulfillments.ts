@@ -861,15 +861,15 @@ export function createFulfillments(
             location: {
               id: "L1",
               descriptor: {
-                name: "ABC Store",
+                name: "Mock Seller NP",
               },
-              gps: "19.129076,72.825803",
+              gps: "12.925810,77.583624",
               address: {
                 building: "my building name or house",
-                city: "Mumbai",
-                state: "Maharashtra",
+                city: "Bengaluru",
+                state: "Karnataka",
                 country: "IND",
-                area_code: "400053",
+                area_code: "560011",
                 locality: "my street name",
                 name: "my house or door or floor",
               },
@@ -917,13 +917,17 @@ export function createFulfillments(
       ],
     };
     let finalFulfillments = sessionData.on_status_fulfillments as Fulfillments;
-    if (sessionData.on_status_fulfillments.length <= 0) {
+    console.log(
+      "sessionData.on_status_fulfillments",
+      JSON.stringify(finalFulfillments)
+    );
+    if (sessionData.on_status_fulfillments.length == 0) {
       const time = new Date(new Date().getTime() + 10 * 1000 * 60);
       const start_end = new Date(time.getTime() + 10 * 1000 * 60).toISOString();
       finalFulfillments = fulfillments
         // .filter((f) => f.type == "Delivery")
         .map((f) => {
-          if (f.type == "Delivery") {
+          if (f.type == "Delivery" && actionId == "on_status_accepted") {
             return {
               ...f,
               start: {
@@ -977,6 +981,7 @@ export function createFulfillments(
                   timestamp: new Date().toISOString(),
                 },
               },
+              tags: tags.tags,
             };
           }
           return f;
@@ -984,6 +989,17 @@ export function createFulfillments(
         break;
       case "on_status_out_for_delivery":
         state = "Out-for-delivery";
+        console.log("finalFulfillments", JSON.stringify(finalFulfillments));
+        finalFulfillments = finalFulfillments.map((f) => {
+          if (f.type === "Delivery") {
+            return {
+              ...f,
+              tags: tags.tags,
+            };
+          }
+          return f;
+        });
+        console.log("Final Fulfillments: ", JSON.stringify(finalFulfillments));
         break;
       case "on_status_order_delivered":
         state = "Order-delivered";
@@ -998,6 +1014,7 @@ export function createFulfillments(
                   timestamp: new Date().toISOString(),
                 },
               },
+              tags: tags.tags,
             };
           }
           return f;
@@ -1005,6 +1022,22 @@ export function createFulfillments(
         break;
       case "on_status_rto_delivered":
         state = "Cancelled";
+        finalFulfillments = finalFulfillments.map((f) => {
+          if (f.type === "RTO") {
+            return {
+              ...f,
+              end: {
+                ...f.end,
+                time: {
+                  ...f.end?.time,
+                  timestamp: new Date().toISOString(),
+                },
+              },
+              tags: tags.tags,
+            };
+          }
+          return f;
+        });
       case "on_status_ready_to_ship":
         state = "Packed";
         finalFulfillments = finalFulfillments.map((f) => {

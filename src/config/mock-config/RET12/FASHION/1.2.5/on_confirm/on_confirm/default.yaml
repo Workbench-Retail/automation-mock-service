@@ -65,7 +65,7 @@ order:
             country: IND
             area_code: "560027"
             locality: my street name
-            name: my house or door or floor
+            name: my house or door or floor       
   quote:
     price:
       currency: INR

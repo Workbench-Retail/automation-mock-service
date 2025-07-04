@@ -3,7 +3,7 @@ order:
     id: P1
     locations:
       - id: L1
-  state: Completed
+  state: In-progress
   items:
     - id: I1
       quantity:

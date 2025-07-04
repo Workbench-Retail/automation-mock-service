@@ -51,6 +51,12 @@ import { confirm_seller_cred_generator } from "./confirm/confirm_seller_cred/gen
 import { on_confirm_seller_cred_generator } from "./on_confirm/on_confirm_seller_cred/generator";
 import { update_reverse_qc_rep_generator } from "./update/update_reverse_qc_rep/generator";
 import { on_update_picked_rep_generator } from "./on_update/on_update_return_picked_rep/generator";
+import { cancel_no_generator } from "./cancel/cancel_no/generator";
+import { cancel_yes_generator } from "./cancel/cancel_yes/generator";
+import { update_settlement_cancel_generator } from "./update/update_settlement_cancel/generator";
+import { on_cancel_yes_generator } from "./on_cancel/on_cancel_yes/generator";
+import { on_status_out_for_delivery_force_generator } from "./on_status/on_status_out_for_delivery_force/generator";
+
 export async function Generator(
   action_id: string,
   existingPayload: any,
@@ -171,6 +177,16 @@ export async function Generator(
       return update_reverse_qc_rep_generator(existingPayload, sessionData);
     case "on_update_return_picked_rep":
       return on_update_picked_rep_generator(existingPayload, sessionData);
+    case "on_status_out_for_delivery_force":
+      return on_status_out_for_delivery_force_generator(existingPayload, sessionData);
+    case "cancel_no":
+      return cancel_no_generator(existingPayload, sessionData);
+    case "cancel_yes":
+      return cancel_yes_generator(existingPayload, sessionData);
+    case "on_cancel_yes":
+      return on_cancel_yes_generator(existingPayload, sessionData);
+    case "update_settlement_cancel":
+      return update_settlement_cancel_generator(existingPayload, sessionData);
     default:
       console.log(action_id);
       throw new Error("Invalid action id found! ");

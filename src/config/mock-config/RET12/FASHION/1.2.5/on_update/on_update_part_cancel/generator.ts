@@ -57,7 +57,7 @@ export async function on_update_part_cancel_generator(
   existingPayload.message.order.billing = sessionData.billing;
   existingPayload.message.order.payment = sessionData.payment;
   existingPayload.message.order.created_at = sessionData.order_created_at;
-  existingPayload.message.order.updated_at = new Date().toISOString();
+  existingPayload.message.order.updated_at = existingPayload.context.timestamp;
 
   // Target item "I1" for partial cancellation (reduce quantity by 1)
   const itemsIds = sessionData.items.map((item: any) => item.id) as string[];
@@ -76,7 +76,7 @@ export async function on_update_part_cancel_generator(
   sessionData.items.push(copyItem);
 
   // Update original item's quantity (reduce by 1)
-  cancelItem.quantity.count -= 1;
+  cancelItem.quantity.count = Math.max(cancelItem.quantity.count - 1, 0) ;
   existingPayload.message.order.items = sessionData.items;
 
   // Update cancelFulfillment tags
@@ -112,6 +112,6 @@ export async function on_update_part_cancel_generator(
     existingPayload,
     fulfillments
   );
-
+  existingPayload.message.order.updated_at = existingPayload.context.timestamp;
   return existingPayload;
 }

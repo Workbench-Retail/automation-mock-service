@@ -6,6 +6,10 @@ export function createGenericOnStatus(
 	existingPayload: any,
 	sessionData: SessionData
 ) {
+	console.log(
+		'SESATASSSIPN : ', JSON.stringify(sessionData, null, 2)
+	);
+	
 	existingPayload.message.order.id = sessionData.order_id;
 	existingPayload.message.order.provider = sessionData.provider;
 	existingPayload.message.order.items = sessionData.items;
@@ -16,7 +20,7 @@ export function createGenericOnStatus(
 	const timeISO = new Date().toISOString();
 	existingPayload.message.order.updated_at = timeISO;
 	existingPayload.message.order.created_at = sessionData.order_created_at;
-	e	
+
 	existingPayload.message.order.payment = sessionData.payment
 	return existingPayload;
 }

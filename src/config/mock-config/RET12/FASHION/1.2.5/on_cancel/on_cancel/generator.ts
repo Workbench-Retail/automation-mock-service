@@ -29,7 +29,7 @@ export async function on_cancel_generator(
 	existingPayload.message.order.payment = sessionData.payment;
 	existingPayload.message.order.id = sessionData.order_id;
 	existingPayload.message.order.created_at = sessionData.order_created_at;
-	existingPayload.message.order.updated_at = new Date().toISOString();
+	existingPayload.message.order.updated_at = existingPayload.context.timestamp;
 	existingPayload.message.order.cancellation = {
 		cancelled_by: existingPayload.context.bap_id,
 		reason: {
@@ -37,6 +37,13 @@ export async function on_cancel_generator(
 		},
 	};
 	existingPayload.message.order.quote = sessionData.quote;
+	let totalPrice = 0;
+	existingPayload.message.order.quote.breakup.forEach((b : any) => {
+		totalPrice += parseInt(b?.price?.value)
+	})
+	totalPrice.toFixed(2);
+	
+	existingPayload.message.order.quote.price.value = String(totalPrice);
 	return existingPayload;
 }
 
