@@ -102,6 +102,44 @@ export const RET14ELECTRONICS125Catalog = {
               },
             ],
           },
+          {
+            id: "CG1",
+            descriptor: {
+              name: "Custom_Input",
+            },
+            tags: [
+              {
+                code: "type",
+                list: [
+                  {
+                    code: "type",
+                    value: "custom_group",
+                  },
+                ],
+              },
+              {
+                code: "config",
+                list: [
+                  {
+                    code: "min",
+                    value: "0",
+                  },
+                  {
+                    code: "max",
+                    value: "1",
+                  },
+                  {
+                    code: "input",
+                    value: "text",
+                  },
+                  {
+                    code: "seq",
+                    value: "1",
+                  },
+                ],
+              },
+            ],
+          },
         ],
         items: [
           {
@@ -119,7 +157,7 @@ export const RET14ELECTRONICS125Catalog = {
               long_desc:
                 "A Power Bank is a portable charger designed to recharge your electronic devices when you're on the move. Ranging in size from slim, pocket-sized devices up to larger, higher-capacity Power Banks",
               images: ["https://sellerNP.com/images/i1.png"],
-              code: "5:ESS45300",
+              code: "3:9501101530007",
             },
             quantity: {
               unitized: {
@@ -197,6 +235,24 @@ export const RET14ELECTRONICS125Catalog = {
                   },
                 ],
               },
+              {
+                code: "type",
+                list: [
+                  {
+                    code: "type",
+                    value: "item",
+                  },
+                ],
+              },
+              {
+                code: "custom_group",
+                list: [
+                  {
+                    code: "id",
+                    value: "CG1",
+                  },
+                ],
+              },
             ],
           },
           {
@@ -214,7 +270,7 @@ export const RET14ELECTRONICS125Catalog = {
               long_desc:
                 "An adapter or adaptor is a device that converts attributes of one electrical device or system to those of an otherwise incompatible device or system. Some modify power or signal attributes, while others merely adapt the physical form of one connector to another.",
               images: ["https://sellerNP.com/images/i1.png"],
-              code: "5:ESS45391",
+              code: "3:7845632198471",
             },
             quantity: {
               unitized: {
@@ -276,13 +332,31 @@ export const RET14ELECTRONICS125Catalog = {
                   },
                 ],
               },
+              {
+                code: "type",
+                list: [
+                  {
+                    code: "type",
+                    value: "item",
+                  },
+                ],
+              },
+              {
+                code: "custom_group",
+                list: [
+                  {
+                    code: "id",
+                    value: "CG1",
+                  },
+                ],
+              },
             ],
           },
           {
             id: "I3",
             descriptor: {
               name: "Charger 360plus 4500mah",
-              code: "5:ESS45399",
+              code: "3:6213574890238",
               symbol: "https://sellerNP.com/images/i1.png",
               short_desc:
                 "Bring home this compact charger from boAt and keep your phone charged at all times. The Auto-detect charging feature keeps your devices charged by adapting to your device’s charging requirements. The Quick Charge 3.0 technology provides lightning-fast speeds of charging. Moreover, your charger is also protected from short circuits, overheating and overcurrent, thanks to the inbuilt Smart IC Protection feature.",
@@ -363,7 +437,7 @@ export const RET14ELECTRONICS125Catalog = {
             id: "I4",
             descriptor: {
               name: "Charger 360plus 4500mah",
-              code: "5:ESS45450",
+              code: "3:4012789543165",
               symbol: "https://sellerNP.com/images/i1.png",
               short_desc:
                 "Bring home this compact charger from boAt and keep your phone charged at all times. The Auto-detect charging feature keeps your devices charged by adapting to your device’s charging requirements. The Quick Charge 3.0 technology provides lightning-fast speeds of charging. Moreover, your charger is also protected from short circuits, overheating and overcurrent, thanks to the inbuilt Smart IC Protection feature.",
@@ -435,6 +509,53 @@ export const RET14ELECTRONICS125Catalog = {
                   {
                     code: "brand",
                     value: "Shiv Electricals",
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            id: "C1",
+            descriptor: {
+              name: "Custom_Input",
+            },
+            quantity: {
+              unitized: {
+                measure: {
+                  unit: "unit",
+                  value: "1",
+                },
+              },
+              available: {
+                count: "99",
+              },
+              maximum: {
+                count: "99",
+              },
+            },
+            price: {
+              currency: "INR",
+              value: "0.0",
+              maximum_value: "0.0",
+            },
+            category_id: "Power Bank",
+            related: true,
+            tags: [
+              {
+                code: "type",
+                list: [
+                  {
+                    code: "type",
+                    value: "customization",
+                  },
+                ],
+              },
+              {
+                code: "parent",
+                list: [
+                  {
+                    code: "id",
+                    value: "CG1",
                   },
                 ],
               },

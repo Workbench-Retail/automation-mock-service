@@ -1,5 +1,6 @@
 import { SessionData } from "../../../session-types";
 import { RET14ELECTRONICS125Catalog } from "../on_search/on_search/catalog";
+import { Tags } from "../on_select/on_select_input/generator";
 import { Fulfillments } from "./fulfillments";
 
 const breakupItem = {
@@ -49,8 +50,15 @@ const breakup = [
     },
   },
 ];
+
 export function createQuote(
-  selectedItems: { id: string; count: number; fulfillment_id: string }[],
+  selectedItems: {
+    id: string;
+    count: number;
+    fulfillment_id: string;
+    parent_item_id?: string;
+    tags?: Tags;
+  }[],
   sessionData: SessionData,
   existingPayload: any,
   fulfillments: Fulfillments,
@@ -83,26 +91,27 @@ export function createQuote(
       continue;
     }
     const catalogItem = catalogItems.find((i: any) => i.id === selectedItem.id);
-    if (!catalogItem) continue; // Skip if item not found in catalog
+    if (!catalogItem) continue;
 
     const quantity = cancelled ? 0 : selectedItem.count ?? 1;
     const price = parseFloat(catalogItem.price.value) * quantity;
     console.log("Price: ", price, catalogItem.price.value);
     totalPrice += price;
 
-    const breakupClone = JSON.parse(
-      JSON.stringify(breakupItem)
-    ) as typeof breakupItem;
+    const breakupClone = JSON.parse(JSON.stringify(breakupItem));
     breakupClone["@ondc/org/item_id"] = catalogItem.id;
     breakupClone.title = catalogItem.descriptor.name;
     breakupClone["@ondc/org/item_quantity"].count = quantity;
     breakupClone.price.value = `${price.toFixed(2)}`;
+    if (selectedItem.tags) {
+      breakupClone.tags = selectedItem.tags;
+    }
     breakupClone.item.price.value = catalogItem.price.value;
     breakupObject.push(breakupClone);
 
     if (sessionData.out_of_stock_item_ids?.includes(catalogItem.id)) {
       breakupClone.item.quantity.available.count = "0";
-      breakupClone.item.quantity.maximum.count = "0";
+      breakupClone.item.quantity.maximum.count = "0"; // Skip if item not found in catalog
       breakupClone["@ondc/org/title_type"] = "0";
       existingPayload.error = {
         type: "DOMAIN-ERROR",

@@ -1,6 +1,7 @@
 import { SessionData } from "../../../../session-types";
 import { getUpdatedBilling } from "../../api-objects/billing";
 import { createFulfillments } from "../../api-objects/fulfillments";
+import { removeItemQuantitiesFromQuote } from "../../api-objects/quote";
 
 export async function on_init_snp_unsolicited_generator(
   existingPayload: any,
@@ -25,5 +26,6 @@ export async function on_init_snp_unsolicited_generator(
   existingPayload.message.order.payment.params.amount = existingPayload.message.order.quote.price.value;
   existingPayload.message.order.provider = sessionData.provider;
   existingPayload.message.order.quote = sessionData.quote;
+  existingPayload.message.order.quote = removeItemQuantitiesFromQuote(sessionData.quote);
   return existingPayload;
 }

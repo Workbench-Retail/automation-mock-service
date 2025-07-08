@@ -41,6 +41,8 @@ import { on_status_picked_fin_generator } from "./on_status/on_status_picked_fin
 import { on_status_out_for_delivery_fin_generator } from "./on_status/on_status_out_for_delivery_fin/generator";
 import { on_status_order_delivered_fin_generator } from "./on_status/on_status_order_delivered_fin/generator";
 import { on_confirm_fin_generator } from "./on_confirm/on_confirm_fin/generator";
+import { select_input_generator } from "./select/select_input/generator";
+import { on_select_input_generator } from "./on_select/on_select_input/generator";
 
 export async function Generator(
   action_id: string,
@@ -139,6 +141,10 @@ export async function Generator(
         existingPayload,
         sessionData
       );
+    case "select_input":
+      return select_input_generator(existingPayload, sessionData);
+    case "on_select_input":
+      return on_select_input_generator(existingPayload, sessionData);
     default:
       console.log(action_id);
       throw new Error("Invalid action id found! ");

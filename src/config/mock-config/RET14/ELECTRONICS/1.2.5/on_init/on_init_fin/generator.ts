@@ -1,6 +1,7 @@
 import { SessionData } from "../../../../session-types";
 import { getUpdatedBilling } from "../../api-objects/billing";
 import { createFulfillments } from "../../api-objects/fulfillments";
+import { removeItemQuantitiesFromQuote } from "../../api-objects/quote";
 import { getRandomItem } from "../../api-objects/utils";
 
 export async function on_init_fin_generator(
@@ -68,6 +69,6 @@ export async function on_init_fin_generator(
     },
   });
   existingPayload.message.order.tags = sessionData.order_tags;
-
+  existingPayload.message.order.quote = removeItemQuantitiesFromQuote(sessionData.quote);
   return existingPayload;
 }

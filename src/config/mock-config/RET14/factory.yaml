@@ -244,3 +244,13 @@ codes:
     action_id: on_status_order_delivered_fin
     action: on_status
     message_id: true
+  - code: 501
+    default: ELECTRONICS/1.2.5/select/select_input/default.yaml
+    action_id: select_input
+    action: select
+    message_id: true
+  - code: 502
+    default: ELECTRONICS/1.2.5/on_select/on_select_input/default.yaml
+    action_id: on_select_input
+    action: on_select
+    message_id: false
