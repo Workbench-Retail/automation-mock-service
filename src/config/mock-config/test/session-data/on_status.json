@@ -1,6 +1,6 @@
 {
-  "transaction_id": "51b5112f-db31-4e07-8b90-d06e2c498e18",
-  "message_id": "56f0b0f7-7d57-4480-8aba-8851998381bd",
+  "transaction_id": "39a063e4-def3-4990-96c0-366042824037",
+  "message_id": "4d333d3a-1793-490d-a200-88bee27aba56",
   "city": "std:011",
   "inc_mode": null,
   "selected_items": [
@@ -68,8 +68,8 @@
     "phone": "9898989898",
     "name": "ONDC buyer",
     "email": "nobody@nomail.com",
-    "created_at": "2025-07-04T07:38:06.030Z",
-    "updated_at": "2025-07-04T07:38:06.030Z"
+    "created_at": "2025-07-08T06:48:17.940Z",
+    "updated_at": "2025-07-08T06:48:17.940Z"
   },
   "fulfillments": [
     {
@@ -104,10 +104,10 @@
         },
         "time": {
           "range": {
-            "start": "2025-07-04T07:48:11.046Z",
-            "end": "2025-07-04T07:58:11.046Z"
+            "start": "2025-07-08T06:58:23.117Z",
+            "end": "2025-07-08T07:08:23.117Z"
           },
-          "timestamp": "2025-07-04T07:38:11.062Z"
+          "timestamp": "2025-07-08T06:48:23.270Z"
         }
       },
       "end": {
@@ -132,8 +132,8 @@
         },
         "time": {
           "range": {
-            "start": "2025-07-04T07:58:11.046Z",
-            "end": "2025-07-06T07:48:11.046Z"
+            "start": "2025-07-08T07:08:23.117Z",
+            "end": "2025-07-10T06:58:23.117Z"
           }
         }
       },
@@ -289,7 +289,7 @@
     },
     "ttl": "P1D"
   },
-  "order_id": "726706",
+  "order_id": "725575",
   "payment": {
     "params": {
       "amount": "400.00",
@@ -318,7 +318,7 @@
     ]
   },
   "order_state": "In-progress",
-  "order_created_at": "2025-07-04T07:38:11.040Z",
+  "order_created_at": "2025-07-08T06:48:23.004Z",
   "on_select_fulfillments": [
     {
       "id": "F1",
@@ -367,10 +367,10 @@
         },
         "time": {
           "range": {
-            "start": "2025-07-04T07:48:11.046Z",
-            "end": "2025-07-04T07:58:11.046Z"
+            "start": "2025-07-08T06:58:23.117Z",
+            "end": "2025-07-08T07:08:23.117Z"
           },
-          "timestamp": "2025-07-04T07:38:11.062Z"
+          "timestamp": "2025-07-08T06:48:23.270Z"
         }
       },
       "end": {
@@ -395,8 +395,8 @@
         },
         "time": {
           "range": {
-            "start": "2025-07-04T07:58:11.046Z",
-            "end": "2025-07-06T07:48:11.046Z"
+            "start": "2025-07-08T07:08:23.117Z",
+            "end": "2025-07-10T06:58:23.117Z"
           }
         }
       },
@@ -497,7 +497,7 @@
       "id": "FLAT50"
     }
   ],
-  "last_updated_at": "2025-07-04T07:38:11.066Z",
+  "last_updated_at": "2025-07-08T06:48:23.281Z",
   "bap_id": "dev-automation.ondc.org",
   "bpp_id": "dev-automation.ondc.org",
   "bap_uri": "https://dev-automation.ondc.org/buyer",
