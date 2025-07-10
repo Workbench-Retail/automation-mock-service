@@ -1,15 +1,12 @@
-import { randomUUID } from "crypto";
 import { SessionData } from "../../../../session-types";
 import { getUpdatedBilling } from "../../api-objects/billing";
 import { createFulfillments } from "../../api-objects/fulfillments";
 import { TagsType } from "../../api-objects/tags";
 
-export async function on_confirm_seller_cred_generator(
+export async function on_confirm_ccc_generator(
     existingPayload: any,
     sessionData: SessionData
 ) {
-    
-    const timeIso = new Date().toISOString();
     existingPayload.message.order.updated_at = existingPayload.context.timestamp;
     existingPayload.message.order.created_at = sessionData.order_created_at;
     existingPayload.message.order.id = sessionData.order_id;
@@ -31,13 +28,6 @@ export async function on_confirm_seller_cred_generator(
     if (bapTerms) {
         bapTerms.list = sessionData.bap_terms.list;
     }
-    existingPayload.message.order.provider.creds = existingPayload.message.order.provider.creds || [];
-    existingPayload.message.order.provider.creds.push({
-        id: randomUUID().toString(),
-        descriptor: {
-            code : "Seller_Credential",
-            short_desc: "GI"
-        }
-    });
+    existingPayload.context.domain = "ONDC:FFFFF";
     return existingPayload;
 }

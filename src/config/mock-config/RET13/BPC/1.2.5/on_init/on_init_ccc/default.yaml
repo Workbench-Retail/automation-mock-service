@@ -1,15 +1,8 @@
 order:
-  id: O1
-  state: Created
   provider:
     id: P1
     locations:
       - id: L1
-    creds:
-    - id: gi-12345678
-      descriptor:
-        code: Social Sector
-        short_desc: GI
   items:
     - id: I1
       quantity:
@@ -25,39 +18,14 @@ order:
       locality: my street name
       name: my house or door or floor
     phone: "9898989898"
-    name: ONDC buyer
+    name: ONDC Buyer
     email: nobody@nomail.com
     created_at: "2024-08-14T09:10:34.369Z"
     updated_at: "2024-08-14T09:10:34.369Z"
   fulfillments:
     - id: F1
-      "@ondc/org/provider_name": Seller Business
-      "@ondc/org/TAT": P3D
-      state:
-        descriptor:
-          code: Pending
       type: Delivery
-      tracking: true
-      start:
-        location:
-          id: L1
-          descriptor:
-            name: Seller Business
-          gps: 12.925810,77.583624
-          address:
-            building: my building name or house
-            country: IND
-            locality: my street name
-            city: Bengaluru
-            area_code: "560011"
-            state: Karnataka
-            name: my house or door or floor
-        contact:
-          phone: "9594663710"
-          email: nobody@nomail.com
       end:
-        person:
-          name: John Doe
         contact:
           email: nobody@nomail.com
           phone: "9898989898"
@@ -71,15 +39,16 @@ order:
             area_code: "560027"
             locality: my street name
             name: my house or door or floor
+      tracking: true
   quote:
     price:
-      currency: INR
       value: "2756.75"
+      currency: INR
     breakup:
       - "@ondc/org/item_id": I1
         "@ondc/org/item_quantity":
           count: 1
-        title: Butterfly Beautiful 13 Gold Necklace
+        title: Plain Atta
         "@ondc/org/title_type": item
         price:
           currency: INR
@@ -102,24 +71,17 @@ order:
           value: "3.00"
     ttl: P1D
   payment:
-    params:
-      amount: "2756.75"
-      currency: INR
-      transaction_id: order_Okj0iihMKJod0V
-    status: PAID
-    type: ON-ORDER
-    collected_by: BAP
     "@ondc/org/buyer_app_finder_fee_type": percent
-    "@ondc/org/buyer_app_finder_fee_amount": "3.0"
+    "@ondc/org/buyer_app_finder_fee_amount": "3"
     "@ondc/org/settlement_details":
       - settlement_counterparty: seller-app
         settlement_phase: sale-amount
         settlement_type: neft
         beneficiary_name: xxxx
-        settlement_bank_account_no: xxxx
-        settlement_ifsc_code: xxxx
-        bank_name: xxxx
-        branch_name: xxxx
+        settlement_bank_account_no: XXXX
+        settlement_ifsc_code: XXXX
+        bank_name: XXXX
+        branch_name: XXXX
   tags:
     - code: bpp_terms
       list:
@@ -129,9 +91,3 @@ order:
           value: 37ABACA6712B1Z6
         - code: provider_tax_number
           value: USYDS6482D
-    - code: bap_terms
-      list:
-        - code: tax_number
-          value: 37ABACA6712B1Z6
-  created_at: "2024-08-14T09:11:00.810Z"
-  updated_at: "2024-08-14T09:11:01.239Z"

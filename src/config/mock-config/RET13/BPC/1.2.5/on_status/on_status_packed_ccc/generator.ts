@@ -1,18 +1,21 @@
 import { SessionData } from "../../../../session-types";
+import { getUpdatedBilling } from "../../api-objects/billing";
 import { createFulfillments } from "../../api-objects/fulfillments";
 import { createGenericOnStatus } from "../../api-objects/on_status";
 
-export async function on_status_rto_delivereddisposed_generator(
+export async function on_status_packed_ccc_generator(
 	existingPayload: any,
 	sessionData: SessionData
 ) {
 	const generalPayload = createGenericOnStatus(existingPayload, sessionData);
+	generalPayload.message.order.fulfillments
 	generalPayload.message.order.fulfillments = createFulfillments(
 		"on_status",
-		"on_status_rto_delivered",
+		"on_status_packed",
 		sessionData,
 		generalPayload.message.order.fulfillments
 	);
 	generalPayload.message.order.updated_at = existingPayload.context.timestamp;
-	return existingPayload;
+	  generalPayload.context.domain = "ONDC:FFFFF";
+	return generalPayload;
 }

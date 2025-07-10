@@ -1,15 +1,10 @@
 order:
   id: O1
-  state: Created
+  state: Accepted
   provider:
     id: P1
     locations:
       - id: L1
-    creds:
-    - id: gi-12345678
-      descriptor:
-        code: Social Sector
-        short_desc: GI
   items:
     - id: I1
       quantity:
@@ -37,7 +32,7 @@ order:
         descriptor:
           code: Pending
       type: Delivery
-      tracking: true
+      tracking: false
       start:
         location:
           id: L1
@@ -55,6 +50,10 @@ order:
         contact:
           phone: "9594663710"
           email: nobody@nomail.com
+        time:
+          range:
+            start: "2024-08-14T09:27:36.706Z"
+            end: "2024-08-16T09:27:36.707Z"
       end:
         person:
           name: John Doe
@@ -71,6 +70,15 @@ order:
             area_code: "560027"
             locality: my street name
             name: my house or door or floor
+        time:
+          range:
+            start: "2024-08-17T09:27:36.706Z"
+            end: "2024-08-19T09:27:36.707Z"
+      tags:
+        - code: routing
+          list:
+            - code: type
+              value: P2P
   quote:
     price:
       currency: INR
@@ -120,18 +128,5 @@ order:
         settlement_ifsc_code: xxxx
         bank_name: xxxx
         branch_name: xxxx
-  tags:
-    - code: bpp_terms
-      list:
-        - code: np_type
-          value: MSN
-        - code: tax_number
-          value: 37ABACA6712B1Z6
-        - code: provider_tax_number
-          value: USYDS6482D
-    - code: bap_terms
-      list:
-        - code: tax_number
-          value: 37ABACA6712B1Z6
   created_at: "2024-08-14T09:11:00.810Z"
-  updated_at: "2024-08-14T09:11:01.239Z"
+  updated_at: "2024-08-14T09:27:32.127Z"

@@ -49,7 +49,7 @@ function yamlToJson(filePath: string): object {
   }
 }
 
-export async function createMockResponseRET12_125(
+export async function createMockResponseRET13_125(
   actionID: string,
   sessionData: SessionData
 ) {

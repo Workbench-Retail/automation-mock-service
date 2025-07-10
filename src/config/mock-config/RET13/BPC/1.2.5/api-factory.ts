@@ -51,6 +51,21 @@ import { confirm_seller_cred_generator } from "./confirm/confirm_seller_cred/gen
 import { on_confirm_seller_cred_generator } from "./on_confirm/on_confirm_seller_cred/generator";
 import { update_reverse_qc_rep_generator } from "./update/update_reverse_qc_rep/generator";
 import { on_update_picked_rep_generator } from "./on_update/on_update_return_picked_rep/generator";
+import { select_ccc_generator } from "./select/select_ccc/generator";
+import { on_select_ccc_generator } from "./on_select/on_select_ccc/generator";
+import { init_ccc_generator } from "./init/init_ccc/generator";
+import { on_init_ccc_generator } from "./on_init/on_init_ccc/generator";
+import { confirm_ccc_generator } from "./confirm/confirm_ccc/generator";
+import { on_confirm_ccc_generator } from "./on_confirm/on_confirm_ccc/generator";
+import { on_status_accepted_ccc_generator } from "./on_status/on_status_accepted_ccc/generator";
+import { on_status_packed_ccc_generator } from "./on_status/on_status_packed_ccc/generator";
+import { on_status_agent_assigned_ccc_generator } from "./on_status/on_status_agent_assigned_ccc/generator";
+import { on_status_picked_ccc_generator } from "./on_status/on_status_picked_ccc/generator";
+import { on_status_out_for_delivery_ccc_generator } from "./on_status/on_status_out_for_delivery_ccc/generator";
+import { on_status_order_delivered_ccc_generator } from "./on_status/on_status_order_delivered_ccc/generator";
+import { select_offers_generator } from "./select/select_offers/generator";
+import { on_select_offers_generator } from "./on_select/on_select_offers/generator";
+import { init_offers_generator } from "./init/init_offers/generator";
 export async function Generator(
   action_id: string,
   existingPayload: any,
@@ -69,10 +84,16 @@ export async function Generator(
       return on_search_inc_disable_generator(existingPayload, sessionData);
     case "select":
       return select_generator(existingPayload, sessionData);
+    case "select_offers":
+      return select_offers_generator(existingPayload, sessionData);
     case "on_select":
       return on_select_generator(existingPayload, sessionData);
+    case "on_select_offers":
+      return on_select_offers_generator(existingPayload, sessionData);
     case "init":
       return init_generator(existingPayload, sessionData);
+    case "init_offers":
+      return init_offers_generator(existingPayload, sessionData);
     case "on_init":
       return on_init_generator(existingPayload, sessionData);
     case "confirm":
@@ -171,6 +192,30 @@ export async function Generator(
       return update_reverse_qc_rep_generator(existingPayload, sessionData);
     case "on_update_return_picked_rep":
       return on_update_picked_rep_generator(existingPayload, sessionData);
+      case "select_ccc":
+        return select_ccc_generator(existingPayload, sessionData);
+      case "on_select_ccc":
+        return on_select_ccc_generator(existingPayload, sessionData);
+      case "init_ccc":
+        return init_ccc_generator(existingPayload, sessionData);
+      case "on_init_ccc":
+        return on_init_ccc_generator(existingPayload, sessionData);
+      case "confirm_ccc":
+        return confirm_ccc_generator(existingPayload, sessionData);
+      case "on_confirm_ccc":
+        return on_confirm_ccc_generator(existingPayload, sessionData);
+      case "on_status_accepted_ccc":
+        return on_status_accepted_ccc_generator(existingPayload, sessionData);
+      case "on_status_packed_ccc":
+        return on_status_packed_ccc_generator(existingPayload, sessionData);
+      case "on_status_agent_assigned_ccc":
+        return on_status_agent_assigned_ccc_generator(existingPayload, sessionData);
+      case "on_status_picked_ccc":
+        return on_status_picked_ccc_generator(existingPayload, sessionData);
+      case "on_status_out_for_delivery_ccc":
+        return on_status_out_for_delivery_ccc_generator(existingPayload, sessionData);
+      case "on_status_order_delivered_ccc":
+        return on_status_order_delivered_ccc_generator(existingPayload, sessionData);
     default:
       console.log(action_id);
       throw new Error("Invalid action id found! ");

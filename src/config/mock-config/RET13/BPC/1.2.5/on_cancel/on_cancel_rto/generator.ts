@@ -120,6 +120,8 @@ function createRtoFulfillment(
 	rtoClone.end = {
 		...deliveryFulfillment.start,
 	};
+	delete rtoClone.end?.time;
+	console.log('RTO Fulfillment:', JSON.stringify(rtoClone, null, 2));
 	return rtoClone;
 }
 

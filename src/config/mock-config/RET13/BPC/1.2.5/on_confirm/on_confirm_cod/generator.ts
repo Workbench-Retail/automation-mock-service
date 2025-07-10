@@ -8,7 +8,7 @@ export async function on_confirm_cod_generator(
 	sessionData: SessionData
 ) {
 	const timeIso = new Date().toISOString();
-	existingPayload.message.order.updated_at = timeIso;
+    existingPayload.message.order.updated_at = existingPayload.context.timestamp;
 	existingPayload.message.order.created_at = sessionData.order_created_at;
 	existingPayload.message.order.id = sessionData.order_id;
 	existingPayload.message.order.billing = getUpdatedBilling(

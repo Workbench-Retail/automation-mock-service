@@ -239,3 +239,78 @@ codes:
     action_id: on_status_order_delivered_rep
     action: on_status
     message_id: true
+  - code: 304
+    default: BPC/1.2.5/select/select_ccc/default.yaml
+    action_id: select_ccc
+    action: select
+    message_id: true
+  - code: 305
+    default: BPC/1.2.5/on_select/on_select_ccc/default.yaml
+    action_id: on_select_ccc
+    action: on_select
+    message_id: false
+  - code: 306
+    default: BPC/1.2.5/init/init_ccc/default.yaml
+    action_id: init_ccc
+    action: init
+    message_id: true
+  - code: 307
+    default: BPC/1.2.5/on_init/on_init_ccc/default.yaml
+    action_id: on_init_ccc
+    action: on_init
+    message_id: false
+  - code: 308
+    default: BPC/1.2.5/confirm/confirm_ccc/default.yaml
+    action_id: confirm_ccc
+    action: confirm
+    message_id: true
+  - code: 309
+    default: BPC/1.2.5/on_confirm/on_confirm_ccc/default.yaml
+    action_id: on_confirm_ccc
+    action: on_confirm
+    message_id: false
+  - code: 310
+    default: BPC/1.2.5/on_status/on_status_accepted_ccc/default.yaml
+    action_id: on_status_accepted_ccc
+    action: on_status
+    message_id: true
+  - code: 311
+    default: BPC/1.2.5/on_status/on_status_packed_ccc/default.yaml
+    action_id: on_status_packed_ccc
+    action: on_status
+    message_id: true
+  - code: 312
+    default: BPC/1.2.5/on_status/on_status_agent_assigned_ccc/default.yaml
+    action_id: on_status_agent_assigned_ccc
+    action: on_status
+    message_id: true
+  - code: 313
+    default: BPC/1.2.5/on_status/on_status_picked_ccc/default.yaml
+    action_id: on_status_picked_ccc
+    action: on_status
+    message_id: true
+  - code: 314
+    default: BPC/1.2.5/on_status/on_status_out_for_delivery_ccc/default.yaml
+    action_id: on_status_out_for_delivery_ccc
+    action: on_status
+    message_id: true
+  - code: 315
+    default: BPC/1.2.5/on_status/on_status_order_delivered_ccc/default.yaml
+    action_id: on_status_order_delivered_ccc
+    action: on_status
+    message_id: true
+  - code: 316
+    default: BPC/1.2.5/select/select_offers/default.yaml
+    action_id: select_offers
+    action: select
+    message_id: true
+  - code: 317
+    default: BPC/1.2.5/on_select/on_select_offers/default.yaml
+    action_id: on_select_offers
+    action: on_select
+    message_id: false
+  - code: 318
+    default: BPC/1.2.5/init/init_offers/default.yaml
+    action_id: init_offers
+    action: init
+    message_id: true

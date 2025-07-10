@@ -1,6 +1,6 @@
 import { RedisService } from "ondc-automation-cache-lib";
 import { Input, SessionData } from "./session-types";
-import { createMockResponseRET12_125 } from "./BPC/1.2.5/generation-pipeline";
+import { createMockResponseRET13_125 } from "./BPC/1.2.5/generation-pipeline";
 import { createBuyerUrl, createSellerUrl } from "../../../utils/request-utils";
 
 export async function createMockResponse(
@@ -20,7 +20,7 @@ export async function createMockResponse(
   console.log("version", version, "usecaseId", usecaseId);
   if (usecaseId === "BPC") {
     if (version === "1.2.5") {
-      payload = await createMockResponseRET12_125(action_id, sessionData);
+      payload = await createMockResponseRET13_125(action_id, sessionData);
     } else {
       throw new Error("version not found");
     }

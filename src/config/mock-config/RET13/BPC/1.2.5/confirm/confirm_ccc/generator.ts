@@ -4,7 +4,7 @@ import { createFulfillments } from "../../api-objects/fulfillments";
 import { removeItemQuantitiesFromQuote } from "../../api-objects/quotes";
 import { TagsType } from "../../api-objects/tags";
 
-export async function confirm_seller_cred_generator(
+export async function confirm_ccc_generator(
 	existingPayload: any,
 	sessionData: SessionData
 ) {
@@ -13,7 +13,7 @@ export async function confirm_seller_cred_generator(
 	existingPayload.message.order.id = generateSixDigitCode();
 	existingPayload.message.order.created_at = existingPayload.context.timestamp;
 	existingPayload.message.order.updated_at = existingPayload.context.timestamp;
-existingPayload.message.order.quote = removeItemQuantitiesFromQuote(sessionData.quote);
+	existingPayload.message.order.quote = removeItemQuantitiesFromQuote(sessionData.quote);
 	existingPayload.message.order.billing = getUpdatedBilling(
 		sessionData.billing
 	);
@@ -29,17 +29,18 @@ existingPayload.message.order.quote = removeItemQuantitiesFromQuote(sessionData.
 		sessionData,
 		existingPayload.message.order.fulfillments
 	);
-	const existingTags = existingPayload.message.order.tags as TagsType;
-	const bppTerms = existingTags.find((f) => f.code === "bpp_terms");
-	if (bppTerms) {
-		bppTerms.list = sessionData.bpp_terms.list;
-	}
-		existingPayload.message.order.fulfillments.forEach((fulfillment: any) => {
+	existingPayload.message.order.fulfillments.forEach((fulfillment: any) => {
 	// Remove unwanted properties from fulfillment	
 	if( fulfillment["@ondc/org/category"]) {
 		delete fulfillment["@ondc/org/category"];
 	}
 	});
+	const existingTags = existingPayload.message.order.tags as TagsType;
+	const bppTerms = existingTags.find((f) => f.code === "bpp_terms");
+	if (bppTerms) {
+		bppTerms.list = sessionData.bpp_terms.list;
+	}
+	existingPayload.context.domain = "ONDC:FFFFF";
 	return existingPayload;
 }
 

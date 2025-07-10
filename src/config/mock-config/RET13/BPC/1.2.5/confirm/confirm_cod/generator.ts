@@ -10,8 +10,8 @@ export async function confirm_cod_generator(
 ) {
 	const timeIso = new Date().toISOString();
 	existingPayload.message.order.id = generateSixDigitCode();
-	existingPayload.message.order.created_at = timeIso;
-	existingPayload.message.order.updated_at = timeIso;
+existingPayload.message.order.created_at = existingPayload.context.timestamp;
+	existingPayload.message.order.updated_at = existingPayload.context.timestamp;
 existingPayload.message.order.quote = removeItemQuantitiesFromQuote(sessionData.quote);
 	existingPayload.message.order.billing = getUpdatedBilling(
 		sessionData.billing
@@ -31,6 +31,12 @@ existingPayload.message.order.quote = removeItemQuantitiesFromQuote(sessionData.
 	if (bppTerms) {
 		bppTerms.list = sessionData.bpp_terms.list;
 	}
+		existingPayload.message.order.fulfillments.forEach((fulfillment: any) => {
+	// Remove unwanted properties from fulfillment	
+	if( fulfillment["@ondc/org/category"]) {
+		delete fulfillment["@ondc/org/category"];
+	}
+	});
 	return existingPayload;
 }
 

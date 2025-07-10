@@ -10,7 +10,7 @@ export async function search_generator(
   const tags = existingPayload.message.intent.tags as any[];
   if (codesArray.length > 0)
     tags.push({
-      code: "bap_features",
+      code: "bnp_features",
       list: [
         ...codesArray.map((code: string) => {
           return {
