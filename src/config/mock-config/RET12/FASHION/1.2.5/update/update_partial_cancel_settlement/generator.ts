@@ -16,6 +16,9 @@ export async function update_partial_cancel_settlement_generator(
 ) {
 	existingPayload.message.order.id = sessionData.order_id;
 	const fulfillments = sessionData.fulfillments as Fulfillments;
+
+	console.log("object 2",  JSON.stringify(sessionData.items));
+
 	existingPayload.message.order.fulfillments = [];
 	const cancelId =
 		fulfillments.filter((f) => f.type === "Cancel")[0]?.id || undefined;
@@ -56,7 +59,7 @@ export async function update_partial_cancel_settlement_generator(
 				settlement_phase: "refund",
 				settlement_type: "netbanking",
 				settlement_amount: `${-1 * totalAmount}`,
-				settlement_timestamp: existingPayload.context.timestamp
+				settlement_timestamp: new Date().toISOString(),
 			},
 		],
 	};
