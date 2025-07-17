@@ -1,6 +1,6 @@
 {
-  "transaction_id": "db048bbb-745e-4bbf-82ba-062b9a0306ee",
-  "message_id": "5e17a8e4-a32b-4f2f-ae13-d4e023cdf775",
+  "transaction_id": "39a063e4-def3-4990-96c0-366042824037",
+  "message_id": "6fdeac2a-fd27-4e7d-984d-e4793223bc62",
   "city": "std:011",
   "inc_mode": null,
   "selected_items": [
@@ -34,17 +34,17 @@
   "items": [
     {
       "id": "I1",
+      "fulfillment_id": "F1",
       "quantity": {
         "count": 1
-      },
-      "fulfillment_id": "F3"
+      }
     },
     {
       "id": "I3",
+      "fulfillment_id": "F1",
       "quantity": {
         "count": 1
-      },
-      "fulfillment_id": "F2"
+      }
     }
   ],
   "provider": {
@@ -68,35 +68,12 @@
     "phone": "9898989898",
     "name": "ONDC buyer",
     "email": "nobody@nomail.com",
-    "created_at": "2025-06-25T08:32:13.001Z",
-    "updated_at": "2025-06-25T08:32:13.001Z"
+    "created_at": "2025-07-08T06:48:17.940Z",
+    "updated_at": "2025-07-08T06:48:17.940Z"
   },
   "fulfillments": [
     {
-      "id": "F3",
-      "type": "Delivery",
-      "end": {
-        "contact": {
-          "email": "nobody@nomail.com",
-          "phone": "9898989898"
-        },
-        "location": {
-          "gps": "12.1233,12.9992",
-          "address": {
-            "building": "mock-building",
-            "city": "mock-city",
-            "state": "mock-state",
-            "country": "IND",
-            "area_code": "110092",
-            "locality": "mock-locality",
-            "name": "mock-house-name"
-          }
-        }
-      },
-      "tracking": true
-    },
-    {
-      "id": "F2",
+      "id": "F1",
       "type": "Delivery",
       "end": {
         "contact": {
@@ -158,6 +135,24 @@
         }
       },
       {
+        "@ondc/org/item_id": "F1",
+        "title": "Delivery charges",
+        "@ondc/org/title_type": "delivery",
+        "price": {
+          "currency": "INR",
+          "value": "00.00"
+        }
+      },
+      {
+        "@ondc/org/item_id": "F1",
+        "title": "Convenience Fee",
+        "@ondc/org/title_type": "misc",
+        "price": {
+          "currency": "INR",
+          "value": "00.00"
+        }
+      },
+      {
         "@ondc/org/item_id": "FLAT50",
         "title": "Flat discount of ₹50 on minimum cart value of ₹200",
         "@ondc/org/title_type": "offer",
@@ -211,42 +206,6 @@
             }
           ]
         }
-      },
-      {
-        "@ondc/org/item_id": "F2",
-        "title": "Delivery charges",
-        "@ondc/org/title_type": "delivery",
-        "price": {
-          "currency": "INR",
-          "value": "00.00"
-        }
-      },
-      {
-        "@ondc/org/item_id": "F2",
-        "title": "Convenience Fee",
-        "@ondc/org/title_type": "misc",
-        "price": {
-          "currency": "INR",
-          "value": "00.00"
-        }
-      },
-      {
-        "@ondc/org/item_id": "F3",
-        "title": "Delivery charges",
-        "@ondc/org/title_type": "delivery",
-        "price": {
-          "currency": "INR",
-          "value": "00.00"
-        }
-      },
-      {
-        "@ondc/org/item_id": "F3",
-        "title": "Convenience Fee",
-        "@ondc/org/title_type": "misc",
-        "price": {
-          "currency": "INR",
-          "value": "00.00"
-        }
       }
     ],
     "price": {
@@ -265,34 +224,8 @@
       "type": "Delivery",
       "@ondc/org/provider_name": "LSP or Provider Name",
       "tracking": true,
-      "@ondc/org/category": "Immediate Delivery",
-      "@ondc/org/TAT": "PT60M",
-      "state": {
-        "descriptor": {
-          "code": "Serviceable"
-        }
-      }
-    },
-    {
-      "id": "F2",
-      "type": "Delivery",
-      "@ondc/org/provider_name": "LSP or Provider Name",
-      "tracking": true,
-      "@ondc/org/category": "Immediate Delivery",
-      "@ondc/org/TAT": "PT2H",
-      "state": {
-        "descriptor": {
-          "code": "Serviceable"
-        }
-      }
-    },
-    {
-      "id": "F3",
-      "type": "Delivery",
-      "@ondc/org/provider_name": "LSP or Provider Name",
-      "tracking": true,
-      "@ondc/org/category": "Immediate Delivery",
-      "@ondc/org/TAT": "P1D",
+      "@ondc/org/category": "Standard Delivery",
+      "@ondc/org/TAT": "P2D",
       "state": {
         "descriptor": {
           "code": "Serviceable"
@@ -344,24 +277,11 @@
   "on_select_items": [
     {
       "id": "I1",
-      "fulfillment_ids": [
-        "F1",
-        "F3"
-      ]
-    },
-    {
-      "id": "I2",
-      "fulfillment_ids": [
-        "F2",
-        "F3"
-      ]
+      "fulfillment_id": "F1"
     },
     {
       "id": "I3",
-      "fulfillment_ids": [
-        "F1",
-        "F2"
-      ]
+      "fulfillment_id": "F1"
     }
   ],
   "selected_offers": [
