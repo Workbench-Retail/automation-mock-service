@@ -108,6 +108,10 @@ import { init_self_pickup_generator } from "./init/init_self_pickup/generator";
 import { on_init_self_pickup_generator } from "./on_init/on_init_self_pickup/generator";
 import { on_status_self_pickup_packed_generator } from "./on_status/on_status_self_pick_packed/generator";
 import { on_status_self_pickup_picked_generator } from "./on_status/on_status_self_pick_picked/generator";
+import { cancel_force_generator } from "./cancel/cancel_force/generator";
+import { on_cancel_force_generator } from "./on_cancel/on_cancel_force/generator";
+import { cancel_breach_generator } from "./cancel/cancel_breach/generator";
+import { delay } from "../../../../../utils/generic-utils";
 
 export async function Generator(
 	action_id: string,
@@ -397,6 +401,13 @@ export async function Generator(
 			);
 		case "search_inc_stop":
 			return search_inc_generator(existingPayload, sessionData);
+		case "cancel_force":
+			await delay(5000);
+			return cancel_force_generator(existingPayload, sessionData);
+		case "on_cancel_force":
+			return on_cancel_force_generator(existingPayload, sessionData);
+		case "cancel_breach":
+			return cancel_breach_generator(existingPayload, sessionData);
 		default:
 			console.log(action_id);
 			throw new Error("Invalid action id found! ");
