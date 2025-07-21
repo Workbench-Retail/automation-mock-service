@@ -35,7 +35,7 @@ flows:
         owner: BPP
         expect: false
         description: Respond to init
-      - key: confirm_multi_fulfillment
+      - key: confirm
         type: confirm
         unsolicited: false
         pair: on_confirm

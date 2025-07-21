@@ -12,7 +12,7 @@ intent:
         - code: static_terms_new
           value: https://github.com/ONDC-Official/NP-Static-Terms/buyerNP_BNP/1.0/tc.pdf
         - code: effective_date
-          value: "2025-02-01T00:00"
+          value: "2025-02-01T00:00:00.000Z"
     # - code: bnp_features
     #   list:
     #     - code: "003"

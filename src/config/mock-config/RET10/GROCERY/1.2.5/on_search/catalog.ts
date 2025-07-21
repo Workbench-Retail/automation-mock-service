@@ -118,7 +118,7 @@ export const RET10GROCERY125Catalog = JSON.parse(
 								long_desc: "Plain Atta",
 								images: ["https://sellerNP.com/images/i1.png"],
 							},
-							rating: "4.0",
+							rating: "4",
 							price: {
 								currency: "INR",
 								value: "200.00",
@@ -183,7 +183,7 @@ export const RET10GROCERY125Catalog = JSON.parse(
 								long_desc: "Plain Atta",
 								images: ["https://sellerNP.com/images/i1.png"],
 							},
-							rating: "3.0",
+							rating: "3",
 							price: {
 								currency: "INR",
 								value: "300.00",
@@ -248,11 +248,11 @@ export const RET10GROCERY125Catalog = JSON.parse(
 								long_desc: "Alphanso Mango freshly hand picked",
 								images: ["https://sellerNP.com/images/i1.png"],
 							},
-							rating: "3.0",
+							rating: "3",
 							price: {
 								currency: "INR",
 								value: "250.00",
-								maximum_value: "50.00",
+								maximum_value: "250.00",
 							},
 							quantity: {
 								unitized: {
@@ -701,7 +701,7 @@ const typeCatalog = {
 							long_desc: "Plain Atta",
 							images: ["https://sellerNP.com/images/i1.png"],
 						},
-						rating: "4.0",
+						rating: "4",
 						price: {
 							currency: "INR",
 							value: "200.00",
@@ -766,7 +766,7 @@ const typeCatalog = {
 							long_desc: "Plain Atta",
 							images: ["https://sellerNP.com/images/i1.png"],
 						},
-						rating: "3.0",
+						rating: "3",
 						price: {
 							currency: "INR",
 							value: "300.00",
@@ -831,7 +831,7 @@ const typeCatalog = {
 							long_desc: "Alphanso Mango freshly hand picked",
 							images: ["https://sellerNP.com/images/i1.png"],
 						},
-						rating: "3.0",
+						rating: "3",
 						price: {
 							currency: "INR",
 							value: "250.00",
@@ -872,7 +872,6 @@ const typeCatalog = {
 								list: [
 									{
 										code: "country",
-										value: "IND",
 										value: "IND",
 									},
 								],
@@ -1018,7 +1017,6 @@ const typeCatalog = {
 									{
 										code: "min_value",
 										value: "100.00",
-										value: "100.00",
 									},
 								],
 							},
@@ -1045,7 +1043,6 @@ const typeCatalog = {
 									{
 										code: "auto",
 										value: "no",
-										value: "no",
 									},
 								],
 							},
@@ -1060,12 +1057,10 @@ const typeCatalog = {
 						location_ids: ["L1"],
 						category_ids: [],
 						item_ids: ["I1", "I2", "I3"],
-						item_ids: ["I1", "I2", "I3"],
 						time: {
 							label: "valid",
 							range: {
 								start: "2025-01-01T16:00:00.000Z",
-								end: "2030-01-01T23:00:00.000Z",
 								end: "2030-01-01T23:00:00.000Z",
 							},
 						},
@@ -1105,61 +1100,6 @@ const typeCatalog = {
 									},
 									{
 										code: "auto",
-										value: "no",
-									},
-								],
-							},
-						],
-					},
-					{
-						id: "combo1",
-						descriptor: {
-							code: "combo",
-							images: ["https://snp.com/images/offer1-banner.webp"],
-						},
-						location_ids: ["L1"],
-						category_ids: ["C1"],
-						item_ids: ["I1", "I2", "I3"],
-						time: {
-							label: "valid",
-							range: {
-								start: "2025-01-01T16:00:00.000Z",
-								end: "2030-01-01T23:00:00.000Z",
-							},
-						},
-						tags: [
-							{
-								code: "qualifier",
-								list: [
-									{
-										code: "item_id",
-										value: "I1,I2,I3",
-									},
-								],
-							},
-							{
-								code: "benefit",
-								list: [
-									{
-										code: "value_type",
-										value: "amount",
-									},
-									{
-										code: "value",
-										value: "-75.00",
-									},
-								],
-							},
-							{
-								code: "meta",
-								list: [
-									{
-										code: "additive",
-										value: "no",
-									},
-									{
-										code: "auto",
-										value: "no",
 										value: "no",
 									},
 								],
