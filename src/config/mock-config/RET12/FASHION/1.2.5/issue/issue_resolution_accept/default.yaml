@@ -80,7 +80,7 @@ issue:
       descriptor:
         code: OPEN
         short_desc: Complaint created
-      updated_at: "2023-01-15T10:00:00.489Z"
+      updated_at: "2023-01-15T10:00:00.469Z"
       action_by: NP1
       actor_details:
         name: mock-person
@@ -88,16 +88,16 @@ issue:
       descriptor:
         code: PROCESSING
         short_desc: Complaint created
-      updated_at: "2023-01-15T10:00:00.489Z"
+      updated_at: "2023-01-15T10:00:00.469Z"
       action_by: NP2
       actor_details:
         name: mock-person
     - id: A3_1
       descriptor:
         code: INFO_REQUESTED
-        name: INFO01
+        name: INFO001
         short_desc: Please provide product image
-      updated_at: "2023-01-15T10:00:00.489Z"
+      updated_at: "2023-01-15T10:00:00.469Z"
       action_by: NP2
       actor_details:
         name: mock-person
@@ -106,7 +106,7 @@ issue:
         code: INFO_REQUESTED
         name: INFO002
         short_desc: Please provide invoice
-      updated_at: "2023-01-15T10:00:00.489Z"
+      updated_at: "2023-01-15T10:00:00.469Z"
       action_by: NP2
       actor_details:
         name: mock-person
@@ -114,17 +114,34 @@ issue:
       ref_id: A3_1
       descriptor:
         code: INFO_PROVIDED
-        short_desc: Info provided from buyer app
+        short_desc: Responded with images
         images:
-          - url: "http://buyerapp.com/addtional-details/img1.png"
+          - url: http://buyerapp.com/addtional-details/img1.png
             size_type: xs
-          - url: "http://buyerapp.com/addtional-details/img2.png"
+          - url: http://buyerapp.com/addtional-details/img2.png
             size_type: xs
-      updated_at: "2023-01-15T10:00:00.489Z"
+      updated_at: "2023-01-15T10:00:00.469Z"
       action_by: NP1
       actor_details:
         name: mock-person
-    - id: A10
+    - id: A5
+      descriptor:
+        code: PROCESSING
+        short_desc: Complaint created
+      updated_at: "2023-01-15T10:00:00.469Z"
+      action_by: NP1
+      actor_details:
+        name: mock-person
+    - id: A6
+      ref_id: R_PARENT
+      ref_type: RESOLUTIONS
+      descriptor:
+        code: RESOLUTION_PROPOSED
+      updated_at: "2023-01-15T10:00:00.469Z"
+      action_by: NP2
+      actor_details:
+        name: mock-person
+    - id: A7
       ref_id: R2
       ref_type: RESOLUTIONS
       descriptor:

@@ -102,6 +102,43 @@ export const onIssueStatusGenerator = async (
 
     case "on_issue_resolved":
       existingPayload.message.issue.resolutions = sessionData.issue_resolution;
+      let sessionActions = sessionData.issue_action;
+      const issueActionAccept: any = sessionActions[sessionActions.length - 1];
+      const refId = issueActionAccept?.ref_id;
+      let updatedAction = {
+        id: "A8",
+        ref_id: "R2",
+        ref_type: "RESOLUTIONS",
+        descriptor: {
+          code: "RESOLVED",
+          name: "REPLACEMENT",
+          short_desc: "Providing replacement",
+        },
+        updated_at: newDate,
+        action_by: "NP2",
+        actor_details: {
+          name: "mock-person",
+        },
+      };
+      if (refId == "R1") {
+        updatedAction = {
+          id: "A8",
+          ref_id: "R1",
+          ref_type: "RESOLUTIONS",
+          descriptor: {
+            code: "RESOLVED",
+            name: "REFUND",
+            short_desc: "Providing refund",
+          },
+          updated_at: newDate,
+          action_by: "NP2",
+          actor_details: {
+            name: "mock-person",
+          },
+        };
+      }
+      const actions = existingPayload.message.issue.actions;
+      actions[actions.length - 1] = updatedAction;
       break;
 
     default:

@@ -145,35 +145,6 @@ issue:
       actor_details:
         name: mock-person
     - id: A6
-      ref_id: A3_2
-      descriptor:
-        code: INFO_REQUESTED
-        name: INFO002
-        short_desc: Please provide invoice
-      updated_at: "2023-01-15T10:00:00.469Z"
-      action_by: NP2
-      actor_details:
-        name: mock-person
-    - id: A7
-      ref_id: A6
-      descriptor:
-        code: INFO_PROVIDED
-        short_desc: Provided invoice
-        media:
-          - url: https://buyerapp.com/resources/invoiceord1.pdf
-      updated_at: "2023-01-15T10:00:00.469Z"
-      action_by: NP1
-      actor_details:
-        name: mock-person
-    - id: A8
-      descriptor:
-        code: PROCESSING
-        short_desc: Processing the complaint information
-      updated_at: "2023-01-15T10:00:00.469Z"
-      action_by: NP2
-      actor_details:
-        name: mock-person
-    - id: A9
       ref_id: R_PARENT
       ref_type: RESOLUTIONS
       descriptor:
@@ -182,26 +153,6 @@ issue:
       action_by: NP2
       actor_details:
         name: mock-person
-    # - id: A10
-    #   ref_id: R2
-    #   ref_type: RESOLUTIONS
-    #   descriptor:
-    #     code: RESOLUTION_ACCEPTED
-    #   updated_at: "2023-01-15T10:00:00.469Z"
-    #   action_by: NP1
-    #   actor_details:
-    #     name: mock-person
-    # - id: A11
-    #   ref_id: R2
-    #   ref_type: RESOLUTIONS
-    #   descriptor:
-    #     code: RESOLVED
-    #     name: REPLACEMENT
-    #     short_desc: Providing replacement
-    #   updated_at: "2023-01-15T10:00:00.469Z"
-    #   action_by: NP2
-    #   actor_details:
-    #     name: mock-person
   resolutions:
     - id: R_PARENT
       descriptor:

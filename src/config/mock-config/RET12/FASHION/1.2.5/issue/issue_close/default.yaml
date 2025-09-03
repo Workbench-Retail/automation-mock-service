@@ -111,7 +111,7 @@ issue:
         name: INFO001
         short_desc: Please provide product image
       updated_at: "2023-01-15T10:00:00.469Z"
-      action_by: NP1
+      action_by: NP2
       actor_details:
         name: mock-person
     - id: A3_2
@@ -120,7 +120,7 @@ issue:
         name: INFO002
         short_desc: Please provide invoice
       updated_at: "2023-01-15T10:00:00.469Z"
-      action_by: NP1
+      action_by: NP2
       actor_details:
         name: mock-person
     - id: A4
@@ -146,35 +146,6 @@ issue:
       actor_details:
         name: mock-person
     - id: A6
-      ref_id: A3_2
-      descriptor:
-        code: INFO_REQUESTED
-        name: INFO002
-        short_desc: Please provide invoice
-      updated_at: "2023-01-15T10:00:00.469Z"
-      action_by: NP2
-      actor_details:
-        name: mock-person
-    - id: A7
-      ref_id: A6
-      descriptor:
-        code: INFO_PROVIDED
-        short_desc: Provided invoice
-        media:
-          - url: https://buyerapp.com/resources/invoiceord1.pdf
-      updated_at: "2023-01-15T10:00:00.469Z"
-      action_by: NP1
-      actor_details:
-        name: mock-person
-    - id: A8
-      descriptor:
-        code: PROCESSING
-        short_desc: Processing the complaint information
-      updated_at: "2023-01-15T10:00:00.469Z"
-      action_by: NP2
-      actor_details:
-        name: mock-person
-    - id: A9
       ref_id: R_PARENT
       ref_type: RESOLUTIONS
       descriptor:
@@ -183,7 +154,7 @@ issue:
       action_by: NP2
       actor_details:
         name: mock-person
-    - id: A10
+    - id: A7
       ref_id: R2
       ref_type: RESOLUTIONS
       descriptor:
@@ -192,7 +163,7 @@ issue:
       action_by: NP1
       actor_details:
         name: mock-person
-    - id: A11
+    - id: A8
       ref_id: R2
       ref_type: RESOLUTIONS
       descriptor:
@@ -203,7 +174,7 @@ issue:
       action_by: NP2
       actor_details:
         name: mock-person
-    - id: A12
+    - id: A9
       descriptor:
         code: CLOSED
         short_desc: Closing the complaint

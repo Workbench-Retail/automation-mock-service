@@ -117,6 +117,14 @@ export const issueStatusGenerator = async (
       existingPayload.message.issue.last_action_id =
         sessionData.last_action || "AL7";
       existingPayload.message.issue.resolutions = sessionData.issue_resolution;
+      console.log("issue_resolution_accept");
+      let input: any = sessionData.user_inputs;
+      const resolution_accept = input?.resolution_accept || "R2-Replacement";
+      console.log("input", input);
+      const refId = resolution_accept.split("-");
+      console.log("refId", refId)
+      let actions = existingPayload.message.issue.actions;
+      actions[actions.length - 1].ref_id = refId[0];
       break;
 
     case "issue_close":
